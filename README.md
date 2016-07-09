@@ -7,8 +7,8 @@ Usage examples of [spark-lucenerdd](https://github.com/zouzias/spark-lucenerdd)
 Install Java, [SBT](http://www.scala-sbt.org) and clone the project
 
 ```bash
-git clone https://github.com/zouzias/spark-lucenerdd.git
-cd spark-lucenerdd
+git clone https://github.com/zouzias/spark-lucenerdd-examples.git
+cd spark-lucenerdd-examples
 sbt compile assembly
 ```
 
