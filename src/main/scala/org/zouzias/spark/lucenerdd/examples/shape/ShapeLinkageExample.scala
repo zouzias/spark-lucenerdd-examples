@@ -2,13 +2,13 @@ package org.zouzias.spark.lucenerdd.examples.shape
 
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkConf, SparkContext}
-import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD
-
+import org.zouzias.spark.lucenerdd.spatial.shape._
+import org.zouzias.spark.lucenerdd._
 
 object ShapeLinkageExample {
 
-  def main(): Unit = {
+  def main(args: Array[String]): Unit = {
     // initialise spark context
     val conf = new SparkConf().setAppName("ShapeLinkageExample")
 
@@ -17,10 +17,14 @@ object ShapeLinkageExample {
     val sqlContext = new SQLContext(sc)
 
     // Load all countries
-    val allCountries = sqlContext.read.parquet("data/countries-poly.parquet").select("name", "shape").map(row => (row.getString(1), row.getString(0)))
+    val allCountries = sqlContext.read.parquet("data/countries-poly.parquet")
+      .select("name", "shape")
+      .map(row => (row.getString(1), row.getString(0)))
 
     // Load all cities
-    val citiesPoint = sqlContext.read.parquet("data/world-cities-points.parquet").select("city", "shape").map(row => (row.getString(1), row.getString(0)))
+    val citiesPoint = sqlContext.read.parquet("data/world-cities-points.parquet")
+      .select("city", "shape")
+      .map(row => (row.getString(1), row.getString(0)))
 
     def parseDouble(s: String): Double = try { s.toDouble } catch { case _: Throwable => 0.0 }
 
@@ -33,7 +37,6 @@ object ShapeLinkageExample {
 
     val shapes = ShapeLuceneRDD(allCountries)
     shapes.cache
-
 
     val linked = shapes.linkByKnn(citiesPoint, coords, 3)
     linked.cache
