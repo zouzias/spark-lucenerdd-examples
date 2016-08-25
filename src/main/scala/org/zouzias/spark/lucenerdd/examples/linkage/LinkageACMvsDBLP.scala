@@ -15,7 +15,7 @@ object LinkageACMvsDBLP extends Logging {
   def main(args: Array[String]) {
 
     // initialise spark context
-    val conf = new SparkConf().setAppName(LinkageScholarvsDBLP.getClass.getName)
+    val conf = new SparkConf().setAppName(LinkageACMvsDBLP.getClass.getName)
 
     implicit val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
