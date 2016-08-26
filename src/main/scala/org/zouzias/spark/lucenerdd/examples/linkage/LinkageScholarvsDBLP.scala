@@ -27,7 +27,7 @@ object LinkageScholarvsDBLP extends Logging {
     val groundTruthDF = sqlContext.read.parquet("data/linkage-papers1/linkage-papers-scholar-vs-dblp.parquet")
 
     val scholar = scholarDF.select("id", "title", "authors", "venue").map( row => (row.get(0).toString, row.getString(1), row.getString(2)))
-    val dblp = LuceneRDD(dblpDF.select("id", "title", "authors", "venue").map( row => (row.get(0).toString, row.getString(1), row.getString(2))))
+    val dblp = LuceneRDD(dblpDF)
 
     // A custom linker
     val linker: (String, String, String) => String = {
@@ -36,13 +36,13 @@ object LinkageScholarvsDBLP extends Logging {
         val authorsTerms = authors.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 2).mkString(" OR ")
 
         if (titleTokens.nonEmpty && authorsTerms.nonEmpty) {
-          s"(_2:(${titleTokens}) OR _3:(${authorsTerms}))"
+          s"(title:(${titleTokens}) OR authors:(${authorsTerms}))"
         }
         else if (titleTokens.nonEmpty){
-          s"_2:(${titleTokens})"
+          s"title:(${titleTokens})"
         }
         else if (authorsTerms.nonEmpty){
-          s"_3:(${authorsTerms})"
+          s"authors:(${authorsTerms})"
         }
         else {
           "*:*"

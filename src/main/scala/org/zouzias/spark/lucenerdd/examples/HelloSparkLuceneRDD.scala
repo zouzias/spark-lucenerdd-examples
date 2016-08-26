@@ -6,14 +6,15 @@ import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd._
 
-// define main method (scala entry point)
+/**
+ * Minimalistic example for [[LuceneRDD]]
+ */
 object HelloSparkLuceneRDD {
   def main(args: Array[String]) {
 
     // initialise spark context
     val conf = new SparkConf().setAppName("HelloSparkLuceneRDD")
 
-    //
     implicit val sc = new SparkContext(conf)
 
     val array = Array("Hello", "world")
@@ -26,6 +27,5 @@ object HelloSparkLuceneRDD {
 
     // terminate spark context
     sc.stop()
-
   }
 }
