@@ -14,8 +14,8 @@ object WikipediaSearchExample {
 
     // initialise spark context
     val conf = new SparkConf().setAppName("WikipediaSearchExample")
+    val k = 10
 
-    //
     implicit val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
 
@@ -25,9 +25,9 @@ object WikipediaSearchExample {
 
     val rdd = LuceneRDD(wiki.take(10000))
 
-    val result = rdd.termQuery("_1", "argos", 10)
+    val result = rdd.termQuery("_1", "argos", k)
 
-    println(result.seq.size)
+    println(result.take(k).foreach(println))
 
     // terminate spark context
     sc.stop()
