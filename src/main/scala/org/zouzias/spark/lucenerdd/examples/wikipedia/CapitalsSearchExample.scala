@@ -6,9 +6,9 @@ import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd._
 
 /**
- * Wikipedia search example
+ * Capitals search example
  */
-object WikipediaSearchExample {
+object CapitalsSearchExample {
 
   def main(args: Array[String]) {
 
@@ -19,13 +19,11 @@ object WikipediaSearchExample {
     implicit val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
 
-    val wiki = sqlContext.read.parquet("data/enwiki-latest-all-titles").select("title")
-      .map(row => row.getString(0).replaceAll("_", " "))
-      .map(_.replaceAll("[^a-zA-Z0-9\\s]", ""))
+    val capitals = sqlContext.read.parquet("data/spatial/capitals.parquet").select("name", "country")
 
-    val rdd = LuceneRDD(wiki.take(10000))
+    val rdd = LuceneRDD(capitals)
 
-    val result = rdd.termQuery("_1", "argos", k)
+    val result = rdd.termQuery("name", "ottawa", k)
 
     println(result.take(k).foreach(println))
 
