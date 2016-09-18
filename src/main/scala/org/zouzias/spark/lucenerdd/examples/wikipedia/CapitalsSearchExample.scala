@@ -13,7 +13,7 @@ object CapitalsSearchExample {
   def main(args: Array[String]) {
 
     // initialise spark context
-    val conf = new SparkConf().setAppName("WikipediaSearchExample")
+    val conf = new SparkConf().setAppName("CapitalsSearchExample")
     val k = 10
 
     implicit val sc = new SparkContext(conf)
