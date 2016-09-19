@@ -15,7 +15,8 @@ sbt compile assembly
 Download and extract apache spark under your home directory, update the `spark-submit.sh` script accordingly and run
 
 ```
-./spark-submit.sh
+./spark-linkage-*.sh
 ```
 
+to run the record linkage examples and `./spark-search-capitalts.sh` to run a search example.
 to run the project.
