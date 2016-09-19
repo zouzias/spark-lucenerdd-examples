@@ -19,4 +19,3 @@ Download and extract apache spark under your home directory, update the `spark-s
 ```
 
 to run the record linkage examples and `./spark-search-capitalts.sh` to run a search example.
-to run the project.
