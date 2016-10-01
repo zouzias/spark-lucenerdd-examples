@@ -18,6 +18,7 @@ object LinkageACMvsDBLP extends Logging {
     val conf = new SparkConf().setAppName(LinkageACMvsDBLP.getClass.getName)
 
     implicit val sc = SparkSession.builder.config(conf).getOrCreate()
+    import sc.implicits._
 
     val acmDF = sc.read.parquet("data/linkage-papers2/linkage-papers-acm.parquet")
     logInfo(s"Loaded ${acmDF.count} ACM records")
@@ -48,9 +49,8 @@ object LinkageACMvsDBLP extends Logging {
 
     val linkedResults = dblp2.linkDataFrame(acmDF, linker, 10)
 
-    import sc.implicits._
-
-    val linkageResults = linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) => (topDocs.head.doc.textField("id").head, acm.getInt(acm.fieldIndex("id")).toString)}.toDF("idDBLP", "idACM")
+    val linkageResults = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) => (topDocs.head.doc.textField("id").head, acm.getInt(acm.fieldIndex("id")).toString)})
+      .toDF("idDBLP", "idACM")
 
     val correctHits: Double = linkageResults.join(groundTruthDF, groundTruthDF.col("idDBLP").equalTo(linkageResults("idDBLP")) &&  groundTruthDF.col("idACM").equalTo(linkageResults("idACM"))).count
     val total: Double = groundTruthDF.count

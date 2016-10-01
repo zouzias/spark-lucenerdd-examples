@@ -57,9 +57,7 @@ object LinkageScholarvsDBLP extends Logging {
 
     val linkedResults = dblp.linkDataFrame(scholar, linker, 3)
 
-    import sc.sqlContext.implicits._
-
-    val linkageResults = linkedResults.filter(_._2.nonEmpty).map{ case (scholar, topDocs) => (topDocs.head.doc.textField("id").head, scholar.getString(scholar.fieldIndex("id")))}
+    val linkageResults = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (scholar, topDocs) => (topDocs.head.doc.textField("id").head, scholar.getString(scholar.fieldIndex("id")))})
       .toDF("idDBLP", "idScholar")
 
     val correctHits: Double = linkageResults

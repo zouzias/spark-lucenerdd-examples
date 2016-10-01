@@ -18,13 +18,14 @@ object LinkageAbtvsBuy extends Logging {
     // initialise sparkSession context
     val conf = new SparkConf().setAppName(LinkageAbtvsBuy.getClass.getName)
 
-    implicit val sparkSession = SparkSession.builder().config(conf).getOrCreate()
+    implicit val sc = SparkSession.builder().config(conf).getOrCreate()
+    import sc.implicits._
 
-    val abtDF = sparkSession.read.parquet("data/linkage-products2/linkage-products-abt.parquet")
+    val abtDF = sc.read.parquet("data/linkage-products2/linkage-products-abt.parquet")
     logInfo(s"Loaded ${abtDF.count} Abt product descriptions")
-    val buyDF = sparkSession.read.parquet("data/linkage-products2/linkage-products-buy.parquet")
+    val buyDF = sc.read.parquet("data/linkage-products2/linkage-products-buy.parquet")
     logInfo(s"Loaded ${buyDF.count} Buy product descriptions")
-    val groundTruthDF = sparkSession.read.parquet("data/linkage-products2/linkage-products-abt-vs-buy.parquet")
+    val groundTruthDF = sc.read.parquet("data/linkage-products2/linkage-products-abt-vs-buy.parquet")
 
 
     val abt = abtDF.map( row => (row.get(0).toString, row.getString(1), row.getString(2), row.getString(3)))
@@ -49,9 +50,7 @@ object LinkageAbtvsBuy extends Logging {
 
     val linkedResults = buy.link(abt.rdd, linker.tupled, 3)
 
-    import sparkSession.sqlContext.implicits._
-
-    val linkageResultsIds = linkedResults.filter(_._2.nonEmpty).map{ case (abtId, topDocs) => (topDocs.head.doc.textField("_1").head, abtId._1.toInt)}.toDF("idBuy", "idAbt")
+    val linkageResultsIds = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (abtId, topDocs) => (topDocs.head.doc.textField("_1").head, abtId._1.toInt)}).toDF("idBuy", "idAbt")
 
     val correctHits: Double = linkageResultsIds.join(groundTruthDF, groundTruthDF.col("idAbt").equalTo(linkageResultsIds("idAbt")) &&  groundTruthDF.col("idBuy").equalTo(linkageResultsIds("idBuy"))).count
     val total: Double = groundTruthDF.count
@@ -62,7 +61,7 @@ object LinkageAbtvsBuy extends Logging {
     logInfo(s"Accuracy of linkage is ${accuracy}")
     logInfo("********************************")
     // terminate sparkSession context
-    sparkSession.stop()
+    sc.stop()
 
   }
 }
