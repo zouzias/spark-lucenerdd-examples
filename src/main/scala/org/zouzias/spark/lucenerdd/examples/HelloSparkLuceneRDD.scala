@@ -22,7 +22,7 @@ object HelloSparkLuceneRDD {
     val count = rdd.count
 
     println("=" * 10)
-    println(s"Count is ${count}")
+    println(s"LuceneRDD results count is ${count}")
     println("=" * 10)
 
     // terminate spark context

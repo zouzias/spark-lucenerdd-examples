@@ -1,8 +1,9 @@
 package org.zouzias.spark.lucenerdd.examples.linkage
 
-import org.apache.spark.sql.{Row, SQLContext}
-import org.apache.spark.{Logging, SparkConf, SparkContext}
+import org.apache.spark.sql.{Row, SQLContext, SparkSession}
+import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.LuceneRDD
+import org.zouzias.spark.lucenerdd.logging.Logging
 
 /**
  * Record linkage example between ACM and DBLP using [[LuceneRDD]]
@@ -16,14 +17,14 @@ object LinkageACMvsDBLP extends Logging {
     // initialise spark context
     val conf = new SparkConf().setAppName(LinkageACMvsDBLP.getClass.getName)
 
-    implicit val sc = new SparkContext(conf)
-    val sqlContext = new SQLContext(sc)
+    implicit val sc = SparkSession.builder.config(conf).getOrCreate()
+    import sc.implicits._
 
-    val acmDF = sqlContext.read.parquet("data/linkage-papers2/linkage-papers-acm.parquet")
+    val acmDF = sc.read.parquet("data/linkage-papers2/linkage-papers-acm.parquet")
     logInfo(s"Loaded ${acmDF.count} ACM records")
-    val dblp2DF = sqlContext.read.parquet("data/linkage-papers2/linkage-papers-dblp2.parquet")
+    val dblp2DF = sc.read.parquet("data/linkage-papers2/linkage-papers-dblp2.parquet")
     logInfo(s"Loaded ${acmDF.count} DBLP records")
-    val groundTruthDF = sqlContext.read.parquet("data/linkage-papers2/linkage-papers-acm-vs-dblp2.parquet")
+    val groundTruthDF = sc.read.parquet("data/linkage-papers2/linkage-papers-acm-vs-dblp2.parquet")
 
     val dblp2 = LuceneRDD(dblp2DF)
     dblp2.cache()
@@ -48,9 +49,8 @@ object LinkageACMvsDBLP extends Logging {
 
     val linkedResults = dblp2.linkDataFrame(acmDF, linker, 10)
 
-    import sqlContext.implicits._
-
-    val linkageResults = linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) => (topDocs.head.doc.textField("id").head, acm.getInt(acm.fieldIndex("id")).toString)}.toDF("idDBLP", "idACM")
+    val linkageResults = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) => (topDocs.head.doc.textField("id").head, acm.getInt(acm.fieldIndex("id")).toString)})
+      .toDF("idDBLP", "idACM")
 
     val correctHits: Double = linkageResults.join(groundTruthDF, groundTruthDF.col("idDBLP").equalTo(linkageResults("idDBLP")) &&  groundTruthDF.col("idACM").equalTo(linkageResults("idACM"))).count
     val total: Double = groundTruthDF.count

@@ -1,9 +1,10 @@
 package org.zouzias.spark.lucenerdd.examples.linkage
 
-import org.apache.spark.sql.SQLContext
-import org.apache.spark.{Logging, SparkConf, SparkContext}
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.{SparkConf}
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd._
+import org.zouzias.spark.lucenerdd.logging.Logging
 
 /**
  * Record linkage example between Abt and Buy product's descriptions using [[LuceneRDD]]
@@ -14,21 +15,21 @@ object LinkageAbtvsBuy extends Logging {
 
   def main(args: Array[String]) {
 
-    // initialise spark context
+    // initialise sparkSession context
     val conf = new SparkConf().setAppName(LinkageAbtvsBuy.getClass.getName)
 
-    implicit val sc = new SparkContext(conf)
-    val sqlContext = new SQLContext(sc)
+    implicit val sc = SparkSession.builder().config(conf).getOrCreate()
+    import sc.implicits._
 
-    val abtDF = sqlContext.read.parquet("data/linkage-products2/linkage-products-abt.parquet")
+    val abtDF = sc.read.parquet("data/linkage-products2/linkage-products-abt.parquet")
     logInfo(s"Loaded ${abtDF.count} Abt product descriptions")
-    val buyDF = sqlContext.read.parquet("data/linkage-products2/linkage-products-buy.parquet")
+    val buyDF = sc.read.parquet("data/linkage-products2/linkage-products-buy.parquet")
     logInfo(s"Loaded ${buyDF.count} Buy product descriptions")
-    val groundTruthDF = sqlContext.read.parquet("data/linkage-products2/linkage-products-abt-vs-buy.parquet")
+    val groundTruthDF = sc.read.parquet("data/linkage-products2/linkage-products-abt-vs-buy.parquet")
 
 
     val abt = abtDF.map( row => (row.get(0).toString, row.getString(1), row.getString(2), row.getString(3)))
-    val buy = LuceneRDD(buyDF.map( row => (row.get(0).toString, row.getString(1), row.getString(2), row.getString(3))))
+    val buy = LuceneRDD(buyDF.rdd.map( row => (row.get(0).toString, row.getString(1), row.getString(2), row.getString(3))))
 
 
 
@@ -47,11 +48,9 @@ object LinkageAbtvsBuy extends Logging {
     }
 
 
-    val linkedResults = buy.link(abt, linker.tupled, 3)
+    val linkedResults = buy.link(abt.rdd, linker.tupled, 3)
 
-    import sqlContext.implicits._
-
-    val linkageResultsIds = linkedResults.filter(_._2.nonEmpty).map{ case (abtId, topDocs) => (topDocs.head.doc.textField("_1").head, abtId._1.toInt)}.toDF("idBuy", "idAbt")
+    val linkageResultsIds = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (abtId, topDocs) => (topDocs.head.doc.textField("_1").head, abtId._1.toInt)}).toDF("idBuy", "idAbt")
 
     val correctHits: Double = linkageResultsIds.join(groundTruthDF, groundTruthDF.col("idAbt").equalTo(linkageResultsIds("idAbt")) &&  groundTruthDF.col("idBuy").equalTo(linkageResultsIds("idBuy"))).count
     val total: Double = groundTruthDF.count
@@ -61,7 +60,7 @@ object LinkageAbtvsBuy extends Logging {
     logInfo("********************************")
     logInfo(s"Accuracy of linkage is ${accuracy}")
     logInfo("********************************")
-    // terminate spark context
+    // terminate sparkSession context
     sc.stop()
 
   }

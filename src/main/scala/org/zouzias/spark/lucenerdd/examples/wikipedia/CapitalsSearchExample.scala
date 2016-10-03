@@ -1,7 +1,7 @@
 package org.zouzias.spark.lucenerdd.examples.wikipedia
 
-import org.apache.spark.sql.SQLContext
-import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd._
 
@@ -16,10 +16,9 @@ object CapitalsSearchExample {
     val conf = new SparkConf().setAppName("CapitalsSearchExample")
     val k = 10
 
-    implicit val sc = new SparkContext(conf)
-    val sqlContext = new SQLContext(sc)
+    implicit val sc = SparkSession.builder.config(conf).getOrCreate()
 
-    val capitals = sqlContext.read.parquet("data/spatial/capitals.parquet").select("name", "country")
+    val capitals = sc.read.parquet("data/spatial/capitals.parquet").select("name", "country")
 
     val rdd = LuceneRDD(capitals)
 

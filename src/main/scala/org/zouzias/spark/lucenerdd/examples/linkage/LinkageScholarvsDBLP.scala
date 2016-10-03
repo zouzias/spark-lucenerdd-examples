@@ -1,9 +1,10 @@
 package org.zouzias.spark.lucenerdd.examples.linkage
 
-import org.apache.spark.sql.{Row, SQLContext}
-import org.apache.spark.{Logging, SparkConf, SparkContext}
+import org.apache.spark.SparkConf
+import org.apache.spark.sql.{Row, SparkSession}
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd._
+import org.zouzias.spark.lucenerdd.logging.Logging
 
 /**
  * Record linkage example between Google scholar and DBLP using [[LuceneRDD]]
@@ -17,14 +18,14 @@ object LinkageScholarvsDBLP extends Logging {
     // initialise spark context
     val conf = new SparkConf().setAppName(LinkageScholarvsDBLP.getClass.getName)
 
-    implicit val sc = new SparkContext(conf)
-    val sqlContext = new SQLContext(sc)
+    implicit val sc = SparkSession.builder.config(conf).getOrCreate()
+    import sc.implicits._
 
-    val scholarDF = sqlContext.read.parquet("data/linkage-papers1/linkage-papers-scholar.parquet")
+    val scholarDF = sc.read.parquet("data/linkage-papers1/linkage-papers-scholar.parquet")
     logInfo(s"Loaded ${scholarDF.count} ACM records")
-    val dblpDF = sqlContext.read.parquet("data/linkage-papers1/linkage-papers-dblp.parquet")
+    val dblpDF = sc.read.parquet("data/linkage-papers1/linkage-papers-dblp.parquet")
     logInfo(s"Loaded ${scholarDF.count} DBLP records")
-    val groundTruthDF = sqlContext.read.parquet("data/linkage-papers1/linkage-papers-scholar-vs-dblp.parquet")
+    val groundTruthDF = sc.read.parquet("data/linkage-papers1/linkage-papers-scholar-vs-dblp.parquet")
 
     val scholar = scholarDF.select("id", "title", "authors", "venue")
 
@@ -56,9 +57,7 @@ object LinkageScholarvsDBLP extends Logging {
 
     val linkedResults = dblp.linkDataFrame(scholar, linker, 3)
 
-    import sqlContext.implicits._
-
-    val linkageResults = linkedResults.filter(_._2.nonEmpty).map{ case (scholar, topDocs) => (topDocs.head.doc.textField("id").head, scholar.getString(scholar.fieldIndex("id")))}
+    val linkageResults = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (scholar, topDocs) => (topDocs.head.doc.textField("id").head, scholar.getString(scholar.fieldIndex("id")))})
       .toDF("idDBLP", "idScholar")
 
     val correctHits: Double = linkageResults
