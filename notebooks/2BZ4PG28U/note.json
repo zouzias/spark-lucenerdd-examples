@@ -1,0 +1,264 @@
+{
+  "paragraphs": [
+    {
+      "title": "Load Spark LuceneRDD Jars",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.0\")",
+      "dateUpdated": "Oct 5, 2016 10:01:31 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475350680699_-1674609895",
+      "id": "20161001-115642_482200633",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@4586de89\n"
+      },
+      "dateCreated": "Oct 1, 2016 7:38:00 AM",
+      "dateStarted": "Oct 5, 2016 10:01:31 PM",
+      "dateFinished": "Oct 5, 2016 10:01:49 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Imports for spark-lucenerdd",
+      "text": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
+      "dateUpdated": "Oct 5, 2016 10:04:33 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475350680710_-1592658380",
+      "id": "20161001-120020_440303718",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
+      },
+      "dateCreated": "Oct 1, 2016 7:38:00 AM",
+      "dateStarted": "Oct 5, 2016 10:04:33 PM",
+      "dateFinished": "Oct 5, 2016 10:04:37 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Load ACM and DBLP datasets",
+      "text": "import spark.implicits._\n\nval acmDF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-acm.parquet\")\nprintln(s\"Loaded ${acmDF.count} ACM records\")\n\nval dblp2DF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-dblp2.parquet\")\nprintln(s\"Loaded ${acmDF.count} DBLP records\")\nval groundTruthDF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-acm-vs-dblp2.parquet\")\n\nval dblp2 \u003d LuceneRDD(dblp2DF)\ndblp2.cache()",
+      "dateUpdated": "Oct 5, 2016 10:04:41 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475350680712_-1594966873",
+      "id": "20161001-120320_2078137697",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nimport spark.implicits._\n\nacmDF: org.apache.spark.sql.DataFrame \u003d [id: int, title: string ... 3 more fields]\nLoaded 2294 ACM records\n\ndblp2DF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\nLoaded 2294 DBLP records\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: int]\n\ndblp2: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[47] at RDD at LuceneRDD.scala:40\n\nres6: dblp2.type \u003d LuceneRDD[47] at RDD at LuceneRDD.scala:40\n"
+      },
+      "dateCreated": "Oct 1, 2016 7:38:00 AM",
+      "dateStarted": "Oct 5, 2016 10:04:41 PM",
+      "dateFinished": "Oct 5, 2016 10:04:49 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "   // Link is the author tokens or title tokens match. Combine all tokens by an OR clause\nval linker: Row \u003d\u003e String \u003d {\n  case row \u003d\u003e {\n    val title \u003d row.getString(row.fieldIndex(\"title\"))\n    val authors \u003d row.getString(row.fieldIndex(\"authors\"))\n\n    val titleTokens \u003d title.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e 3).mkString(\" OR \")\n    val authorsTerms \u003d authors.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e 2).mkString(\" OR \")\n\n    if (authorsTerms.nonEmpty) {\n      s\"(title:(${titleTokens})) OR (author:${authorsTerms})\"\n    }\n    else{\n      s\"title:(${titleTokens})\"\n    }\n  }\n}",
+      "dateUpdated": "Oct 5, 2016 10:04:54 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475350680724_-1587271895",
+      "id": "20161001-154952_870995671",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n"
+      },
+      "dateCreated": "Oct 1, 2016 7:38:00 AM",
+      "dateStarted": "Oct 5, 2016 10:04:54 PM",
+      "dateFinished": "Oct 5, 2016 10:04:56 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": " val linkedResults \u003d dblp2.linkDataFrame(acmDF, linker, 10)\n\nval linkageResults \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) \u003d\u003e (topDocs.head.doc.textField(\"id\").head, acm.getInt(acm.fieldIndex(\"id\")).toString)}).toDF(\"idDBLP\", \"idACM\")\n\nval correctHits: Double \u003d linkageResults.join(groundTruthDF, groundTruthDF.col(\"idDBLP\").equalTo(linkageResults(\"idDBLP\")) \u0026\u0026  groundTruthDF.col(\"idACM\").equalTo(linkageResults(\"idACM\"))).count\n    \nval total: Double \u003d groundTruthDF.count\nval accuracy \u003d correctHits / total\n\nprintln(\"********************************\")\nprintln(s\"Accuracy of linkage is ${accuracy}\")\nprintln(\"********************************\")",
+      "dateUpdated": "Oct 5, 2016 10:04:59 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475350680724_-1587271895",
+      "id": "20161001-155056_1480917921",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, List[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[60] at map at LuceneRDD.scala:168\n\nlinkageResults: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: string]\n\ncorrectHits: Double \u003d 2108.0\n\ntotal: Double \u003d 2224.0\n\naccuracy: Double \u003d 0.947841726618705\n********************************\nAccuracy of linkage is 0.947841726618705\n********************************\n"
+      },
+      "dateCreated": "Oct 1, 2016 7:38:00 AM",
+      "dateStarted": "Oct 5, 2016 10:05:00 PM",
+      "dateFinished": "Oct 5, 2016 10:05:29 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "",
+      "dateUpdated": "Oct 5, 2016 10:01:32 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475350680725_-1587656644",
+      "id": "20161001-155628_1046044654",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Oct 1, 2016 7:38:00 AM",
+      "dateStarted": "Oct 5, 2016 10:02:39 PM",
+      "dateFinished": "Oct 5, 2016 10:02:39 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "/lucenerdd/linkage-acm-vs-dblp",
+  "id": "2BZ4PG28U",
+  "angularObjects": {
+    "2BW8YVU6H:shared_process": [],
+    "2BXS381NX:shared_process": [],
+    "2BXU7ZEKD:shared_process": [],
+    "2BXC8C2P5:shared_process": [],
+    "2BYQXFMF3:shared_process": [],
+    "2BZUU6GXA:shared_process": [],
+    "2BXTB63NK:shared_process": [],
+    "2BW4GGRH6:shared_process": [],
+    "2BYN1QVD7:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

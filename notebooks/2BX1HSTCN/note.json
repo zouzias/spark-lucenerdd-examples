@@ -1,0 +1,259 @@
+{
+  "paragraphs": [
+    {
+      "title": "Load Spark LuceneRDD Jars",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.0\")",
+      "dateUpdated": "Oct 5, 2016 9:39:22 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475703562465_719052780",
+      "id": "20161001-115642_482200633",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@4586de89\n"
+      },
+      "dateCreated": "Oct 5, 2016 9:39:22 PM",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Imports for spark-lucenerdd",
+      "text": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.apache.spark.sql.SparkSession\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
+      "dateUpdated": "Oct 5, 2016 9:39:22 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475703562467_719822277",
+      "id": "20161001-120020_440303718",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.apache.spark.sql.SparkSession\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
+      },
+      "dateCreated": "Oct 5, 2016 9:39:22 PM",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Load all capitals",
+      "text": "val capitals \u003d spark.read.parquet(\"data/spatial/capitals.parquet\").select(\"name\", \"country\")\n\nval luceneRDD \u003d LuceneRDD(capitals)\nluceneRDD.cache\nluceneRDD.count",
+      "dateUpdated": "Oct 5, 2016 9:46:27 PM",
+      "config": {
+        "tableHide": true,
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475703562472_716359537",
+      "id": "20161001-145632_657667869",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\ncapitals: org.apache.spark.sql.DataFrame \u003d [name: string, country: string]\n\nluceneRDD: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[74] at RDD at LuceneRDD.scala:40\n\nres13: luceneRDD.type \u003d LuceneRDD[74] at RDD at LuceneRDD.scala:40\n\nres14: Long \u003d 303\n"
+      },
+      "dateCreated": "Oct 5, 2016 9:39:22 PM",
+      "dateStarted": "Oct 5, 2016 9:46:28 PM",
+      "dateFinished": "Oct 5, 2016 9:46:33 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Search for ottawa",
+      "text": "val k \u003d 10\nval result \u003d luceneRDD.termQuery(\"name\", \"ottawa\", k)\n\nprintln(result.take(k).foreach(println))",
+      "dateUpdated": "Oct 5, 2016 9:46:59 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475703562473_715974788",
+      "id": "20161001-155628_1046044654",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nk: Int \u003d 10\n\nresult: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse[77] at RDD at LuceneRDDResponse.scala:31\nSparkScoreDoc(6.020585,161,0,Text fields:country:[Canada]name:[Ottawa])\n()\n"
+      },
+      "dateCreated": "Oct 5, 2016 9:39:22 PM",
+      "dateStarted": "Oct 5, 2016 9:46:59 PM",
+      "dateFinished": "Oct 5, 2016 9:47:04 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Prefix query for \"pa\"",
+      "text": "val k \u003d 10\nval result \u003d luceneRDD.prefixQuery(\"name\", \"pa\", k)\n\nprintln(result.take(k).foreach(println))",
+      "dateUpdated": "Oct 5, 2016 9:48:35 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475703562515_812162013",
+      "id": "20161003-215636_1667429531",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nk: Int \u003d 10\n\nresult: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse[82] at RDD at LuceneRDDResponse.scala:31\nSparkScoreDoc(1.0,159,0,Text fields:country:[France]name:[Paris])\nSparkScoreDoc(1.0,144,0,Text fields:country:[Unknown]name:[Pacitan])\nSparkScoreDoc(1.0,104,0,Text fields:country:[Unknown]name:[Pasuruan])\nSparkScoreDoc(1.0,91,0,Text fields:country:[Panama]name:[Alcaldía de Panamá])\nSparkScoreDoc(1.0,43,0,Text fields:country:[Suriname]name:[Paramaribo])\n()\n"
+      },
+      "dateCreated": "Oct 5, 2016 9:39:22 PM",
+      "dateStarted": "Oct 5, 2016 9:47:44 PM",
+      "dateFinished": "Oct 5, 2016 9:47:48 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "",
+      "dateUpdated": "Oct 5, 2016 9:47:37 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475704046895_-348355040",
+      "id": "20161005-214726_2020969583",
+      "dateCreated": "Oct 5, 2016 9:47:26 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "/lucenerdd/search/capitals",
+  "id": "2BX1HSTCN",
+  "angularObjects": {
+    "2BW8YVU6H:shared_process": [],
+    "2BXS381NX:shared_process": [],
+    "2BXU7ZEKD:shared_process": [],
+    "2BXC8C2P5:shared_process": [],
+    "2BYQXFMF3:shared_process": [],
+    "2BZUU6GXA:shared_process": [],
+    "2BXTB63NK:shared_process": [],
+    "2BW4GGRH6:shared_process": [],
+    "2BYN1QVD7:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

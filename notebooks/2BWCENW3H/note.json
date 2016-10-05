@@ -1,0 +1,347 @@
+{
+  "paragraphs": [
+    {
+      "title": "Load Spark LuceneRDD Jars",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.0\")",
+      "dateUpdated": "Oct 5, 2016 9:49:57 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475336874705_-1470869390",
+      "id": "20161001-115642_482200633",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "Must be used before SparkInterpreter (%spark) initialized\nHint: put this paragraph before any Spark code and restart Zeppelin/Interpreter"
+      },
+      "dateCreated": "Oct 1, 2016 3:47:54 AM",
+      "dateStarted": "Oct 5, 2016 9:49:58 PM",
+      "dateFinished": "Oct 5, 2016 9:49:58 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Imports for spark-lucenerdd",
+      "text": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.SparkSession\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
+      "dateUpdated": "Oct 5, 2016 9:49:58 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475336874708_-1472023637",
+      "id": "20161001-120020_440303718",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.SparkSession\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
+      },
+      "dateCreated": "Oct 1, 2016 3:47:54 AM",
+      "dateStarted": "Oct 5, 2016 9:49:58 PM",
+      "dateFinished": "Oct 5, 2016 9:50:04 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Load world cities",
+      "text": "import spark.implicits._\n\nval amazonDF \u003d spark.read.parquet(\"data/linkage-products1/linkage-products-amazon.parquet\")\nval googleDF \u003d spark.read.parquet(\"data/linkage-products1/linkage-products-google.parquet\")\nval groundTruthDF \u003d spark.read.parquet(\"data/linkage-products1/linkage-products-amazon-vs-google.parquet\")",
+      "dateUpdated": "Oct 5, 2016 9:49:58 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475336874708_-1472023637",
+      "id": "20161001-120320_2078137697",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nimport spark.implicits._\n\namazonDF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\n\ngoogleDF: org.apache.spark.sql.DataFrame \u003d [id: string, name: string ... 3 more fields]\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idAmazon: string, idGoogleBase: string]\n"
+      },
+      "dateCreated": "Oct 1, 2016 3:47:54 AM",
+      "dateStarted": "Oct 5, 2016 9:49:59 PM",
+      "dateFinished": "Oct 5, 2016 9:50:11 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Load Amazon \u0026 Gogle datates",
+      "text": "val amazon \u003d amazonDF.select(\"id\", \"title\", \"description\", \"manufacturer\").map( row \u003d\u003e (row.get(0).toString, row.getString(1), row.getString(2), row.getString(3)))\nval googleLuceneRDD \u003d LuceneRDD(googleDF.rdd.map( row \u003d\u003e (row.get(0).toString, row.getString(1), row.getString(2), row.getString(3))))",
+      "dateUpdated": "Oct 5, 2016 9:49:59 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475336874708_-1472023637",
+      "id": "20161001-145632_657667869",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\namazon: org.apache.spark.sql.Dataset[(String, String, String, String)] \u003d [_1: string, _2: string ... 2 more fields]\n\ngoogleLuceneRDD: org.zouzias.spark.lucenerdd.LuceneRDD[(String, String, String, String)] \u003d LuceneRDD[96] at RDD at LuceneRDD.scala:40\n"
+      },
+      "dateCreated": "Oct 1, 2016 3:47:54 AM",
+      "dateStarted": "Oct 5, 2016 9:50:05 PM",
+      "dateFinished": "Oct 5, 2016 9:50:13 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "    val linker: (String, String, String, String) \u003d\u003e String \u003d {\n      case (_, name, description, manu) \u003d\u003e {\n        val nameTokens \u003d name.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e 1).distinct.mkString(\" OR \")\n        val descTerms \u003d description.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e 6).distinct.mkString(\" OR \")\n        val manuTerms \u003d manu.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e 1).mkString(\" OR \")\n\n        /*if (descTerms.nonEmpty \u0026\u0026 nameTokens.nonEmpty \u0026\u0026 manuTerms.nonEmpty) {\n          s\"(_2:(${nameTokens})) OR (_3:${descTerms}) OR (_4:${manuTerms})\"\n        }\n        else if (nameTokens.nonEmpty \u0026\u0026 manuTerms.nonEmpty)  s\"(_2:(${nameTokens})) OR (_4:${manuTerms})\" else if (nameTokens.nonEmpty) s\"_2:(${nameTokens})\" else \"*:*\"*/\n        \n        if (nameTokens.nonEmpty) {\n          s\"_2:(${nameTokens})\"\n        }\n        else {\n          \"*:*\"\n        }\n      }\n    }",
+      "dateUpdated": "Oct 5, 2016 9:49:59 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475336992456_923022942",
+      "id": "20161001-154952_870995671",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nlinker: (String, String, String, String) \u003d\u003e String \u003d \u003cfunction4\u003e\n"
+      },
+      "dateCreated": "Oct 1, 2016 3:49:52 AM",
+      "dateStarted": "Oct 5, 2016 9:50:11 PM",
+      "dateFinished": "Oct 5, 2016 9:50:16 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val linkedResults \u003d googleLuceneRDD.link(amazon.rdd, linker.tupled, 3)\n\nval linkageResults \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (left, topDocs) \u003d\u003e (topDocs.head.doc.textField(\"_1\").head, left._1)})\n      .toDF(\"idGoogleBase\", \"idAmazon\")",
+      "dateUpdated": "Oct 5, 2016 9:50:00 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475337056813_290551590",
+      "id": "20161001-155056_1480917921",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nlinkedResults: org.apache.spark.rdd.RDD[((String, String, String, String), List[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[110] at map at LuceneRDD.scala:168\n\nlinkageResults: org.apache.spark.sql.DataFrame \u003d [idGoogleBase: string, idAmazon: string]\n"
+      },
+      "dateCreated": "Oct 1, 2016 3:50:56 AM",
+      "dateStarted": "Oct 5, 2016 9:50:14 PM",
+      "dateFinished": "Oct 5, 2016 9:50:23 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val correctHits: Double \u003d linkageResults.join(groundTruthDF, groundTruthDF.col(\"idAmazon\").equalTo(linkageResults(\"idAmazon\")) \u0026\u0026  groundTruthDF.col(\"idGoogleBase\").equalTo(linkageResults(\"idGoogleBase\"))).count\nval total: Double \u003d groundTruthDF.count\nval accuracy \u003d correctHits / total\n\nprintln(\"********************************\")\nprintln(s\"Accuracy of linkage is ${accuracy}\")\nprintln(\"********************************\")",
+      "dateUpdated": "Oct 5, 2016 9:50:01 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475337106969_1370434483",
+      "id": "20161001-155146_1988058650",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\ncorrectHits: Double \u003d 763.0\n\ntotal: Double \u003d 1300.0\n\naccuracy: Double \u003d 0.5869230769230769\n********************************\nAccuracy of linkage is 0.5869230769230769\n********************************\n"
+      },
+      "dateCreated": "Oct 1, 2016 3:51:46 AM",
+      "dateStarted": "Oct 5, 2016 9:50:16 PM",
+      "dateFinished": "Oct 5, 2016 9:50:35 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "",
+      "dateUpdated": "Oct 5, 2016 9:50:01 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475337388763_458024630",
+      "id": "20161001-155628_1046044654",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Oct 1, 2016 3:56:28 AM",
+      "dateStarted": "Oct 5, 2016 9:50:23 PM",
+      "dateFinished": "Oct 5, 2016 9:50:35 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "/lucenerdd/linkage-google-vs-amazon",
+  "id": "2BWCENW3H",
+  "angularObjects": {
+    "2BW8YVU6H:shared_process": [],
+    "2BXS381NX:shared_process": [],
+    "2BXU7ZEKD:shared_process": [],
+    "2BXC8C2P5:shared_process": [],
+    "2BYQXFMF3:shared_process": [],
+    "2BZUU6GXA:shared_process": [],
+    "2BXTB63NK:shared_process": [],
+    "2BW4GGRH6:shared_process": [],
+    "2BYN1QVD7:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

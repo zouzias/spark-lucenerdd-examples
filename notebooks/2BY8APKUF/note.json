@@ -1,0 +1,218 @@
+{
+  "paragraphs": [
+    {
+      "title": "Load Spark LuceneRDD Jars",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.0\")",
+      "dateUpdated": "Oct 5, 2016 10:05:47 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475350705756_458300089",
+      "id": "20161001-115642_482200633",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "Must be used before SparkInterpreter (%spark) initialized\nHint: put this paragraph before any Spark code and restart Zeppelin/Interpreter"
+      },
+      "dateCreated": "Oct 1, 2016 7:38:25 AM",
+      "dateStarted": "Oct 5, 2016 10:05:47 PM",
+      "dateFinished": "Oct 5, 2016 10:05:47 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Imports for spark-lucenerdd",
+      "text": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.apache.spark.sql.SparkSession\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
+      "dateUpdated": "Oct 5, 2016 10:05:47 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475350705757_457915340",
+      "id": "20161001-120020_440303718",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.apache.spark.sql.SparkSession\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
+      },
+      "dateCreated": "Oct 1, 2016 7:38:25 AM",
+      "dateStarted": "Oct 5, 2016 10:05:48 PM",
+      "dateFinished": "Oct 5, 2016 10:05:51 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Load DBLP \u0026 Scholar datasets",
+      "text": "val scholarDF \u003d spark.read.parquet(\"data/linkage-papers1/linkage-papers-scholar.parquet\")\nval dblpDF \u003d spark.read.parquet(\"data/linkage-papers1/linkage-papers-dblp.parquet\")\nval groundTruthDF \u003d spark.read.parquet(\"data/linkage-papers1/linkage-papers-scholar-vs-dblp.parquet\")\n\nval scholar \u003d scholarDF.select(\"id\", \"title\", \"authors\", \"venue\")\n\nval dblp \u003d LuceneRDD(dblpDF)",
+      "dateUpdated": "Oct 5, 2016 10:05:47 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475350705768_441371138",
+      "id": "20161001-145632_657667869",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nscholarDF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\n\ndblpDF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idScholar: string]\n\nscholar: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 2 more fields]\n\ndblp: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[90] at RDD at LuceneRDD.scala:40\n"
+      },
+      "dateCreated": "Oct 1, 2016 7:38:25 AM",
+      "dateStarted": "Oct 5, 2016 10:05:48 PM",
+      "dateFinished": "Oct 5, 2016 10:05:55 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// A custom linker\n    val linker: Row \u003d\u003e String \u003d {\n      case row \u003d\u003e {\n        val title \u003d row.getString(row.fieldIndex(\"title\"))\n        val authors \u003d row.getString(row.fieldIndex(\"authors\"))\n\n        val titleTokens \u003d title.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e 3).mkString(\" OR \")\n        val authorsTerms \u003d authors.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e 2).mkString(\" OR \")\n\n        if (titleTokens.nonEmpty \u0026\u0026 authorsTerms.nonEmpty) {\n          s\"(title:(${titleTokens}) OR authors:(${authorsTerms}))\"\n        }\n        else if (titleTokens.nonEmpty){\n          s\"title:(${titleTokens})\"\n        }\n        else if (authorsTerms.nonEmpty){\n          s\"authors:(${authorsTerms})\"\n        }\n        else {\n          \"*:*\"\n        }\n      }\n    }\n\n    val linkedResults \u003d dblp.linkDataFrame(scholar, linker, 3)\n\n    val linkageResults \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (scholar, topDocs) \u003d\u003e (topDocs.head.doc.textField(\"id\").head, scholar.getString(scholar.fieldIndex(\"id\")))})\n      .toDF(\"idDBLP\", \"idScholar\")\n\n    val correctHits: Double \u003d linkageResults\n      .join(groundTruthDF, groundTruthDF.col(\"idDBLP\").equalTo(linkageResults(\"idDBLP\")) \u0026\u0026  groundTruthDF.col(\"idScholar\").equalTo(linkageResults(\"idScholar\"))).count\n    val total: Double \u003d groundTruthDF.count\n    val accuracy \u003d correctHits / total\n\n    println(20L * \"*\")\n    println(s\"Accuracy of linkage is ${accuracy}\")\n    println(20L * \"\u003d\")",
+      "dateUpdated": "Oct 5, 2016 10:05:48 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475350705777_450220362",
+      "id": "20161001-155628_1046044654",
+      "result": "org.apache.thrift.transport.TTransportException",
+      "dateCreated": "Oct 1, 2016 7:38:25 AM",
+      "dateStarted": "Oct 5, 2016 10:05:52 PM",
+      "dateFinished": "Oct 5, 2016 10:07:08 PM",
+      "status": "ERROR",
+      "errorMessage": "org.apache.thrift.transport.TTransportException\n\tat org.apache.thrift.transport.TIOStreamTransport.read(TIOStreamTransport.java:132)\n\tat org.apache.thrift.transport.TTransport.readAll(TTransport.java:86)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readAll(TBinaryProtocol.java:429)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readI32(TBinaryProtocol.java:318)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readMessageBegin(TBinaryProtocol.java:219)\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:69)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:261)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:245)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:326)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:325)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:329)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "",
+      "dateUpdated": "Oct 5, 2016 10:05:48 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1475531796415_-542312315",
+      "id": "20161003-215636_1667429531",
+      "result": "org.apache.thrift.transport.TTransportException",
+      "dateCreated": "Oct 3, 2016 9:56:36 AM",
+      "dateStarted": "Oct 5, 2016 10:05:56 PM",
+      "dateFinished": "Oct 5, 2016 10:07:08 PM",
+      "status": "ERROR",
+      "errorMessage": "org.apache.thrift.transport.TTransportException\n\tat org.apache.thrift.transport.TIOStreamTransport.read(TIOStreamTransport.java:132)\n\tat org.apache.thrift.transport.TTransport.readAll(TTransport.java:86)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readAll(TBinaryProtocol.java:429)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readI32(TBinaryProtocol.java:318)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readMessageBegin(TBinaryProtocol.java:219)\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:69)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:261)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:245)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:326)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:325)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:329)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "/lucenerdd/linkage-scholar-vs-dblp",
+  "id": "2BY8APKUF",
+  "angularObjects": {
+    "2BW8YVU6H:shared_process": [],
+    "2BXS381NX:shared_process": [],
+    "2BXU7ZEKD:shared_process": [],
+    "2BXC8C2P5:shared_process": [],
+    "2BYQXFMF3:shared_process": [],
+    "2BZUU6GXA:shared_process": [],
+    "2BXTB63NK:shared_process": [],
+    "2BW4GGRH6:shared_process": [],
+    "2BYN1QVD7:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}
