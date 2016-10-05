@@ -1,7 +1,7 @@
 package org.zouzias.spark.lucenerdd.examples.linkage.shape
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.{SparkConf}
+import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD
 import org.zouzias.spark.lucenerdd.spatial.shape._
 import org.zouzias.spark.lucenerdd._
@@ -13,23 +13,23 @@ import org.zouzias.spark.lucenerdd._
  */
 object ShapeLinkageCountriesvsCapitals {
 
-  // 50km radius
+  // 20km radius
   val Radius = 20D
 
   def main(args: Array[String]): Unit = {
     // initialise spark context
     val conf = new SparkConf().setAppName(ShapeLinkageCountriesvsCapitals.getClass.getName)
 
-    implicit val sc = SparkSession.builder.config(conf).getOrCreate()
-    import sc.implicits._
+    implicit val spark = SparkSession.builder.config(conf).getOrCreate()
+    import spark.implicits._
 
     // Load all countries
-    val allCountries = sc.read.parquet("data/spatial/countries-poly.parquet")
+    val allCountries = spark.read.parquet("data/spatial/countries-poly.parquet")
       .select("name", "shape")
       .map(row => (row.getString(1), row.getString(0)))
 
     // Load all capitals
-    val capitals = sc.read.parquet("data/spatial/capitals.parquet")
+    val capitals = spark.read.parquet("data/spatial/capitals.parquet")
       .select("name", "shape")
       .map(row => (row.getString(1), row.getString(0)))
 
@@ -51,7 +51,7 @@ object ShapeLinkageCountriesvsCapitals {
     linked.map(x => (x._1, x._2.map(_.doc.textField("_1")))).foreach(println)
 
     // terminate spark context
-    sc.stop()
+    spark.stop()
 
   }
 }

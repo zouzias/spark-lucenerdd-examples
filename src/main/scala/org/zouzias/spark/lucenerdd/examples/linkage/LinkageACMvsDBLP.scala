@@ -17,14 +17,14 @@ object LinkageACMvsDBLP extends Logging {
     // initialise spark context
     val conf = new SparkConf().setAppName(LinkageACMvsDBLP.getClass.getName)
 
-    implicit val sc = SparkSession.builder.config(conf).getOrCreate()
-    import sc.implicits._
+    implicit val spark = SparkSession.builder.config(conf).getOrCreate()
+    import spark.implicits._
 
-    val acmDF = sc.read.parquet("data/linkage-papers2/linkage-papers-acm.parquet")
+    val acmDF = spark.read.parquet("data/linkage-papers2/linkage-papers-acm.parquet")
     logInfo(s"Loaded ${acmDF.count} ACM records")
-    val dblp2DF = sc.read.parquet("data/linkage-papers2/linkage-papers-dblp2.parquet")
+    val dblp2DF = spark.read.parquet("data/linkage-papers2/linkage-papers-dblp2.parquet")
     logInfo(s"Loaded ${acmDF.count} DBLP records")
-    val groundTruthDF = sc.read.parquet("data/linkage-papers2/linkage-papers-acm-vs-dblp2.parquet")
+    val groundTruthDF = spark.read.parquet("data/linkage-papers2/linkage-papers-acm-vs-dblp2.parquet")
 
     val dblp2 = LuceneRDD(dblp2DF)
     dblp2.cache()
@@ -49,7 +49,7 @@ object LinkageACMvsDBLP extends Logging {
 
     val linkedResults = dblp2.linkDataFrame(acmDF, linker, 10)
 
-    val linkageResults = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) => (topDocs.head.doc.textField("id").head, acm.getInt(acm.fieldIndex("id")).toString)})
+    val linkageResults = spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) => (topDocs.head.doc.textField("id").head, acm.getInt(acm.fieldIndex("id")).toString)})
       .toDF("idDBLP", "idACM")
 
     val correctHits: Double = linkageResults.join(groundTruthDF, groundTruthDF.col("idDBLP").equalTo(linkageResults("idDBLP")) &&  groundTruthDF.col("idACM").equalTo(linkageResults("idACM"))).count
@@ -61,7 +61,7 @@ object LinkageACMvsDBLP extends Logging {
     logInfo(s"Accuracy of linkage is ${accuracy}")
     logInfo("********************************")
     // terminate spark context
-    sc.stop()
+    spark.stop()
 
   }
 }

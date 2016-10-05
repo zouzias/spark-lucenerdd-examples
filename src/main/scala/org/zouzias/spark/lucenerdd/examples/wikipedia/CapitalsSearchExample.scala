@@ -16,18 +16,18 @@ object CapitalsSearchExample {
     val conf = new SparkConf().setAppName("CapitalsSearchExample")
     val k = 10
 
-    implicit val sc = SparkSession.builder.config(conf).getOrCreate()
+    implicit val spark = SparkSession.builder.config(conf).getOrCreate()
 
-    val capitals = sc.read.parquet("data/spatial/capitals.parquet").select("name", "country")
+    val capitals = spark.read.parquet("data/spatial/capitals.parquet").select("name", "country")
 
-    val rdd = LuceneRDD(capitals)
+    val luceneRDD = LuceneRDD(capitals)
 
-    val result = rdd.termQuery("name", "ottawa", k)
+    val result = luceneRDD.termQuery("name", "ottawa", k)
 
     println(result.take(k).foreach(println))
 
     // terminate spark context
-    sc.stop()
+    spark.stop()
 
   }
 }
