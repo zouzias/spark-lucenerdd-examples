@@ -1,0 +1,216 @@
+{
+  "paragraphs": [
+    {
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.0\")",
+      "dateUpdated": "Oct 11, 2016 6:00:34 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476132703718_-1609222579",
+      "id": "20161010-205143_1251171978",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@4c4b4f8c\n"
+      },
+      "dateCreated": "Oct 10, 2016 8:51:43 AM",
+      "dateStarted": "Oct 11, 2016 6:00:34 AM",
+      "dateFinished": "Oct 11, 2016 6:00:49 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "\nimport org.zouzias.spark.lucenerdd.facets.FacetedLuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.apache.spark.sql.functions._\nimport org.zouzias.spark.lucenerdd.logging.Logging\nval cities \u003d spark.read.parquet(\"data/world-cities-maxmind.parquet\")",
+      "dateUpdated": "Oct 11, 2016 6:00:34 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476132726766_832055165",
+      "id": "20161010-205206_358353446",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nimport org.zouzias.spark.lucenerdd.facets.FacetedLuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.apache.spark.sql.functions._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n\ncities: org.apache.spark.sql.DataFrame \u003d [Country: string, City: string ... 5 more fields]\n"
+      },
+      "dateCreated": "Oct 10, 2016 8:52:06 AM",
+      "dateStarted": "Oct 11, 2016 6:00:39 AM",
+      "dateFinished": "Oct 11, 2016 6:01:07 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "cities.cache\ncities.count",
+      "dateUpdated": "Oct 11, 2016 6:00:34 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476132824517_-343967337",
+      "id": "20161010-205344_531270225",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nres1: cities.type \u003d [Country: string, City: string ... 5 more fields]\n\nres2: Long \u003d 3173958\n"
+      },
+      "dateCreated": "Oct 10, 2016 8:53:44 AM",
+      "dateStarted": "Oct 11, 2016 6:00:50 AM",
+      "dateFinished": "Oct 11, 2016 6:01:29 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val fieldName \u003d \"country\"\nval k \u003d 10\nval dfStart \u003d System.currentTimeMillis()\nval dfResults \u003d cities.groupBy(fieldName).count().sort(desc(\"count\")).take(k)\nval dfEnd \u003d System.currentTimeMillis()\n\nval luceneRDD \u003d FacetedLuceneRDD(cities.select(fieldName))\nluceneRDD.cache()\nluceneRDD.count()\nval lucStart \u003dSystem.currentTimeMillis()\nluceneRDD.facetQuery(\"*:*\", fieldName, facetNum \u003d k)\nval lucEnd \u003dSystem.currentTimeMillis()\n\n\nprintln(\"\u003d\" * 20)\nprintln(s\"DF time: ${ (dfEnd - dfStart) / 1000D } seconds\")\nprintln(\"\u003d\" * 20)\nprintln(s\"Lucene time: ${(lucEnd - lucStart) / 1000D} seconds\")\nprintln(\"\u003d\" * 20)",
+      "dateUpdated": "Oct 11, 2016 6:00:34 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476132888753_137784783",
+      "id": "20161010-205448_472882432",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Oct 10, 2016 8:54:48 AM",
+      "dateStarted": "Oct 11, 2016 6:01:08 AM",
+      "dateFinished": "Oct 10, 2016 9:30:25 AM",
+      "status": "RUNNING",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "",
+      "dateUpdated": "Oct 11, 2016 6:00:34 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476132978801_-1356641242",
+      "id": "20161010-205618_237558344",
+      "dateCreated": "Oct 10, 2016 8:56:18 AM",
+      "dateStarted": "Oct 10, 2016 9:28:40 AM",
+      "dateFinished": "Oct 10, 2016 9:30:25 AM",
+      "status": "PENDING",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "/lucenerdd/df_vs_lucenerdd",
+  "id": "2C1RW5BTE",
+  "angularObjects": {
+    "2BYGV1X1M:shared_process": [],
+    "2BWR1GGDS:shared_process": [],
+    "2BZ9NRX2M:shared_process": [],
+    "2C1B796DK:shared_process": [],
+    "2BYMMQUKG:shared_process": [],
+    "2BYK3XACJ:shared_process": [],
+    "2BWNVWME7:shared_process": [],
+    "2BZVFDW6K:shared_process": [],
+    "2BY8A5G22:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}
