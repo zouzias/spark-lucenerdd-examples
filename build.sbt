@@ -1,16 +1,18 @@
 organization := "org.zouzias"
 name := "spark-lucenerdd-examples"
-version := "0.2.0"
+version := "0.2.1"
 scalaVersion := "2.11.8"
-val sparkV = "2.0.0"
+val sparkV = "2.0.1"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
+
+resolvers += "Apache Repos" at "https://repository.apache.org/content/repositories/releases"
 
 libraryDependencies ++= Seq(
 	"org.zouzias" %% "spark-lucenerdd" % version.value,
 	"org.apache.spark" %% "spark-core" % sparkV % "provided",
 	"org.apache.spark" %% "spark-sql" % sparkV % "provided" ,
-	"com.holdenkarau"  %% "spark-testing-base" % s"${sparkV}_0.4.5" % "test" intransitive()
+	"com.holdenkarau"  %% "spark-testing-base" % s"${sparkV}_0.4.7" % "test" intransitive()
 )
 
 enablePlugins(DockerPlugin)
