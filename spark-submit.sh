@@ -5,7 +5,7 @@ CURRENT_DIR=`pwd`
 # Assumes that spark is installed under home directory
 HOME_DIR=`echo ~`
 export SPARK_LOCAL_IP=localhost
-SPARK_HOME=${HOME_DIR}/spark-2.0.0-bin-hadoop2.7
+SPARK_HOME=${HOME_DIR}/spark-2.0.1-bin-hadoop2.7
 
 # spark-lucenerdd assembly JAR
 MAIN_JAR=${CURRENT_DIR}/target/scala-2.11/spark-lucenerdd-examples-assembly-0.2.1.jar
