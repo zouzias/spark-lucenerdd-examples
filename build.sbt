@@ -1,12 +1,13 @@
 organization := "org.zouzias"
 name := "spark-lucenerdd-examples"
-version := "0.2.1"
+version := "0.2.2-SNAPSHOT"
 scalaVersion := "2.11.8"
 val sparkV = "2.0.1"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 
 resolvers += "Apache Repos" at "https://repository.apache.org/content/repositories/releases"
+resolvers += "OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
 libraryDependencies ++= Seq(
 	"org.zouzias" %% "spark-lucenerdd" % version.value,
