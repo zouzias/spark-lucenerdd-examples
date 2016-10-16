@@ -5,6 +5,9 @@ zeppelin:
     ZEPPELIN_JAVA_OPTS: >-
       -Dspark.driver.memory=1g
       -Dspark.executor.memory=1g
+      -Dspark.rdd.compress=true
+      -Dspark.serializer=org.apache.spark.serializer.KryoSerializer
+      -Dspark.kryo.registrator=org.zouzias.spark.lucenerdd.LuceneRDDKryoRegistrator
     MASTER: local[*]
   ports:
     - 8080:8080
