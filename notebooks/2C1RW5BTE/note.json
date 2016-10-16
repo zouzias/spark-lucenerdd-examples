@@ -1,8 +1,8 @@
 {
   "paragraphs": [
     {
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.0\")",
-      "dateUpdated": "Oct 11, 2016 6:00:34 AM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.2-SNAPSHOT\")",
+      "dateUpdated": "Oct 15, 2016 8:38:58 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -32,17 +32,17 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@4c4b4f8c\n"
+        "msg": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@7c896adb\n"
       },
       "dateCreated": "Oct 10, 2016 8:51:43 AM",
-      "dateStarted": "Oct 11, 2016 6:00:34 AM",
-      "dateFinished": "Oct 11, 2016 6:00:49 AM",
+      "dateStarted": "Oct 15, 2016 8:38:58 PM",
+      "dateFinished": "Oct 15, 2016 8:39:34 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "\nimport org.zouzias.spark.lucenerdd.facets.FacetedLuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.apache.spark.sql.functions._\nimport org.zouzias.spark.lucenerdd.logging.Logging\nval cities \u003d spark.read.parquet(\"data/world-cities-maxmind.parquet\")",
-      "dateUpdated": "Oct 11, 2016 6:00:34 AM",
+      "dateUpdated": "Oct 15, 2016 8:38:58 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -75,14 +75,14 @@
         "msg": "\nimport org.zouzias.spark.lucenerdd.facets.FacetedLuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.apache.spark.sql.functions._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n\ncities: org.apache.spark.sql.DataFrame \u003d [Country: string, City: string ... 5 more fields]\n"
       },
       "dateCreated": "Oct 10, 2016 8:52:06 AM",
-      "dateStarted": "Oct 11, 2016 6:00:39 AM",
-      "dateFinished": "Oct 11, 2016 6:01:07 AM",
+      "dateStarted": "Oct 15, 2016 8:39:01 PM",
+      "dateFinished": "Oct 15, 2016 8:39:47 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "cities.cache\ncities.count",
-      "dateUpdated": "Oct 11, 2016 6:00:34 AM",
+      "dateUpdated": "Oct 15, 2016 8:38:59 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -115,14 +115,14 @@
         "msg": "\nres1: cities.type \u003d [Country: string, City: string ... 5 more fields]\n\nres2: Long \u003d 3173958\n"
       },
       "dateCreated": "Oct 10, 2016 8:53:44 AM",
-      "dateStarted": "Oct 11, 2016 6:00:50 AM",
-      "dateFinished": "Oct 11, 2016 6:01:29 AM",
+      "dateStarted": "Oct 15, 2016 8:39:35 PM",
+      "dateFinished": "Oct 15, 2016 8:39:59 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val fieldName \u003d \"country\"\nval k \u003d 10\nval dfStart \u003d System.currentTimeMillis()\nval dfResults \u003d cities.groupBy(fieldName).count().sort(desc(\"count\")).take(k)\nval dfEnd \u003d System.currentTimeMillis()\n\nval luceneRDD \u003d FacetedLuceneRDD(cities.select(fieldName))\nluceneRDD.cache()\nluceneRDD.count()\nval lucStart \u003dSystem.currentTimeMillis()\nluceneRDD.facetQuery(\"*:*\", fieldName, facetNum \u003d k)\nval lucEnd \u003dSystem.currentTimeMillis()\n\n\nprintln(\"\u003d\" * 20)\nprintln(s\"DF time: ${ (dfEnd - dfStart) / 1000D } seconds\")\nprintln(\"\u003d\" * 20)\nprintln(s\"Lucene time: ${(lucEnd - lucStart) / 1000D} seconds\")\nprintln(\"\u003d\" * 20)",
-      "dateUpdated": "Oct 11, 2016 6:00:34 AM",
+      "dateUpdated": "Oct 15, 2016 8:41:26 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -149,21 +149,17 @@
       "apps": [],
       "jobName": "paragraph_1476132888753_137784783",
       "id": "20161010-205448_472882432",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": ""
-      },
+      "result": "org.apache.zeppelin.interpreter.InterpreterException: org.apache.thrift.transport.TTransportException: java.net.ConnectException: Connection refused",
       "dateCreated": "Oct 10, 2016 8:54:48 AM",
-      "dateStarted": "Oct 11, 2016 6:01:08 AM",
-      "dateFinished": "Oct 10, 2016 9:30:25 AM",
-      "status": "RUNNING",
-      "errorMessage": "",
+      "dateStarted": "Oct 15, 2016 8:41:26 PM",
+      "dateFinished": "Oct 15, 2016 8:41:26 PM",
+      "status": "ERROR",
+      "errorMessage": "java.net.ConnectException: Connection refused\n\tat java.net.PlainSocketImpl.socketConnect(Native Method)\n\tat java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)\n\tat java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)\n\tat java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)\n\tat java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)\n\tat java.net.Socket.connect(Socket.java:589)\n\tat org.apache.thrift.transport.TSocket.open(TSocket.java:182)\n\tat org.apache.zeppelin.interpreter.remote.ClientFactory.create(ClientFactory.java:51)\n\tat org.apache.zeppelin.interpreter.remote.ClientFactory.create(ClientFactory.java:37)\n\tat org.apache.commons.pool2.BasePooledObjectFactory.makeObject(BasePooledObjectFactory.java:60)\n\tat org.apache.commons.pool2.impl.GenericObjectPool.create(GenericObjectPool.java:861)\n\tat org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:435)\n\tat org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:363)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterProcess.getClient(RemoteInterpreterProcess.java:96)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:305)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:325)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:329)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "",
-      "dateUpdated": "Oct 11, 2016 6:00:34 AM",
+      "dateUpdated": "Oct 15, 2016 8:38:59 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -181,7 +177,8 @@
           }
         },
         "enabled": true,
-        "tableHide": true
+        "tableHide": true,
+        "editorMode": "ace/mode/scala"
       },
       "settings": {
         "params": {},
@@ -190,26 +187,27 @@
       "apps": [],
       "jobName": "paragraph_1476132978801_-1356641242",
       "id": "20161010-205618_237558344",
+      "result": "org.apache.thrift.transport.TTransportException",
       "dateCreated": "Oct 10, 2016 8:56:18 AM",
-      "dateStarted": "Oct 10, 2016 9:28:40 AM",
-      "dateFinished": "Oct 10, 2016 9:30:25 AM",
-      "status": "PENDING",
-      "errorMessage": "",
+      "dateStarted": "Oct 15, 2016 8:39:59 PM",
+      "dateFinished": "Oct 15, 2016 8:40:43 PM",
+      "status": "ERROR",
+      "errorMessage": "org.apache.thrift.transport.TTransportException\n\tat org.apache.thrift.transport.TIOStreamTransport.read(TIOStreamTransport.java:132)\n\tat org.apache.thrift.transport.TTransport.readAll(TTransport.java:86)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readAll(TBinaryProtocol.java:429)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readI32(TBinaryProtocol.java:318)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readMessageBegin(TBinaryProtocol.java:219)\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:69)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:261)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:245)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:326)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:325)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:329)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n",
       "progressUpdateIntervalMs": 500
     }
   ],
   "name": "/lucenerdd/df_vs_lucenerdd",
   "id": "2C1RW5BTE",
   "angularObjects": {
-    "2BYGV1X1M:shared_process": [],
-    "2BWR1GGDS:shared_process": [],
-    "2BZ9NRX2M:shared_process": [],
-    "2C1B796DK:shared_process": [],
-    "2BYMMQUKG:shared_process": [],
-    "2BYK3XACJ:shared_process": [],
-    "2BWNVWME7:shared_process": [],
-    "2BZVFDW6K:shared_process": [],
-    "2BY8A5G22:shared_process": []
+    "2C19FBXH2:shared_process": [],
+    "2BYB8EHF4:shared_process": [],
+    "2C1Y9QC7S:shared_process": [],
+    "2BXK26GAE:shared_process": [],
+    "2BXMPJ4Y1:shared_process": [],
+    "2BZ4VKJZC:shared_process": [],
+    "2C1KMW63X:shared_process": [],
+    "2BZ3SBTTR:shared_process": [],
+    "2BYTR1VXA:shared_process": []
   },
   "config": {},
   "info": {}

@@ -2,7 +2,7 @@
   "paragraphs": [
     {
       "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.0\")",
-      "dateUpdated": "Oct 7, 2016 8:19:26 PM",
+      "dateUpdated": "Oct 15, 2016 8:59:07 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -30,19 +30,19 @@
       "jobName": "paragraph_1475690150553_-1276120470",
       "id": "20161005-175550_494955961",
       "result": {
-        "code": "SUCCESS",
+        "code": "ERROR",
         "type": "TEXT",
-        "msg": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@4586de89\n"
+        "msg": "Must be used before SparkInterpreter (%spark) initialized\nHint: put this paragraph before any Spark code and restart Zeppelin/Interpreter"
       },
       "dateCreated": "Oct 5, 2016 5:55:50 AM",
-      "dateStarted": "Oct 7, 2016 8:19:26 PM",
-      "dateFinished": "Oct 7, 2016 8:19:47 PM",
-      "status": "FINISHED",
+      "dateStarted": "Oct 15, 2016 8:59:07 PM",
+      "dateFinished": "Oct 15, 2016 8:59:07 PM",
+      "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "import org.apache.spark.sql.SparkSession\nimport org.apache.spark.SparkConf\nimport org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD\nimport org.zouzias.spark.lucenerdd.spatial.shape._\nimport org.zouzias.spark.lucenerdd._",
-      "dateUpdated": "Oct 7, 2016 8:19:26 PM",
+      "dateUpdated": "Oct 15, 2016 8:59:07 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -75,14 +75,14 @@
         "msg": "\nimport org.apache.spark.sql.SparkSession\n\nimport org.apache.spark.SparkConf\n\nimport org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD\n\nimport org.zouzias.spark.lucenerdd.spatial.shape._\n\nimport org.zouzias.spark.lucenerdd._\n"
       },
       "dateCreated": "Oct 5, 2016 5:56:58 AM",
-      "dateStarted": "Oct 7, 2016 8:19:30 PM",
-      "dateFinished": "Oct 7, 2016 8:20:08 PM",
+      "dateStarted": "Oct 15, 2016 8:59:07 PM",
+      "dateFinished": "Oct 15, 2016 8:59:09 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": " // Load all countries\nval allCountries \u003d spark.read.parquet(\"data/spatial/countries-poly.parquet\").select(\"name\", \"shape\").map(row \u003d\u003e (row.getString(1), row.getString(0)))\n\n// Load all capitals\nval capitals \u003d spark.read.parquet(\"data/spatial/capitals.parquet\").select(\"name\", \"shape\").map(row \u003d\u003e (row.getString(1), row.getString(0)))",
-      "dateUpdated": "Oct 7, 2016 8:19:26 PM",
+      "dateUpdated": "Oct 15, 2016 8:59:07 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -115,14 +115,14 @@
         "msg": "\nallCountries: org.apache.spark.sql.Dataset[(String, String)] \u003d [_1: string, _2: string]\n\ncapitals: org.apache.spark.sql.Dataset[(String, String)] \u003d [_1: string, _2: string]\n"
       },
       "dateCreated": "Oct 5, 2016 5:59:17 AM",
-      "dateStarted": "Oct 7, 2016 8:19:47 PM",
-      "dateFinished": "Oct 7, 2016 8:20:27 PM",
+      "dateStarted": "Oct 15, 2016 8:59:07 PM",
+      "dateFinished": "Oct 15, 2016 8:59:10 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "def parseDouble(s: String): Double \u003d try { s.toDouble } catch { case _: Throwable \u003d\u003e 0.0 }\n\ndef coords(point: (String, String)): (Double, Double) \u003d {\n    val str \u003d point._1\n    val nums \u003d str.dropWhile(x \u003d\u003e x.compareTo(\u0027(\u0027) !\u003d 0).drop(1).dropRight(1)\n    val coords \u003d nums.split(\" \").map(_.trim)\n    (parseDouble(coords(0)), parseDouble(coords(1)))\n}",
-      "dateUpdated": "Oct 7, 2016 8:19:26 PM",
+      "dateUpdated": "Oct 15, 2016 8:59:07 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -155,19 +155,19 @@
         "msg": "\nparseDouble: (s: String)Double\n\ncoords: (point: (String, String))(Double, Double)\n"
       },
       "dateCreated": "Oct 5, 2016 6:01:10 AM",
-      "dateStarted": "Oct 7, 2016 8:20:08 PM",
-      "dateFinished": "Oct 7, 2016 8:20:32 PM",
+      "dateStarted": "Oct 15, 2016 8:59:09 PM",
+      "dateFinished": "Oct 15, 2016 8:59:11 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val shapes \u003d ShapeLuceneRDD(allCountries)\nshapes.cache\n\nval Radius \u003d 20\nval linked \u003d shapes.linkByRadius(capitals.rdd, coords, Radius)\nlinked.cache\n\nlinked.map(x \u003d\u003e (x._1, x._2.map(_.doc.textField(\"_1\")))).foreach(println)\n",
-      "dateUpdated": "Oct 7, 2016 8:19:27 PM",
+      "dateUpdated": "Oct 15, 2016 9:11:11 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
           "mode": "table",
-          "height": 300.0,
+          "height": 231.0,
           "optionOpen": false,
           "keys": [],
           "values": [],
@@ -192,17 +192,17 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "\nshapes: org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD[String,String] \u003d ShapeLuceneRDD[10] at RDD at ShapeLuceneRDD.scala:45\n\nres1: shapes.type \u003d ShapeLuceneRDD[10] at RDD at ShapeLuceneRDD.scala:45\n\nRadius: Int \u003d 20\n\nlinked: org.apache.spark.rdd.RDD[((String, String), List[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[24] at map at ShapeLuceneRDD.scala:115\n\nres2: linked.type \u003d MapPartitionsRDD[24] at map at ShapeLuceneRDD.scala:115\n"
+        "msg": "\nshapes: org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD[String,String] \u003d ShapeLuceneRDD[526] at RDD at ShapeLuceneRDD.scala:45\n\nres73: shapes.type \u003d ShapeLuceneRDD[526] at RDD at ShapeLuceneRDD.scala:45\n\nRadius: Int \u003d 20\n\nlinked: org.apache.spark.rdd.RDD[((String, String), List[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[535] at map at ShapeLuceneRDD.scala:119\n\nres74: linked.type \u003d MapPartitionsRDD[535] at map at ShapeLuceneRDD.scala:119\n"
       },
       "dateCreated": "Oct 5, 2016 9:32:19 AM",
-      "dateStarted": "Oct 7, 2016 8:20:28 PM",
-      "dateFinished": "Oct 7, 2016 8:24:06 PM",
+      "dateStarted": "Oct 15, 2016 9:08:55 PM",
+      "dateFinished": "Oct 15, 2016 9:10:51 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "",
-      "dateUpdated": "Oct 7, 2016 8:19:27 PM",
+      "dateUpdated": "Oct 15, 2016 8:59:07 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -235,8 +235,8 @@
         "msg": ""
       },
       "dateCreated": "Oct 5, 2016 9:34:33 AM",
-      "dateStarted": "Oct 7, 2016 8:20:32 PM",
-      "dateFinished": "Oct 7, 2016 8:24:06 PM",
+      "dateStarted": "Oct 15, 2016 8:59:11 PM",
+      "dateFinished": "Oct 15, 2016 9:01:01 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     }
@@ -244,15 +244,15 @@
   "name": "/lucenerdd/spatial/linkage-countries-vs-cities",
   "id": "2BYG28DT7",
   "angularObjects": {
-    "2BW8YVU6H:shared_process": [],
-    "2BXS381NX:shared_process": [],
-    "2BXU7ZEKD:shared_process": [],
-    "2BXC8C2P5:shared_process": [],
-    "2BYQXFMF3:shared_process": [],
-    "2BZUU6GXA:shared_process": [],
-    "2BXTB63NK:shared_process": [],
-    "2BW4GGRH6:shared_process": [],
-    "2BYN1QVD7:shared_process": []
+    "2C19FBXH2:shared_process": [],
+    "2BYB8EHF4:shared_process": [],
+    "2C1Y9QC7S:shared_process": [],
+    "2BXK26GAE:shared_process": [],
+    "2BXMPJ4Y1:shared_process": [],
+    "2BZ4VKJZC:shared_process": [],
+    "2C1KMW63X:shared_process": [],
+    "2BZ3SBTTR:shared_process": [],
+    "2BYTR1VXA:shared_process": []
   },
   "config": {},
   "info": {}
