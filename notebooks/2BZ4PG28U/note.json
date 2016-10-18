@@ -3,7 +3,7 @@
     {
       "title": "Load Spark LuceneRDD Jars",
       "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.2-SNAPSHOT\")",
-      "dateUpdated": "Oct 16, 2016 7:46:36 PM",
+      "dateUpdated": "Oct 18, 2016 12:10:03 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -34,18 +34,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@5dbba78f\n"
+        "msg": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@1744edb9\n"
       },
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Oct 16, 2016 7:46:36 PM",
-      "dateFinished": "Oct 16, 2016 7:46:50 PM",
+      "dateStarted": "Oct 18, 2016 12:10:03 PM",
+      "dateFinished": "Oct 18, 2016 12:10:18 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Imports for LuceneRDD",
-      "text": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
-      "dateUpdated": "Oct 16, 2016 7:47:22 PM",
+      "text": "%spark\nimport org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
+      "dateUpdated": "Oct 18, 2016 12:10:30 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -79,15 +79,15 @@
         "msg": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
       },
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Oct 16, 2016 7:46:39 PM",
-      "dateFinished": "Oct 16, 2016 7:47:02 PM",
+      "dateStarted": "Oct 18, 2016 12:10:30 PM",
+      "dateFinished": "Oct 18, 2016 12:10:44 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Load ACM and DBLP datasets",
       "text": "import spark.implicits._\n\nval acmDF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-acm.parquet\")\nprintln(s\"Loaded ${acmDF.count} ACM records\")\nacmDF.cache()\nacmDF.printSchema()\n\nval dblp2DF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-dblp2.parquet\")\nprintln(s\"Loaded ${acmDF.count} DBLP records\")\nval groundTruthDF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-acm-vs-dblp2.parquet\")\n\nval dblp2 \u003d LuceneRDD(dblp2DF)\ndblp2.cache()\ndblp2.fields()",
-      "dateUpdated": "Oct 16, 2016 8:08:55 PM",
+      "dateUpdated": "Oct 18, 2016 12:10:48 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -118,18 +118,162 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "\nimport spark.implicits._\n\nacmDF: org.apache.spark.sql.DataFrame \u003d [id: int, title: string ... 3 more fields]\nLoaded 2294 ACM records\n\nres70: acmDF.type \u003d [id: int, title: string ... 3 more fields]\nroot\n |-- id: integer (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n |-- authors: string (nullable \u003d true)\n |-- venue: string (nullable \u003d true)\n |-- year: integer (nullable \u003d true)\n\n\ndblp2DF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\nLoaded 2294 DBLP records\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: int]\n\ndblp2: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[393] at RDD at LuceneRDD.scala:40\n\nres73: dblp2.type \u003d LuceneRDD[393] at RDD at LuceneRDD.scala:40\n\nres74: Set[String] \u003d Set(year, id, authors, title, venue)\n"
+        "msg": "\nimport spark.implicits._\n\nacmDF: org.apache.spark.sql.DataFrame \u003d [id: int, title: string ... 3 more fields]\nLoaded 2294 ACM records\n\nres1: acmDF.type \u003d [id: int, title: string ... 3 more fields]\nroot\n |-- id: integer (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n |-- authors: string (nullable \u003d true)\n |-- venue: string (nullable \u003d true)\n |-- year: integer (nullable \u003d true)\n\n\ndblp2DF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\nLoaded 2294 DBLP records\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: int]\n\ndblp2: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[26] at RDD at LuceneRDD.scala:40\n\nres4: dblp2.type \u003d LuceneRDD[26] at RDD at LuceneRDD.scala:40\n\nres5: Set[String] \u003d Set(year, id, authors, title, venue)\n"
       },
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Oct 16, 2016 8:08:55 PM",
-      "dateFinished": "Oct 16, 2016 8:09:00 PM",
+      "dateStarted": "Oct 18, 2016 12:10:48 PM",
+      "dateFinished": "Oct 18, 2016 12:11:09 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "title": "Entinty Linkage Function",
+      "text": "acmDF.registerTempTable(\"acm\")\ndblp2DF.registerTempTable(\"dblp\")",
+      "dateUpdated": "Oct 18, 2016 12:15:43 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476792709323_-1512020199",
+      "id": "20161018-121149_1501647868",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n"
+      },
+      "dateCreated": "Oct 18, 2016 12:11:49 PM",
+      "dateStarted": "Oct 18, 2016 12:15:43 PM",
+      "dateFinished": "Oct 18, 2016 12:15:44 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect * FROM acm limit 10",
+      "dateUpdated": "Oct 18, 2016 12:18:17 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "id",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "title",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "id",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "title",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          },
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "helium": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476792941795_1780446349",
+      "id": "20161018-121541_1139402059",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "id\ttitle\tauthors\tvenue\tyear\n765538\tSpatial and temporal content-based access to hypervideo databases\tHaitao Jiang, Ahmed K. Elmagarmid\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\n765539\tOptimal clip ordering for multi-clip queries\tRaymond T. Ng, Paul Shum\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\n765540\tIntegrating symbolic images into a multimedia database system using classification and abstraction approaches\tAya Soffer, Hanan Samet\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\n765541\tApproximate similarity retrieval with M-trees\tPavel Zezula, Pasquale Savino, Giuseppe Amato, Fausto Rabitti\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\n765542\tDelivering presentations from multimedia servers\tNevzat Hurkan Balkir, Gultekin Ozsoyoglu\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\n765544\tThe hB $^\\\\Pi$-tree: a multi-attribute index supporting concurrency, recovery and node consolidation\tGeorgios Evangelidis, David Lomet, Betty Salzberg\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1997\n765545\tDictionary-based order-preserving string compression\tGennady Antoshenkov\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1997\n765527\tA logical view of structured files\tSerge Abiteboul, Sophie Cluet, Tova Milo\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\n765528\tFast image retrieval using color-spatial information\tBeng Chin Ooi, Kian-Lee Tan, Tat Seng Chua, Wynne Hsu\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\n765530\tGuest Editorial\tMatthias Jarke\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\n"
+      },
+      "dateCreated": "Oct 18, 2016 12:15:41 PM",
+      "dateStarted": "Oct 18, 2016 12:18:17 PM",
+      "dateFinished": "Oct 18, 2016 12:18:17 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect * FROM dblp limit 10",
+      "dateUpdated": "Oct 18, 2016 12:17:49 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476793006890_1637948050",
+      "id": "20161018-121646_135219171",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "id\ttitle\tauthors\tvenue\tyear\nconf/sigmod/RamaswamyRS00\tEfficient Algorithms for Mining Outliers from Large Data Sets\tKyuseok Shim, Sridhar Ramaswamy, Rajeev Rastogi\tSIGMOD Conference\t2000\nconf/sigmod/MumickQM97\tMaintenance of Data Cubes and Summary Tables in a Warehouse\tInderpal Singh Mumick, Dallan Quass, Barinderpal Singh Mumick\tSIGMOD Conference\t1997\njournals/vldb/LandauST95\tHistorical Queries Along Multiple Lines of Time Evolution\tVassilis J. Tsotras, Gad M. Landau, Jeanette P. Schmidt\tVLDB J.\t1995\njournals/sigmod/BarbaraBFLS94\tThe Impact of Database Research on Industrial Products (Panel Summary)\tDavid B. Lomet, Daniel Barbar�, Jos� A. Blakeley, Michael Stonebraker, Daniel H. Fishman\tSIGMOD Record\t1994\nconf/sigmod/Chamberlin03\tXQuery: A Query Language for XML\tDonald D. Chamberlin\tSIGMOD Conference\t2003\nconf/vldb/HvasshovdTBH95\tThe ClustRa Telecom Database: High Availability, High Throughput, and Real-Time Response\tSvein-Olaf Hvasshovd, �ystein Torbj�rnsen, Svein Erik Bratsberg, Per Holager\tVLDB\t1995\nconf/sigmod/Mamoulis03\tEfficient Processing of Joins on Set-valued Attributes\tNikos Mamoulis\tSIGMOD Conference\t2003\nconf/sigmod/ChristophidesCM96\tEvaluating Queries with Generalized Path Expressions\tGuido Moerkotte, Sophie Cluet, Vassilis Christophides\tSIGMOD Conference\t1996\njournals/sigmod/PissinouSEMOPSTD94\tTowards an Infrastructure for Temporal Databases: Report of an Invitational ARPA/NSF Workshop\tRamez Elmasri, Richard T. Snodgrass, Babis Theodoulidis, Inderpal Singh Mumick, Arie Segev, M. Tamer �zsu, Umeshwar Dayal, Niki Pissinou, Barbara Pernici\tSIGMOD Record\t1994\njournals/sigmod/AbererCDDHPS03\tP-Grid: a self-organizing structured P2P system\tZoran Despotovic, Manfred Hauswirth, Karl Aberer, Philippe Cudr�-Mauroux, Magdalena Punceva, Anwitaman Datta, Roman Schmidt\tSIGMOD Record\t2003\n"
+      },
+      "dateCreated": "Oct 18, 2016 12:16:46 PM",
+      "dateStarted": "Oct 18, 2016 12:17:49 PM",
+      "dateFinished": "Oct 18, 2016 12:17:49 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Entinty Linkage Function Definition",
       "text": "\ndef tokenizer(s: String, threshold: Int, comb: String \u003d \"OR\"): String \u003d {\n    s.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e threshold).mkString(s\" ${comb} \")\n}\n   \n// Entity linkage function definition, i.e., how do you want your records to be linked?\n// Input: org.apache.spark.sql.Row\n// Output: Lucene query string as in [query string](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)\nval linker: Row \u003d\u003e String \u003d { case row \u003d\u003e {\n    \n    // Get title and authors fields\n    val title \u003d row.getString(row.fieldIndex(\"title\"))\n    val authors \u003d row.getString(row.fieldIndex(\"authors\"))\n    \n    val titleTokens \u003d tokenizer(title, 3)\n    val authorsTerms \u003d \"\" // tokenizer(authors, 3)\n    \n    if (titleTokens.nonEmpty \u0026\u0026 authorsTerms.nonEmpty) {\n        s\"(title:(${titleTokens})) OR (authors:${authorsTerms})\"\n    }\n    else if (titleTokens.nonEmpty){\n        s\"title:(${titleTokens})\"\n    }\n    else if ( authorsTerms.nonEmpty) {\n        s\"(authors:${authorsTerms})\"\n    }\n    else {\n        \"*:*\"\n    }\n  }\n}",
-      "dateUpdated": "Oct 16, 2016 8:17:01 PM",
+      "dateUpdated": "Oct 18, 2016 12:18:45 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -164,15 +308,15 @@
         "msg": "\ntokenizer: (s: String, threshold: Int, comb: String)String\n\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n"
       },
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Oct 16, 2016 8:17:02 PM",
-      "dateFinished": "Oct 16, 2016 8:17:02 PM",
+      "dateStarted": "Oct 18, 2016 12:18:34 PM",
+      "dateFinished": "Oct 18, 2016 12:18:36 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Compute Linkage Accuracy",
-      "text": "// Entity linkage\nval linkedResults \u003d dblp2.linkDataFrame(acmDF, linker, 3)\n\n\nval linkageResults \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) \u003d\u003e (topDocs.head.doc.textField(\"id\").get, acm.getInt(acm.fieldIndex(\"id\")).toString)}).toDF(\"idDBLP\", \"idACM\")\n\n// Compute the number of currect results based on ground truth\nval correctHits: Double \u003d linkageResults.join(groundTruthDF, groundTruthDF.col(\"idDBLP\").equalTo(linkageResults(\"idDBLP\")) \u0026\u0026  groundTruthDF.col(\"idACM\").equalTo(linkageResults(\"idACM\"))).count\n\n// Total # of ground truth records    \nval total: Double \u003d groundTruthDF.count\n\n// Accuracy\nval accuracy \u003d correctHits / total\n\nprintln(\"********************************\")\nprintln(\"********************************\")\nprintln(s\"Accuracy of linkage is ${accuracy}\")\nprintln(\"********************************\")\nprintln(\"********************************\")",
-      "dateUpdated": "Oct 16, 2016 8:16:47 PM",
+      "text": "// Entity linkage\nval linkedResults \u003d dblp2.linkDataFrame(acmDF, linker, 3)\n\n// Linkage Results (get top result)\nval linkageResults \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) \u003d\u003e (topDocs.head.doc.textField(\"id\").get, acm.getInt(acm.fieldIndex(\"id\")).toString)}).toDF(\"idDBLP\", \"idACM\")\n\n// Compute the number of currect results based on ground truth\nval correctHits: Double \u003d linkageResults.join(groundTruthDF, groundTruthDF.col(\"idDBLP\").equalTo(linkageResults(\"idDBLP\")) \u0026\u0026  groundTruthDF.col(\"idACM\").equalTo(linkageResults(\"idACM\"))).count\n\n// Total # of ground truth records    \nval total: Double \u003d groundTruthDF.count\n\n// Accuracy\nval accuracy \u003d correctHits / total\n\nprintln(\"********************************\")\nprintln(\"********************************\")\nprintln(s\"Accuracy of linkage is ${accuracy}\")\nprintln(\"********************************\")\nprintln(\"********************************\")",
+      "dateUpdated": "Oct 18, 2016 12:20:37 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -200,21 +344,17 @@
       "apps": [],
       "jobName": "paragraph_1475350680724_-1587271895",
       "id": "20161001-155056_1480917921",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": "\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, List[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[568] at map at LuceneRDD.scala:177\n\nlinkageResults: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: string]\n\ncorrectHits: Double \u003d 2006.0\n\ntotal: Double \u003d 2224.0\n\naccuracy: Double \u003d 0.9019784172661871\n********************************\n********************************\nAccuracy of linkage is 0.9019784172661871\n********************************\n********************************\n"
-      },
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Oct 16, 2016 8:16:47 PM",
-      "dateFinished": "Oct 16, 2016 8:16:51 PM",
+      "dateStarted": "Oct 18, 2016 9:26:36 AM",
+      "dateFinished": "Oct 18, 2016 9:26:47 AM",
       "status": "FINISHED",
+      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Output few results",
       "text": "linkedResults.take(10).foreach(println)",
-      "dateUpdated": "Oct 16, 2016 7:55:10 PM",
+      "dateUpdated": "Oct 18, 2016 9:26:39 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -242,20 +382,16 @@
       "apps": [],
       "jobName": "paragraph_1475350680725_-1587656644",
       "id": "20161001-155628_1046044654",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": "([191928,A performance study of transitive closure algorithms,Shaul Dar, Raghu Ramakrishnan,International Conference on Management of Data,1994],List(SparkScoreDoc(1.8093524,795,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[conf/sigmod/DarR94]authors:[Raghu Ramakrishnan, Shaul Dar]title:[A Performance Study of Transitive Closure Algorithms]venue:[SIGMOD Conference]), SparkScoreDoc(0.4603616,1212,0,Numeric fields:year:[1995]Text fields:year:[1995]id:[journals/tods/ShashaLSV95]authors:[Dennis Shasha, Eric Simon, Patrick Valduriez, Fran�ois Llirbat]title:[Transaction Chopping: Algorithms and Performance Studies]venue:[ACM Trans. Database Syst.]), SparkScoreDoc(0.21213067,1290,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[conf/vldb/WienerN94]authors:[Jeffrey F. Naughton, Janet L. Wiener]title:[Bulk Loading into an OODB: A Performance Study]venue:[VLDB]), SparkScoreDoc(0.18182628,841,0,Numeric fields:year:[1995]Text fields:year:[1995]id:[conf/sigmod/WhiteD95]authors:[Seth J. White, David J. DeWitt]title:[Implementing Crash Recovery in QuickStore: A Performance Study]venue:[SIGMOD Conference]), SparkScoreDoc(0.17687772,1193,0,Numeric fields:year:[2003]Text fields:year:[2003]id:[journals/vldb/HelmerM03]authors:[Guido Moerkotte, Sven Helmer]title:[A performance study of four index structures for set-valued attributes of low cardinality]venue:[VLDB J.]), SparkScoreDoc(0.17687772,83,0,Numeric fields:year:[1995]Text fields:year:[1995]id:[conf/vldb/WuYCT95]authors:[Kun-Lung Wu, Philip S. Yu, James Z. Teng, Jen-Yao Chung]title:[A Performance Study of Workfile Disk Management for Concurrent Mergesorts in a Multiprocessor Database System]venue:[VLDB]), SparkScoreDoc(0.1526324,121,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[journals/sigmod/YeungHL94]authors:[Chim-fu Yeung, Kam-yiu Lam, Sheung-lun Hung]title:[Performance Evaluation of a New Distributed Deadlock Detection Algorithm]venue:[SIGMOD Record]), SparkScoreDoc(0.1515219,572,0,Numeric fields:year:[1998]Text fields:year:[1998]id:[conf/vldb/WeberSB98]authors:[Stephen Blott, Roger Weber, Hans-J�rg Schek]title:[A Quantitative Analysis and Performance Study for Similarity-Search Methods in High-Dimensional Spaces]venue:[VLDB]), SparkScoreDoc(0.1515219,459,0,Numeric fields:year:[2000]Text fields:year:[2000]id:[conf/sigmod/PeiMHZ00]authors:[Hua Zhu, Kan Hu, Jian Pei, Runying Mao]title:[Towards Data Mining Benchmarking: A Testbed for Performance Study of Frequent Pattern Mining]venue:[SIGMOD Conference]), SparkScoreDoc(0.14150219,660,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[conf/vldb/AnandBH94]authors:[John G. Hughes, David A. Bell, Sarabjot S. Anand]title:[An Empirical Performance Study of the Ingres Search Accelerator for a Large Property Management Database System]venue:[VLDB])))\n([672968,A Multidatabase System for Tracking and Retrieval of Financial Data,Munir Cochinwala, John Bradley,Very Large Data Bases,1994],List(SparkScoreDoc(1.6497896,861,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[conf/vldb/CochinwalaB94]authors:[Munir Cochinwala, John Bradley]title:[A Multidatabase System for Tracking and Retrieval of Financial Data]venue:[VLDB]), SparkScoreDoc(0.19383883,1118,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[conf/sigmod/KuhnTS94]authors:[Konrad Schwarz, eva K�hn, Thomas Tschernko]title:[A Language Based Multidatabase System]venue:[SIGMOD Conference]), SparkScoreDoc(0.169609,1241,0,Numeric fields:year:[1997]Text fields:year:[1997]id:[journals/vldb/MehrotraKS97]authors:[Henry F. Korth, Abraham Silberschatz, Sharad Mehrotra]title:[Concurrency Control in Hierarchical Multidatabase Systems]venue:[VLDB J.]), SparkScoreDoc(0.13950863,723,0,Numeric fields:year:[1995]Text fields:year:[1995]id:[journals/sigmod/LeeCL95]authors:[Chiang Lee, Hongjun Lu, Chia-Jung Chen]title:[An Aspect of Query Optimization in Multidatabase Systems (Extended Abstract)]venue:[SIGMOD Record]), SparkScoreDoc(0.13950863,190,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[conf/sigmod/ZhangNBB94]authors:[Bharat K. Bhargava, Aidong Zhang, Marian H. Nodine, Omran A. Bukhres]title:[Ensuring Relaxed Atomicity for Flexible Transactions in Multidatabase Systems]venue:[SIGMOD Conference]), SparkScoreDoc(0.11625718,668,0,Numeric fields:year:[1996]Text fields:year:[1996]id:[conf/sigmod/MorpainCFP96]authors:[Mich�le Cart, Claire Morpain, Jean-Fran�ois Pons, Jean Ferri�]title:[Maintaining Database Consistency in Presence of Value Dependencies in Multidatabase Systems]venue:[SIGMOD Conference]), SparkScoreDoc(0.11191489,451,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[journals/sigmod/GlavitschSW94]authors:[Martin Wechsler, Ulrike Glavitsch, Peter Sch�uble]title:[Metadata for Integrating Speech Documents in a Text Retrieval System]venue:[SIGMOD Record]), SparkScoreDoc(0.105213724,1201,0,Numeric fields:year:[2001]Text fields:year:[2001]id:[conf/vldb/ChaudhuriS01]authors:[Surajit Chaudhuri, Kyuseok Shim]title:[Storage and Retrieval of XML Data Using Relational Databases]venue:[VLDB]), SparkScoreDoc(0.105213724,1084,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[journals/sigmod/HuangKL02]authors:[Chih-He Li, Irene S. Y. Kwan, Shi-Ming Huang]title:[A Study on the Management of Semantic Transaction for Efficient Data Retrieval]venue:[SIGMOD Record]), SparkScoreDoc(0.10439253,1190,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[conf/vldb/SistlaYH94]authors:[Clement T. Yu, A. Prasad Sistla, R. Haddad]title:[Reasoning About Spatial Relationships in Picture Retrieval Systems]venue:[VLDB])))\n([375764,Securing XML documents: the author-X project demonstration,Elisa Bertino, Silvana Castano, Elena Ferrari,International Conference on Management of Data,2001],List(SparkScoreDoc(0.9761666,428,0,Numeric fields:year:[2001]Text fields:year:[2001]id:[conf/sigmod/BertinoCF01]authors:[Elisa Bertino, Elena Ferrari, Silvana Castano]title:[Securing XML Documents: the Author-X Project Demonstration]venue:[SIGMOD Conference]), SparkScoreDoc(0.35320294,110,0,Numeric fields:year:[2003]Text fields:year:[2003]id:[conf/vldb/MarianS03]authors:[Am�lie Marian, J�r�me Sim�on]title:[Projecting XML Documents]venue:[VLDB]), SparkScoreDoc(0.2084603,971,0,Numeric fields:year:[2000]Text fields:year:[2000]id:[conf/vldb/BeneventanoBCCGMMV00]authors:[Michele Melchiori, Silvana Castano, G. Malvezzi, Domenico Beneventano, R. Guidetti, Alberto Corni, Sonia Bergamaschi, Maurizio Vincini]title:[Information Integration: The MOMIS Project Demonstration]venue:[VLDB]), SparkScoreDoc(0.16444565,1115,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[conf/vldb/AbiteboulAAACHHMMMMSTV99]authors:[Bruno Tessier, Am�lie Marian, Brendan Hills, Sophie Cluet, Jean-Claude Mamou, Bernd Amann, Anne-Marie Vercoustre, Fr�d�ric Hubert, Vincent Aguilera, Laurent Mignet, Serge Abiteboul, S�bastien Ailleret, Tova Milo, Cassio Souza dos Santos]title:[XML Repository and Active Views Demonstration]venue:[VLDB]), SparkScoreDoc(0.13467768,422,0,Numeric fields:year:[2001]Text fields:year:[2001]id:[journals/sigmod/ChienTZ01]authors:[Carlo Zaniolo, Vassilis J. Tsotras, Shu-Yao Chien]title:[XML Document Versioning]venue:[SIGMOD Record]), SparkScoreDoc(0.1296772,497,0,Numeric fields:year:[2003]Text fields:year:[2003]id:[conf/sigmod/ChoALS03]authors:[SungRan Cho, Laks V. S. Lakshmanan, Divesh Srivastava, Sihem Amer-Yahia]title:[LockX: A System for Efficiently Querying Secure XML]venue:[SIGMOD Conference]), SparkScoreDoc(0.12230544,488,0,Numeric fields:year:[2003]Text fields:year:[2003]id:[conf/sigmod/AbiteboulBCMM03]authors:[Ioana Manolescu, Serge Abiteboul, Tova Milo, Angela Bonifati, Gregory Cobena]title:[Dynamic XML documents with distribution and replication]venue:[SIGMOD Conference]), SparkScoreDoc(0.105968736,143,0,Numeric fields:year:[2000]Text fields:year:[2000]id:[conf/sigmod/GarofalakisGRSS00]authors:[Rajeev Rastogi, S. Seshadri, Minos N. Garofalakis, Aristides Gionis, Kyuseok Shim]title:[XTRACT: A System for Extracting Document Type Descriptors from XML Documents]venue:[SIGMOD Conference]), SparkScoreDoc(0.10483324,1187,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[conf/vldb/ShanmugasundaramGTZDN99]authors:[Jeffrey F. Naughton, Kristin Tufte, Chun Zhang, Gang He, David J. DeWitt, Jayavel Shanmugasundaram]title:[Relational Databases for Querying XML Documents: Limitations and Opportunities]venue:[VLDB]), SparkScoreDoc(0.10483324,873,0,Numeric fields:year:[2000]Text fields:year:[2000]id:[conf/vldb/AltinelF00]authors:[Michael J. Franklin, Mehmet Altinel]title:[Efficient Filtering of XML Documents for Selective Dissemination of Information]venue:[VLDB])))\n([227609,Polymorphism and type inference in database programming,Peter Buneman, Atsushi Ohori,ACM Transactions on Database Systems (TODS) ,1996],List(SparkScoreDoc(1.7415314,782,0,Numeric fields:year:[1996]Text fields:year:[1996]id:[journals/tods/BunemanO96]authors:[Atsushi Ohori, Peter Buneman]title:[Polymorphism and Type Inference in Database Programming]venue:[ACM Trans. Database Syst.]), SparkScoreDoc(0.14686513,7,0,Numeric fields:year:[1998]Text fields:year:[1998]id:[journals/vldb/Seshadri98]authors:[Praveen Seshadri]title:[Enhanced Abstract Data Types in Object-Relational Databases]venue:[VLDB J.]), SparkScoreDoc(0.1463029,880,0,Numeric fields:year:[1996]Text fields:year:[1996]id:[conf/sigmod/GoyalHKMS96]authors:[Ravi Krishnamurthy, Charles Hoch, Nita Goyal, Michael Suckow, Brian Meckler]title:[Is GUI Programming a Database Research Problem?]venue:[SIGMOD Conference]), SparkScoreDoc(0.1463029,658,0,Numeric fields:year:[1995]Text fields:year:[1995]id:[journals/vldb/AlbanoGO95]authors:[Antonio Albano, Renzo Orsini, Giorgio Ghelli]title:[Fibonacci: A Programming Language for Object Databases]venue:[VLDB J.]), SparkScoreDoc(0.1438366,1230,0,Numeric fields:year:[1998]Text fields:year:[1998]id:[journals/sigmod/BurtonM98]authors:[V. Wiktor Marek, Bradley F. Burton]title:[Applications of the JAVA Programming Language to Database Management]venue:[SIGMOD Record]), SparkScoreDoc(0.1438366,500,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[journals/sigmod/Wiegand02]authors:[Nancy Wiegand]title:[Investigating XQuery for Querying Across Database Object Types]venue:[SIGMOD Record]), SparkScoreDoc(0.12540248,1297,0,Numeric fields:year:[1996]Text fields:year:[1996]id:[journals/tods/BellNNS96]authors:[Anil Nerode, Colin Bell, Raymond T. Ng, V. S. Subrahmanian]title:[Implementing Deductive Databases by Mixed Integer Programming]venue:[ACM Trans. Database Syst.]), SparkScoreDoc(0.12540248,76,0,Numeric fields:year:[1996]Text fields:year:[1996]id:[journals/vldb/PoulovassilisS96]authors:[Carol Small, Alexandra Poulovassilis]title:[Algebraic Query Optimisation for Database Programming Languages]venue:[VLDB J.]), SparkScoreDoc(0.11986382,40,0,Numeric fields:year:[1996]Text fields:year:[1996]id:[journals/tods/GhandeharizadehHJ96]authors:[Dean Jacobs, Shahram Ghandeharizadeh, Richard Hull]title:[Heraclitus: Elevating Deltas to be First-Class Citizens in a Database Programming Language]venue:[ACM Trans. Database Syst.]), SparkScoreDoc(0.110921815,778,0,Numeric fields:year:[1997]Text fields:year:[1997]id:[journals/sigmod/NestorovAM97]authors:[Rajeev Motwani, Serge Abiteboul, Svetlozar Nestorov]title:[Infering Structure in Semistructured Data]venue:[SIGMOD Record])))\n([671697,Mining Frequent Itemsets Using Support Constraints,Ke Wang, Yu He, Jiawei Han,Very Large Data Bases,2000],List(SparkScoreDoc(1.7700514,985,0,Numeric fields:year:[2000]Text fields:year:[2000]id:[conf/vldb/WangHH00]authors:[Jiawei Han, Ke Wang, Yu He]title:[Mining Frequent Itemsets Using Support Constraints]venue:[VLDB]), SparkScoreDoc(0.20279333,1131,0,Numeric fields:year:[2000]Text fields:year:[2000]id:[conf/sigmod/HanPY00]authors:[Jian Pei, Jiawei Han, Yiwen Yin]title:[Mining Frequent Patterns without Candidate Generation]venue:[SIGMOD Conference]), SparkScoreDoc(0.18451087,1131,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[conf/sigmod/NgLHM99]authors:[Jiawei Han, Teresa Mah, Laks V. S. Lakshmanan, Raymond T. Ng]title:[Exploratory Mining via Constrained Frequent Set Queries]venue:[SIGMOD Conference]), SparkScoreDoc(0.18451087,1106,0,Numeric fields:year:[2003]Text fields:year:[2003]id:[journals/tods/LakshmananLN03]authors:[Laks V. S. Lakshmanan, Raymond T. Ng, Carson Kai-Sang Leung]title:[Efficient dynamic mining of constrained frequent sets]venue:[ACM Trans. Database Syst.]), SparkScoreDoc(0.18122244,557,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[conf/sigmod/LakshmananNHP99]authors:[Laks V. S. Lakshmanan, Alex Pang, Raymond T. Ng, Jiawei Han]title:[Optimization of Constrained Frequent Set Queries with 2-variable Constraints]venue:[SIGMOD Conference]), SparkScoreDoc(0.17984247,1144,0,Numeric fields:year:[2003]Text fields:year:[2003]id:[conf/vldb/LeeHJT03]authors:[Christian S. Jensen, Bin Cui, Mong-Li Lee, Keng Lik Teo, Wynne Hsu]title:[Supporting Frequent Updates in R-Trees: A Bottom-Up Approach]venue:[VLDB]), SparkScoreDoc(0.17460243,459,0,Numeric fields:year:[2000]Text fields:year:[2000]id:[conf/sigmod/PeiMHZ00]authors:[Hua Zhu, Kan Hu, Jian Pei, Runying Mao]title:[Towards Data Mining Benchmarking: A Testbed for Performance Study of Frequent Pattern Mining]venue:[SIGMOD Conference]), SparkScoreDoc(0.14899176,923,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[conf/vldb/GarofalakisRS99]authors:[Rajeev Rastogi, Kyuseok Shim, Minos N. Garofalakis]title:[SPIRIT: Sequential Pattern Mining with Regular Expression Constraints]venue:[VLDB]), SparkScoreDoc(0.13535655,376,0,Numeric fields:year:[1998]Text fields:year:[1998]id:[journals/tods/BertinoBFS98]authors:[Elena Ferrari, Pierangela Samarati, Claudio Bettini, Elisa Bertino]title:[An Access Control Model Supporting Periodicity Constraints and Temporal Reasoning]venue:[ACM Trans. Database Syst.]), SparkScoreDoc(0.12486659,833,0,Numeric fields:year:[2003]Text fields:year:[2003]id:[conf/vldb/HinneburgLH03]authors:[Wolfgang Lehner, Alexander Hinneburg, Dirk Habich]title:[COMBI-Operator: Database Support for Data Mining Applications]venue:[VLDB])))\n([253263,Fast parallel similarity search in multimedia databases,Stefan Berchtold, Christian B\u0026#246;hm, Bernhard Braunm\u0026#252;ller, Daniel A. Keim, Hans-Peter Kriegel,International Conference on Management of Data,1997],List(SparkScoreDoc(0.83510476,368,0,Numeric fields:year:[1997]Text fields:year:[1997]id:[conf/sigmod/BerchtoldBBKK97]authors:[Christian B�hm, Bernhard Braunm�ller, Hans-Peter Kriegel, Daniel A. Keim, Stefan Berchtold]title:[Fast Parallel Similarity Search in Multimedia Databases]venue:[SIGMOD Conference]), SparkScoreDoc(0.31711692,715,0,Numeric fields:year:[1995]Text fields:year:[1995]id:[conf/vldb/AgrawalLSS95]authors:[King-Ip Lin, Harpreet S. Sawhney, Rakesh Agrawal, Kyuseok Shim]title:[Fast Similarity Search in the Presence of Noise, Scaling, and Translation in Time-Series Databases]venue:[VLDB]), SparkScoreDoc(0.27565202,1117,0,Numeric fields:year:[1997]Text fields:year:[1997]id:[conf/vldb/SeidlK97]authors:[Thomas Seidl, Hans-Peter Kriegel]title:[Efficient User-Adaptable Similarity Search in Large Multimedia Databases]venue:[VLDB]), SparkScoreDoc(0.18693843,719,0,Numeric fields:year:[1997]Text fields:year:[1997]id:[conf/sigmod/BerchtoldK97]authors:[Hans-Peter Kriegel, Stefan Berchtold]title:[S3: Similarity Search in CAD Database Systems]venue:[SIGMOD Conference]), SparkScoreDoc(0.17248389,630,0,Numeric fields:year:[1998]Text fields:year:[1998]id:[conf/vldb/OoiGT98]authors:[Kian-Lee Tan, Cheng Hian Goh, Beng Chin Ooi]title:[Fast High-Dimensional Data Search in Incomplete Databases]venue:[VLDB]), SparkScoreDoc(0.17248389,171,0,Numeric fields:year:[1996]Text fields:year:[1996]id:[conf/vldb/KornSFSP96]authors:[Zenon Protopapas, Christos Faloutsos, Eliot Siegel, Flip Korn, Nikolaos Sidiropoulos]title:[Fast Nearest Neighbor Search in Medical Image Databases]venue:[VLDB]), SparkScoreDoc(0.1618857,215,0,Numeric fields:year:[1998]Text fields:year:[1998]id:[conf/sigmod/KanthAS98]authors:[Ambuj K. Singh, Kothuri Venkata Ravi Kanth, Divyakant Agrawal]title:[Dimensionality Reduction for Similarity Searching in Dynamic Databases]venue:[SIGMOD Conference]), SparkScoreDoc(0.13490474,5,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[conf/sigmod/Keim99]authors:[Daniel A. Keim]title:[Efficient Geometry-based Similarity Search of 3D Spatial Databases]venue:[SIGMOD Conference]), SparkScoreDoc(0.12572926,472,0,Numeric fields:year:[2001]Text fields:year:[2001]id:[conf/vldb/BohmMSW01]authors:[Michael Mlivoncic, Roger Weber, Klemens B�hm, Hans-J�rg Schek]title:[Fast Evaluation Techniques for Complex Similarity Queries]venue:[VLDB]), SparkScoreDoc(0.1156833,1271,0,Numeric fields:year:[1996]Text fields:year:[1996]id:[conf/sigmod/OConnellISWABCCLPWW96]authors:[C. Watson, G. Linderman, Euthimios Panagos, T. Walters, Ion Tim Ieong, Alexandros Biliris, J. Wang, S. Choo, David Schrader, P. Colin, William O\u0027Connell, Grace Au]title:[A Content-Based Multimedia Server for Massively Parallel Architectures]venue:[SIGMOD Conference])))\n([271078,Wrapper generation for semi-structured Internet sources,Naveen Ashish, Craig A. Knoblock,ACM SIGMOD Record ,1997],List(SparkScoreDoc(0.8999835,1280,0,Numeric fields:year:[1997]Text fields:year:[1997]id:[journals/sigmod/AshishK97]authors:[Craig A. Knoblock, Naveen Ashish]title:[Wrapper Generation for Semi-structured Internet Sources]venue:[SIGMOD Record]), SparkScoreDoc(0.31183225,1177,0,Numeric fields:year:[2001]Text fields:year:[2001]id:[conf/vldb/BaumgartnerFG01a]authors:[Sergio Flesca, Robert Baumgartner, Georg Gottlob]title:[Supervised Wrapper Generation with Lixto]venue:[VLDB]), SparkScoreDoc(0.23387419,1225,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[conf/sigmod/LiuHBPT99]authors:[David Buttler, Wei Tang, Calton Pu, Wei Han, Ling Liu]title:[An XML-based Wrapper Generator for Web Information Extraction]venue:[SIGMOD Conference]), SparkScoreDoc(0.23015843,464,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[conf/vldb/SahuguetA99]authors:[Arnaud Sahuguet, Fabien Azavant]title:[Building Light-Weight Wrappers for Legacy Web Data-Sources Using W4F]venue:[VLDB]), SparkScoreDoc(0.22680031,68,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[journals/sigmod/BergamaschiCV99]authors:[Sonia Bergamaschi, Maurizio Vincini, Silvana Castano]title:[Semantic Integration of Semistructured and Structured Data Sources]venue:[SIGMOD Record]), SparkScoreDoc(0.22354205,613,0,Numeric fields:year:[1997]Text fields:year:[1997]id:[conf/vldb/GravanoG97]authors:[Hector Garcia-Molina, Luis Gravano]title:[Merging Ranks from Heterogeneous Internet Sources]venue:[VLDB]), SparkScoreDoc(0.22033317,1162,0,Numeric fields:year:[1997]Text fields:year:[1997]id:[conf/vldb/RothS97]authors:[Peter M. Schwarz, Mary Tork Roth]title:[Don\u0027t Scrap It, Wrap It! A Wrapper Architecture for Legacy Data Sources]venue:[VLDB]), SparkScoreDoc(0.21611758,1063,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[journals/tods/GravanoGT99]authors:[Hector Garcia-Molina, Luis Gravano, Anthony Tomasic]title:[GlOSS: Text-Source Discovery over the Internet]venue:[ACM Trans. Database Syst.]), SparkScoreDoc(0.21611758,109,0,Numeric fields:year:[1998]Text fields:year:[1998]id:[conf/sigmod/AmbiteABKMMMPT98]authors:[Ion Muslea, Greg Barish, Andrew Philpot, Craig A. Knoblock, Steven Minton, Jos� Luis Ambite, Pragnesh Jay Modi, Sheila Tejada, Naveen Ashish]title:[ARIADNE: A System for Constructing Mediators for Internet Sources]venue:[SIGMOD Conference]), SparkScoreDoc(0.18900025,854,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[conf/vldb/BouganimCDDGS99]authors:[Fei Sha, Tatiana Chan-Sine-Ying, Georges Gardarin, Tuyet-Tram Dang-Ngoc, Jean-Luc Darroux, Luc Bouganim]title:[Miro Web: Integrating Multiple Data Sources through Semistructured Data Types]venue:[VLDB])))\n([604273,Book reviews,Karl Aberer,ACM SIGMOD Record ,2001],List(SparkScoreDoc(1.1256633,1266,0,Numeric fields:year:[2001]Text fields:year:[2001]id:[journals/sigmod/Aberer01a]authors:[Karl Aberer]title:[Book Review Column]venue:[SIGMOD Record]), SparkScoreDoc(1.1256633,582,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[journals/sigmod/Aberer02c]authors:[Karl Aberer]title:[Book Review Column]venue:[SIGMOD Record]), SparkScoreDoc(1.1256633,531,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[journals/sigmod/Grefen02]authors:[Paul W. P. J. Grefen]title:[What Will Be - Book Review]venue:[SIGMOD Record]), SparkScoreDoc(1.1256633,135,0,Numeric fields:year:[2003]Text fields:year:[2003]id:[journals/sigmod/Aberer03b]authors:[Karl Aberer]title:[Book review column]venue:[SIGMOD Record]), SparkScoreDoc(1.1256633,63,0,Numeric fields:year:[2003]Text fields:year:[2003]id:[journals/sigmod/Aberer03d]authors:[Karl Aberer]title:[Book review column]venue:[SIGMOD Record]), SparkScoreDoc(1.1256633,52,0,Numeric fields:year:[2003]Text fields:year:[2003]id:[journals/sigmod/Aberer03]authors:[Karl Aberer]title:[Call for Book Reviews]venue:[SIGMOD Record]), SparkScoreDoc(1.0936542,942,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[journals/sigmod/Aberer02a]authors:[Karl Aberer]title:[Book Review Column]venue:[SIGMOD Record]), SparkScoreDoc(1.0936542,705,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[journals/sigmod/Aberer02b]authors:[Karl Aberer]title:[Book Review Column]venue:[SIGMOD Record]), SparkScoreDoc(1.0936542,386,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[journals/sigmod/Aberer02]authors:[Karl Aberer]title:[Book Review Column]venue:[SIGMOD Record]), SparkScoreDoc(0.9849553,60,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[journals/sigmod/Kuijpers02]authors:[Bart Kuijpers]title:[Introduction to Constraint Databases - Book Review]venue:[SIGMOD Record])))\n([223789,Towards an effective calculus for object query languages,Leonidas Fegaras, David Maier,International Conference on Management of Data,1995],List(SparkScoreDoc(1.410865,146,0,Numeric fields:year:[1995]Text fields:year:[1995]id:[conf/sigmod/FegarasM95]authors:[David Maier, Leonidas Fegaras]title:[Towards an Effective Calculus for Object Query Languages]venue:[SIGMOD Conference]), SparkScoreDoc(0.68194807,563,0,Numeric fields:year:[2000]Text fields:year:[2000]id:[journals/tods/FegarasM00]authors:[Leonidas Fegaras, David Maier]title:[Optimizing object queries using an effective calculus]venue:[ACM Trans. Database Syst.]), SparkScoreDoc(0.45759434,1059,0,Numeric fields:year:[1997]Text fields:year:[1997]id:[conf/vldb/ChavdaW97]authors:[Manoj Chavda, Peter T. Wood]title:[Towards an ODMG-Compliant Visual Object Query Language]venue:[VLDB]), SparkScoreDoc(0.27613413,510,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[conf/sigmod/WangTYGWP02]authors:[Jun Gao, Jian Pei, Tengjiao Wang, Shiwei Tang, Yuqing Wu, Dongqing Yang]title:[COMMIX: towards effective web information extraction, integration and query answering]venue:[SIGMOD Conference]), SparkScoreDoc(0.27578983,783,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[conf/vldb/BarjaPFWD94]authors:[M. Howard Williams, Norman W. Paton, Andrew Dinn, Maria L. Barja, Alvaro A. A. Fernandes]title:[An Effective Deductive Object-Oriented Database Through Language Integration]venue:[VLDB]), SparkScoreDoc(0.2571363,373,0,Numeric fields:year:[1995]Text fields:year:[1995]id:[conf/vldb/SubietaKL95]authors:[Kazimierz Subieta, Jacek Leszczylowski, Yahiko Kambayashi]title:[Procedures in Object-Oriented Query Languages]venue:[VLDB]), SparkScoreDoc(0.2449985,1119,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[journals/vldb/KamelWS94]authors:[Stanley Y. W. Su, Nabil Kamel, Ping Wu]title:[A Pattern-Based Object Calculus]venue:[VLDB J.]), SparkScoreDoc(0.2374447,375,0,Numeric fields:year:[1995]Text fields:year:[1995]id:[conf/sigmod/BrodskyK95]authors:[Alexander Brodsky, Yoram Kornatzky]title:[The LyriC Language: Querying Constraint Objects]venue:[SIGMOD Conference]), SparkScoreDoc(0.20352402,855,0,Numeric fields:year:[1995]Text fields:year:[1995]id:[conf/sigmod/GardarinMP95]authors:[Georges Gardarin, Fernando Machuca, Philippe Pucheral]title:[OFL: A Functional Execution Model for Object Query Languages]venue:[SIGMOD Conference]), SparkScoreDoc(0.19452703,569,0,Numeric fields:year:[1996]Text fields:year:[1996]id:[conf/sigmod/McAuliffeCS96]authors:[Marvin H. Solomon, Michael J. Carey, Mark L. McAuliffe]title:[Towards Effective and Efficient Free Space Management]venue:[SIGMOD Conference])))\n([671339,R-Tree Based Indexing of Now-Relative Bitemporal Data,Rasa Bliujute, Christian S. Jensen, Simonas Saltenis, Giedrius Slivinskas,Very Large Data Bases,1998],List(SparkScoreDoc(0.33755696,844,0,Numeric fields:year:[1998]Text fields:year:[1998]id:[conf/vldb/BliujuteJSS98]authors:[Simonas Saltenis, Christian S. Jensen, Giedrius Slivinskas, Rasa Bliujute]title:[R-Tree Based Indexing of Now-Relative Bitemporal Data]venue:[VLDB]), SparkScoreDoc(0.25495297,37,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[journals/vldb/SaltenisJ02]authors:[Simonas Saltenis, Christian S. Jensen]title:[Indexing of now-relative spatio-bitemporal data]venue:[VLDB J.]), SparkScoreDoc(0.105014205,568,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[journals/vldb/SakuraiYUK02]authors:[Shunsuke Uemura, Masatoshi Yoshikawa, Yasushi Sakurai, Haruhiko Kojima]title:[Spatial indexing of high-dimensional data based on relative approximation]venue:[VLDB J.]), SparkScoreDoc(0.09710795,608,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[conf/vldb/Chiueh94]authors:[Tzi-cker Chiueh]title:[Content-Based Image Indexing]venue:[VLDB]), SparkScoreDoc(0.074799776,291,0,Numeric fields:year:[2001]Text fields:year:[2001]id:[conf/vldb/CooperSFHS01]authors:[Brian Cooper, G�sli R. Hjaltason, Michael J. Franklin, Neal Sample, Moshe Shadmon]title:[A Fast Index for Semistructured Data]venue:[VLDB]), SparkScoreDoc(0.07283096,661,0,Numeric fields:year:[1997]Text fields:year:[1997]id:[conf/sigmod/BozkayaO97]authors:[Z. Meral �zsoyoglu, Tolga Bozkaya]title:[Distance-Based Indexing for High-Dimensional Metric Spaces]venue:[SIGMOD Conference]), SparkScoreDoc(0.065449804,918,0,Numeric fields:year:[1999]Text fields:year:[1999]id:[conf/sigmod/KanthRSB99]authors:[Jayant Sharma, Kothuri Venkata Ravi Kanth, Jay Banerjee, Siva Ravada]title:[Indexing Medium-dimensionality Data in Oracle]venue:[SIGMOD Conference]), SparkScoreDoc(0.05653703,414,0,Numeric fields:year:[2002]Text fields:year:[2002]id:[journals/vldb/HjaltasonS02]authors:[G�sli R. Hjaltason, Hanan Samet]title:[Speeding up construction of PMR quadtree-based spatial indexes]venue:[VLDB J.]), SparkScoreDoc(0.05646662,629,0,Numeric fields:year:[2003]Text fields:year:[2003]id:[conf/vldb/EleftheriouBCDHLPPABDDDGJHLRSVW03]authors:[B. Gotsmann, A. Dholakia, G. Cherubini, Walter H�berle, H. Pozidis, Michel Despont, Richard Stutz, P. B�chtold, C. Hagleitner, T. R. Albrecht, Hugo E. Rothuizen, Gerd K. Binnig, D. Jubin, A. Pantazi, M. A. Lantz, E. Eleftheriou, Urs D�rig, T. Loeliger, Peter Vettiger, D. Wiesmann, Ute Drechsler]title:[A Nanotechnology-based Approach to Data Storage]venue:[VLDB]), SparkScoreDoc(0.05646662,93,0,Numeric fields:year:[1994]Text fields:year:[1994]id:[conf/sigmod/GibbsBT94]authors:[Simon J. Gibbs, Christian Breiteneder, Dennis Tsichritzis]title:[Data Modeling of Time-Based Media]venue:[SIGMOD Conference])))\n"
-      },
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Oct 16, 2016 7:47:16 PM",
-      "dateFinished": "Oct 16, 2016 7:47:33 PM",
+      "dateStarted": "Oct 18, 2016 9:26:39 AM",
+      "dateFinished": "Oct 18, 2016 9:26:48 AM",
       "status": "FINISHED",
+      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "",
-      "dateUpdated": "Oct 16, 2016 7:46:37 PM",
+      "dateUpdated": "Oct 18, 2016 9:25:58 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -272,7 +408,8 @@
             "pinCols": []
           }
         },
-        "enabled": true
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
       },
       "settings": {
         "params": {},
@@ -281,30 +418,26 @@
       "apps": [],
       "jobName": "paragraph_1476565047816_-86531383",
       "id": "20161015-205727_383127430",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": ""
-      },
       "dateCreated": "Oct 15, 2016 8:57:27 AM",
-      "dateStarted": "Oct 16, 2016 7:47:32 PM",
-      "dateFinished": "Oct 16, 2016 7:47:33 PM",
-      "status": "FINISHED",
+      "dateStarted": "Oct 16, 2016 7:47:32 AM",
+      "dateFinished": "Oct 16, 2016 7:47:33 AM",
+      "status": "ERROR",
+      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     }
   ],
   "name": "/lucenerdd/linkage-acm-vs-dblp",
   "id": "2BZ4PG28U",
   "angularObjects": {
-    "2C19FBXH2:shared_process": [],
-    "2BYB8EHF4:shared_process": [],
-    "2C1Y9QC7S:shared_process": [],
-    "2BXK26GAE:shared_process": [],
-    "2BXMPJ4Y1:shared_process": [],
-    "2BZ4VKJZC:shared_process": [],
-    "2C1KMW63X:shared_process": [],
-    "2BZ3SBTTR:shared_process": [],
-    "2BYTR1VXA:shared_process": []
+    "2C17CGB1U:shared_process": [],
+    "2BY6UDKX9:shared_process": [],
+    "2BYP39ECA:shared_process": [],
+    "2BZX6U5K5:shared_process": [],
+    "2BYB2TM6Z:shared_process": [],
+    "2C1YVDXAK:shared_process": [],
+    "2C2BE23KU:shared_process": [],
+    "2BZWG155B:shared_process": [],
+    "2C1GFU2YD:shared_process": []
   },
   "config": {},
   "info": {}
