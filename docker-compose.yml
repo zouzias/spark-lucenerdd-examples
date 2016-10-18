@@ -8,6 +8,8 @@ zeppelin:
       -Dspark.rdd.compress=true
       -Dspark.serializer=org.apache.spark.serializer.KryoSerializer
       -Dspark.kryo.registrator=org.zouzias.spark.lucenerdd.LuceneRDDKryoRegistrator
+      -Dspark.driver.extraJavaOptions=-Dlucenerdd.index.store.mode=disk
+      -Dspark.executor.extraJavaOptions=-Dlucenerdd.index.store.mode=disk
     MASTER: local[*]
   ports:
     - 8080:8080

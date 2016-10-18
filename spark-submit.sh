@@ -19,6 +19,8 @@ ${SPARK_HOME}/bin/spark-submit   --conf "spark.executor.memory=1g" \
 				--conf "spark.serializer=org.apache.spark.serializer.KryoSerializer" \
 				--conf "spark.kryoserializer.buffer=24mb" \
 				--conf "spark.kryo.registrator=org.zouzias.spark.lucenerdd.LuceneRDDKryoRegistrator" \
+				--conf "spark.driver.extraJavaOptions=-Dlucenerdd.index.store.mode=disk" \
+				--conf "spark.executor.extraJavaOptions=-Dlucenerdd.index.store.mode=disk" \
 				--master local[*] \
 				--class $1 \
 				--jars ${MAIN_JAR} \
