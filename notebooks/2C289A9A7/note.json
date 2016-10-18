@@ -1,0 +1,307 @@
+{
+  "paragraphs": [
+    {
+      "title": "Load Spark LuceneRDD Jars",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.2-SNAPSHOT\")",
+      "dateUpdated": "Oct 18, 2016 7:46:40 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476819348997_1965972767",
+      "id": "20161001-115642_482200633",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "Must be used before SparkInterpreter (%spark) initialized\nHint: put this paragraph before any Spark code and restart Zeppelin/Interpreter"
+      },
+      "dateCreated": "Oct 18, 2016 7:35:48 PM",
+      "dateStarted": "Oct 18, 2016 7:46:40 PM",
+      "dateFinished": "Oct 18, 2016 7:46:40 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Imports for spark-lucenerdd",
+      "text": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.SparkSession\nimport org.apache.spark.sql.Row\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
+      "dateUpdated": "Oct 18, 2016 7:46:40 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476819349007_1963664273",
+      "id": "20161001-120020_440303718",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.SparkSession\n\nimport org.apache.spark.sql.Row\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
+      },
+      "dateCreated": "Oct 18, 2016 7:35:49 PM",
+      "dateStarted": "Oct 18, 2016 7:46:40 PM",
+      "dateFinished": "Oct 18, 2016 7:46:42 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Load Abt \u0026 Buy datasets",
+      "text": "import spark.implicits._\n\nval abtDF \u003d spark.read.parquet(\"data/linkage-products2/linkage-products-abt.parquet\")\nval buyDF \u003d spark.read.parquet(\"data/linkage-products2/linkage-products-buy.parquet\")\nval groundTruthDF \u003d spark.read.parquet(\"data/linkage-products2/linkage-products-abt-vs-buy.parquet\")",
+      "dateUpdated": "Oct 18, 2016 7:46:40 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476819349010_1974821991",
+      "id": "20161001-120320_2078137697",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nimport spark.implicits._\n\nabtDF: org.apache.spark.sql.DataFrame \u003d [id: int, name: string ... 2 more fields]\n\nbuyDF: org.apache.spark.sql.DataFrame \u003d [id: int, name: string ... 3 more fields]\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idAbt: int, idBuy: int]\n"
+      },
+      "dateCreated": "Oct 18, 2016 7:35:49 PM",
+      "dateStarted": "Oct 18, 2016 7:46:40 PM",
+      "dateFinished": "Oct 18, 2016 7:46:45 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Prepare LuceneRDD",
+      "text": "val abt \u003d abtDF.select(\"id\", \"name\", \"description\")\nval buyLuceneRDD \u003d LuceneRDD(buyDF)\nbuyLuceneRDD.cache\nbuyLuceneRDD.fields()",
+      "dateUpdated": "Oct 18, 2016 7:46:40 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476819349011_1974437242",
+      "id": "20161001-145632_657667869",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nabt: org.apache.spark.sql.DataFrame \u003d [id: int, name: string ... 1 more field]\n\nbuyLuceneRDD: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[134] at RDD at LuceneRDD.scala:40\n\nres14: buyLuceneRDD.type \u003d LuceneRDD[134] at RDD at LuceneRDD.scala:40\n\nres15: Set[String] \u003d Set(name, description, price, id, manufacturer)\n"
+      },
+      "dateCreated": "Oct 18, 2016 7:35:49 PM",
+      "dateStarted": "Oct 18, 2016 7:46:43 PM",
+      "dateFinished": "Oct 18, 2016 7:46:47 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "def tokenizer(s: String, threshold: Int, comb: String \u003d \"OR\"): String \u003d {\n    s.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e threshold).mkString(s\" ${comb} \")\n}\n   \n// Entity linkage function definition, i.e., how do you want your records to be linked?\n// Input: org.apache.spark.sql.Row\n// Output: Lucene query string as in [query string](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)\nval linker: Row \u003d\u003e String \u003d {\n  case row: Row \u003d\u003e {\n    val nameTokens \u003d tokenizer(row.getString(row.fieldIndex(\"name\")), 2)\n    val descTerms \u003d tokenizer(row.getString(row.fieldIndex(\"description\")), 6)\n\n    /*\n    if (descTerms.nonEmpty \u0026\u0026 nameTokens.nonEmpty \u0026\u0026 manuTerms.nonEmpty) {\n      s\"(name:(${nameTokens}))^10 OR (description:${descTerms}) OR (manufacturer:${manuTerms})^5\"\n    }\n    else if (nameTokens.nonEmpty \u0026\u0026 manuTerms.nonEmpty) {\n        s\"(name:(${nameTokens}))^10 OR (manufacturer:${manuTerms})\"\n    \n    } \n    else if (nameTokens.nonEmpty) {\n        s\"name:(${nameTokens})\" \n    }\n    else {\n        \"*:*\"\n    }*/\n    \n   if (nameTokens.nonEmpty) {\n      s\"name:(${nameTokens})\"\n    }\n    else {\n      \"*:*\"\n    }\n  }\n}",
+      "dateUpdated": "Oct 18, 2016 7:46:40 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476819349012_1972513498",
+      "id": "20161001-154952_870995671",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\ntokenizer: (s: String, threshold: Int, comb: String)String\n\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n"
+      },
+      "dateCreated": "Oct 18, 2016 7:35:49 PM",
+      "dateStarted": "Oct 18, 2016 7:46:45 PM",
+      "dateFinished": "Oct 18, 2016 7:46:48 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val linkedResults \u003d buyLuceneRDD.linkDataFrame(abt, linker, 3)\n\nval linkageResults \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (left, topDocs) \u003d\u003e (topDocs.head.doc.textField(\"id\").head, left.getInt(left.fieldIndex(\"id\")))}).toDF(\"idBuy\", \"idAbt\")\n\nval correctHits: Double \u003d linkageResults.join(groundTruthDF, groundTruthDF.col(\"idAbt\").equalTo(linkageResults(\"idAbt\")) \u0026\u0026  groundTruthDF.col(\"idBuy\").equalTo(linkageResults(\"idBuy\"))).count\nval total: Double \u003d groundTruthDF.count\nval accuracy \u003d correctHits / total\n\nprintln(\"********************************\")\nprintln(s\"Accuracy of linkage is ${accuracy}\")\nprintln(\"********************************\")",
+      "dateUpdated": "Oct 18, 2016 7:48:23 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476819349014_1973282996",
+      "id": "20161001-155056_1480917921",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, List[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[205] at map at LuceneRDD.scala:177\n\nlinkageResults: org.apache.spark.sql.DataFrame \u003d [idBuy: string, idAbt: int]\n\ncorrectHits: Double \u003d 711.0\n\ntotal: Double \u003d 1097.0\n\naccuracy: Double \u003d 0.6481312670920693\n********************************\nAccuracy of linkage is 0.6481312670920693\n********************************\n"
+      },
+      "dateCreated": "Oct 18, 2016 7:35:49 PM",
+      "dateStarted": "Oct 18, 2016 7:48:23 PM",
+      "dateFinished": "Oct 18, 2016 7:48:28 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "",
+      "dateUpdated": "Oct 18, 2016 7:46:41 PM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {},
+          "map": {
+            "baseMapType": "Streets",
+            "isOnline": true,
+            "pinCols": []
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1476819349015_1972898247",
+      "id": "20161001-155628_1046044654",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Oct 18, 2016 7:35:49 PM",
+      "dateStarted": "Oct 18, 2016 7:46:48 PM",
+      "dateFinished": "Oct 18, 2016 7:46:48 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "/lucenerdd/linkage-abt-vs-buy",
+  "id": "2C289A9A7",
+  "angularObjects": {
+    "2C17CGB1U:shared_process": [],
+    "2BY6UDKX9:shared_process": [],
+    "2BYP39ECA:shared_process": [],
+    "2BZX6U5K5:shared_process": [],
+    "2BYB2TM6Z:shared_process": [],
+    "2C1YVDXAK:shared_process": [],
+    "2C2BE23KU:shared_process": [],
+    "2BZWG155B:shared_process": [],
+    "2C1GFU2YD:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}
