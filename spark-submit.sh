@@ -8,7 +8,7 @@ export SPARK_LOCAL_IP=localhost
 SPARK_HOME=${HOME_DIR}/spark-2.0.1-bin-hadoop2.7
 
 # spark-lucenerdd assembly JAR
-MAIN_JAR=${CURRENT_DIR}/target/scala-2.11/spark-lucenerdd-examples-assembly-0.2.2-SNAPSHOT.jar
+MAIN_JAR=${CURRENT_DIR}/target/scala-2.11/spark-lucenerdd-examples-assembly-0.2.2.jar
 
 echo "Running example class $1"
 
