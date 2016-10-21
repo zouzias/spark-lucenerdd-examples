@@ -1,6 +1,5 @@
 organization := "org.zouzias"
 name := "spark-lucenerdd-examples"
-version := "0.2.2"
 scalaVersion := "2.11.8"
 val sparkV = "2.0.1"
 
