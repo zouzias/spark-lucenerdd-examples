@@ -2,8 +2,8 @@
   "paragraphs": [
     {
       "title": "Load Spark LuceneRDD Jars",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.2-SNAPSHOT\")",
-      "dateUpdated": "Oct 20, 2016 8:36:52 AM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.3-SNAPSHOT\")",
+      "dateUpdated": "Oct 21, 2016 8:57:23 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -34,18 +34,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@260fd7ef\n"
+        "msg": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@3462413a\n"
       },
       "dateCreated": "Oct 5, 2016 9:39:22 AM",
-      "dateStarted": "Oct 20, 2016 8:36:52 AM",
-      "dateFinished": "Oct 20, 2016 8:37:07 AM",
+      "dateStarted": "Oct 21, 2016 8:57:23 PM",
+      "dateFinished": "Oct 21, 2016 8:57:36 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Imports for spark-lucenerdd",
       "text": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.apache.spark.sql.SparkSession\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\nLuceneRDD.version.foreach(println)",
-      "dateUpdated": "Oct 20, 2016 8:38:25 AM",
+      "dateUpdated": "Oct 21, 2016 8:57:23 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -78,18 +78,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.apache.spark.sql.SparkSession\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n(builtAtMillis,1476807568482)\n(name,spark-lucenerdd)\n(scalaVersion,2.11.8)\n(version,0.2.2-SNAPSHOT)\n(sbtVersion,0.13.12)\n(builtAtString,2016-10-18 16:19:28.482)\n"
+        "msg": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.apache.spark.sql.SparkSession\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n(builtAtMillis,1477058959919)\n(name,spark-lucenerdd)\n(scalaVersion,2.11.8)\n(version,0.2.3-SNAPSHOT)\n(sbtVersion,0.13.12)\n(builtAtString,2016-10-21 14:09:19.919)\n"
       },
       "dateCreated": "Oct 5, 2016 9:39:22 AM",
-      "dateStarted": "Oct 20, 2016 8:38:18 AM",
-      "dateFinished": "Oct 20, 2016 8:38:20 AM",
+      "dateStarted": "Oct 21, 2016 8:57:26 PM",
+      "dateFinished": "Oct 21, 2016 8:57:50 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Load all capitals",
       "text": "val capitals \u003d spark.read.parquet(\"data/spatial/capitals.parquet\").select(\"name\", \"country\")\nval luceneRDD \u003d LuceneRDD(capitals)\n\nluceneRDD.cache\nluceneRDD.count",
-      "dateUpdated": "Oct 20, 2016 8:36:52 AM",
+      "dateUpdated": "Oct 21, 2016 8:57:23 PM",
       "config": {
         "tableHide": true,
         "colWidth": 12.0,
@@ -121,18 +121,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "\ncapitals: org.apache.spark.sql.DataFrame \u003d [name: string, country: string]\n\nluceneRDD: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[7] at RDD at LuceneRDD.scala:40\n\nres0: luceneRDD.type \u003d LuceneRDD[7] at RDD at LuceneRDD.scala:40\n\nres1: Long \u003d 303\n"
+        "msg": "\ncapitals: org.apache.spark.sql.DataFrame \u003d [name: string, country: string]\n\nluceneRDD: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[7] at RDD at LuceneRDD.scala:40\n\nres1: luceneRDD.type \u003d LuceneRDD[7] at RDD at LuceneRDD.scala:40\n\nres2: Long \u003d 303\n"
       },
       "dateCreated": "Oct 5, 2016 9:39:22 AM",
-      "dateStarted": "Oct 20, 2016 8:37:07 AM",
-      "dateFinished": "Oct 20, 2016 8:37:37 AM",
+      "dateStarted": "Oct 21, 2016 8:57:37 PM",
+      "dateFinished": "Oct 21, 2016 8:58:02 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Search for ottawa",
       "text": "val k \u003d 10\nval result \u003d luceneRDD.termQuery(\"name\", \"ottawa\", k)\n\nresult.take(k).foreach(println)",
-      "dateUpdated": "Oct 20, 2016 8:36:52 AM",
+      "dateUpdated": "Oct 21, 2016 8:58:51 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -163,18 +163,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "\nk: Int \u003d 10\n\nresult: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse[10] at RDD at LuceneRDDResponse.scala:32\nSparkScoreDoc(5.337291,11,0,Text fields:name:[Ottawa]country:[Canada])\n"
+        "msg": "\nk: Int \u003d 10\n\nresult: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse[16] at RDD at LuceneRDDResponse.scala:32\nSparkScoreDoc(5.337291,11,0,Text fields:name:[Ottawa]country:[Canada])\n"
       },
       "dateCreated": "Oct 5, 2016 9:39:22 AM",
-      "dateStarted": "Oct 20, 2016 8:37:23 AM",
-      "dateFinished": "Oct 20, 2016 8:37:39 AM",
+      "dateStarted": "Oct 21, 2016 8:58:51 PM",
+      "dateFinished": "Oct 21, 2016 8:58:53 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Prefix query for \"par\"",
-      "text": "val topK \u003d 10\nval response \u003d luceneRDD.prefixQuery(\"name\", \"par\", topK)",
-      "dateUpdated": "Oct 20, 2016 8:36:52 AM",
+      "text": "val topK \u003d 10\nval response \u003d luceneRDD.prefixQuery(\"name\", \"par\", topK)\nresponse.take(k).foreach(println)",
+      "dateUpdated": "Oct 21, 2016 8:58:55 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -205,57 +205,17 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "\ntopK: Int \u003d 10\n\nresponse: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse[13] at RDD at LuceneRDDResponse.scala:32\n"
+        "msg": "\ntopK: Int \u003d 10\n\nresponse: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse[19] at RDD at LuceneRDDResponse.scala:32\nSparkScoreDoc(1.0,9,0,Text fields:name:[Paris]country:[France])\nSparkScoreDoc(1.0,43,0,Text fields:name:[Paramaribo]country:[Suriname])\n"
       },
       "dateCreated": "Oct 5, 2016 9:39:22 AM",
-      "dateStarted": "Oct 20, 2016 8:37:37 AM",
-      "dateFinished": "Oct 20, 2016 8:37:39 AM",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "text": "response.take(k).foreach(println)",
-      "dateUpdated": "Oct 20, 2016 8:36:52 AM",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
-        "enabled": true,
-        "editorMode": "ace/mode/scala"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "apps": [],
-      "jobName": "paragraph_1475704046895_-348355040",
-      "id": "20161005-214726_2020969583",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": "SparkScoreDoc(1.0,9,0,Text fields:name:[Paris]country:[France])\nSparkScoreDoc(1.0,43,0,Text fields:name:[Paramaribo]country:[Suriname])\n"
-      },
-      "dateCreated": "Oct 5, 2016 9:47:26 AM",
-      "dateStarted": "Oct 20, 2016 8:37:39 AM",
-      "dateFinished": "Oct 20, 2016 8:37:40 AM",
+      "dateStarted": "Oct 21, 2016 8:58:55 PM",
+      "dateFinished": "Oct 21, 2016 8:58:56 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "",
-      "dateUpdated": "Oct 20, 2016 8:36:52 AM",
+      "dateUpdated": "Oct 21, 2016 8:58:48 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -273,7 +233,8 @@
           }
         },
         "enabled": true,
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -288,8 +249,8 @@
         "msg": ""
       },
       "dateCreated": "Oct 16, 2016 9:44:32 AM",
-      "dateStarted": "Oct 20, 2016 8:37:40 AM",
-      "dateFinished": "Oct 20, 2016 8:37:40 AM",
+      "dateStarted": "Oct 21, 2016 8:58:05 PM",
+      "dateFinished": "Oct 21, 2016 8:58:06 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     }
