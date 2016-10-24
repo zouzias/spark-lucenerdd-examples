@@ -23,6 +23,8 @@ object ShapeLinkageCountriesvsCapitals {
     implicit val spark = SparkSession.builder.config(conf).getOrCreate()
     import spark.implicits._
 
+    val start = System.currentTimeMillis()
+
     // Load all countries
     val allCountries = spark.read.parquet("data/spatial/countries-poly.parquet")
       .select("name", "shape")
@@ -50,6 +52,11 @@ object ShapeLinkageCountriesvsCapitals {
 
     linked.map(x => (x._1, x._2.map(_.doc.textField("_1")))).foreach(println)
 
+    val end = System.currentTimeMillis()
+
+    println("=" * 40)
+    println(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    println("=" * 40)
     // terminate spark context
     spark.stop()
 

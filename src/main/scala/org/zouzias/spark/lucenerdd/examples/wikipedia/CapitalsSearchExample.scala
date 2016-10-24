@@ -18,11 +18,19 @@ object CapitalsSearchExample {
 
     implicit val spark = SparkSession.builder.config(conf).getOrCreate()
 
+    val start = System.currentTimeMillis()
+
     val capitals = spark.read.parquet("data/spatial/capitals.parquet").select("name", "country")
 
     val luceneRDD = LuceneRDD(capitals)
 
     val result = luceneRDD.termQuery("name", "ottawa", k)
+
+    val end = System.currentTimeMillis()
+
+    println("=" * 40)
+    println(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    println("=" * 40)
 
     println(result.take(k).foreach(println))
 

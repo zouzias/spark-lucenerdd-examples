@@ -20,6 +20,8 @@ object LinkageACMvsDBLP extends Logging {
     implicit val spark = SparkSession.builder.config(conf).getOrCreate()
     import spark.implicits._
 
+    val start = System.currentTimeMillis()
+
     val acmDF = spark.read.parquet("data/linkage-papers2/linkage-papers-acm.parquet")
     logInfo(s"Loaded ${acmDF.count} ACM records")
     val dblp2DF = spark.read.parquet("data/linkage-papers2/linkage-papers-dblp2.parquet")
@@ -56,6 +58,12 @@ object LinkageACMvsDBLP extends Logging {
     val total: Double = groundTruthDF.count
 
     val accuracy = correctHits / total
+
+    val end = System.currentTimeMillis()
+
+    println("=" * 40)
+    println(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    println("=" * 40)
 
     logInfo("********************************")
     logInfo(s"Accuracy of linkage is ${accuracy}")

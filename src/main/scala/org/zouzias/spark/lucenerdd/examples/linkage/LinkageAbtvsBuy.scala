@@ -21,6 +21,8 @@ object LinkageAbtvsBuy extends Logging {
     implicit val sc = SparkSession.builder().config(conf).getOrCreate()
     import sc.implicits._
 
+    val start = System.currentTimeMillis()
+
     val abtDF = sc.read.parquet("data/linkage-products2/linkage-products-abt.parquet")
     logInfo(s"Loaded ${abtDF.count} Abt product descriptions")
     val buyDF = sc.read.parquet("data/linkage-products2/linkage-products-buy.parquet")
@@ -56,6 +58,12 @@ object LinkageAbtvsBuy extends Logging {
     val total: Double = groundTruthDF.count
 
     val accuracy = correctHits / total
+
+    val end = System.currentTimeMillis()
+
+    println("=" * 40)
+    println(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    println("=" * 40)
 
     logInfo("********************************")
     logInfo(s"Accuracy of linkage is ${accuracy}")
