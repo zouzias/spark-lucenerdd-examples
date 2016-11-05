@@ -2,12 +2,11 @@ package org.zouzias.spark.lucenerdd.examples.linkage.shape
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.SparkConf
-import org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD
 import org.zouzias.spark.lucenerdd.spatial.shape._
-import org.zouzias.spark.lucenerdd._
+import org.zouzias.spark.lucenerdd.spatial.shape.rdds.ShapeRDD
 
 /**
- * Record linkage example between countries and cities using [[ShapeLuceneRDD]]
+ * Record linkage example between countries and cities using [[ShapeRDD]]
  *
  * You can run this locally with, ./spark-linkage-radius.sh
  */
@@ -44,13 +43,14 @@ object ShapeLinkageCountriesvsCapitals {
       (parseDouble(coords(0)), parseDouble(coords(1)))
     }
 
-    val shapes = ShapeLuceneRDD(allCountries)
+    val shapes = ShapeRDD(allCountries)
     shapes.cache
 
     val linked = shapes.linkByRadius(capitals.rdd, coords, Radius)
     linked.cache
 
-    linked.map(x => (x._1, x._2.headOption.flatMap(_.doc.textField("_1")))).foreach(println)
+    shapes.postLinker(linked).map(x => (x._1, x._2._2)).collect().foreach(println)
+    //linked.map(x => (x._1, x._2.headOption.flatMap(_.doc.textField("__index__")))).foreach(println)
 
     val end = System.currentTimeMillis()
 
