@@ -4,21 +4,20 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.spatial.shape._
 import org.zouzias.spark.lucenerdd._
-import org.zouzias.spark.lucenerdd.spatial.shape.rdds.{ShapeLuceneRDD, ShapeRDD}
 
 /**
- * Record linkage example between countries and cities using [[ShapeRDD]]
+ * Record linkage example between countries and cities using [[ShapeLuceneRDD]]
  *
  * You can run this locally with, ./spark-linkage-radius.sh
  */
-object ShapeLinkageCountriesvsCapitals {
+object ShapeLuceneRDDLinkageCountriesvsCapitals {
 
   // 20km radius
   val Radius = 20D
 
   def main(args: Array[String]): Unit = {
     // initialise spark context
-    val conf = new SparkConf().setAppName(ShapeLinkageCountriesvsCapitals.getClass.getName)
+    val conf = new SparkConf().setAppName(ShapeLuceneRDDLinkageCountriesvsCapitals.getClass.getName)
 
     implicit val spark = SparkSession.builder.config(conf).getOrCreate()
     import spark.implicits._
