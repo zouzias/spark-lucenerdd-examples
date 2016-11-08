@@ -49,7 +49,7 @@ object ShapeLuceneRDDLinkageCountriesvsCapitals {
     val linked = shapes.linkByRadius(capitals.rdd, coords, Radius)
     linked.cache
 
-    linked.map(x => (x._1, x._2.headOption.flatMap(_.doc.textField("__index__")))).foreach(println)
+    linked.map(x => (x._1, x._2.headOption.flatMap(_.doc.textField("_1")))).foreach(println)
 
     val end = System.currentTimeMillis()
 
