@@ -3,22 +3,21 @@ package org.zouzias.spark.lucenerdd.examples.linkage.shape
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.spatial.shape._
-import org.zouzias.spark.lucenerdd._
-import org.zouzias.spark.lucenerdd.spatial.shape.rdds.{ShapeLuceneRDD, ShapeRDD}
+import org.zouzias.spark.lucenerdd.spatial.shape.rdds.ShapeRDD
 
 /**
  * Record linkage example between countries and cities using [[ShapeRDD]]
  *
  * You can run this locally with, ./spark-linkage-radius.sh
  */
-object ShapeLinkageCountriesvsCapitals {
+object ShapeRDDLinkageCountriesvsCapitals {
 
   // 20km radius
   val Radius = 20D
 
   def main(args: Array[String]): Unit = {
     // initialise spark context
-    val conf = new SparkConf().setAppName(ShapeLinkageCountriesvsCapitals.getClass.getName)
+    val conf = new SparkConf().setAppName(ShapeRDDLinkageCountriesvsCapitals.getClass.getName)
 
     implicit val spark = SparkSession.builder.config(conf).getOrCreate()
     import spark.implicits._
@@ -44,13 +43,18 @@ object ShapeLinkageCountriesvsCapitals {
       (parseDouble(coords(0)), parseDouble(coords(1)))
     }
 
-    val shapes = ShapeLuceneRDD(allCountries)
+    val shapes = ShapeRDD(allCountries)
     shapes.cache
 
     val linked = shapes.linkByRadius(capitals.rdd, coords, Radius)
     linked.cache
 
-    linked.map(x => (x._1, x._2.headOption.flatMap(_.doc.textField("__index__")))).foreach(println)
+    println("=" * 40)
+    println(s"Total is ${linked.count()}")
+    println("=" * 40)
+
+
+    shapes.postLinker(linked).map(x => (x._1._2, x._2._2)).foreach(println)
 
     val end = System.currentTimeMillis()
 

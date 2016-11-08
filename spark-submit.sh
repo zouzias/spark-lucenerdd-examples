@@ -24,6 +24,7 @@ echo "SPARK SUBMIT: $1"
 ${SPARK_HOME}/bin/spark-submit   \
         --conf "spark.executor.memory=1g" \
         --conf "spark.executor.cores=4" \
+        --conf "spark.executor.instances=2" \
         --conf "spark.driver.memory=1g" \
         --conf "spark.rdd.compress=true" \
         --conf "spark.serializer=org.apache.spark.serializer.KryoSerializer" \
