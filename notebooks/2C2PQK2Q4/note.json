@@ -203,7 +203,7 @@
     },
     {
       "text": "val results \u003dl.dedup(linker,3)",
-      "dateUpdated": "Jan 22, 2017 10:24:25 AM",
+      "dateUpdated": "Jan 22, 2017 3:15:18 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -238,12 +238,12 @@
       "dateCreated": "Nov 9, 2016 3:48:41 AM",
       "dateStarted": "Jan 22, 2017 10:24:25 AM",
       "dateFinished": "Jan 22, 2017 10:24:25 AM",
-      "status": "FINISHED",
+      "status": "PENDING",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "results.count\nresults.filter(_._2.nonEmpty).count",
-      "dateUpdated": "Jan 22, 2017 10:24:27 AM",
+      "dateUpdated": "Jan 22, 2017 3:15:20 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -278,12 +278,12 @@
       "dateCreated": "Nov 9, 2016 3:49:12 AM",
       "dateStarted": "Jan 22, 2017 10:24:27 AM",
       "dateFinished": "Jan 22, 2017 10:24:33 AM",
-      "status": "FINISHED",
+      "status": "PENDING",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "results.collect().filter(_._2.nonEmpty).map(x \u003d\u003e (x._1, x._2.headOption)).foreach(println)",
-      "dateUpdated": "Jan 22, 2017 10:24:36 AM",
+      "dateUpdated": "Jan 22, 2017 3:15:21 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
