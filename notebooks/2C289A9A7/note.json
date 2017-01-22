@@ -2,8 +2,8 @@
   "paragraphs": [
     {
       "title": "Load Spark LuceneRDD Jars",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.2-SNAPSHOT\")",
-      "dateUpdated": "Oct 18, 2016 7:46:40 AM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.5\")",
+      "dateUpdated": "Jan 22, 2017 10:30:01 AM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -291,7 +291,17 @@
   ],
   "name": "/lucenerdd/linkage/abt-vs-buy",
   "id": "2C289A9A7",
-  "angularObjects": {},
+  "angularObjects": {
+    "2C7ANUU2A:shared_process": [],
+    "2C7B2WPCQ:shared_process": [],
+    "2C9W4XS9U:shared_process": [],
+    "2C6HHWV2X:shared_process": [],
+    "2C9551V7R:shared_process": [],
+    "2C8MT3TDC:shared_process": [],
+    "2C931APEM:shared_process": [],
+    "2C7SASSJQ:shared_process": [],
+    "2C9ZJANFH:shared_process": []
+  },
   "config": {
     "looknfeel": "default"
   },
