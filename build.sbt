@@ -12,7 +12,7 @@ libraryDependencies ++= Seq(
 	"org.zouzias" %% "spark-lucenerdd" % version.value,
 	"org.apache.spark" %% "spark-core" % sparkV % "provided",
 	"org.apache.spark" %% "spark-sql" % sparkV % "provided" ,
-	"com.holdenkarau"  %% "spark-testing-base" % s"${sparkV}_0.5.0" % "test" intransitive()
+	"com.holdenkarau"  %% "spark-testing-base" % s"${sparkV}_0.6.0" % "test" intransitive()
 )
 
 enablePlugins(DockerPlugin)
