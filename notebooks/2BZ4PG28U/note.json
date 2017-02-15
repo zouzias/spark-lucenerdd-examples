@@ -2,8 +2,8 @@
   "paragraphs": [
     {
       "title": "Load Spark LuceneRDD Jars",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.5\")",
-      "dateUpdated": "Jan 22, 2017 10:30:16 AM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.6\")",
+      "dateUpdated": "Feb 15, 2017 5:13:41 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -46,7 +46,7 @@
     {
       "title": "Imports for LuceneRDD",
       "text": "%spark\nimport org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
-      "dateUpdated": "Oct 21, 2016 9:00:29 AM",
+      "dateUpdated": "Feb 15, 2017 5:14:04 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -81,15 +81,15 @@
         "msg": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
       },
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Oct 21, 2016 9:00:30 AM",
-      "dateFinished": "Oct 21, 2016 9:00:32 AM",
+      "dateStarted": "Feb 15, 2017 5:14:04 PM",
+      "dateFinished": "Feb 15, 2017 5:14:05 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Load ACM and DBLP datasets",
       "text": "import spark.implicits._\n\n// ACM\nval acmDF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-acm.parquet\")\nprintln(s\"Loaded ${acmDF.count} ACM records\")\nacmDF.cache()\nacmDF.printSchema()\n\n// DBLP\nval dblp2DF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-dblp2.parquet\")\nprintln(s\"Loaded ${acmDF.count} DBLP records\")\n\n// Ground truth DataFrame\nval groundTruthDF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-acm-vs-dblp2.parquet\")\n\n// DBLP LuceneRDD\nval dblp2 \u003d LuceneRDD(dblp2DF)\ndblp2.cache()\ndblp2.fields()",
-      "dateUpdated": "Oct 21, 2016 9:06:19 AM",
+      "dateUpdated": "Feb 15, 2017 5:14:05 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -121,18 +121,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "\nimport spark.implicits._\n\nacmDF: org.apache.spark.sql.DataFrame \u003d [id: int, title: string ... 3 more fields]\nLoaded 2294 ACM records\n\nres8: acmDF.type \u003d [id: int, title: string ... 3 more fields]\nroot\n |-- id: integer (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n |-- authors: string (nullable \u003d true)\n |-- venue: string (nullable \u003d true)\n |-- year: integer (nullable \u003d true)\n\n\ndblp2DF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\nLoaded 2294 DBLP records\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: int]\n\ndblp2: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[47] at RDD at LuceneRDD.scala:40\n\nres11: dblp2.type \u003d LuceneRDD[47] at RDD at LuceneRDD.scala:40\n\nres12: Set[String] \u003d Set(year, id, authors, title, venue)\n"
+        "msg": "\nimport spark.implicits._\n\nacmDF: org.apache.spark.sql.DataFrame \u003d [id: int, title: string ... 3 more fields]\nLoaded 2294 ACM records\n\nres15: acmDF.type \u003d [id: int, title: string ... 3 more fields]\nroot\n |-- id: integer (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n |-- authors: string (nullable \u003d true)\n |-- venue: string (nullable \u003d true)\n |-- year: integer (nullable \u003d true)\n\n\ndblp2DF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\nLoaded 2294 DBLP records\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: int]\n\ndblp2: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[70] at RDD at LuceneRDD.scala:42\n\nres18: dblp2.type \u003d LuceneRDD[70] at RDD at LuceneRDD.scala:42\n\nres19: Set[String] \u003d Set(year, id, authors, title, venue)\n"
       },
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Oct 21, 2016 9:00:30 AM",
-      "dateFinished": "Oct 21, 2016 9:00:39 AM",
+      "dateStarted": "Feb 15, 2017 5:14:05 PM",
+      "dateFinished": "Feb 15, 2017 5:14:14 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Register tables for visualization",
       "text": "acmDF.registerTempTable(\"acm\")\ndblp2DF.registerTempTable(\"dblp\")",
-      "dateUpdated": "Oct 21, 2016 9:00:30 AM",
+      "dateUpdated": "Feb 15, 2017 5:14:08 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -167,15 +167,15 @@
         "msg": "\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n"
       },
       "dateCreated": "Oct 18, 2016 12:11:49 PM",
-      "dateStarted": "Oct 21, 2016 9:00:33 AM",
-      "dateFinished": "Oct 21, 2016 9:00:40 AM",
+      "dateStarted": "Feb 15, 2017 5:14:08 PM",
+      "dateFinished": "Feb 15, 2017 5:14:16 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "ACM Papers",
       "text": "%sql\nselect title, authors, venue, year, id FROM acm limit 10",
-      "dateUpdated": "Oct 21, 2016 9:00:30 AM",
+      "dateUpdated": "Feb 15, 2017 5:14:11 PM",
       "config": {
         "colWidth": 6.0,
         "graph": {
@@ -210,15 +210,15 @@
         "msg": "title\tauthors\tvenue\tyear\tid\nSpatial and temporal content-based access to hypervideo databases\tHaitao Jiang, Ahmed K. Elmagarmid\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765538\nOptimal clip ordering for multi-clip queries\tRaymond T. Ng, Paul Shum\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765539\nIntegrating symbolic images into a multimedia database system using classification and abstraction approaches\tAya Soffer, Hanan Samet\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765540\nApproximate similarity retrieval with M-trees\tPavel Zezula, Pasquale Savino, Giuseppe Amato, Fausto Rabitti\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765541\nDelivering presentations from multimedia servers\tNevzat Hurkan Balkir, Gultekin Ozsoyoglu\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765542\nThe hB $^\\\\Pi$-tree: a multi-attribute index supporting concurrency, recovery and node consolidation\tGeorgios Evangelidis, David Lomet, Betty Salzberg\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1997\t765544\nDictionary-based order-preserving string compression\tGennady Antoshenkov\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1997\t765545\nA logical view of structured files\tSerge Abiteboul, Sophie Cluet, Tova Milo\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765527\nFast image retrieval using color-spatial information\tBeng Chin Ooi, Kian-Lee Tan, Tat Seng Chua, Wynne Hsu\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765528\nGuest Editorial\tMatthias Jarke\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765530\n"
       },
       "dateCreated": "Oct 18, 2016 12:15:41 PM",
-      "dateStarted": "Oct 21, 2016 9:00:39 AM",
-      "dateFinished": "Oct 21, 2016 9:00:41 AM",
+      "dateStarted": "Feb 15, 2017 5:14:15 PM",
+      "dateFinished": "Feb 15, 2017 5:14:16 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "DBLP papers",
       "text": "%sql\nselect title, authors, venue, year, id FROM dblp limit 10",
-      "dateUpdated": "Oct 21, 2016 9:00:30 AM",
+      "dateUpdated": "Feb 15, 2017 5:14:12 PM",
       "config": {
         "colWidth": 6.0,
         "graph": {
@@ -276,14 +276,14 @@
         "msg": "title\tauthors\tvenue\tyear\tid\nEfficient Algorithms for Mining Outliers from Large Data Sets\tKyuseok Shim, Sridhar Ramaswamy, Rajeev Rastogi\tSIGMOD Conference\t2000\tconf/sigmod/RamaswamyRS00\nMaintenance of Data Cubes and Summary Tables in a Warehouse\tInderpal Singh Mumick, Dallan Quass, Barinderpal Singh Mumick\tSIGMOD Conference\t1997\tconf/sigmod/MumickQM97\nHistorical Queries Along Multiple Lines of Time Evolution\tVassilis J. Tsotras, Gad M. Landau, Jeanette P. Schmidt\tVLDB J.\t1995\tjournals/vldb/LandauST95\nThe Impact of Database Research on Industrial Products (Panel Summary)\tDavid B. Lomet, Daniel Barbar�, Jos� A. Blakeley, Michael Stonebraker, Daniel H. Fishman\tSIGMOD Record\t1994\tjournals/sigmod/BarbaraBFLS94\nXQuery: A Query Language for XML\tDonald D. Chamberlin\tSIGMOD Conference\t2003\tconf/sigmod/Chamberlin03\nThe ClustRa Telecom Database: High Availability, High Throughput, and Real-Time Response\tSvein-Olaf Hvasshovd, �ystein Torbj�rnsen, Svein Erik Bratsberg, Per Holager\tVLDB\t1995\tconf/vldb/HvasshovdTBH95\nEfficient Processing of Joins on Set-valued Attributes\tNikos Mamoulis\tSIGMOD Conference\t2003\tconf/sigmod/Mamoulis03\nEvaluating Queries with Generalized Path Expressions\tGuido Moerkotte, Sophie Cluet, Vassilis Christophides\tSIGMOD Conference\t1996\tconf/sigmod/ChristophidesCM96\nTowards an Infrastructure for Temporal Databases: Report of an Invitational ARPA/NSF Workshop\tRamez Elmasri, Richard T. Snodgrass, Babis Theodoulidis, Inderpal Singh Mumick, Arie Segev, M. Tamer �zsu, Umeshwar Dayal, Niki Pissinou, Barbara Pernici\tSIGMOD Record\t1994\tjournals/sigmod/PissinouSEMOPSTD94\nP-Grid: a self-organizing structured P2P system\tZoran Despotovic, Manfred Hauswirth, Karl Aberer, Philippe Cudr�-Mauroux, Magdalena Punceva, Anwitaman Datta, Roman Schmidt\tSIGMOD Record\t2003\tjournals/sigmod/AbererCDDHPS03\n"
       },
       "dateCreated": "Oct 18, 2016 12:16:46 PM",
-      "dateStarted": "Oct 21, 2016 9:00:41 AM",
-      "dateFinished": "Oct 21, 2016 9:00:42 AM",
+      "dateStarted": "Feb 15, 2017 5:14:16 PM",
+      "dateFinished": "Feb 15, 2017 5:14:17 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%spark\n\n// Size threshold on the words of *title* field\nval titleThres \u003d z.input(\"title_word_threshold\", 8.0)\n\n// Size threshold of the words on *authors* field\nval authorsThres \u003d z.input(\"authors_word_threshold\", 100.0)\n",
-      "dateUpdated": "Oct 21, 2016 9:11:35 AM",
+      "dateUpdated": "Feb 15, 2017 5:14:21 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -337,15 +337,15 @@
         "msg": "\ntitleThres: Object \u003d 3\n\nauthorsThres: Object \u003d 3\n"
       },
       "dateCreated": "Oct 20, 2016 7:58:37 AM",
-      "dateStarted": "Oct 21, 2016 9:11:35 AM",
-      "dateFinished": "Oct 21, 2016 9:11:36 AM",
+      "dateStarted": "Feb 15, 2017 5:14:21 PM",
+      "dateFinished": "Feb 15, 2017 5:14:22 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Define Entity Linkage Function",
       "text": "%spark\n\n// Helper: whitespace split words, keep words \u003e threshold # of chars\ndef tokenizer(s: String, threshold: Int, comb: String \u003d \"OR\"): String \u003d {\n    s.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e threshold).mkString(s\" ${comb} \")\n}\n   \n///////////////////////////////////////////////////////////////////////////////////////\n// Entity linkage function definition, i.e., how do you want your records to be linked?\n//\n// Input: org.apache.spark.sql.Row\n// Output: Lucene query string as in [query string] (https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)\n//////////////////////////////////////////////////////////////////////////////////////\nval linker: Row \u003d\u003e String \u003d { case row \u003d\u003e {\n    \n    // Get title and authors fields\n    val title \u003d row.getString(row.fieldIndex(\"title\"))\n    val authors \u003d row.getString(row.fieldIndex(\"authors\"))\n    \n    val titleTokens \u003d tokenizer(title, Integer.parseInt(titleThres.toString)) // Replace 8 with 3\n    val authorsTerms \u003d tokenizer(authors, Integer.parseInt(authorsThres.toString)) // Use 3 to get 0.97 accuracy\n    \n    if (titleTokens.nonEmpty \u0026\u0026 authorsTerms.nonEmpty) {\n        s\"(title:(${titleTokens})) OR (authors:${authorsTerms})\"\n    }\n    else if (titleTokens.nonEmpty){\n        s\"title:(${titleTokens})\"\n    }\n    else if ( authorsTerms.nonEmpty) {\n        s\"(authors:${authorsTerms})\"\n    }\n    else {\n        \"*:*\"\n    }\n  }\n}",
-      "dateUpdated": "Oct 21, 2016 9:11:39 AM",
+      "dateUpdated": "Feb 15, 2017 5:14:25 PM",
       "config": {
         "colWidth": 7.0,
         "editorMode": "ace/mode/scala",
@@ -381,15 +381,15 @@
         "msg": "\ntokenizer: (s: String, threshold: Int, comb: String)String\n\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n"
       },
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Oct 21, 2016 9:11:39 AM",
-      "dateFinished": "Oct 21, 2016 9:11:39 AM",
+      "dateStarted": "Feb 15, 2017 5:14:25 PM",
+      "dateFinished": "Feb 15, 2017 5:14:26 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Compute Linkage Accuracy",
       "text": "//////////////////////////////////\n// Entity linkage                /\n//////////////////////////////////\nval linkedResults \u003d dblp2.linkDataFrame(acmDF, linker, 3)\n\n////////////////////////////////////////\n// The rest is for computing accuracy  /\n////////////////////////////////////////\n\n// Linkage Results (get top result)\nval linkageResultsDF \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) \u003d\u003e (topDocs.head.doc.textField(\"id\").get, acm.getInt(acm.fieldIndex(\"id\")).toString)}).toDF(\"idDBLP\", \"idACM\")\n\n// Compute the number of currect results based on ground truth\nval correctHits: Double \u003d linkageResultsDF.join(groundTruthDF, groundTruthDF.col(\"idDBLP\").equalTo(linkageResultsDF(\"idDBLP\")) \u0026\u0026  groundTruthDF.col(\"idACM\").equalTo(linkageResultsDF(\"idACM\"))).count\n\n// Total # of ground truth records    \nval total: Double \u003d groundTruthDF.count\n\n// Accuracy\nval accuracy \u003d correctHits / total\n\nprintln(\"********************************\")\nprintln(\"********************************\")\nprintln(s\"Accuracy of linkage is ${accuracy}\")\nprintln(\"********************************\")\nprintln(\"********************************\")",
-      "dateUpdated": "Oct 21, 2016 9:11:55 AM",
+      "dateUpdated": "Feb 15, 2017 5:14:28 PM",
       "config": {
         "colWidth": 5.0,
         "editorMode": "ace/mode/scala",
@@ -422,11 +422,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, List[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[238] at map at LuceneRDD.scala:179\n\nlinkageResultsDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: string]\n\ncorrectHits: Double \u003d 2162.0\n\ntotal: Double \u003d 2224.0\n\naccuracy: Double \u003d 0.9721223021582733\n********************************\n********************************\nAccuracy of linkage is 0.9721223021582733\n********************************\n********************************\n"
+        "msg": "\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, Array[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[91] at map at LuceneRDD.scala:187\n\nlinkageResultsDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: string]\n\ncorrectHits: Double \u003d 2162.0\n\ntotal: Double \u003d 2224.0\n\naccuracy: Double \u003d 0.9721223021582733\n********************************\n********************************\nAccuracy of linkage is 0.9721223021582733\n********************************\n********************************\n"
       },
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Oct 21, 2016 9:11:40 AM",
-      "dateFinished": "Oct 21, 2016 9:11:45 AM",
+      "dateStarted": "Feb 15, 2017 5:14:28 PM",
+      "dateFinished": "Feb 15, 2017 5:14:38 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -516,15 +516,15 @@
   "name": "/lucenerdd/linkage/acm-vs-dblp (ScalaIO)",
   "id": "2BZ4PG28U",
   "angularObjects": {
-    "2C7ANUU2A:shared_process": [],
-    "2C7B2WPCQ:shared_process": [],
-    "2C9W4XS9U:shared_process": [],
-    "2C6HHWV2X:shared_process": [],
-    "2C9551V7R:shared_process": [],
-    "2C8MT3TDC:shared_process": [],
-    "2C931APEM:shared_process": [],
-    "2C7SASSJQ:shared_process": [],
-    "2C9ZJANFH:shared_process": []
+    "2CB7Y9KUS:shared_process": [],
+    "2CBU3U3UG:shared_process": [],
+    "2CA85WCVR:shared_process": [],
+    "2CA99RTYY:shared_process": [],
+    "2CAQSGWFF:shared_process": [],
+    "2C98RMQQN:shared_process": [],
+    "2CBUTWQF9:shared_process": [],
+    "2C9TGFCBC:shared_process": [],
+    "2CBWDGM39:shared_process": []
   },
   "config": {
     "looknfeel": "default"

@@ -2,8 +2,8 @@
   "paragraphs": [
     {
       "title": "Load Spark LuceneRDD Jars",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.3-SNAPSHOT\")",
-      "dateUpdated": "Oct 21, 2016 5:02:39 PM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.6\")",
+      "dateUpdated": "Feb 15, 2017 5:15:56 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -32,8 +32,8 @@
       "jobName": "paragraph_1475336874705_-1470869390",
       "id": "20161001-115642_482200633",
       "dateCreated": "Oct 1, 2016 3:47:54 AM",
-      "dateStarted": "Oct 21, 2016 5:01:13 PM",
-      "dateFinished": "Oct 21, 2016 5:01:13 PM",
+      "dateStarted": "Oct 21, 2016 5:01:13 AM",
+      "dateFinished": "Oct 21, 2016 5:01:13 AM",
       "status": "ERROR",
       "errorMessage": "",
       "progressUpdateIntervalMs": 500
@@ -41,7 +41,7 @@
     {
       "title": "Imports for spark-lucenerdd",
       "text": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.SparkSession\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
-      "dateUpdated": "Oct 21, 2016 5:01:13 PM",
+      "dateUpdated": "Oct 21, 2016 5:01:13 AM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -70,8 +70,8 @@
       "jobName": "paragraph_1475336874708_-1472023637",
       "id": "20161001-120020_440303718",
       "dateCreated": "Oct 1, 2016 3:47:54 AM",
-      "dateStarted": "Oct 21, 2016 5:01:13 PM",
-      "dateFinished": "Oct 21, 2016 5:01:17 PM",
+      "dateStarted": "Oct 21, 2016 5:01:13 AM",
+      "dateFinished": "Oct 21, 2016 5:01:17 AM",
       "status": "FINISHED",
       "errorMessage": "",
       "progressUpdateIntervalMs": 500
@@ -79,7 +79,7 @@
     {
       "title": "Load Amazon \u0026 Gogle datasets",
       "text": "import spark.implicits._\n\nval amazonDF \u003d spark.read.parquet(\"data/linkage-products1/linkage-products-amazon.parquet\")\nval googleDF \u003d spark.read.parquet(\"data/linkage-products1/linkage-products-google.parquet\")\nval groundTruthDF \u003d spark.read.parquet(\"data/linkage-products1/linkage-products-amazon-vs-google.parquet\")",
-      "dateUpdated": "Oct 21, 2016 5:01:13 PM",
+      "dateUpdated": "Oct 21, 2016 5:01:13 AM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -108,8 +108,8 @@
       "jobName": "paragraph_1475336874708_-1472023637",
       "id": "20161001-120320_2078137697",
       "dateCreated": "Oct 1, 2016 3:47:54 AM",
-      "dateStarted": "Oct 21, 2016 5:01:13 PM",
-      "dateFinished": "Oct 21, 2016 5:01:22 PM",
+      "dateStarted": "Oct 21, 2016 5:01:13 AM",
+      "dateFinished": "Oct 21, 2016 5:01:22 AM",
       "status": "FINISHED",
       "errorMessage": "",
       "progressUpdateIntervalMs": 500
@@ -117,7 +117,7 @@
     {
       "title": "Prepare LuceneRDD",
       "text": "val amazon \u003d amazonDF.select(\"id\", \"title\", \"description\", \"manufacturer\").map( row \u003d\u003e (row.get(0).toString, row.getString(1), row.getString(2), row.getString(3)))\nval googleLuceneRDD \u003d LuceneRDD(googleDF)\ngoogleLuceneRDD.cache\ngoogleLuceneRDD.fields()",
-      "dateUpdated": "Oct 21, 2016 5:01:13 PM",
+      "dateUpdated": "Oct 21, 2016 5:01:13 AM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -146,15 +146,15 @@
       "jobName": "paragraph_1475336874708_-1472023637",
       "id": "20161001-145632_657667869",
       "dateCreated": "Oct 1, 2016 3:47:54 AM",
-      "dateStarted": "Oct 21, 2016 5:01:17 PM",
-      "dateFinished": "Oct 21, 2016 5:01:26 PM",
+      "dateStarted": "Oct 21, 2016 5:01:17 AM",
+      "dateFinished": "Oct 21, 2016 5:01:26 AM",
       "status": "FINISHED",
       "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "def tokenizer(s: String, threshold: Int, comb: String \u003d \"OR\"): String \u003d {\n    s.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e threshold).mkString(s\" ${comb} \")\n}\n   \n// Entity linkage function definition, i.e., how do you want your records to be linked?\n// Input: org.apache.spark.sql.Row\n// Output: Lucene query string as in [query string](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)\nval linker: (String, String, String, String) \u003d\u003e String \u003d {\n  case (_, name, description, manu) \u003d\u003e {\n    val nameTokens \u003d tokenizer(name, 2)\n    val descTerms \u003d tokenizer(description, 6)\n    val manuTerms \u003d tokenizer(manu, 1)\n    \n    /*\n    if (descTerms.nonEmpty \u0026\u0026 nameTokens.nonEmpty \u0026\u0026 manuTerms.nonEmpty) {\n      s\"(name:(${nameTokens}))^10 OR (description:${descTerms}) OR (manufacturer:${manuTerms})^5\"\n    }\n    else if (nameTokens.nonEmpty \u0026\u0026 manuTerms.nonEmpty) {\n        s\"(name:(${nameTokens}))^10 OR (manufacturer:${manuTerms})\"\n    \n    } \n    else if (nameTokens.nonEmpty) {\n        s\"name:(${nameTokens})\" \n    }\n    else {\n        \"*:*\"\n    }*/\n    \n   if (nameTokens.nonEmpty) {\n      s\"name:(${nameTokens})\"\n    }\n    else {\n      \"*:*\"\n    }\n  }\n}",
-      "dateUpdated": "Oct 21, 2016 5:01:14 PM",
+      "dateUpdated": "Oct 21, 2016 5:01:14 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -182,15 +182,15 @@
       "jobName": "paragraph_1475336992456_923022942",
       "id": "20161001-154952_870995671",
       "dateCreated": "Oct 1, 2016 3:49:52 AM",
-      "dateStarted": "Oct 21, 2016 5:01:23 PM",
-      "dateFinished": "Oct 21, 2016 5:01:28 PM",
+      "dateStarted": "Oct 21, 2016 5:01:23 AM",
+      "dateFinished": "Oct 21, 2016 5:01:28 AM",
       "status": "FINISHED",
       "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val linkedResults \u003d googleLuceneRDD.link(amazon.rdd, linker.tupled, 3)\n\nval linkageResults \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (left, topDocs) \u003d\u003e (topDocs.head.doc.textField(\"id\").head, left._1)})\n      .toDF(\"idGoogleBase\", \"idAmazon\")\n\nval correctHits: Double \u003d linkageResults.join(groundTruthDF, groundTruthDF.col(\"idAmazon\").equalTo(linkageResults(\"idAmazon\")) \u0026\u0026  groundTruthDF.col(\"idGoogleBase\").equalTo(linkageResults(\"idGoogleBase\"))).count\nval total: Double \u003d groundTruthDF.count\nval accuracy \u003d correctHits / total\n\nprintln(\"********************************\")\nprintln(s\"Accuracy of linkage is ${accuracy}\")\nprintln(\"********************************\")",
-      "dateUpdated": "Oct 21, 2016 5:01:14 PM",
+      "dateUpdated": "Oct 21, 2016 5:01:14 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -218,15 +218,15 @@
       "jobName": "paragraph_1475337056813_290551590",
       "id": "20161001-155056_1480917921",
       "dateCreated": "Oct 1, 2016 3:50:56 AM",
-      "dateStarted": "Oct 21, 2016 5:01:27 PM",
-      "dateFinished": "Oct 21, 2016 5:01:36 PM",
+      "dateStarted": "Oct 21, 2016 5:01:27 AM",
+      "dateFinished": "Oct 21, 2016 5:01:36 AM",
       "status": "FINISHED",
       "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "",
-      "dateUpdated": "Oct 21, 2016 5:01:14 PM",
+      "dateUpdated": "Oct 21, 2016 5:01:14 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -254,8 +254,8 @@
       "jobName": "paragraph_1475337388763_458024630",
       "id": "20161001-155628_1046044654",
       "dateCreated": "Oct 1, 2016 3:56:28 AM",
-      "dateStarted": "Oct 21, 2016 5:01:28 PM",
-      "dateFinished": "Oct 21, 2016 5:01:28 PM",
+      "dateStarted": "Oct 21, 2016 5:01:28 AM",
+      "dateFinished": "Oct 21, 2016 5:01:28 AM",
       "status": "ERROR",
       "errorMessage": "",
       "progressUpdateIntervalMs": 500
@@ -264,15 +264,15 @@
   "name": "/lucenerdd/linkage/google-vs-amazon",
   "id": "2BWCENW3H",
   "angularObjects": {
-    "2C146Z915:shared_process": [],
-    "2BXFGK4SY:shared_process": [],
-    "2BYAYETPV:shared_process": [],
-    "2BZCD4GGR:shared_process": [],
-    "2BYXMQBZY:shared_process": [],
-    "2BYWGTMM8:shared_process": [],
-    "2C1D1827H:shared_process": [],
-    "2C195RH6B:shared_process": [],
-    "2C1N24D8Q:shared_process": []
+    "2CB7Y9KUS:shared_process": [],
+    "2CBU3U3UG:shared_process": [],
+    "2CA85WCVR:shared_process": [],
+    "2CA99RTYY:shared_process": [],
+    "2CAQSGWFF:shared_process": [],
+    "2C98RMQQN:shared_process": [],
+    "2CBUTWQF9:shared_process": [],
+    "2C9TGFCBC:shared_process": [],
+    "2CBWDGM39:shared_process": []
   },
   "config": {
     "looknfeel": "default"

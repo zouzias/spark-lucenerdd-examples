@@ -1,8 +1,8 @@
 {
   "paragraphs": [
     {
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.5\")",
-      "dateUpdated": "Jan 22, 2017 10:28:33 AM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.6\")",
+      "dateUpdated": "Feb 15, 2017 5:15:42 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -157,7 +157,7 @@
       "dateCreated": "Oct 10, 2016 8:54:48 AM",
       "dateStarted": "Jan 22, 2017 10:28:37 AM",
       "dateFinished": "Nov 9, 2016 3:15:18 AM",
-      "status": "PENDING",
+      "status": "ABORT",
       "errorMessage": "",
       "progressUpdateIntervalMs": 500
     },
@@ -203,15 +203,15 @@
   "name": "/lucenerdd/df_vs_lucenerdd",
   "id": "2C1RW5BTE",
   "angularObjects": {
-    "2C7ANUU2A:shared_process": [],
-    "2C7B2WPCQ:shared_process": [],
-    "2C9W4XS9U:shared_process": [],
-    "2C6HHWV2X:shared_process": [],
-    "2C9551V7R:shared_process": [],
-    "2C8MT3TDC:shared_process": [],
-    "2C931APEM:shared_process": [],
-    "2C7SASSJQ:shared_process": [],
-    "2C9ZJANFH:shared_process": []
+    "2CB7Y9KUS:shared_process": [],
+    "2CBU3U3UG:shared_process": [],
+    "2CA85WCVR:shared_process": [],
+    "2CA99RTYY:shared_process": [],
+    "2CAQSGWFF:shared_process": [],
+    "2C98RMQQN:shared_process": [],
+    "2CBUTWQF9:shared_process": [],
+    "2C9TGFCBC:shared_process": [],
+    "2CBWDGM39:shared_process": []
   },
   "config": {},
   "info": {}
