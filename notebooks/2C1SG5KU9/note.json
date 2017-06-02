@@ -2,41 +2,58 @@
   "paragraphs": [
     {
       "title": "Download spark-lucenerdd JARS",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")  // Releases\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\") // SNAPSHOTS\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.6\")",
-      "dateUpdated": "Feb 15, 2017 5:15:09 PM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")  // Releases\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\") // SNAPSHOTS\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.8\")",
+      "dateUpdated": "Jun 2, 2017 1:17:25 PM",
       "config": {
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "tableHide": false,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "title": true
+        "title": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476824980259_1282654834",
-      "id": "20161005-175550_494955961",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@5f322512\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@5f322512\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476824980259_1282654834",
+      "id": "20161005-175550_494955961",
       "dateCreated": "Oct 18, 2016 9:09:40 AM",
       "dateStarted": "Nov 10, 2016 8:31:52 AM",
       "dateFinished": "Nov 10, 2016 8:32:51 AM",
@@ -52,34 +69,47 @@
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
         "title": true,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
+        "enabled": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
           }
-        },
-        "enabled": true
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476824980260_1280731089",
-      "id": "20161005-175658_813862107",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nimport org.apache.spark.sql.SparkSession\n\nimport org.apache.spark.SparkConf\n\nimport org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD\n\nimport org.zouzias.spark.lucenerdd.spatial.shape._\n\nimport org.zouzias.spark.lucenerdd._\n(builtAtString,2016-11-10 19:41:31.340)\n(builtAtMillis,1478806891340)\n(version,0.2.3)\n(scalaVersion,2.11.8)\n(name,spark-lucenerdd)\n(sbtVersion,0.13.12)\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\nimport org.apache.spark.sql.SparkSession\n\nimport org.apache.spark.SparkConf\n\nimport org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD\n\nimport org.zouzias.spark.lucenerdd.spatial.shape._\n\nimport org.zouzias.spark.lucenerdd._\n(builtAtString,2016-11-10 19:41:31.340)\n(builtAtMillis,1478806891340)\n(version,0.2.3)\n(scalaVersion,2.11.8)\n(name,spark-lucenerdd)\n(sbtVersion,0.13.12)\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476824980260_1280731089",
+      "id": "20161005-175658_813862107",
       "dateCreated": "Oct 18, 2016 9:09:40 AM",
       "dateStarted": "Nov 10, 2016 8:31:56 AM",
       "dateFinished": "Nov 10, 2016 8:33:20 AM",
@@ -95,34 +125,47 @@
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
         "title": true,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
+        "enabled": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
           }
-        },
-        "enabled": true
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476824980260_1280731089",
-      "id": "20161005-175917_1541464701",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nallCountriesDF: org.apache.spark.sql.DataFrame \u003d [name: string, shape: string]\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nshapes: org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD[String,org.apache.spark.sql.Row] \u003d ShapeLuceneRDD[25] at RDD at ShapeLuceneRDD.scala:48\n\nres12: shapes.type \u003d ShapeLuceneRDD[25] at RDD at ShapeLuceneRDD.scala:48\n\nres13: Long \u003d 248\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\nallCountriesDF: org.apache.spark.sql.DataFrame \u003d [name: string, shape: string]\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nshapes: org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD[String,org.apache.spark.sql.Row] \u003d ShapeLuceneRDD[25] at RDD at ShapeLuceneRDD.scala:48\n\nres12: shapes.type \u003d ShapeLuceneRDD[25] at RDD at ShapeLuceneRDD.scala:48\n\nres13: Long \u003d 248\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476824980260_1280731089",
+      "id": "20161005-175917_1541464701",
       "dateCreated": "Oct 18, 2016 9:09:40 AM",
       "dateStarted": "Nov 10, 2016 8:38:19 AM",
       "dateFinished": "Nov 10, 2016 8:40:34 AM",
@@ -134,35 +177,48 @@
       "dateUpdated": "Nov 10, 2016 8:31:53 AM",
       "config": {
         "colWidth": 3.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "editorMode": "ace/mode/sql"
+        "editorMode": "ace/mode/sql",
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476825065939_1711419995",
-      "id": "20161018-211105_67089171",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.spark.SparkException: Job 2 cancelled part of cancelled job group zeppelin-20161018-211105_67089171\n\tat org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1450)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobCancellation(DAGScheduler.scala:1389)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply$mcVI$sp(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat scala.collection.mutable.HashSet.foreach(HashSet.scala:78)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobGroupCancelled(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1638)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1618)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1607)\n\tat org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)\n\tat org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:632)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1871)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1884)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1897)\n\tat org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:347)\n\tat org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:39)\n\tat org.apache.spark.sql.Dataset$$anonfun$org$apache$spark$sql$Dataset$$execute$1$1.apply(Dataset.scala:2183)\n\tat org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:57)\n\tat org.apache.spark.sql.Dataset.withNewExecutionId(Dataset.scala:2532)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$execute$1(Dataset.scala:2182)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$collect(Dataset.scala:2189)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1925)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.withTypedCallback(Dataset.scala:2562)\n\tat org.apache.spark.sql.Dataset.head(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.take(Dataset.scala:2139)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.zeppelin.spark.ZeppelinContext.showDF(ZeppelinContext.java:214)\n\tat org.apache.zeppelin.spark.SparkSqlInterpreter.interpret(SparkSqlInterpreter.java:129)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:390)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n"
+          }
+        ]
+      },
       "result": {
         "code": "ERROR",
         "type": "TEXT",
         "msg": "org.apache.spark.SparkException: Job 2 cancelled part of cancelled job group zeppelin-20161018-211105_67089171\n\tat org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1450)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobCancellation(DAGScheduler.scala:1389)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply$mcVI$sp(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat scala.collection.mutable.HashSet.foreach(HashSet.scala:78)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobGroupCancelled(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1638)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1618)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1607)\n\tat org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)\n\tat org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:632)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1871)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1884)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1897)\n\tat org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:347)\n\tat org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:39)\n\tat org.apache.spark.sql.Dataset$$anonfun$org$apache$spark$sql$Dataset$$execute$1$1.apply(Dataset.scala:2183)\n\tat org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:57)\n\tat org.apache.spark.sql.Dataset.withNewExecutionId(Dataset.scala:2532)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$execute$1(Dataset.scala:2182)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$collect(Dataset.scala:2189)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1925)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.withTypedCallback(Dataset.scala:2562)\n\tat org.apache.spark.sql.Dataset.head(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.take(Dataset.scala:2139)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.zeppelin.spark.ZeppelinContext.showDF(ZeppelinContext.java:214)\n\tat org.apache.zeppelin.spark.SparkSqlInterpreter.interpret(SparkSqlInterpreter.java:129)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:390)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476825065939_1711419995",
+      "id": "20161018-211105_67089171",
       "dateCreated": "Oct 18, 2016 9:11:05 AM",
       "dateStarted": "Nov 10, 2016 8:33:21 AM",
       "dateFinished": "Nov 10, 2016 8:38:08 AM",
@@ -175,57 +231,70 @@
       "config": {
         "colWidth": 9.0,
         "editorMode": "ace/mode/sql",
-        "graph": {
-          "mode": "table",
-          "height": 349.0,
-          "optionOpen": false,
-          "keys": [
-            {
-              "name": "name",
-              "index": 0.0,
-              "aggr": "sum"
+        "enabled": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 349.0,
+              "optionOpen": false,
+              "keys": [
+                {
+                  "name": "name",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "shape",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "scatter": {
+                "xAxis": {
+                  "name": "name",
+                  "index": 0.0,
+                  "aggr": "sum"
+                },
+                "yAxis": {
+                  "name": "shape",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              },
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
             }
-          ],
-          "values": [
-            {
-              "name": "shape",
-              "index": 1.0,
-              "aggr": "sum"
-            }
-          ],
-          "groups": [],
-          "scatter": {
-            "xAxis": {
-              "name": "name",
-              "index": 0.0,
-              "aggr": "sum"
-            },
-            "yAxis": {
-              "name": "shape",
-              "index": 1.0,
-              "aggr": "sum"
-            }
-          },
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
           }
-        },
-        "enabled": true
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476824980263_1281115838",
-      "id": "20161018-202324_40232036",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.spark.SparkException: Job 3 cancelled part of cancelled job group zeppelin-20161018-202324_40232036\n\tat org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1450)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobCancellation(DAGScheduler.scala:1389)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply$mcVI$sp(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat scala.collection.mutable.HashSet.foreach(HashSet.scala:78)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobGroupCancelled(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1638)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1618)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1607)\n\tat org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)\n\tat org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:632)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1871)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1884)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1897)\n\tat org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:347)\n\tat org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:39)\n\tat org.apache.spark.sql.Dataset$$anonfun$org$apache$spark$sql$Dataset$$execute$1$1.apply(Dataset.scala:2183)\n\tat org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:57)\n\tat org.apache.spark.sql.Dataset.withNewExecutionId(Dataset.scala:2532)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$execute$1(Dataset.scala:2182)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$collect(Dataset.scala:2189)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1925)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.withTypedCallback(Dataset.scala:2562)\n\tat org.apache.spark.sql.Dataset.head(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.take(Dataset.scala:2139)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.zeppelin.spark.ZeppelinContext.showDF(ZeppelinContext.java:214)\n\tat org.apache.zeppelin.spark.SparkSqlInterpreter.interpret(SparkSqlInterpreter.java:129)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:390)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n"
+          }
+        ]
+      },
       "result": {
         "code": "ERROR",
         "type": "TEXT",
         "msg": "org.apache.spark.SparkException: Job 3 cancelled part of cancelled job group zeppelin-20161018-202324_40232036\n\tat org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1450)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobCancellation(DAGScheduler.scala:1389)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply$mcVI$sp(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat scala.collection.mutable.HashSet.foreach(HashSet.scala:78)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobGroupCancelled(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1638)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1618)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1607)\n\tat org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)\n\tat org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:632)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1871)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1884)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1897)\n\tat org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:347)\n\tat org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:39)\n\tat org.apache.spark.sql.Dataset$$anonfun$org$apache$spark$sql$Dataset$$execute$1$1.apply(Dataset.scala:2183)\n\tat org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:57)\n\tat org.apache.spark.sql.Dataset.withNewExecutionId(Dataset.scala:2532)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$execute$1(Dataset.scala:2182)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$collect(Dataset.scala:2189)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1925)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.withTypedCallback(Dataset.scala:2562)\n\tat org.apache.spark.sql.Dataset.head(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.take(Dataset.scala:2139)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.zeppelin.spark.ZeppelinContext.showDF(ZeppelinContext.java:214)\n\tat org.apache.zeppelin.spark.SparkSqlInterpreter.interpret(SparkSqlInterpreter.java:129)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:390)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476824980263_1281115838",
+      "id": "20161018-202324_40232036",
       "dateCreated": "Oct 18, 2016 9:09:40 AM",
       "dateStarted": "Nov 10, 2016 8:37:57 AM",
       "dateFinished": "Nov 10, 2016 8:38:10 AM",
@@ -239,35 +308,48 @@
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
-        "graph": {
-          "mode": "table",
-          "height": 231.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "title": true
+        "title": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 231.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476824980264_1279192094",
-      "id": "20161005-213219_809764400",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nRadius: Int \u003d 20\n\nk: Int \u003d 10\n\nBern: (Double, Double) \u003d (7.433534,46.94838)\n\n\n\n\u003cconsole\u003e:41: error: not found: value shapes\n       shapes.circleSearch(Bern, Radius, k).take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
+          }
+        ]
+      },
       "result": {
         "code": "ERROR",
         "type": "TEXT",
         "msg": "\nRadius: Int \u003d 20\n\nk: Int \u003d 10\n\nBern: (Double, Double) \u003d (7.433534,46.94838)\n\n\n\n\u003cconsole\u003e:41: error: not found: value shapes\n       shapes.circleSearch(Bern, Radius, k).take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476824980264_1279192094",
+      "id": "20161005-213219_809764400",
       "dateCreated": "Oct 18, 2016 9:09:40 AM",
       "dateStarted": "Nov 10, 2016 8:38:09 AM",
       "dateFinished": "Nov 10, 2016 8:38:13 AM",
@@ -281,35 +363,48 @@
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "title": true
+        "title": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476824980264_1279192094",
-      "id": "20161005-213433_1705431143",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nk: Int \u003d 10\n\nBern: String \u003d POINT (7.433534 46.948380)\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.spatialSearch(Bern, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
+          }
+        ]
+      },
       "result": {
         "code": "ERROR",
         "type": "TEXT",
         "msg": "\nk: Int \u003d 10\n\nBern: String \u003d POINT (7.433534 46.948380)\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.spatialSearch(Bern, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476824980264_1279192094",
+      "id": "20161005-213433_1705431143",
       "dateCreated": "Oct 18, 2016 9:09:40 AM",
       "dateStarted": "Nov 10, 2016 8:38:11 AM",
       "dateFinished": "Nov 10, 2016 8:38:15 AM",
@@ -322,36 +417,49 @@
       "dateUpdated": "Nov 10, 2016 8:31:54 AM",
       "config": {
         "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
         "title": true,
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476826265233_-1429019832",
-      "id": "20161018-213105_1384937762",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nk: Int \u003d 10\n\nbernToAthens: String \u003d LINESTRING (7.433534 46.948380, 23.725979  37.994620)\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.spatialSearch(bernToAthens, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
+          }
+        ]
+      },
       "result": {
         "code": "ERROR",
         "type": "TEXT",
         "msg": "\nk: Int \u003d 10\n\nbernToAthens: String \u003d LINESTRING (7.433534 46.948380, 23.725979  37.994620)\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.spatialSearch(bernToAthens, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476826265233_-1429019832",
+      "id": "20161018-213105_1384937762",
       "dateCreated": "Oct 18, 2016 9:31:05 AM",
       "dateStarted": "Nov 10, 2016 8:38:14 AM",
       "dateFinished": "Nov 10, 2016 8:38:16 AM",
@@ -364,36 +472,49 @@
       "dateUpdated": "Nov 10, 2016 8:31:54 AM",
       "config": {
         "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
         "title": true,
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476826534986_2048723831",
-      "id": "20161018-213534_524770034",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nk: Int \u003d 10\n\nbernAthensMadrid: String \u003d POLYGON ((7.433534 46.948380, 23.725979 37.994620,-3.688473 40.435779,7.433534 46.948380))\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.spatialSearch(bernAthensMadrid, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
+          }
+        ]
+      },
       "result": {
         "code": "ERROR",
         "type": "TEXT",
         "msg": "\nk: Int \u003d 10\n\nbernAthensMadrid: String \u003d POLYGON ((7.433534 46.948380, 23.725979 37.994620,-3.688473 40.435779,7.433534 46.948380))\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.spatialSearch(bernAthensMadrid, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476826534986_2048723831",
+      "id": "20161018-213534_524770034",
       "dateCreated": "Oct 18, 2016 9:35:34 AM",
       "dateStarted": "Nov 10, 2016 8:38:15 AM",
       "dateFinished": "Nov 10, 2016 8:38:17 AM",
@@ -405,35 +526,48 @@
       "dateUpdated": "Nov 10, 2016 8:31:54 AM",
       "config": {
         "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476826795482_-660710216",
-      "id": "20161018-213955_1431661705",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nk: Int \u003d 30\n\nBern: (Double, Double) \u003d (7.433534,46.94838)\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.knnSearch(Bern, k).take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
+          }
+        ]
+      },
       "result": {
         "code": "ERROR",
         "type": "TEXT",
         "msg": "\nk: Int \u003d 30\n\nBern: (Double, Double) \u003d (7.433534,46.94838)\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.knnSearch(Bern, k).take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476826795482_-660710216",
+      "id": "20161018-213955_1431661705",
       "dateCreated": "Oct 18, 2016 9:39:55 AM",
       "dateStarted": "Nov 10, 2016 8:38:16 AM",
       "dateFinished": "Nov 10, 2016 8:38:18 AM",
@@ -445,35 +579,26 @@
       "dateUpdated": "Nov 10, 2016 8:31:54 AM",
       "config": {
         "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "results": []
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476826874896_161821635",
-      "id": "20161018-214114_2004943258",
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": ""
       },
+      "apps": [],
+      "jobName": "paragraph_1476826874896_161821635",
+      "id": "20161018-214114_2004943258",
       "dateCreated": "Oct 18, 2016 9:41:14 AM",
       "dateStarted": "Nov 10, 2016 8:38:17 AM",
       "dateFinished": "Nov 10, 2016 8:38:18 AM",
@@ -483,17 +608,7 @@
   ],
   "name": "/lucenerdd/spatial/capitals-spatial-search (ScalaIO)",
   "id": "2C1SG5KU9",
-  "angularObjects": {
-    "2CB7Y9KUS:shared_process": [],
-    "2CBU3U3UG:shared_process": [],
-    "2CA85WCVR:shared_process": [],
-    "2CA99RTYY:shared_process": [],
-    "2CAQSGWFF:shared_process": [],
-    "2C98RMQQN:shared_process": [],
-    "2CBUTWQF9:shared_process": [],
-    "2C9TGFCBC:shared_process": [],
-    "2CBWDGM39:shared_process": []
-  },
+  "angularObjects": {},
   "config": {
     "looknfeel": "default"
   },

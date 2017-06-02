@@ -2,41 +2,58 @@
   "paragraphs": [
     {
       "title": "Load Spark LuceneRDD Jars",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.6\")",
-      "dateUpdated": "Feb 15, 2017 5:13:41 PM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.8\")",
+      "dateUpdated": "May 31, 2017 6:28:48 PM",
       "config": {
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "title": true,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "tableHide": true
+        "tableHide": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1475350680699_-1674609895",
-      "id": "20161001-115642_482200633",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Must be used before SparkInterpreter (%spark) initialized\nHint: put this paragraph before any Spark code and restart Zeppelin/Interpreter"
+          }
+        ]
+      },
       "result": {
         "code": "ERROR",
         "type": "TEXT",
         "msg": "Must be used before SparkInterpreter (%spark) initialized\nHint: put this paragraph before any Spark code and restart Zeppelin/Interpreter"
       },
+      "apps": [],
+      "jobName": "paragraph_1475350680699_-1674609895",
+      "id": "20161001-115642_482200633",
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
       "dateStarted": "Oct 21, 2016 9:00:29 AM",
       "dateFinished": "Oct 21, 2016 9:00:29 AM",
@@ -51,35 +68,48 @@
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
         "title": true,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "tableHide": true
+        "tableHide": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1475350680710_-1592658380",
-      "id": "20161001-120020_440303718",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1475350680710_-1592658380",
+      "id": "20161001-120020_440303718",
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
       "dateStarted": "Feb 15, 2017 5:14:04 PM",
       "dateFinished": "Feb 15, 2017 5:14:05 PM",
@@ -94,35 +124,48 @@
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
         "title": true,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "tableHide": true
+        "tableHide": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1475350680712_-1594966873",
-      "id": "20161001-120320_2078137697",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nimport spark.implicits._\n\nacmDF: org.apache.spark.sql.DataFrame \u003d [id: int, title: string ... 3 more fields]\nLoaded 2294 ACM records\n\nres15: acmDF.type \u003d [id: int, title: string ... 3 more fields]\nroot\n |-- id: integer (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n |-- authors: string (nullable \u003d true)\n |-- venue: string (nullable \u003d true)\n |-- year: integer (nullable \u003d true)\n\n\ndblp2DF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\nLoaded 2294 DBLP records\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: int]\n\ndblp2: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[70] at RDD at LuceneRDD.scala:42\n\nres18: dblp2.type \u003d LuceneRDD[70] at RDD at LuceneRDD.scala:42\n\nres19: Set[String] \u003d Set(year, id, authors, title, venue)\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\nimport spark.implicits._\n\nacmDF: org.apache.spark.sql.DataFrame \u003d [id: int, title: string ... 3 more fields]\nLoaded 2294 ACM records\n\nres15: acmDF.type \u003d [id: int, title: string ... 3 more fields]\nroot\n |-- id: integer (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n |-- authors: string (nullable \u003d true)\n |-- venue: string (nullable \u003d true)\n |-- year: integer (nullable \u003d true)\n\n\ndblp2DF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\nLoaded 2294 DBLP records\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: int]\n\ndblp2: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[70] at RDD at LuceneRDD.scala:42\n\nres18: dblp2.type \u003d LuceneRDD[70] at RDD at LuceneRDD.scala:42\n\nres19: Set[String] \u003d Set(year, id, authors, title, venue)\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1475350680712_-1594966873",
+      "id": "20161001-120320_2078137697",
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
       "dateStarted": "Feb 15, 2017 5:14:05 PM",
       "dateFinished": "Feb 15, 2017 5:14:14 PM",
@@ -135,37 +178,50 @@
       "dateUpdated": "Feb 15, 2017 5:14:08 PM",
       "config": {
         "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
         "editorMode": "ace/mode/scala",
         "tableHide": true,
-        "title": true
+        "title": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476792709323_-1512020199",
-      "id": "20161018-121149_1501647868",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476792709323_-1512020199",
+      "id": "20161018-121149_1501647868",
       "dateCreated": "Oct 18, 2016 12:11:49 PM",
       "dateStarted": "Feb 15, 2017 5:14:08 PM",
       "dateFinished": "Feb 15, 2017 5:14:16 PM",
@@ -178,37 +234,50 @@
       "dateUpdated": "Feb 15, 2017 5:14:11 PM",
       "config": {
         "colWidth": 6.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
         "editorMode": "ace/mode/sql",
-        "helium": {},
-        "title": true
+        "title": true,
+        "results": [
+          {
+            "helium": {},
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476792941795_1780446349",
-      "id": "20161018-121541_1139402059",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "title\tauthors\tvenue\tyear\tid\nSpatial and temporal content-based access to hypervideo databases\tHaitao Jiang, Ahmed K. Elmagarmid\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765538\nOptimal clip ordering for multi-clip queries\tRaymond T. Ng, Paul Shum\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765539\nIntegrating symbolic images into a multimedia database system using classification and abstraction approaches\tAya Soffer, Hanan Samet\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765540\nApproximate similarity retrieval with M-trees\tPavel Zezula, Pasquale Savino, Giuseppe Amato, Fausto Rabitti\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765541\nDelivering presentations from multimedia servers\tNevzat Hurkan Balkir, Gultekin Ozsoyoglu\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765542\nThe hB $^\\\\Pi$-tree: a multi-attribute index supporting concurrency, recovery and node consolidation\tGeorgios Evangelidis, David Lomet, Betty Salzberg\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1997\t765544\nDictionary-based order-preserving string compression\tGennady Antoshenkov\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1997\t765545\nA logical view of structured files\tSerge Abiteboul, Sophie Cluet, Tova Milo\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765527\nFast image retrieval using color-spatial information\tBeng Chin Ooi, Kian-Lee Tan, Tat Seng Chua, Wynne Hsu\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765528\nGuest Editorial\tMatthias Jarke\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765530\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
         "msg": "title\tauthors\tvenue\tyear\tid\nSpatial and temporal content-based access to hypervideo databases\tHaitao Jiang, Ahmed K. Elmagarmid\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765538\nOptimal clip ordering for multi-clip queries\tRaymond T. Ng, Paul Shum\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765539\nIntegrating symbolic images into a multimedia database system using classification and abstraction approaches\tAya Soffer, Hanan Samet\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765540\nApproximate similarity retrieval with M-trees\tPavel Zezula, Pasquale Savino, Giuseppe Amato, Fausto Rabitti\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765541\nDelivering presentations from multimedia servers\tNevzat Hurkan Balkir, Gultekin Ozsoyoglu\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765542\nThe hB $^\\\\Pi$-tree: a multi-attribute index supporting concurrency, recovery and node consolidation\tGeorgios Evangelidis, David Lomet, Betty Salzberg\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1997\t765544\nDictionary-based order-preserving string compression\tGennady Antoshenkov\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1997\t765545\nA logical view of structured files\tSerge Abiteboul, Sophie Cluet, Tova Milo\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765527\nFast image retrieval using color-spatial information\tBeng Chin Ooi, Kian-Lee Tan, Tat Seng Chua, Wynne Hsu\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765528\nGuest Editorial\tMatthias Jarke\tThe VLDB Journal \u0026mdash; The International Journal on Very Large Data Bases \t1998\t765530\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476792941795_1780446349",
+      "id": "20161018-121541_1139402059",
       "dateCreated": "Oct 18, 2016 12:15:41 PM",
       "dateStarted": "Feb 15, 2017 5:14:15 PM",
       "dateFinished": "Feb 15, 2017 5:14:16 PM",
@@ -221,60 +290,73 @@
       "dateUpdated": "Feb 15, 2017 5:14:12 PM",
       "config": {
         "colWidth": 6.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [
-            {
-              "name": "title",
-              "index": 0.0,
-              "aggr": "sum"
-            }
-          ],
-          "values": [
-            {
-              "name": "authors",
-              "index": 1.0,
-              "aggr": "sum"
-            }
-          ],
-          "groups": [],
-          "scatter": {
-            "xAxis": {
-              "name": "title",
-              "index": 0.0,
-              "aggr": "sum"
-            },
-            "yAxis": {
-              "name": "authors",
-              "index": 1.0,
-              "aggr": "sum"
-            }
-          },
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
         "editorMode": "ace/mode/sql",
         "title": true,
-        "editorHide": false
+        "editorHide": false,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [
+                {
+                  "name": "title",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "authors",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "scatter": {
+                "xAxis": {
+                  "name": "title",
+                  "index": 0.0,
+                  "aggr": "sum"
+                },
+                "yAxis": {
+                  "name": "authors",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              },
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476793006890_1637948050",
-      "id": "20161018-121646_135219171",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "title\tauthors\tvenue\tyear\tid\nEfficient Algorithms for Mining Outliers from Large Data Sets\tKyuseok Shim, Sridhar Ramaswamy, Rajeev Rastogi\tSIGMOD Conference\t2000\tconf/sigmod/RamaswamyRS00\nMaintenance of Data Cubes and Summary Tables in a Warehouse\tInderpal Singh Mumick, Dallan Quass, Barinderpal Singh Mumick\tSIGMOD Conference\t1997\tconf/sigmod/MumickQM97\nHistorical Queries Along Multiple Lines of Time Evolution\tVassilis J. Tsotras, Gad M. Landau, Jeanette P. Schmidt\tVLDB J.\t1995\tjournals/vldb/LandauST95\nThe Impact of Database Research on Industrial Products (Panel Summary)\tDavid B. Lomet, Daniel Barbar�, Jos� A. Blakeley, Michael Stonebraker, Daniel H. Fishman\tSIGMOD Record\t1994\tjournals/sigmod/BarbaraBFLS94\nXQuery: A Query Language for XML\tDonald D. Chamberlin\tSIGMOD Conference\t2003\tconf/sigmod/Chamberlin03\nThe ClustRa Telecom Database: High Availability, High Throughput, and Real-Time Response\tSvein-Olaf Hvasshovd, �ystein Torbj�rnsen, Svein Erik Bratsberg, Per Holager\tVLDB\t1995\tconf/vldb/HvasshovdTBH95\nEfficient Processing of Joins on Set-valued Attributes\tNikos Mamoulis\tSIGMOD Conference\t2003\tconf/sigmod/Mamoulis03\nEvaluating Queries with Generalized Path Expressions\tGuido Moerkotte, Sophie Cluet, Vassilis Christophides\tSIGMOD Conference\t1996\tconf/sigmod/ChristophidesCM96\nTowards an Infrastructure for Temporal Databases: Report of an Invitational ARPA/NSF Workshop\tRamez Elmasri, Richard T. Snodgrass, Babis Theodoulidis, Inderpal Singh Mumick, Arie Segev, M. Tamer �zsu, Umeshwar Dayal, Niki Pissinou, Barbara Pernici\tSIGMOD Record\t1994\tjournals/sigmod/PissinouSEMOPSTD94\nP-Grid: a self-organizing structured P2P system\tZoran Despotovic, Manfred Hauswirth, Karl Aberer, Philippe Cudr�-Mauroux, Magdalena Punceva, Anwitaman Datta, Roman Schmidt\tSIGMOD Record\t2003\tjournals/sigmod/AbererCDDHPS03\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
         "msg": "title\tauthors\tvenue\tyear\tid\nEfficient Algorithms for Mining Outliers from Large Data Sets\tKyuseok Shim, Sridhar Ramaswamy, Rajeev Rastogi\tSIGMOD Conference\t2000\tconf/sigmod/RamaswamyRS00\nMaintenance of Data Cubes and Summary Tables in a Warehouse\tInderpal Singh Mumick, Dallan Quass, Barinderpal Singh Mumick\tSIGMOD Conference\t1997\tconf/sigmod/MumickQM97\nHistorical Queries Along Multiple Lines of Time Evolution\tVassilis J. Tsotras, Gad M. Landau, Jeanette P. Schmidt\tVLDB J.\t1995\tjournals/vldb/LandauST95\nThe Impact of Database Research on Industrial Products (Panel Summary)\tDavid B. Lomet, Daniel Barbar�, Jos� A. Blakeley, Michael Stonebraker, Daniel H. Fishman\tSIGMOD Record\t1994\tjournals/sigmod/BarbaraBFLS94\nXQuery: A Query Language for XML\tDonald D. Chamberlin\tSIGMOD Conference\t2003\tconf/sigmod/Chamberlin03\nThe ClustRa Telecom Database: High Availability, High Throughput, and Real-Time Response\tSvein-Olaf Hvasshovd, �ystein Torbj�rnsen, Svein Erik Bratsberg, Per Holager\tVLDB\t1995\tconf/vldb/HvasshovdTBH95\nEfficient Processing of Joins on Set-valued Attributes\tNikos Mamoulis\tSIGMOD Conference\t2003\tconf/sigmod/Mamoulis03\nEvaluating Queries with Generalized Path Expressions\tGuido Moerkotte, Sophie Cluet, Vassilis Christophides\tSIGMOD Conference\t1996\tconf/sigmod/ChristophidesCM96\nTowards an Infrastructure for Temporal Databases: Report of an Invitational ARPA/NSF Workshop\tRamez Elmasri, Richard T. Snodgrass, Babis Theodoulidis, Inderpal Singh Mumick, Arie Segev, M. Tamer �zsu, Umeshwar Dayal, Niki Pissinou, Barbara Pernici\tSIGMOD Record\t1994\tjournals/sigmod/PissinouSEMOPSTD94\nP-Grid: a self-organizing structured P2P system\tZoran Despotovic, Manfred Hauswirth, Karl Aberer, Philippe Cudr�-Mauroux, Magdalena Punceva, Anwitaman Datta, Roman Schmidt\tSIGMOD Record\t2003\tjournals/sigmod/AbererCDDHPS03\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476793006890_1637948050",
+      "id": "20161018-121646_135219171",
       "dateCreated": "Oct 18, 2016 12:16:46 PM",
       "dateStarted": "Feb 15, 2017 5:14:16 PM",
       "dateFinished": "Feb 15, 2017 5:14:17 PM",
@@ -286,23 +368,27 @@
       "dateUpdated": "Feb 15, 2017 5:14:21 PM",
       "config": {
         "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
         "editorMode": "ace/mode/scala",
-        "editorHide": false
+        "editorHide": false,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {
@@ -328,14 +414,23 @@
           }
         }
       },
-      "apps": [],
-      "jobName": "paragraph_1476993517851_-127333029",
-      "id": "20161020-195837_359626346",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\ntitleThres: Object \u003d 3\n\nauthorsThres: Object \u003d 3\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\ntitleThres: Object \u003d 3\n\nauthorsThres: Object \u003d 3\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1476993517851_-127333029",
+      "id": "20161020-195837_359626346",
       "dateCreated": "Oct 20, 2016 7:58:37 AM",
       "dateStarted": "Feb 15, 2017 5:14:21 PM",
       "dateFinished": "Feb 15, 2017 5:14:22 PM",
@@ -349,37 +444,50 @@
       "config": {
         "colWidth": 7.0,
         "editorMode": "ace/mode/scala",
-        "graph": {
-          "mode": "table",
-          "height": 86.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
         "title": true,
         "lineNumbers": true,
-        "tableHide": false
+        "tableHide": false,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 86.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1475350680724_-1587271895",
-      "id": "20161001-154952_870995671",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\ntokenizer: (s: String, threshold: Int, comb: String)String\n\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\ntokenizer: (s: String, threshold: Int, comb: String)String\n\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1475350680724_-1587271895",
+      "id": "20161001-154952_870995671",
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
       "dateStarted": "Feb 15, 2017 5:14:25 PM",
       "dateFinished": "Feb 15, 2017 5:14:26 PM",
@@ -393,37 +501,50 @@
       "config": {
         "colWidth": 5.0,
         "editorMode": "ace/mode/scala",
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
         "title": true,
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1475350680724_-1587271895",
-      "id": "20161001-155056_1480917921",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, Array[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[91] at map at LuceneRDD.scala:187\n\nlinkageResultsDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: string]\n\ncorrectHits: Double \u003d 2162.0\n\ntotal: Double \u003d 2224.0\n\naccuracy: Double \u003d 0.9721223021582733\n********************************\n********************************\nAccuracy of linkage is 0.9721223021582733\n********************************\n********************************\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, Array[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[91] at map at LuceneRDD.scala:187\n\nlinkageResultsDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: string]\n\ncorrectHits: Double \u003d 2162.0\n\ntotal: Double \u003d 2224.0\n\naccuracy: Double \u003d 0.9721223021582733\n********************************\n********************************\nAccuracy of linkage is 0.9721223021582733\n********************************\n********************************\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1475350680724_-1587271895",
+      "id": "20161001-155056_1480917921",
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
       "dateStarted": "Feb 15, 2017 5:14:28 PM",
       "dateFinished": "Feb 15, 2017 5:14:38 PM",
@@ -436,36 +557,49 @@
       "dateUpdated": "Oct 21, 2016 9:12:02 AM",
       "config": {
         "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 448.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
         "editorMode": "ace/mode/scala",
-        "title": true
+        "title": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 448.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1475350680725_-1587656644",
-      "id": "20161001-155628_1046044654",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(Optimization Algorithms for Exploiting the Parallelism-Communication Tradeoff in Pipelined Parallelism,Some(Some(Optimization Algorithms for Exploiting the Parallelism-Communication Tradeoff in Pipelined Parallelism)))\n(An Efficient Algorithm for Mining Association Rules in Large Databases,Some(Some(An Efficient Algorithm for Mining Association Rules in Large Databases)))\n(SPARTAN: a model-based semantic compression system for massive data tables,Some(Some(SPARTAN: A Model-Based Semantic Compression System for Massive Data Tables)))\n(Analyzing Quantitative Databases: Image is Everything,Some(Some(Analyzing Quantitative Databases: Image is Everything)))\n(The INCINERATE data model,Some(Some(The INCINERATE Data Model)))\n(In-memory data management for consumer transactions the timesten approach,Some(Some(In-Memory Data Management for Consumer Transactions The Times-Ten Approach)))\n(Improving OLTP data quality using data warehouse mechanisms,Some(Some(Improving OLTP Data Quality Using Data Warehouse Mechanisms)))\n(Efficiently supporting ad hoc queries in large datasets of time sequences,Some(Some(Efficiently Supporting Ad Hoc Queries in Large Datasets of Time Sequences)))\n(SQLJ  Part 1: SQL routines using the Java programming language,Some(Some(SQLJ-Part 1: SQL Routines Using the Java Programming Language)))\n(Replication, consistency, and practicality: are these mutually exclusive?,Some(Some(Replication, Consistency, and Practicality: Are These Mutually Exclusive?)))\n(Index configuration in object-oriented databases,Some(Some(Index Configuration in Object-Oriented Databases)))\n(Microsoft index turning wizard for SQL Server 7.0,Some(Some(Microsoft Index Tuning Wizard for SQL Server 7.0)))\n(A Database System for Real-Time Event Aggregation in Telecommunication,Some(Some(A Database System for Real-Time Event Aggregation in Telecommunication)))\n(TIMBER: a native system for querying XML,Some(Some(TIMBER: A Native System for Querying XML)))\n(D(k)-index: an adaptive structural summary for graph-structured data,Some(Some(D(k)-Index: An Adaptive Structural Summary for Graph-Structured Data)))\n(Indexing of now-relative spatio-bitemporal data,Some(Some(Indexing of now-relative spatio-bitemporal data)))\n(ProbView: a flexible probabilistic database system,Some(Some(ProbView: A Flexible Probabilistic Database System)))\n(Open object database management systems,Some(Some(Open Object Database Management Systems)))\n(Repositories and object oriented databases,Some(Some(Repositories and Object Oriented Databases)))\n(Reports,Some(Some(Semantic Interoperability in Information Services: Experiencing with CoopWARE)))\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "(Optimization Algorithms for Exploiting the Parallelism-Communication Tradeoff in Pipelined Parallelism,Some(Some(Optimization Algorithms for Exploiting the Parallelism-Communication Tradeoff in Pipelined Parallelism)))\n(An Efficient Algorithm for Mining Association Rules in Large Databases,Some(Some(An Efficient Algorithm for Mining Association Rules in Large Databases)))\n(SPARTAN: a model-based semantic compression system for massive data tables,Some(Some(SPARTAN: A Model-Based Semantic Compression System for Massive Data Tables)))\n(Analyzing Quantitative Databases: Image is Everything,Some(Some(Analyzing Quantitative Databases: Image is Everything)))\n(The INCINERATE data model,Some(Some(The INCINERATE Data Model)))\n(In-memory data management for consumer transactions the timesten approach,Some(Some(In-Memory Data Management for Consumer Transactions The Times-Ten Approach)))\n(Improving OLTP data quality using data warehouse mechanisms,Some(Some(Improving OLTP Data Quality Using Data Warehouse Mechanisms)))\n(Efficiently supporting ad hoc queries in large datasets of time sequences,Some(Some(Efficiently Supporting Ad Hoc Queries in Large Datasets of Time Sequences)))\n(SQLJ  Part 1: SQL routines using the Java programming language,Some(Some(SQLJ-Part 1: SQL Routines Using the Java Programming Language)))\n(Replication, consistency, and practicality: are these mutually exclusive?,Some(Some(Replication, Consistency, and Practicality: Are These Mutually Exclusive?)))\n(Index configuration in object-oriented databases,Some(Some(Index Configuration in Object-Oriented Databases)))\n(Microsoft index turning wizard for SQL Server 7.0,Some(Some(Microsoft Index Tuning Wizard for SQL Server 7.0)))\n(A Database System for Real-Time Event Aggregation in Telecommunication,Some(Some(A Database System for Real-Time Event Aggregation in Telecommunication)))\n(TIMBER: a native system for querying XML,Some(Some(TIMBER: A Native System for Querying XML)))\n(D(k)-index: an adaptive structural summary for graph-structured data,Some(Some(D(k)-Index: An Adaptive Structural Summary for Graph-Structured Data)))\n(Indexing of now-relative spatio-bitemporal data,Some(Some(Indexing of now-relative spatio-bitemporal data)))\n(ProbView: a flexible probabilistic database system,Some(Some(ProbView: A Flexible Probabilistic Database System)))\n(Open object database management systems,Some(Some(Open Object Database Management Systems)))\n(Repositories and object oriented databases,Some(Some(Repositories and Object Oriented Databases)))\n(Reports,Some(Some(Semantic Interoperability in Information Services: Experiencing with CoopWARE)))\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1475350680725_-1587656644",
+      "id": "20161001-155628_1046044654",
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
       "dateStarted": "Oct 21, 2016 9:12:02 AM",
       "dateFinished": "Oct 21, 2016 9:12:03 AM",
@@ -477,35 +611,26 @@
       "dateUpdated": "Oct 21, 2016 9:00:31 AM",
       "config": {
         "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "results": []
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1476565047816_-86531383",
-      "id": "20161015-205727_383127430",
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": ""
       },
+      "apps": [],
+      "jobName": "paragraph_1476565047816_-86531383",
+      "id": "20161015-205727_383127430",
       "dateCreated": "Oct 15, 2016 8:57:27 AM",
       "dateStarted": "Oct 21, 2016 9:00:55 AM",
       "dateFinished": "Oct 21, 2016 9:00:55 AM",
@@ -516,15 +641,15 @@
   "name": "/lucenerdd/linkage/acm-vs-dblp (ScalaIO)",
   "id": "2BZ4PG28U",
   "angularObjects": {
-    "2CB7Y9KUS:shared_process": [],
-    "2CBU3U3UG:shared_process": [],
-    "2CA85WCVR:shared_process": [],
-    "2CA99RTYY:shared_process": [],
-    "2CAQSGWFF:shared_process": [],
-    "2C98RMQQN:shared_process": [],
-    "2CBUTWQF9:shared_process": [],
-    "2C9TGFCBC:shared_process": [],
-    "2CBWDGM39:shared_process": []
+    "2CH4UDTUV:shared_process": [],
+    "2CKCFBMPR:shared_process": [],
+    "2CJP67NJX:shared_process": [],
+    "2CK9YG3TF:shared_process": [],
+    "2CK17QQGN:shared_process": [],
+    "2CJWNB4BE:shared_process": [],
+    "2CH4QY2BC:shared_process": [],
+    "2CH3YEQJH:shared_process": [],
+    "2CJMFN7AB:shared_process": []
   },
   "config": {
     "looknfeel": "default"

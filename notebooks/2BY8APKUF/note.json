@@ -2,40 +2,57 @@
   "paragraphs": [
     {
       "title": "Load Spark LuceneRDD Jars",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.6\")",
-      "dateUpdated": "Feb 15, 2017 5:16:06 PM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.8\")",
+      "dateUpdated": "Jun 2, 2017 1:17:10 PM",
       "config": {
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "title": true,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
+        "enabled": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
           }
-        },
-        "enabled": true
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1475350705756_458300089",
-      "id": "20161001-115642_482200633",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Must be used before SparkInterpreter (%spark) initialized\nHint: put this paragraph before any Spark code and restart Zeppelin/Interpreter"
+          }
+        ]
+      },
       "result": {
         "code": "ERROR",
         "type": "TEXT",
         "msg": "Must be used before SparkInterpreter (%spark) initialized\nHint: put this paragraph before any Spark code and restart Zeppelin/Interpreter"
       },
+      "apps": [],
+      "jobName": "paragraph_1475350705756_458300089",
+      "id": "20161001-115642_482200633",
       "dateCreated": "Oct 1, 2016 7:38:25 AM",
       "dateStarted": "Oct 16, 2016 8:35:13 AM",
       "dateFinished": "Oct 16, 2016 8:35:13 AM",
@@ -50,34 +67,47 @@
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
         "title": true,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
+        "enabled": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
           }
-        },
-        "enabled": true
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1475350705757_457915340",
-      "id": "20161001-120020_440303718",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.apache.spark.sql.SparkSession\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.apache.spark.sql.SparkSession\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1475350705757_457915340",
+      "id": "20161001-120020_440303718",
       "dateCreated": "Oct 1, 2016 7:38:25 AM",
       "dateStarted": "Oct 16, 2016 8:35:13 AM",
       "dateFinished": "Oct 16, 2016 8:35:16 AM",
@@ -92,35 +122,48 @@
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
         "title": true,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "tableHide": true
+        "tableHide": true,
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1475350705768_441371138",
-      "id": "20161001-145632_657667869",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nscholarDF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\n\ndblpDF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idScholar: string]\n\nscholar: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 2 more fields]\n\ndblp: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[872] at RDD at LuceneRDD.scala:40\n\nres150: dblp.type \u003d LuceneRDD[872] at RDD at LuceneRDD.scala:40\n\nres151: Set[String] \u003d Set(year, id, authors, title, venue)\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\nscholarDF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\n\ndblpDF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idScholar: string]\n\nscholar: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 2 more fields]\n\ndblp: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[872] at RDD at LuceneRDD.scala:40\n\nres150: dblp.type \u003d LuceneRDD[872] at RDD at LuceneRDD.scala:40\n\nres151: Set[String] \u003d Set(year, id, authors, title, venue)\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1475350705768_441371138",
+      "id": "20161001-145632_657667869",
       "dateCreated": "Oct 1, 2016 7:38:25 AM",
       "dateStarted": "Oct 16, 2016 8:35:14 AM",
       "dateFinished": "Oct 16, 2016 8:35:19 AM",
@@ -132,35 +175,48 @@
       "dateUpdated": "Oct 16, 2016 8:35:14 AM",
       "config": {
         "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "results": [
+          {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "keys": [],
+              "values": [],
+              "groups": [],
+              "scatter": {},
+              "map": {
+                "baseMapType": "Streets",
+                "isOnline": true,
+                "pinCols": []
+              }
+            }
+          }
+        ]
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1475350705777_450220362",
-      "id": "20161001-155628_1046044654",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\ntokenizer: (s: String, threshold: Int, comb: String)String\n\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, List[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[886] at map at LuceneRDD.scala:177\n\nlinkageResults: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idScholar: string]\n\ncorrectHits: Double \u003d 5047.0\n\ntotal: Double \u003d 5347.0\n\naccuracy: Double \u003d 0.9438937722087152\n********************************\n********************************\nAccuracy of linkage is 0.9438937722087152\n********************************\n********************************\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\ntokenizer: (s: String, threshold: Int, comb: String)String\n\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, List[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[886] at map at LuceneRDD.scala:177\n\nlinkageResults: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idScholar: string]\n\ncorrectHits: Double \u003d 5047.0\n\ntotal: Double \u003d 5347.0\n\naccuracy: Double \u003d 0.9438937722087152\n********************************\n********************************\nAccuracy of linkage is 0.9438937722087152\n********************************\n********************************\n"
       },
+      "apps": [],
+      "jobName": "paragraph_1475350705777_450220362",
+      "id": "20161001-155628_1046044654",
       "dateCreated": "Oct 1, 2016 7:38:25 AM",
       "dateStarted": "Oct 16, 2016 8:35:16 AM",
       "dateFinished": "Oct 16, 2016 8:36:10 AM",
@@ -172,35 +228,26 @@
       "dateUpdated": "Oct 16, 2016 8:35:14 AM",
       "config": {
         "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
         "enabled": true,
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/scala",
+        "results": []
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1475531796415_-542312315",
-      "id": "20161003-215636_1667429531",
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": ""
       },
+      "apps": [],
+      "jobName": "paragraph_1475531796415_-542312315",
+      "id": "20161003-215636_1667429531",
       "dateCreated": "Oct 3, 2016 9:56:36 AM",
       "dateStarted": "Oct 16, 2016 8:35:20 AM",
       "dateFinished": "Oct 16, 2016 8:36:10 AM",
@@ -210,17 +257,7 @@
   ],
   "name": "/lucenerdd/linkage/scholar-vs-dblp",
   "id": "2BY8APKUF",
-  "angularObjects": {
-    "2CB7Y9KUS:shared_process": [],
-    "2CBU3U3UG:shared_process": [],
-    "2CA85WCVR:shared_process": [],
-    "2CA99RTYY:shared_process": [],
-    "2CAQSGWFF:shared_process": [],
-    "2C98RMQQN:shared_process": [],
-    "2CBUTWQF9:shared_process": [],
-    "2C9TGFCBC:shared_process": [],
-    "2CBWDGM39:shared_process": []
-  },
+  "angularObjects": {},
   "config": {
     "looknfeel": "default"
   },

@@ -2,11 +2,11 @@
   "paragraphs": [
     {
       "title": "Load Spark LuceneRDD Jars",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.6\")",
-      "dateUpdated": "Feb 15, 2017 5:15:56 PM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.8\")",
+      "dateUpdated": "Jun 2, 2017 1:16:59 PM",
       "config": {
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "title": true,
         "graph": {
           "mode": "table",
@@ -22,7 +22,12 @@
             "pinCols": []
           }
         },
-        "enabled": true
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -263,17 +268,7 @@
   ],
   "name": "/lucenerdd/linkage/google-vs-amazon",
   "id": "2BWCENW3H",
-  "angularObjects": {
-    "2CB7Y9KUS:shared_process": [],
-    "2CBU3U3UG:shared_process": [],
-    "2CA85WCVR:shared_process": [],
-    "2CA99RTYY:shared_process": [],
-    "2CAQSGWFF:shared_process": [],
-    "2C98RMQQN:shared_process": [],
-    "2CBUTWQF9:shared_process": [],
-    "2C9TGFCBC:shared_process": [],
-    "2CBWDGM39:shared_process": []
-  },
+  "angularObjects": {},
   "config": {
     "looknfeel": "default"
   },
