@@ -4,16 +4,17 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.spatial.shape._
 import org.zouzias.spark.lucenerdd._
+import org.zouzias.spark.lucenerdd.logging.Logging
 
 /**
  * Record linkage example between countries and cities using [[ShapeLuceneRDD]]
  *
  * You can run this locally with, ./spark-linkage-radius.sh
  */
-object ShapeLuceneRDDLinkageCountriesvsCapitals {
+object ShapeLuceneRDDLinkageCountriesvsCapitals extends Logging {
 
   // 20km radius
-  val Radius = 20D
+  val Radius = 10D
 
   def main(args: Array[String]): Unit = {
     // initialise spark context
@@ -49,7 +50,9 @@ object ShapeLuceneRDDLinkageCountriesvsCapitals {
     val linked = shapes.linkByRadius(capitals.rdd, coords, Radius)
     linked.cache
 
-    linked.map(x => (x._1, x._2.headOption.flatMap(_.doc.textField("_1")))).foreach(println)
+    linked.map(x => (x._1, x._2.headOption.flatMap(_.doc.textField("_1")))).foreach { case (capital, country) =>
+      logInfo(s"Capital of ${country.getOrElse("Unknown")} is ${capital._2} (${capital._1})")
+    }
 
     val end = System.currentTimeMillis()
 

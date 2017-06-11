@@ -21,6 +21,7 @@ object LinkageGooglevsAmazon extends Logging {
     implicit val sc = SparkSession.builder.config(conf).getOrCreate()
     import sc.implicits._
 
+    val start = System.currentTimeMillis()
     val amazonDF = sc.read.parquet("data/linkage-products1/linkage-products-amazon.parquet")
     logInfo(s"Loaded ${amazonDF.count} ACM records")
     val googleDF = sc.read.parquet("data/linkage-products1/linkage-products-google.parquet")
@@ -70,6 +71,11 @@ object LinkageGooglevsAmazon extends Logging {
     val correctHits: Double = linkageResults.join(groundTruthDF, groundTruthDF.col("idAmazon").equalTo(linkageResults("idAmazon")) &&  groundTruthDF.col("idGoogleBase").equalTo(linkageResults("idGoogleBase"))).count
     val total: Double = groundTruthDF.count
     val accuracy = correctHits / total
+    val end = System.currentTimeMillis()
+
+    logInfo("=" * 40)
+    logInfo(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    logInfo("=" * 40)
 
     logInfo("********************************")
     logInfo(s"Accuracy of linkage is ${accuracy}")

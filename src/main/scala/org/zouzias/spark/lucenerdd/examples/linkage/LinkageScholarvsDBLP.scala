@@ -22,7 +22,6 @@ object LinkageScholarvsDBLP extends Logging {
     import sc.implicits._
 
     val start = System.currentTimeMillis()
-
     val scholarDF = sc.read.parquet("data/linkage-papers1/linkage-papers-scholar.parquet")
     logInfo(s"Loaded ${scholarDF.count} ACM records")
     val dblpDF = sc.read.parquet("data/linkage-papers1/linkage-papers-dblp.parquet")
@@ -69,9 +68,9 @@ object LinkageScholarvsDBLP extends Logging {
 
     val end = System.currentTimeMillis()
 
-    println("=" * 40)
-    println(s"Elapsed time: ${(end - start) / 1000.0} seconds")
-    println("=" * 40)
+    logInfo("=" * 40)
+    logInfo(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    logInfo("=" * 40)
 
 
     logInfo("********************************")

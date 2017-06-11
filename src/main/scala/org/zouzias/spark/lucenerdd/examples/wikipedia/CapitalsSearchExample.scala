@@ -4,11 +4,12 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd._
+import org.zouzias.spark.lucenerdd.logging.Logging
 
 /**
  * Capitals search example
  */
-object CapitalsSearchExample {
+object CapitalsSearchExample extends Logging {
 
   def main(args: Array[String]) {
 
@@ -28,11 +29,11 @@ object CapitalsSearchExample {
 
     val end = System.currentTimeMillis()
 
-    println("=" * 40)
-    println(s"Elapsed time: ${(end - start) / 1000.0} seconds")
-    println("=" * 40)
+    logInfo("=" * 40)
+    logInfo(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    logInfo("=" * 40)
 
-    println(result.take(k).foreach(println))
+    logInfo(result.take(k).mkString("\n"))
 
     // terminate spark context
     spark.stop()

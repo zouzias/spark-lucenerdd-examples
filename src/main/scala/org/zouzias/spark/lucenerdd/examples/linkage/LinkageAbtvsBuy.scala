@@ -1,7 +1,7 @@
 package org.zouzias.spark.lucenerdd.examples.linkage
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.{SparkConf}
+import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd._
 import org.zouzias.spark.lucenerdd.logging.Logging
@@ -34,7 +34,6 @@ object LinkageAbtvsBuy extends Logging {
     val buy = LuceneRDD(buyDF.rdd.map( row => (row.get(0).toString, row.getString(1), row.getString(2), row.getString(3))))
 
 
-
     val linker: (String, String, String, String) => String = {
       case (_, name, description, _) => {
         val nameTokens = name.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 0).mkString(" OR ")
@@ -61,9 +60,9 @@ object LinkageAbtvsBuy extends Logging {
 
     val end = System.currentTimeMillis()
 
-    println("=" * 40)
-    println(s"Elapsed time: ${(end - start) / 1000.0} seconds")
-    println("=" * 40)
+    logInfo("=" * 40)
+    logInfo(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    logInfo("=" * 40)
 
     logInfo("********************************")
     logInfo(s"Accuracy of linkage is ${accuracy}")

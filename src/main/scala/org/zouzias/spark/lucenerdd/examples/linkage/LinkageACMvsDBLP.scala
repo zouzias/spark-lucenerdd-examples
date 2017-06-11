@@ -1,6 +1,6 @@
 package org.zouzias.spark.lucenerdd.examples.linkage
 
-import org.apache.spark.sql.{Row, SQLContext, SparkSession}
+import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd.logging.Logging
@@ -58,12 +58,11 @@ object LinkageACMvsDBLP extends Logging {
     val total: Double = groundTruthDF.count
 
     val accuracy = correctHits / total
-
     val end = System.currentTimeMillis()
 
-    println("=" * 40)
-    println(s"Elapsed time: ${(end - start) / 1000.0} seconds")
-    println("=" * 40)
+    logInfo("=" * 40)
+    logInfo(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    logInfo("=" * 40)
 
     logInfo("********************************")
     logInfo(s"Accuracy of linkage is ${accuracy}")
