@@ -32,6 +32,18 @@ To start an Apache Zeppelin with preloaded notebooks.
 
 ### Examples
 
+#### Record Linkage
+
+Examples with "real-world" datasets are available:
+
+* [DBLP vs ACM](https://github.com/zouzias/spark-lucenerdd-examples/blob/master/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/LinkageACMvsDBLP.scala) - DBLP academic articles versus ACM articles
+* [DBLP vs Scholar](https://github.com/zouzias/spark-lucenerdd-examples/blob/master/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/LinkageScholarvsDBLP.scala) - DBLP academic articles versus Google Scholar articles
+* [Amazon vs Google](https://github.com/zouzias/spark-lucenerdd-examples/blob/master/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/LinkageGooglevsAmazon.scala) - Amazon versus google product listings
+* [Abt vs Buy](https://github.com/zouzias/spark-lucenerdd-examples/blob/master/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/LinkageAbtvsBuy.scala) - Abt versus buy product listings
+
+The datasets used for record linkage are
+available at [here](http://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution). A spark friendly version of the datasets (Parquet) is available at [parquet](https://github.com/zouzias/spark-lucenerdd-examples/tree/master/data). 
+
 #### Spatial linkage between countries and capitals
 
 This example loads all countries from a parquet file containing fields "name" and "shape" (shape is mostly polygons in WKT)
