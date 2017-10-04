@@ -1,9 +1,8 @@
 # spark-lucenerdd-examples
 
 Usage examples of [spark-lucenerdd](https://github.com/zouzias/spark-lucenerdd).
-## Examples
 
-#### Record Linkage
+### Record Linkage
 
 Examples with "real-world" datasets are available:
 
@@ -15,7 +14,7 @@ Examples with "real-world" datasets are available:
 The datasets used for record linkage are
 available at [here](http://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution). A spark friendly version of the datasets (Parquet) is available at [parquet](https://github.com/zouzias/spark-lucenerdd-examples/tree/master/data). 
 
-#### Spatial linkage between countries and capitals
+### Spatial linkage between countries and capitals
 
 This example loads all countries from a parquet file containing fields "name" and "shape" (shape is mostly polygons in WKT)
 
