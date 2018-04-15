@@ -1,7 +1,7 @@
 organization := "org.zouzias"
 name := "spark-lucenerdd-examples"
 scalaVersion := "2.11.11"
-val sparkV = "2.2.0"
+val sparkV = "2.2.1"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 
@@ -12,7 +12,7 @@ libraryDependencies ++= Seq(
 	"org.zouzias" %% "spark-lucenerdd" % version.value,
 	"org.apache.spark" %% "spark-core" % sparkV % "provided",
 	"org.apache.spark" %% "spark-sql" % sparkV % "provided" ,
-	"com.holdenkarau"  %% "spark-testing-base" % s"2.2.0_0.7.4" % "test" intransitive()
+	"com.holdenkarau"  %% "spark-testing-base" % s"2.2.1_0.9.0" % "test" intransitive()
 )
 
 enablePlugins(DockerPlugin)
