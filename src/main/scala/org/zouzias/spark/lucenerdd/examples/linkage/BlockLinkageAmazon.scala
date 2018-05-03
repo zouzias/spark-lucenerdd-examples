@@ -1,15 +1,15 @@
 package org.zouzias.spark.lucenerdd.examples.linkage
 
 import org.apache.spark.SparkConf
-import org.apache.spark.sql.{Row, SparkSession}
+import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.zouzias.spark.lucenerdd.{LuceneRDD, _}
 import org.zouzias.spark.lucenerdd.logging.Logging
 
 /**
  * Record linkage example between amazon and itself blocked by manufacturer using
-  * [[LuceneRDD.blockEntityLinkage]] method
+ * [[LuceneRDD.blockEntityLinkage]] method
  *
- * You can run this locally with, ./spark-blocklinkage-amazon.sh
+ * You can run this locally with ./spark-blocklinkage-amazon.sh
  */
 object BlockLinkageAmazon extends Logging {
 
@@ -18,7 +18,8 @@ object BlockLinkageAmazon extends Logging {
     // initialise spark context
     val conf = new SparkConf().setAppName(LinkageGooglevsAmazon.getClass.getName)
 
-    implicit val spark = SparkSession.builder.config(conf).getOrCreate()
+    implicit val spark: SparkSession = SparkSession.builder.config(conf).getOrCreate()
+    import spark.sqlContext.implicits._
 
     val start = System.currentTimeMillis()
     val amazonDF = spark.read.parquet("data/linkage-products1/linkage-products-amazon.parquet")
@@ -36,20 +37,6 @@ object BlockLinkageAmazon extends Logging {
         val descTerms = description.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 6).distinct.mkString(" OR ")
         val manuTerms = manu.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 1).mkString(" OR ")
 
-        /*
-        if (descTerms.nonEmpty && nameTokens.nonEmpty && manuTerms.nonEmpty) {
-          s"(_2:(${nameTokens})) OR (_3:${descTerms}) OR (_4:${manuTerms})"
-        }
-        else if (nameTokens.nonEmpty && manuTerms.nonEmpty) {
-          s"(_2:(${nameTokens})) OR (_4:${manuTerms})"
-        }
-        else if (nameTokens.nonEmpty) {
-          s"_2:(${nameTokens})"
-        }
-        else {
-          "*:*"
-        }*/
-
         if (nameTokens.nonEmpty) {
           s"title:(${nameTokens})"
         }
@@ -59,13 +46,13 @@ object BlockLinkageAmazon extends Logging {
       }
     }
 
-    val linkedResults = LuceneRDD.blockEntityLinkage(amazonDF, amazonDF,
+    val linkedResults = LuceneRDD.blockEntityLinkage(amazon, amazon,
       linker, /* Link by title similarity */
       Array("manufacturer"),
       Array("manufacturer")
     )
 
-    val linkageResults = spark.createDataFrame(linkedResults
+    val linkageResults: DataFrame = spark.createDataFrame(linkedResults
       .filter(_._2.nonEmpty)
       .map{ case (left, topDocs) =>
         (topDocs.head.doc.textField("id").headOption,
@@ -73,13 +60,10 @@ object BlockLinkageAmazon extends Logging {
         )
       })
       .toDF("id", "id_amazon")
+      .filter($"id".equalTo($"id_amazon"))
 
-
-    linkageResults.show()
-
-
-    val correctHits: Double = linkageResults.count
-    logInfo(s"Correct hits are ${correctHits}")
+    val correctHits: Double = linkageResults.count()
+    logInfo(s"Correct hits are $correctHits")
     val total: Double = amazonDF.count
     val accuracy = correctHits / total
     val end = System.currentTimeMillis()
@@ -89,7 +73,7 @@ object BlockLinkageAmazon extends Logging {
     logInfo("=" * 40)
 
     logInfo("********************************")
-    logInfo(s"Accuracy of linkage is ${accuracy}")
+    logInfo(s"Accuracy of linkage is $accuracy")
     logInfo("********************************")
     // terminate spark context
     spark.stop()
