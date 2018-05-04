@@ -2,10 +2,11 @@
 
 CURRENT_DIR=`pwd`
 
+# Spark version (requires uncompressed tar.gz under $HOME)
+SPARK_VERSION="2.3.0"
+
 # Read the version from version.sbt
 SPARK_LUCENERDD_VERSION=`cat version.sbt | awk '{print $5}' | xargs`
-
-SPARK_VERSION="2.2.1"
 
 echo "==============================================="
 echo "Loading LuceneRDD with version ${SPARK_LUCENERDD_VERSION}"
