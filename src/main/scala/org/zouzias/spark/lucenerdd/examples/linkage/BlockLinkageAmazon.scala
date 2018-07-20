@@ -32,7 +32,6 @@ object BlockLinkageAmazon extends Logging {
       case row => {
         val name = row.getString(row.fieldIndex("title"))
         val description = row.getString(row.fieldIndex("description"))
-        val manu = row.getString(row.fieldIndex("manufacturer"))
         val nameTokens = name.split(" ")
           .map(_.replaceAll("[^a-zA-Z0-9]", ""))
           .filter(_.length > 1)
@@ -56,11 +55,12 @@ object BlockLinkageAmazon extends Logging {
       }
     }
 
+    val blockingFields = Array("manufacturer")
+
+    // Block entity linkage
     val linkedResults = LuceneRDD.blockEntityLinkage(amazon, amazon,
       linker, /* Link by title similarity */
-      Array("manufacturer"),
-      Array("manufacturer")
-    )
+      blockingFields, blockingFields)
 
     val linkageResults: DataFrame = spark.createDataFrame(linkedResults
       .filter(_._2.nonEmpty)
@@ -69,8 +69,8 @@ object BlockLinkageAmazon extends Logging {
           left.getString(left.fieldIndex("id"))
         )
       })
-      .toDF("id", "id_amazon")
-      .filter($"id".equalTo($"id_amazon"))
+      .toDF("left_id", "right_id")
+      .filter($"left_id".equalTo($"right_id"))
 
     val correctHits: Double = linkageResults.count()
     logInfo(s"Correct hits are $correctHits")
