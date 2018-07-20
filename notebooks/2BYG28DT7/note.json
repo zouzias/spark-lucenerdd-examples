@@ -2,7 +2,8 @@
   "paragraphs": [
     {
       "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.8\")",
-      "dateUpdated": "Jun 2, 2017 1:17:37 PM",
+      "user": "anonymous",
+      "dateUpdated": "Jun 16, 2017 11:41:16 AM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -13,16 +14,7 @@
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
         ],
@@ -53,19 +45,20 @@
       "jobName": "paragraph_1475690150553_-1276120470",
       "id": "20161005-175550_494955961",
       "dateCreated": "Oct 5, 2016 5:55:50 AM",
-      "dateStarted": "Oct 21, 2016 9:14:12 AM",
-      "dateFinished": "Oct 21, 2016 9:14:12 AM",
+      "dateStarted": "Jun 16, 2017 11:41:17 AM",
+      "dateFinished": "Jun 16, 2017 11:41:17 AM",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "ShapeLuceneRDD imports",
       "text": "import org.apache.spark.sql.SparkSession\nimport org.apache.spark.SparkConf\nimport org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD\nimport org.zouzias.spark.lucenerdd.spatial.shape._\nimport org.zouzias.spark.lucenerdd._",
-      "dateUpdated": "Oct 21, 2016 9:14:12 AM",
+      "user": "anonymous",
+      "dateUpdated": "Jun 16, 2017 11:41:21 AM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "title": true,
         "tableHide": true,
         "results": [
@@ -73,19 +66,14 @@
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -109,19 +97,20 @@
       "jobName": "paragraph_1475690218448_1320488560",
       "id": "20161005-175658_813862107",
       "dateCreated": "Oct 5, 2016 5:56:58 AM",
-      "dateStarted": "Oct 21, 2016 9:14:12 AM",
-      "dateFinished": "Oct 21, 2016 9:14:14 AM",
+      "dateStarted": "Jun 16, 2017 11:41:21 AM",
+      "dateFinished": "Jun 16, 2017 11:41:23 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Load all countries and all capitals",
       "text": " // Load all countries\nval allCountriesDF \u003d spark.read.parquet(\"data/spatial/countries-poly.parquet\").select(\"name\", \"shape\")\nallCountriesDF.registerTempTable(\"allCountries\")\nval allCountries \u003d allCountriesDF.map(row \u003d\u003e (row.getString(1), row.getString(0)))\n\n// Load all capitals\nval capitalsDF \u003d spark.read.parquet(\"data/spatial/capitals.parquet\").select(\"name\", \"shape\")\ncapitalsDF.registerTempTable(\"capitals\")\nval capitals \u003d capitalsDF.map(row \u003d\u003e (row.getString(1), row.getString(0)))\n\n// Define ShapeLuceneRDD\nval shapes \u003d ShapeLuceneRDD(allCountries)\nshapes.cache",
-      "dateUpdated": "Oct 21, 2016 9:14:12 AM",
+      "user": "anonymous",
+      "dateUpdated": "Jun 16, 2017 11:41:26 AM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "title": true,
         "tableHide": true,
         "results": [
@@ -129,19 +118,14 @@
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -152,7 +136,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nallCountriesDF: org.apache.spark.sql.DataFrame \u003d [name: string, shape: string]\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nallCountries: org.apache.spark.sql.Dataset[(String, String)] \u003d [_1: string, _2: string]\n\ncapitalsDF: org.apache.spark.sql.DataFrame \u003d [name: string, shape: string]\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\ncapitals: org.apache.spark.sql.Dataset[(String, String)] \u003d [_1: string, _2: string]\n\nshapes: org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD[String,String] \u003d ShapeLuceneRDD[271] at RDD at ShapeLuceneRDD.scala:45\n\nres74: shapes.type \u003d ShapeLuceneRDD[271] at RDD at ShapeLuceneRDD.scala:45\n"
+            "data": "\nallCountriesDF: org.apache.spark.sql.DataFrame \u003d [name: string, shape: string]\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nallCountries: org.apache.spark.sql.Dataset[(String, String)] \u003d [_1: string, _2: string]\n\ncapitalsDF: org.apache.spark.sql.DataFrame \u003d [name: string, shape: string]\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\ncapitals: org.apache.spark.sql.Dataset[(String, String)] \u003d [_1: string, _2: string]\n\nshapes: org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD[String,String] \u003d ShapeLuceneRDD[27] at RDD at ShapeLuceneRDD.scala:50\n\nres8: shapes.type \u003d ShapeLuceneRDD[27] at RDD at ShapeLuceneRDD.scala:50\n"
           }
         ]
       },
@@ -165,36 +149,32 @@
       "jobName": "paragraph_1475690357892_1075234945",
       "id": "20161005-175917_1541464701",
       "dateCreated": "Oct 5, 2016 5:59:17 AM",
-      "dateStarted": "Oct 21, 2016 9:14:13 AM",
-      "dateFinished": "Oct 21, 2016 9:15:24 AM",
+      "dateStarted": "Jun 16, 2017 11:41:26 AM",
+      "dateFinished": "Jun 16, 2017 11:41:56 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect * from allCountries limit 10",
-      "dateUpdated": "Oct 21, 2016 9:14:13 AM",
+      "user": "anonymous",
+      "dateUpdated": "Jun 16, 2017 11:42:14 AM",
       "config": {
         "colWidth": 6.0,
         "enabled": true,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "results": [
           {
             "graph": {
               "mode": "table",
-              "height": 354.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "height": 300.0,
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -218,60 +198,32 @@
       "jobName": "paragraph_1476822086170_46147442",
       "id": "20161018-202126_2030198347",
       "dateCreated": "Oct 18, 2016 8:21:26 AM",
-      "dateStarted": "Oct 21, 2016 9:14:15 AM",
-      "dateFinished": "Oct 21, 2016 9:15:24 AM",
+      "dateStarted": "Jun 16, 2017 11:42:14 AM",
+      "dateFinished": "Jun 16, 2017 11:42:15 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect * from capitals limit 20",
-      "dateUpdated": "Oct 21, 2016 9:14:13 AM",
+      "user": "anonymous",
+      "dateUpdated": "Jun 16, 2017 11:42:37 AM",
       "config": {
         "colWidth": 6.0,
         "enabled": true,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "results": [
           {
-            "helium": {},
             "graph": {
               "mode": "table",
-              "height": 349.0,
-              "optionOpen": true,
-              "keys": [
-                {
-                  "name": "name",
-                  "index": 0.0,
-                  "aggr": "sum"
-                }
-              ],
-              "values": [
-                {
-                  "name": "shape",
-                  "index": 1.0,
-                  "aggr": "sum"
-                }
-              ],
-              "groups": [],
-              "scatter": {
-                "xAxis": {
-                  "name": "name",
-                  "index": 0.0,
-                  "aggr": "sum"
-                },
-                "yAxis": {
-                  "name": "shape",
-                  "index": 1.0,
-                  "aggr": "sum"
-                }
-              },
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "height": 300.0,
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -295,36 +247,32 @@
       "jobName": "paragraph_1476822204081_1377948920",
       "id": "20161018-202324_40232036",
       "dateCreated": "Oct 18, 2016 8:23:24 AM",
-      "dateStarted": "Oct 21, 2016 9:15:24 AM",
-      "dateFinished": "Oct 21, 2016 9:15:24 AM",
+      "dateStarted": "Jun 16, 2017 11:42:37 AM",
+      "dateFinished": "Jun 16, 2017 11:42:38 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "def coords(pointAndName: (String, String)): (Double, Double) \u003d {\n    def parseDouble(s: String): Double \u003d try { s.toDouble } catch { case _: Throwable \u003d\u003e 0.0 }\n    val str \u003d pointAndName._1\n    val coords \u003d str.dropWhile(x \u003d\u003e x.compareTo(\u0027(\u0027) !\u003d 0).drop(1).dropRight(1).split(\" \").map(_.trim) // Convert \u0027POINT(x,y)\u0027 to Array[Double]\n    (parseDouble(coords(0)), parseDouble(coords(1)))\n}",
-      "dateUpdated": "Oct 21, 2016 9:14:13 AM",
+      "user": "anonymous",
+      "dateUpdated": "Jun 16, 2017 11:43:33 AM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "results": [
           {
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -348,36 +296,32 @@
       "jobName": "paragraph_1475690470085_434046461",
       "id": "20161005-180110_847843204",
       "dateCreated": "Oct 5, 2016 6:01:10 AM",
-      "dateStarted": "Oct 21, 2016 9:15:24 AM",
-      "dateFinished": "Oct 21, 2016 9:15:25 AM",
+      "dateStarted": "Jun 16, 2017 11:43:34 AM",
+      "dateFinished": "Jun 16, 2017 11:43:35 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "// Radius in km\nval Radius \u003d 20\n// Link by radius\nval linked \u003d shapes.linkByRadius(capitals.rdd, coords, Radius)\nlinked.cache\nlinked.count\n\nlinked.map(x \u003d\u003e (x._1._2, x._2.map(_.doc.textField(\"_1\")))).take(100).foreach(println)\n",
-      "dateUpdated": "Oct 21, 2016 9:14:13 AM",
+      "text": "// Radius in km\nval Radius \u003d 20\n// Link by radius\nval linked \u003d shapes.linkByRadius(capitals.rdd, coords, Radius)\nlinked.cache\nlinked.count\n\nlinked.map(x \u003d\u003e (x._1._2, x._2.flatMap(_.doc.textField(\"_1\")))).take(100).foreach(println)\n",
+      "user": "anonymous",
+      "dateUpdated": "Jun 16, 2017 11:44:17 AM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "results": [
           {
             "graph": {
               "mode": "table",
-              "height": 231.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "height": 300.0,
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -388,7 +332,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nRadius: Int \u003d 20\n\nlinked: org.apache.spark.rdd.RDD[((String, String), List[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[292] at map at ShapeLuceneRDD.scala:122\n\nres76: linked.type \u003d MapPartitionsRDD[292] at map at ShapeLuceneRDD.scala:122\n\nres77: Long \u003d 303\n(Avarua,List(Some(Cook Is.)))\n(Нарьян-Мар,List())\n(London,List(Some(United Kingdom)))\n(Тверь,List())\n(Tekirdağ,List(Some(Turkey)))\n(Sarajevo,List(Some(Bosnia \u0026 Herzegovina)))\n(Кемерово,List())\n(Jember,List(Some(Indonesia)))\n(Lamongan,List(Some(Indonesia)))\n(Ankara,List(Some(Turkey)))\n(Pasuruan,List(Some(Indonesia)))\n(Mbabane,List(Some(Swaziland), Some(South Africa)))\n(Semarang,List(Some(Indonesia)))\n(Αθήνα,List(Some(Greece)))\n(Budapest,List(Some(Hungary)))\n(Липецк,List())\n(Port of Spain,List(Some(Trinidad \u0026 Tobago)))\n(Madiun,List(Some(Indonesia)))\n(Саратов,List())\n(Краснодар,List())\n(Нижний Новгород,List())\n(Antananarivo,List(Some(Madagascar)))\n(Singapore,List(Some(Indonesia), Some(Singapore), Some(Malaysia)))\n(N’Djamena نجامينا,List(Some(Chad), Some(Cameroon)))\n(臺北市,List(Some(China)))\n(Петропавловск-Камчатский,List())\n(Praia,List(Some(Cape Verde)))\n(Nassau,List(Some(The Bahamas)))\n(Bridgetown,List(Some(Barbados)))\n(Актобе,List(Some(Kazakhstan)))\n(القاهرة,List(Some(Egypt)))\n(Banjul,List(Some(The Gambia), Some(Senegal)))\n(Colombo,List(Some(Sri Lanka)))\n(Roma,List(Some(Vatican City), Some(Italy)))\n(Томск,List())\n(Freetown,List(Some(Sierra Leone)))\n(Helsinki,List(Some(Finland)))\n(Oslo,List(Some(Norway)))\n(Владивосток,List())\n(Valletta,List(Some(Malta)))\n(Bern,List(Some(Switzerland)))\n(Lusaka,List(Some(Zambia)))\n(Bruxelles - Brussel,List(Some(Belgium)))\n(Bandar Seri Begawan,List(Some(Malaysia), Some(Brunei)))\n(Калининград,List())\n(Кызыл,List())\n(Чита,List())\n(Волгоград,List())\n(Canberra,List(Some(Australia)))\n(Port-au-Prince,List(Some(Haiti)))\n(Gresik,List(Some(Indonesia)))\n(Bamako,List(Some(Mali)))\n(Новосибирск,List())\n(Yaoundé,List(Some(Cameroon)))\n(تهران,List(Some(Iran)))\n(Brasília,List(Some(Brazil)))\n(Tirana,List(Some(Albania)))\n(Ижевск,List())\n(Tegal,List(Some(Indonesia)))\n(Брянск,List())\n(Београд,List(Some(Serbia \u0026 Montenegro)))\n(Биробиджан,List())\n(Vilnius,List(Some(Lithuania)))\n(Caracas,List(Some(Venezuela)))\n(Santo Domingo,List(Some(Dominican Republic)))\n(Тирасполь,List(Some(Ukraine), Some(Moldova)))\n(Благовещенск,List(Some(China)))\n(နေပြည်တော်,List(Some(Myanmar)))\n(Челябинск,List())\n(Rīga,List(Some(Latvia)))\n(Երևան,List(Some(Turkey), Some(Armenia)))\n(صنعاء,List(Some(Yemen)))\n(Омск,List())\n(北京市,List(Some(China)))\n(Южно-Сахалинск,List())\n(Иваново,List())\n(Manama المنامة,List(Some(Bahrain)))\n(Yogyakarta,List(Some(Indonesia)))\n(Montevideo,List(Some(Uruguay)))\n(Элиста,List())\n(Libreville,List(Some(Gabon)))\n(Саранск,List())\n(Калуга,List())\n(Чебоксары,List())\n(New Delhi,List(Some(India)))\n(Улаанбаатар,List(Some(Mongolia)))\n(Wien,List(Some(Austria)))\n(Abu Dhabi,List(Some(United Arab Emirates)))\n(Alger الجزائر,List(Some(Algeria)))\n(Курган,List())\n(Улан-Удэ,List())\n(ბათუმი (Batumi),List(Some(Turkey), Some(Georgia)))\n(Monrovia,List(Some(Liberia)))\n(Asmara,List(Some(Eritrea)))\n(Georgetown,List(Some(Guyana)))\n(ساری,List(Some(Iran)))\n(Мурманск,List())\n(Magetan,List(Some(Indonesia)))\n(Majuro,List(Some(Marshall Is.)))\n(თბილისი (Tbilisi),List(Some(Georgia)))\n"
+            "data": "\nRadius: Int \u003d 20\n\nlinked: org.apache.spark.rdd.RDD[((String, String), Array[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[59] at map at ShapeLuceneRDD.scala:115\n\nres14: linked.type \u003d MapPartitionsRDD[59] at map at ShapeLuceneRDD.scala:115\n\nres15: Long \u003d 303\n(Prishtinë,[Ljava.lang.String;@271a5a53)\n(نواكشوط,[Ljava.lang.String;@5b7c3b2c)\n(Kendal,[Ljava.lang.String;@79074e63)\n(Сыктывкар,[Ljava.lang.String;@2ae4f758)\n(Jombang,[Ljava.lang.String;@5fd9f895)\n(Тверь,[Ljava.lang.String;@65c61d19)\n(Sarajevo,[Ljava.lang.String;@26f13394)\n(Кемерово,[Ljava.lang.String;@2ba25e25)\n(Lamongan,[Ljava.lang.String;@3baf1694)\n(Stockholm,[Ljava.lang.String;@6ed4ea2d)\n(Ankara,[Ljava.lang.String;@411619f0)\n(Berlin,[Ljava.lang.String;@787c2481)\n(Mbabane,[Ljava.lang.String;@3b2496ac)\n(Nairobi,[Ljava.lang.String;@72688667)\n(Semarang,[Ljava.lang.String;@3c0c843)\n(Probolinggo,[Ljava.lang.String;@1a81bc96)\n(Port of Spain,[Ljava.lang.String;@58fd89c)\n(Madiun,[Ljava.lang.String;@33e22df4)\n(Смоленск,[Ljava.lang.String;@3665691b)\n(Краснодар,[Ljava.lang.String;@2117164d)\n(Самара,[Ljava.lang.String;@5aa771cb)\n(Пермь,[Ljava.lang.String;@78887ae6)\n(Владимир,[Ljava.lang.String;@6538f95d)\n(Душанбе,[Ljava.lang.String;@7c842ec9)\n(Moroni,[Ljava.lang.String;@1dcc21bb)\n(Нижний Новгород,[Ljava.lang.String;@262837ae)\n(N’Djamena نجامينا,[Ljava.lang.String;@478c027)\n(St. George\u0027s,[Ljava.lang.String;@59d75407)\n(Cape Town,[Ljava.lang.String;@256a677f)\n(Томск,[Ljava.lang.String;@4218b13b)\n(Актобе,[Ljava.lang.String;@a328a7)\n(القاهرة,[Ljava.lang.String;@633733d8)\n(Воронеж,[Ljava.lang.String;@1510e15e)\n(Тюмень,[Ljava.lang.String;@12860bae)\n(Freetown,[Ljava.lang.String;@b79ef49)\n(Helsinki,[Ljava.lang.String;@518aa40d)\n(Красноярск,[Ljava.lang.String;@4382b573)\n(Владивосток,[Ljava.lang.String;@61fb0dd6)\n(Valletta,[Ljava.lang.String;@25bca507)\n(Bern,[Ljava.lang.String;@2192c771)\n(Якутск,[Ljava.lang.String;@776dd71d)\n(Астана,[Ljava.lang.String;@4e41f19b)\n(Asunción,[Ljava.lang.String;@e15e1c9)\n(Bruxelles - Brussel,[Ljava.lang.String;@398b0635)\n(Malang,[Ljava.lang.String;@2047eb26)\n(Phnom Penh,[Ljava.lang.String;@614b0b9c)\n(Калининград,[Ljava.lang.String;@40f1a5d5)\n(Кострома,[Ljava.lang.String;@212ab950)\n(Чита,[Ljava.lang.String;@3e2b7888)\n(Кызыл,[Ljava.lang.String;@785833a)\n(Reykjavík,[Ljava.lang.String;@4a974112)\n(Riyadh الرياض,[Ljava.lang.String;@3e039129)\n(Santiago,[Ljava.lang.String;@5b894159)\n(Петропавловск-Камчатский,[Ljava.lang.String;@70be8541)\n(Новосибирск,[Ljava.lang.String;@d1d595)\n(Йошкар-Ола,[Ljava.lang.String;@2279867f)\n(Sragen,[Ljava.lang.String;@33eb88e0)\n(Darwin,[Ljava.lang.String;@377b9751)\n(Tirana,[Ljava.lang.String;@39889156)\n(Ижевск,[Ljava.lang.String;@572cb266)\n(Tegal,[Ljava.lang.String;@38ef9ceb)\n(Брянск,[Ljava.lang.String;@53c545b8)\n(Melbourne,[Ljava.lang.String;@2e3a7cb7)\n(Santo Domingo,[Ljava.lang.String;@1cb74494)\n(Тирасполь,[Ljava.lang.String;@58fb8b2d)\n(Челябинск,[Ljava.lang.String;@21eaed0f)\n(Bandung,[Ljava.lang.String;@5cc8e241)\n(Омск,[Ljava.lang.String;@7afd9ea8)\n(北京市,[Ljava.lang.String;@7edbc039)\n(Manama المنامة,[Ljava.lang.String;@8afd878)\n(Yogyakarta,[Ljava.lang.String;@136ef9c6)\n(Mojokerto,[Ljava.lang.String;@5703ddd)\n(Ульяновск,[Ljava.lang.String;@250aff42)\n(Conakry,[Ljava.lang.String;@53908f83)\n(Элиста,[Ljava.lang.String;@37d4fcfe)\n(Чебоксары,[Ljava.lang.String;@334eb10c)\n(Улаанбаатар,[Ljava.lang.String;@41cca8c8)\n(Addis Abeba,[Ljava.lang.String;@1677dbe5)\n(Abu Dhabi,[Ljava.lang.String;@6d4e6d9)\n(Dili,[Ljava.lang.String;@4054e1de)\n(Bogotá,[Ljava.lang.String;@64fa9bf4)\n(Улан-Удэ,[Ljava.lang.String;@4cfadc7d)\n(Kigali,[Ljava.lang.String;@6d391915)\n(Monrovia,[Ljava.lang.String;@a045f7d)\n(Asmara,[Ljava.lang.String;@3a1140f2)\n(Kuala Lumpur,[Ljava.lang.String;@20926af9)\n(Санкт-Петербург,[Ljava.lang.String;@5c63e4f)\n(Magetan,[Ljava.lang.String;@2d11763d)\n(Ottawa,[Ljava.lang.String;@1db7b5bd)\n(Ciudad de México,[Ljava.lang.String;@2e41c150)\n(Sucre,[Ljava.lang.String;@1a41a691)\n(თბილისი (Tbilisi),[Ljava.lang.String;@3c478b7a)\n(Lilongwe,[Ljava.lang.String;@1c7dcb12)\n(Toshkent,[Ljava.lang.String;@3c96c28c)\n(București,[Ljava.lang.String;@2b748ea1)\n(ساری,[Ljava.lang.String;@2b68ccee)\n(Batu,[Ljava.lang.String;@59bfb7ca)\n(Muqdisho,[Ljava.lang.String;@53378cd3)\n(Kampala,[Ljava.lang.String;@5cb91192)\n(Ciudad de Guatemala,[Ljava.lang.String;@31dba957)\n"
           }
         ]
       },
@@ -401,8 +345,8 @@
       "jobName": "paragraph_1475703139298_987995550",
       "id": "20161005-213219_809764400",
       "dateCreated": "Oct 5, 2016 9:32:19 AM",
-      "dateStarted": "Oct 21, 2016 9:15:25 AM",
-      "dateFinished": "Oct 21, 2016 9:16:27 AM",
+      "dateStarted": "Jun 16, 2017 11:44:17 AM",
+      "dateFinished": "Jun 16, 2017 11:44:22 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -440,7 +384,17 @@
   ],
   "name": "/lucenerdd/spatial/linkage-countries-vs-capitals (ScalaIO)",
   "id": "2BYG28DT7",
-  "angularObjects": {},
+  "angularObjects": {
+    "2CHWSBYAA:shared_process": [],
+    "2CJGSYG7T:shared_process": [],
+    "2CKNVS39B:shared_process": [],
+    "2CHKQ32E5:shared_process": [],
+    "2CM4SVFNC:shared_process": [],
+    "2CKAUVUNK:shared_process": [],
+    "2CH4MDZEC:shared_process": [],
+    "2CKWYMKDD:shared_process": [],
+    "2CK8FN99C:shared_process": []
+  },
   "config": {
     "looknfeel": "default"
   },

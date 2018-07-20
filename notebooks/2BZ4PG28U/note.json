@@ -2,8 +2,8 @@
   "paragraphs": [
     {
       "title": "Load Spark LuceneRDD Jars",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.8\")",
-      "dateUpdated": "May 31, 2017 6:28:48 PM",
+      "text": "    %dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.3\")",
+      "dateUpdated": "Jul 20, 2018 8:48:28 AM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/text",
@@ -15,16 +15,7 @@
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
         ],
@@ -63,10 +54,11 @@
     {
       "title": "Imports for LuceneRDD",
       "text": "%spark\nimport org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
-      "dateUpdated": "Feb 15, 2017 5:14:04 PM",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:49:59 AM",
       "config": {
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "title": true,
         "enabled": true,
         "tableHide": true,
@@ -75,19 +67,14 @@
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -98,7 +85,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.{Row, SparkSession}\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
+            "data": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
           }
         ]
       },
@@ -111,18 +98,19 @@
       "jobName": "paragraph_1475350680710_-1592658380",
       "id": "20161001-120020_440303718",
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Feb 15, 2017 5:14:04 PM",
-      "dateFinished": "Feb 15, 2017 5:14:05 PM",
+      "dateStarted": "Jul 20, 2018 8:49:59 AM",
+      "dateFinished": "Jul 20, 2018 8:50:00 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Load ACM and DBLP datasets",
       "text": "import spark.implicits._\n\n// ACM\nval acmDF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-acm.parquet\")\nprintln(s\"Loaded ${acmDF.count} ACM records\")\nacmDF.cache()\nacmDF.printSchema()\n\n// DBLP\nval dblp2DF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-dblp2.parquet\")\nprintln(s\"Loaded ${acmDF.count} DBLP records\")\n\n// Ground truth DataFrame\nval groundTruthDF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-acm-vs-dblp2.parquet\")\n\n// DBLP LuceneRDD\nval dblp2 \u003d LuceneRDD(dblp2DF)\ndblp2.cache()\ndblp2.fields()",
-      "dateUpdated": "Feb 15, 2017 5:14:05 PM",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:50:03 AM",
       "config": {
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "title": true,
         "enabled": true,
         "tableHide": true,
@@ -131,19 +119,14 @@
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -154,7 +137,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nimport spark.implicits._\n\nacmDF: org.apache.spark.sql.DataFrame \u003d [id: int, title: string ... 3 more fields]\nLoaded 2294 ACM records\n\nres15: acmDF.type \u003d [id: int, title: string ... 3 more fields]\nroot\n |-- id: integer (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n |-- authors: string (nullable \u003d true)\n |-- venue: string (nullable \u003d true)\n |-- year: integer (nullable \u003d true)\n\n\ndblp2DF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\nLoaded 2294 DBLP records\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: int]\n\ndblp2: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[70] at RDD at LuceneRDD.scala:42\n\nres18: dblp2.type \u003d LuceneRDD[70] at RDD at LuceneRDD.scala:42\n\nres19: Set[String] \u003d Set(year, id, authors, title, venue)\n"
+            "data": "import spark.implicits._\nacmDF: org.apache.spark.sql.DataFrame \u003d [id: int, title: string ... 3 more fields]\nLoaded 2294 ACM records\nres228: acmDF.type \u003d [id: int, title: string ... 3 more fields]\nroot\n |-- id: integer (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n |-- authors: string (nullable \u003d true)\n |-- venue: string (nullable \u003d true)\n |-- year: integer (nullable \u003d true)\n\ndblp2DF: org.apache.spark.sql.DataFrame \u003d [id: string, title: string ... 3 more fields]\nLoaded 2294 DBLP records\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: int]\ndblp2: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[489] at RDD at LuceneRDD.scala:52\nres237: dblp2.type \u003d LuceneRDD[489] at RDD at LuceneRDD.scala:52\nres238: Set[String] \u003d Set(year, id, authors, title, venue)\n"
           }
         ]
       },
@@ -167,19 +150,20 @@
       "jobName": "paragraph_1475350680712_-1594966873",
       "id": "20161001-120320_2078137697",
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Feb 15, 2017 5:14:05 PM",
-      "dateFinished": "Feb 15, 2017 5:14:14 PM",
+      "dateStarted": "Jul 20, 2018 8:50:03 AM",
+      "dateFinished": "Jul 20, 2018 8:50:12 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Register tables for visualization",
       "text": "acmDF.registerTempTable(\"acm\")\ndblp2DF.registerTempTable(\"dblp\")",
-      "dateUpdated": "Feb 15, 2017 5:14:08 PM",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:50:07 AM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "tableHide": true,
         "title": true,
         "results": [
@@ -187,19 +171,14 @@
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -210,7 +189,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n"
+            "data": "warning: there was one deprecation warning; re-run with -deprecation for details\nwarning: there was one deprecation warning; re-run with -deprecation for details\n"
           }
         ]
       },
@@ -223,39 +202,34 @@
       "jobName": "paragraph_1476792709323_-1512020199",
       "id": "20161018-121149_1501647868",
       "dateCreated": "Oct 18, 2016 12:11:49 PM",
-      "dateStarted": "Feb 15, 2017 5:14:08 PM",
-      "dateFinished": "Feb 15, 2017 5:14:16 PM",
+      "dateStarted": "Jul 20, 2018 8:50:07 AM",
+      "dateFinished": "Jul 20, 2018 8:50:13 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "ACM Papers",
       "text": "%sql\nselect title, authors, venue, year, id FROM acm limit 10",
-      "dateUpdated": "Feb 15, 2017 5:14:11 PM",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:50:09 AM",
       "config": {
         "colWidth": 6.0,
         "enabled": true,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "title": true,
         "results": [
           {
-            "helium": {},
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -279,19 +253,20 @@
       "jobName": "paragraph_1476792941795_1780446349",
       "id": "20161018-121541_1139402059",
       "dateCreated": "Oct 18, 2016 12:15:41 PM",
-      "dateStarted": "Feb 15, 2017 5:14:15 PM",
-      "dateFinished": "Feb 15, 2017 5:14:16 PM",
+      "dateStarted": "Jul 20, 2018 8:50:12 AM",
+      "dateFinished": "Jul 20, 2018 8:50:13 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "DBLP papers",
       "text": "%sql\nselect title, authors, venue, year, id FROM dblp limit 10",
-      "dateUpdated": "Feb 15, 2017 5:14:12 PM",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:50:11 AM",
       "config": {
         "colWidth": 6.0,
         "enabled": true,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "title": true,
         "editorHide": false,
         "results": [
@@ -299,42 +274,14 @@
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [
-                {
-                  "name": "title",
-                  "index": 0.0,
-                  "aggr": "sum"
-                }
-              ],
-              "values": [
-                {
-                  "name": "authors",
-                  "index": 1.0,
-                  "aggr": "sum"
-                }
-              ],
-              "groups": [],
-              "scatter": {
-                "xAxis": {
-                  "name": "title",
-                  "index": 0.0,
-                  "aggr": "sum"
-                },
-                "yAxis": {
-                  "name": "authors",
-                  "index": 1.0,
-                  "aggr": "sum"
-                }
-              },
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -358,37 +305,33 @@
       "jobName": "paragraph_1476793006890_1637948050",
       "id": "20161018-121646_135219171",
       "dateCreated": "Oct 18, 2016 12:16:46 PM",
-      "dateStarted": "Feb 15, 2017 5:14:16 PM",
-      "dateFinished": "Feb 15, 2017 5:14:17 PM",
+      "dateStarted": "Jul 20, 2018 8:50:13 AM",
+      "dateFinished": "Jul 20, 2018 8:50:14 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%spark\n\n// Size threshold on the words of *title* field\nval titleThres \u003d z.input(\"title_word_threshold\", 8.0)\n\n// Size threshold of the words on *authors* field\nval authorsThres \u003d z.input(\"authors_word_threshold\", 100.0)\n",
-      "dateUpdated": "Feb 15, 2017 5:14:21 PM",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:50:16 AM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "editorHide": false,
         "results": [
           {
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {
@@ -419,7 +362,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\ntitleThres: Object \u003d 3\n\nauthorsThres: Object \u003d 3\n"
+            "data": "titleThres: Object \u003d 3\nauthorsThres: Object \u003d 3\n"
           }
         ]
       },
@@ -432,18 +375,19 @@
       "jobName": "paragraph_1476993517851_-127333029",
       "id": "20161020-195837_359626346",
       "dateCreated": "Oct 20, 2016 7:58:37 AM",
-      "dateStarted": "Feb 15, 2017 5:14:21 PM",
-      "dateFinished": "Feb 15, 2017 5:14:22 PM",
+      "dateStarted": "Jul 20, 2018 8:50:16 AM",
+      "dateFinished": "Jul 20, 2018 8:50:17 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Define Entity Linkage Function",
       "text": "%spark\n\n// Helper: whitespace split words, keep words \u003e threshold # of chars\ndef tokenizer(s: String, threshold: Int, comb: String \u003d \"OR\"): String \u003d {\n    s.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e threshold).mkString(s\" ${comb} \")\n}\n   \n///////////////////////////////////////////////////////////////////////////////////////\n// Entity linkage function definition, i.e., how do you want your records to be linked?\n//\n// Input: org.apache.spark.sql.Row\n// Output: Lucene query string as in [query string] (https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)\n//////////////////////////////////////////////////////////////////////////////////////\nval linker: Row \u003d\u003e String \u003d { case row \u003d\u003e {\n    \n    // Get title and authors fields\n    val title \u003d row.getString(row.fieldIndex(\"title\"))\n    val authors \u003d row.getString(row.fieldIndex(\"authors\"))\n    \n    val titleTokens \u003d tokenizer(title, Integer.parseInt(titleThres.toString)) // Replace 8 with 3\n    val authorsTerms \u003d tokenizer(authors, Integer.parseInt(authorsThres.toString)) // Use 3 to get 0.97 accuracy\n    \n    if (titleTokens.nonEmpty \u0026\u0026 authorsTerms.nonEmpty) {\n        s\"(title:(${titleTokens})) OR (authors:${authorsTerms})\"\n    }\n    else if (titleTokens.nonEmpty){\n        s\"title:(${titleTokens})\"\n    }\n    else if ( authorsTerms.nonEmpty) {\n        s\"(authors:${authorsTerms})\"\n    }\n    else {\n        \"*:*\"\n    }\n  }\n}",
-      "dateUpdated": "Feb 15, 2017 5:14:25 PM",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:50:25 AM",
       "config": {
         "colWidth": 7.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "enabled": true,
         "title": true,
         "lineNumbers": true,
@@ -452,20 +396,15 @@
           {
             "graph": {
               "mode": "table",
-              "height": 86.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "height": 300.0,
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -476,7 +415,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\ntokenizer: (s: String, threshold: Int, comb: String)String\n\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n"
+            "data": "tokenizer: (s: String, threshold: Int, comb: String)String\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n"
           }
         ]
       },
@@ -489,15 +428,16 @@
       "jobName": "paragraph_1475350680724_-1587271895",
       "id": "20161001-154952_870995671",
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Feb 15, 2017 5:14:25 PM",
-      "dateFinished": "Feb 15, 2017 5:14:26 PM",
+      "dateStarted": "Jul 20, 2018 8:50:25 AM",
+      "dateFinished": "Jul 20, 2018 8:50:26 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Compute Linkage Accuracy",
-      "text": "//////////////////////////////////\n// Entity linkage                /\n//////////////////////////////////\nval linkedResults \u003d dblp2.linkDataFrame(acmDF, linker, 3)\n\n////////////////////////////////////////\n// The rest is for computing accuracy  /\n////////////////////////////////////////\n\n// Linkage Results (get top result)\nval linkageResultsDF \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) \u003d\u003e (topDocs.head.doc.textField(\"id\").get, acm.getInt(acm.fieldIndex(\"id\")).toString)}).toDF(\"idDBLP\", \"idACM\")\n\n// Compute the number of currect results based on ground truth\nval correctHits: Double \u003d linkageResultsDF.join(groundTruthDF, groundTruthDF.col(\"idDBLP\").equalTo(linkageResultsDF(\"idDBLP\")) \u0026\u0026  groundTruthDF.col(\"idACM\").equalTo(linkageResultsDF(\"idACM\"))).count\n\n// Total # of ground truth records    \nval total: Double \u003d groundTruthDF.count\n\n// Accuracy\nval accuracy \u003d correctHits / total\n\nprintln(\"********************************\")\nprintln(\"********************************\")\nprintln(s\"Accuracy of linkage is ${accuracy}\")\nprintln(\"********************************\")\nprintln(\"********************************\")",
-      "dateUpdated": "Feb 15, 2017 5:14:28 PM",
+      "text": "//////////////////////////////////\n// Entity linkage                /\n//////////////////////////////////\nval linkedResults \u003d dblp2.linkDataFrame(acmDF, linker, 3)\n\n////////////////////////////////////////\n// The rest is for computing accuracy  /\n////////////////////////////////////////\n\n// Linkage Results (get top result)\nval linkageResultsDF \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) \u003d\u003e (topDocs.head.doc.textField(\"id\").get, acm.getInt(acm.fieldIndex(\"id\")).toString)}).toDF(\"idDBLP\", \"idACM\")\n\n// Compute the number of currect results based on ground truth\nval correctHits: Double \u003d linkageResultsDF.join(groundTruthDF, groundTruthDF.col(\"idDBLP\").equalTo(linkageResultsDF(\"idDBLP\")) \u0026\u0026  groundTruthDF.col(\"idACM\").equalTo(linkageResultsDF(\"idACM\"))).count\n\n// Total # of ground truth records    \nval total: Double \u003d groundTruthDF.count\n\n// Accuracy\nval accuracy \u003d correctHits / total\n\nprintln(\"*\" * 40)\nprintln(\"*\" * 40)\nprintln(s\"* Accuracy of linkage is ${accuracy}\")\nprintln(\"*\" * 40)\nprintln(\"*\" * 40)",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:50:39 AM",
       "config": {
         "colWidth": 5.0,
         "editorMode": "ace/mode/scala",
@@ -510,19 +450,14 @@
             "graph": {
               "mode": "table",
               "height": 300.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
+              "optionOpen": false
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -533,7 +468,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, Array[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[91] at map at LuceneRDD.scala:187\n\nlinkageResultsDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: string]\n\ncorrectHits: Double \u003d 2162.0\n\ntotal: Double \u003d 2224.0\n\naccuracy: Double \u003d 0.9721223021582733\n********************************\n********************************\nAccuracy of linkage is 0.9721223021582733\n********************************\n********************************\n"
+            "data": "linkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, Array[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[508] at map at LuceneRDD.scala:247\nlinkageResultsDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: string]\ncorrectHits: Double \u003d 2164.0\ntotal: Double \u003d 2224.0\naccuracy: Double \u003d 0.9730215827338129\n****************************************\n****************************************\n* Accuracy of linkage is 0.9730215827338129\n****************************************\n****************************************\n"
           }
         ]
       },
@@ -546,8 +481,8 @@
       "jobName": "paragraph_1475350680724_-1587271895",
       "id": "20161001-155056_1480917921",
       "dateCreated": "Oct 1, 2016 7:38:00 AM",
-      "dateStarted": "Feb 15, 2017 5:14:28 PM",
-      "dateFinished": "Feb 15, 2017 5:14:38 PM",
+      "dateStarted": "Jul 20, 2018 8:50:34 AM",
+      "dateFinished": "Jul 20, 2018 8:50:43 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -561,22 +496,7 @@
         "editorMode": "ace/mode/scala",
         "title": true,
         "results": [
-          {
-            "graph": {
-              "mode": "table",
-              "height": 448.0,
-              "optionOpen": false,
-              "keys": [],
-              "values": [],
-              "groups": [],
-              "scatter": {},
-              "map": {
-                "baseMapType": "Streets",
-                "isOnline": true,
-                "pinCols": []
-              }
-            }
-          }
+          {}
         ]
       },
       "settings": {
@@ -641,15 +561,15 @@
   "name": "/lucenerdd/linkage/acm-vs-dblp (ScalaIO)",
   "id": "2BZ4PG28U",
   "angularObjects": {
-    "2CH4UDTUV:shared_process": [],
-    "2CKCFBMPR:shared_process": [],
-    "2CJP67NJX:shared_process": [],
-    "2CK9YG3TF:shared_process": [],
-    "2CK17QQGN:shared_process": [],
-    "2CJWNB4BE:shared_process": [],
-    "2CH4QY2BC:shared_process": [],
-    "2CH3YEQJH:shared_process": [],
-    "2CJMFN7AB:shared_process": []
+    "2DKN7VGRS:shared_process": [],
+    "2DM9V4S9W:shared_process": [],
+    "2DJTTJT27:shared_process": [],
+    "2DM6T9245:shared_process": [],
+    "2DM6REESM:shared_process": [],
+    "2DNGNJGJD:shared_process": [],
+    "2DJNEV1SS:shared_process": [],
+    "2DJXGPGXP:shared_process": [],
+    "2DKUGPWPT:shared_process": []
   },
   "config": {
     "looknfeel": "default"

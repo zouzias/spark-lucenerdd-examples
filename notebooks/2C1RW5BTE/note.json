@@ -1,8 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.8\")",
-      "dateUpdated": "May 31, 2017 6:26:16 PM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.3-SNAPSHOT\")",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 7:47:07 AM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -35,11 +36,11 @@
         "forms": {}
       },
       "results": {
-        "code": "ERROR",
+        "code": "SUCCESS",
         "msg": [
           {
             "type": "TEXT",
-            "data": "Must be used before SparkInterpreter (%spark) initialized\nHint: put this paragraph before any Spark code and restart Zeppelin/Interpreter"
+            "data": "res0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@2a171248\n"
           }
         ]
       },
@@ -52,18 +53,19 @@
       "jobName": "paragraph_1476132703718_-1609222579",
       "id": "20161010-205143_1251171978",
       "dateCreated": "Oct 10, 2016 8:51:43 AM",
-      "dateStarted": "Jan 22, 2017 10:28:33 AM",
-      "dateFinished": "Jan 22, 2017 10:28:33 AM",
-      "status": "ERROR",
+      "dateStarted": "Jul 20, 2018 7:47:08 AM",
+      "dateFinished": "Jul 20, 2018 7:47:35 AM",
+      "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "\nimport org.zouzias.spark.lucenerdd.facets.FacetedLuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.apache.spark.sql.functions._\nimport org.zouzias.spark.lucenerdd.logging.Logging\nval cities \u003d spark.read.parquet(\"data/world-cities-maxmind.parquet\")",
-      "dateUpdated": "Jan 22, 2017 10:28:34 AM",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 7:48:16 AM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "results": [
           {
             "graph": {
@@ -81,7 +83,11 @@
               }
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -92,7 +98,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nimport org.zouzias.spark.lucenerdd.facets.FacetedLuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.apache.spark.sql.functions._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n\ncities: org.apache.spark.sql.DataFrame \u003d [Country: string, City: string ... 5 more fields]\n"
+            "data": "import org.zouzias.spark.lucenerdd.facets.FacetedLuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.apache.spark.sql.functions._\nimport org.zouzias.spark.lucenerdd.logging.Logging\ncities: org.apache.spark.sql.DataFrame \u003d [Country: string, City: string ... 5 more fields]\n"
           }
         ]
       },
@@ -105,18 +111,19 @@
       "jobName": "paragraph_1476132726766_832055165",
       "id": "20161010-205206_358353446",
       "dateCreated": "Oct 10, 2016 8:52:06 AM",
-      "dateStarted": "Jan 22, 2017 10:28:34 AM",
-      "dateFinished": "Jan 22, 2017 10:28:37 AM",
+      "dateStarted": "Jul 20, 2018 7:48:16 AM",
+      "dateFinished": "Jul 20, 2018 7:48:19 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "cities.cache\ncities.count",
-      "dateUpdated": "Jan 22, 2017 10:28:35 AM",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 7:49:05 AM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "results": [
           {
             "graph": {
@@ -134,7 +141,11 @@
               }
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -145,7 +156,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nres25: cities.type \u003d [Country: string, City: string ... 5 more fields]\n\nres26: Long \u003d 3173958\n"
+            "data": "res2: cities.type \u003d [Country: string, City: string ... 5 more fields]\nres3: Long \u003d 3173958\n"
           }
         ]
       },
@@ -158,28 +169,30 @@
       "jobName": "paragraph_1476132824517_-343967337",
       "id": "20161010-205344_531270225",
       "dateCreated": "Oct 10, 2016 8:53:44 AM",
-      "dateStarted": "Jan 22, 2017 10:28:36 AM",
-      "dateFinished": "Jan 22, 2017 10:28:39 AM",
+      "dateStarted": "Jul 20, 2018 7:49:05 AM",
+      "dateFinished": "Jul 20, 2018 7:49:20 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val fieldName \u003d \"country\"\nval k \u003d 10\nval dfStart \u003d System.currentTimeMillis()\nval dfResults \u003d cities.groupBy(fieldName).count().sort(desc(\"count\")).take(k)\nval dfEnd \u003d System.currentTimeMillis()\n\nval luceneRDD \u003d FacetedLuceneRDD(cities.select(fieldName))\nluceneRDD.cache()\nluceneRDD.count()\nval lucStart \u003dSystem.currentTimeMillis()\nluceneRDD.facetQuery(\"*:*\", fieldName, facetNum \u003d k)\nval lucEnd \u003dSystem.currentTimeMillis()\n\n\nprintln(\"\u003d\" * 20)\nprintln(s\"DF time: ${ (dfEnd - dfStart) / 1000D } seconds\")\nprintln(\"\u003d\" * 20)\nprintln(s\"Lucene time: ${(lucEnd - lucStart) / 1000D} seconds\")\nprintln(\"\u003d\" * 20)",
-      "dateUpdated": "Jan 22, 2017 10:28:37 AM",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 7:49:19 AM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
-        "editorMode": "ace/mode/scala",
-        "results": []
+        "editorMode": "ace/mode/text",
+        "results": [],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "results": {
-        "code": "SUCCESS",
-        "msg": []
-      },
+      "results": "org.apache.thrift.transport.TTransportException",
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
@@ -189,10 +202,10 @@
       "jobName": "paragraph_1476132888753_137784783",
       "id": "20161010-205448_472882432",
       "dateCreated": "Oct 10, 2016 8:54:48 AM",
-      "dateStarted": "Jan 22, 2017 10:28:37 AM",
-      "dateFinished": "Nov 9, 2016 3:15:18 AM",
-      "status": "ABORT",
-      "errorMessage": "",
+      "dateStarted": "Jul 20, 2018 7:49:19 AM",
+      "dateFinished": "Jul 20, 2018 7:50:20 AM",
+      "status": "ERROR",
+      "errorMessage": "org.apache.thrift.transport.TTransportException\n\tat org.apache.thrift.transport.TIOStreamTransport.read(TIOStreamTransport.java:132)\n\tat org.apache.thrift.transport.TTransport.readAll(TTransport.java:86)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readAll(TBinaryProtocol.java:429)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readI32(TBinaryProtocol.java:318)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readMessageBegin(TBinaryProtocol.java:219)\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:69)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:266)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:250)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:373)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:97)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:406)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:329)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:748)\n",
       "progressUpdateIntervalMs": 500
     },
     {
@@ -237,15 +250,15 @@
   "name": "/lucenerdd/df_vs_lucenerdd",
   "id": "2C1RW5BTE",
   "angularObjects": {
-    "2CH4UDTUV:shared_process": [],
-    "2CKCFBMPR:shared_process": [],
-    "2CJP67NJX:shared_process": [],
-    "2CK9YG3TF:shared_process": [],
-    "2CK17QQGN:shared_process": [],
-    "2CJWNB4BE:shared_process": [],
-    "2CH4QY2BC:shared_process": [],
-    "2CH3YEQJH:shared_process": [],
-    "2CJMFN7AB:shared_process": []
+    "2DKN7VGRS:shared_process": [],
+    "2DM9V4S9W:shared_process": [],
+    "2DJTTJT27:shared_process": [],
+    "2DM6T9245:shared_process": [],
+    "2DM6REESM:shared_process": [],
+    "2DNGNJGJD:shared_process": [],
+    "2DJNEV1SS:shared_process": [],
+    "2DJXGPGXP:shared_process": [],
+    "2DKUGPWPT:shared_process": []
   },
   "config": {},
   "info": {}

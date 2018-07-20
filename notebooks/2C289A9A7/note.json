@@ -2,8 +2,9 @@
   "paragraphs": [
     {
       "title": "Load Spark LuceneRDD Jars",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.8\")",
-      "dateUpdated": "May 31, 2017 6:26:32 PM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.3-SNAPSHOT\")",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 7:54:30 AM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/text",
@@ -54,18 +55,19 @@
       "jobName": "paragraph_1476819348997_1965972767",
       "id": "20161001-115642_482200633",
       "dateCreated": "Oct 18, 2016 7:35:48 AM",
-      "dateStarted": "Oct 18, 2016 7:46:40 AM",
-      "dateFinished": "Oct 18, 2016 7:46:40 AM",
+      "dateStarted": "Jul 20, 2018 7:54:30 AM",
+      "dateFinished": "Jul 20, 2018 7:54:30 AM",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Imports for spark-lucenerdd",
-      "text": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.SparkSession\nimport org.apache.spark.sql.Row\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
-      "dateUpdated": "Oct 18, 2016 7:46:40 AM",
+      "text": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.SparkSession\nimport org.apache.spark.sql.Row\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\nimport org.zouzias.spark.lucenerdd.models.SparkScoreDoc\n",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:09:22 AM",
       "config": {
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "title": true,
         "enabled": true,
         "results": [
@@ -85,7 +87,11 @@
               }
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -96,7 +102,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nimport org.apache.spark.SparkConf\n\nimport org.apache.spark.sql.SparkSession\n\nimport org.apache.spark.sql.Row\n\nimport org.zouzias.spark.lucenerdd.LuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
+            "data": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.SparkSession\nimport org.apache.spark.sql.Row\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\nimport org.zouzias.spark.lucenerdd.models.SparkScoreDoc\n"
           }
         ]
       },
@@ -109,18 +115,19 @@
       "jobName": "paragraph_1476819349007_1963664273",
       "id": "20161001-120020_440303718",
       "dateCreated": "Oct 18, 2016 7:35:49 AM",
-      "dateStarted": "Oct 18, 2016 7:46:40 AM",
-      "dateFinished": "Oct 18, 2016 7:46:42 AM",
+      "dateStarted": "Jul 20, 2018 8:09:22 AM",
+      "dateFinished": "Jul 20, 2018 8:09:24 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Load Abt \u0026 Buy datasets",
       "text": "import spark.implicits._\n\nval abtDF \u003d spark.read.parquet(\"data/linkage-products2/linkage-products-abt.parquet\")\nval buyDF \u003d spark.read.parquet(\"data/linkage-products2/linkage-products-buy.parquet\")\nval groundTruthDF \u003d spark.read.parquet(\"data/linkage-products2/linkage-products-abt-vs-buy.parquet\")",
-      "dateUpdated": "Oct 18, 2016 7:46:40 AM",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 7:54:59 AM",
       "config": {
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/text",
         "title": true,
         "enabled": true,
         "results": [
@@ -140,7 +147,11 @@
               }
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -151,7 +162,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nimport spark.implicits._\n\nabtDF: org.apache.spark.sql.DataFrame \u003d [id: int, name: string ... 2 more fields]\n\nbuyDF: org.apache.spark.sql.DataFrame \u003d [id: int, name: string ... 3 more fields]\n\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idAbt: int, idBuy: int]\n"
+            "data": "import spark.implicits._\nabtDF: org.apache.spark.sql.DataFrame \u003d [id: int, name: string ... 2 more fields]\nbuyDF: org.apache.spark.sql.DataFrame \u003d [id: int, name: string ... 3 more fields]\ngroundTruthDF: org.apache.spark.sql.DataFrame \u003d [idAbt: int, idBuy: int]\n"
           }
         ]
       },
@@ -164,15 +175,16 @@
       "jobName": "paragraph_1476819349010_1974821991",
       "id": "20161001-120320_2078137697",
       "dateCreated": "Oct 18, 2016 7:35:49 AM",
-      "dateStarted": "Oct 18, 2016 7:46:40 AM",
-      "dateFinished": "Oct 18, 2016 7:46:45 AM",
+      "dateStarted": "Jul 20, 2018 7:54:59 AM",
+      "dateFinished": "Jul 20, 2018 7:55:03 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Prepare LuceneRDD",
-      "text": "val abt \u003d abtDF.select(\"id\", \"name\", \"description\")\nval buyLuceneRDD \u003d LuceneRDD(buyDF)\nbuyLuceneRDD.cache\nbuyLuceneRDD.fields()",
-      "dateUpdated": "Oct 18, 2016 7:46:40 AM",
+      "text": "val abt \u003d abtDF.select(\"id\", \"name\", \"description\")\nval buyLuceneRDD \u003d LuceneRDD(buyDF)\nbuyLuceneRDD.cache\nprint(\"Fields are:\")\nbuyLuceneRDD.fields().foreach(println)",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:47:06 AM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -195,7 +207,11 @@
               }
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -206,7 +222,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nabt: org.apache.spark.sql.DataFrame \u003d [id: int, name: string ... 1 more field]\n\nbuyLuceneRDD: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[134] at RDD at LuceneRDD.scala:40\n\nres14: buyLuceneRDD.type \u003d LuceneRDD[134] at RDD at LuceneRDD.scala:40\n\nres15: Set[String] \u003d Set(name, description, price, id, manufacturer)\n"
+            "data": "abt: org.apache.spark.sql.DataFrame \u003d [id: int, name: string ... 1 more field]\nbuyLuceneRDD: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[461] at RDD at LuceneRDD.scala:52\nres222: buyLuceneRDD.type \u003d LuceneRDD[461] at RDD at LuceneRDD.scala:52\nFields are:name\ndescription\nprice\nid\nmanufacturer\n"
           }
         ]
       },
@@ -219,14 +235,15 @@
       "jobName": "paragraph_1476819349011_1974437242",
       "id": "20161001-145632_657667869",
       "dateCreated": "Oct 18, 2016 7:35:49 AM",
-      "dateStarted": "Oct 18, 2016 7:46:43 AM",
-      "dateFinished": "Oct 18, 2016 7:46:47 AM",
+      "dateStarted": "Jul 20, 2018 8:47:06 AM",
+      "dateFinished": "Jul 20, 2018 8:47:09 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "def tokenizer(s: String, threshold: Int, comb: String \u003d \"OR\"): String \u003d {\n    s.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e threshold).mkString(s\" ${comb} \")\n}\n   \n// Entity linkage function definition, i.e., how do you want your records to be linked?\n// Input: org.apache.spark.sql.Row\n// Output: Lucene query string as in [query string](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)\nval linker: Row \u003d\u003e String \u003d {\n  case row: Row \u003d\u003e {\n    val nameTokens \u003d tokenizer(row.getString(row.fieldIndex(\"name\")), 2)\n    val descTerms \u003d tokenizer(row.getString(row.fieldIndex(\"description\")), 6)\n\n    /*\n    if (descTerms.nonEmpty \u0026\u0026 nameTokens.nonEmpty \u0026\u0026 manuTerms.nonEmpty) {\n      s\"(name:(${nameTokens}))^10 OR (description:${descTerms}) OR (manufacturer:${manuTerms})^5\"\n    }\n    else if (nameTokens.nonEmpty \u0026\u0026 manuTerms.nonEmpty) {\n        s\"(name:(${nameTokens}))^10 OR (manufacturer:${manuTerms})\"\n    \n    } \n    else if (nameTokens.nonEmpty) {\n        s\"name:(${nameTokens})\" \n    }\n    else {\n        \"*:*\"\n    }*/\n    \n   if (nameTokens.nonEmpty) {\n      s\"name:(${nameTokens})\"\n    }\n    else {\n      \"*:*\"\n    }\n  }\n}",
-      "dateUpdated": "Oct 18, 2016 7:46:40 AM",
+      "text": "def tokenizer(s: String, threshold: Int, comb: String \u003d \"OR\"): String \u003d {\n    s.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e threshold).mkString(s\" ${comb} \")\n}\n   \n// Entity linkage function definition, i.e., how do you want your records to be linked?\n// Input: org.apache.spark.sql.Row\n// Output: Lucene query string as in [query string](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)\nval linker: Row \u003d\u003e String \u003d {\n  case row: Row \u003d\u003e {\n    val nameTokens \u003d tokenizer(row.getString(row.fieldIndex(\"name\")), 2)\n    val descTerms \u003d tokenizer(row.getString(row.fieldIndex(\"description\")), 7)\n\n    if (descTerms.nonEmpty \u0026\u0026 nameTokens.nonEmpty) {\n      s\"(name:(${nameTokens})) OR (description:${descTerms})\"\n    }\n    else if (nameTokens.nonEmpty) {\n        s\"(name:(${nameTokens}))\"\n    \n    } \n    else {\n        \"*:*\"\n    }\n    \n   /*\n   if (nameTokens.nonEmpty) {\n      s\"name:(${nameTokens})\"\n    }\n    else {\n      \"*:*\"\n    }*/\n  }\n}",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:46:56 AM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -248,7 +265,11 @@
               }
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -259,7 +280,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\ntokenizer: (s: String, threshold: Int, comb: String)String\n\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n"
+            "data": "tokenizer: (s: String, threshold: Int, comb: String)String\nlinker: org.apache.spark.sql.Row \u003d\u003e String \u003d \u003cfunction1\u003e\n"
           }
         ]
       },
@@ -272,17 +293,54 @@
       "jobName": "paragraph_1476819349012_1972513498",
       "id": "20161001-154952_870995671",
       "dateCreated": "Oct 18, 2016 7:35:49 AM",
-      "dateStarted": "Oct 18, 2016 7:46:45 AM",
-      "dateFinished": "Oct 18, 2016 7:46:48 AM",
+      "dateStarted": "Jul 20, 2018 8:19:12 AM",
+      "dateFinished": "Jul 20, 2018 8:19:13 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "val linkedResults \u003d buyLuceneRDD.linkDataFrame(abt, linker, 3)\n\nval linkageResults \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (left, topDocs) \u003d\u003e (topDocs.head.doc.textField(\"id\").head, left.getInt(left.fieldIndex(\"id\")))}).toDF(\"idBuy\", \"idAbt\")\n\nval correctHits: Double \u003d linkageResults.join(groundTruthDF, groundTruthDF.col(\"idAbt\").equalTo(linkageResults(\"idAbt\")) \u0026\u0026  groundTruthDF.col(\"idBuy\").equalTo(linkageResults(\"idBuy\"))).count\nval total: Double \u003d groundTruthDF.count\nval accuracy \u003d correctHits / total\n\nprintln(\"********************************\")\nprintln(s\"Accuracy of linkage is ${accuracy}\")\nprintln(\"********************************\")",
-      "dateUpdated": "Oct 18, 2016 7:48:23 AM",
+      "text": "val linkedResults \u003d buyLuceneRDD.linkDataFrame(abt, linker, 3).filter(_._2.nonEmpty)",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:19:17 AM",
       "config": {
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "linkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, Array[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[443] at filter at \u003cconsole\u003e:65\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1532073566644_-782520635",
+      "id": "20180720-075926_960572060",
+      "dateCreated": "Jul 20, 2018 7:59:26 AM",
+      "dateStarted": "Jul 20, 2018 8:19:17 AM",
+      "dateFinished": "Jul 20, 2018 8:19:18 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "def linkedResultToIds(left: Row, topDocs: Array[SparkScoreDoc]): (Long, Long) \u003d {\n  (topDocs.head.doc.numericField(\"id\").head.longValue(), left.getInt(left.fieldIndex(\"id\")))\n}\n\nval linkageResults \u003d linkedResults.map{ case (left, topDocs) \u003d\u003e linkedResultToIds(left, topDocs)}.toDF(\"idBuy\", \"idAbt\")",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:19:19 AM",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/text",
         "enabled": true,
         "results": [
           {
@@ -301,7 +359,11 @@
               }
             }
           }
-        ]
+        ],
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        }
       },
       "settings": {
         "params": {},
@@ -312,7 +374,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, List[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])] \u003d MapPartitionsRDD[205] at map at LuceneRDD.scala:177\n\nlinkageResults: org.apache.spark.sql.DataFrame \u003d [idBuy: string, idAbt: int]\n\ncorrectHits: Double \u003d 711.0\n\ntotal: Double \u003d 1097.0\n\naccuracy: Double \u003d 0.6481312670920693\n********************************\nAccuracy of linkage is 0.6481312670920693\n********************************\n"
+            "data": "linkedResultToIds: (left: org.apache.spark.sql.Row, topDocs: Array[org.zouzias.spark.lucenerdd.models.SparkScoreDoc])(Long, Long)\nlinkageResults: org.apache.spark.sql.DataFrame \u003d [idBuy: bigint, idAbt: bigint]\n"
           }
         ]
       },
@@ -325,19 +387,24 @@
       "jobName": "paragraph_1476819349014_1973282996",
       "id": "20161001-155056_1480917921",
       "dateCreated": "Oct 18, 2016 7:35:49 AM",
-      "dateStarted": "Oct 18, 2016 7:48:23 AM",
-      "dateFinished": "Oct 18, 2016 7:48:28 AM",
+      "dateStarted": "Jul 20, 2018 8:19:19 AM",
+      "dateFinished": "Jul 20, 2018 8:19:20 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "",
-      "dateUpdated": "Oct 18, 2016 7:46:41 AM",
+      "text": "val correctHits: Double \u003d linkageResults.join(groundTruthDF, groundTruthDF.col(\"idAbt\").equalTo(linkageResults(\"idAbt\"))\n    \u0026\u0026  groundTruthDF.col(\"idBuy\").equalTo(linkageResults(\"idBuy\")))\n    .count()\nval total: Double \u003d groundTruthDF.count\nval accuracy \u003d correctHits / total\n\nprintln(\"*\" * 40)\nprintln(s\"* Number of examples : ${total}\")\nprintln(s\"* Number of correct linkages : ${correctHits}\")\nprintln(\"*\" * 40)\n\nprintln(\"*\" * 50)\nprintln(s\"* Accuracy of linkage is ${accuracy}\")\nprintln(\"*\" * 50)",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:47:38 AM",
       "config": {
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
         "enabled": true,
-        "results": []
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/scala"
       },
       "settings": {
         "params": {},
@@ -345,35 +412,60 @@
       },
       "results": {
         "code": "SUCCESS",
-        "msg": []
-      },
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": ""
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "correctHits: Double \u003d 697.0\ntotal: Double \u003d 1097.0\naccuracy: Double \u003d 0.6353691886964449\n****************************************\n* Number of examples : 1097.0\n* Number of correct linkages : 697.0\n****************************************\n**************************************************\n* Accuracy of linkage is 0.6353691886964449\n**************************************************\n"
+          }
+        ]
       },
       "apps": [],
-      "jobName": "paragraph_1476819349015_1972898247",
-      "id": "20161001-155628_1046044654",
-      "dateCreated": "Oct 18, 2016 7:35:49 AM",
-      "dateStarted": "Oct 18, 2016 7:46:48 AM",
-      "dateFinished": "Oct 18, 2016 7:46:48 AM",
+      "jobName": "paragraph_1532073439648_1898593591",
+      "id": "20180720-075719_1212768543",
+      "dateCreated": "Jul 20, 2018 7:57:19 AM",
+      "dateStarted": "Jul 20, 2018 8:19:20 AM",
+      "dateFinished": "Jul 20, 2018 8:19:26 AM",
       "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "println(\"*\" * 40)",
+      "user": "anonymous",
+      "dateUpdated": "Jul 20, 2018 8:11:28 AM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1532074190995_-67801674",
+      "id": "20180720-080950_1868672462",
+      "dateCreated": "Jul 20, 2018 8:09:50 AM",
+      "status": "READY",
       "progressUpdateIntervalMs": 500
     }
   ],
   "name": "/lucenerdd/linkage/abt-vs-buy",
   "id": "2C289A9A7",
   "angularObjects": {
-    "2CH4UDTUV:shared_process": [],
-    "2CKCFBMPR:shared_process": [],
-    "2CJP67NJX:shared_process": [],
-    "2CK9YG3TF:shared_process": [],
-    "2CK17QQGN:shared_process": [],
-    "2CJWNB4BE:shared_process": [],
-    "2CH4QY2BC:shared_process": [],
-    "2CH3YEQJH:shared_process": [],
-    "2CJMFN7AB:shared_process": []
+    "2DKN7VGRS:shared_process": [],
+    "2DM9V4S9W:shared_process": [],
+    "2DJTTJT27:shared_process": [],
+    "2DM6T9245:shared_process": [],
+    "2DM6REESM:shared_process": [],
+    "2DNGNJGJD:shared_process": [],
+    "2DJNEV1SS:shared_process": [],
+    "2DJXGPGXP:shared_process": [],
+    "2DKUGPWPT:shared_process": []
   },
   "config": {
     "looknfeel": "default"

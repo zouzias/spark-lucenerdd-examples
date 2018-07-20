@@ -22,7 +22,6 @@ object LinkageScholarvsDBLP extends Logging {
     import sc.implicits._
 
     val start = System.currentTimeMillis()
-
     val scholarDF = sc.read.parquet("data/linkage-papers1/linkage-papers-scholar.parquet")
     logInfo(s"Loaded ${scholarDF.count} ACM records")
     val dblpDF = sc.read.parquet("data/linkage-papers1/linkage-papers-dblp.parquet")
@@ -39,8 +38,14 @@ object LinkageScholarvsDBLP extends Logging {
         val title = row.getString(row.fieldIndex("title"))
         val authors = row.getString(row.fieldIndex("authors"))
 
-        val titleTokens = title.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 3).mkString(" OR ")
-        val authorsTerms = authors.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 2).mkString(" OR ")
+        val titleTokens = title.split(" ")
+          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
+          .filter(_.length > 3)
+          .mkString(" OR ")
+        val authorsTerms = authors.split(" ")
+          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
+          .filter(_.length > 2)
+          .mkString(" OR ")
 
         if (titleTokens.nonEmpty && authorsTerms.nonEmpty) {
           s"(title:(${titleTokens}) OR authors:(${authorsTerms}))"
@@ -57,9 +62,9 @@ object LinkageScholarvsDBLP extends Logging {
       }
     }
 
-    val linkedResults = dblp.linkDataFrame(scholar, linker, 3)
+    val linkedResults = dblp.linkDataFrame(scholar, linker, 3).filter(_._2.nonEmpty)
 
-    val linkageResults = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (scholar, topDocs) => (topDocs.head.doc.textField("id").head, scholar.getString(scholar.fieldIndex("id")))})
+    val linkageResults = sc.createDataFrame(linkedResults.map{ case (schl, topDocs) => (topDocs.head.doc.textField("id").head, schl.getString(schl.fieldIndex("id")))})
       .toDF("idDBLP", "idScholar")
 
     val correctHits: Double = linkageResults
@@ -69,9 +74,9 @@ object LinkageScholarvsDBLP extends Logging {
 
     val end = System.currentTimeMillis()
 
-    println("=" * 40)
-    println(s"Elapsed time: ${(end - start) / 1000.0} seconds")
-    println("=" * 40)
+    logInfo("=" * 40)
+    logInfo(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    logInfo("=" * 40)
 
 
     logInfo("********************************")
