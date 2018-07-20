@@ -34,9 +34,24 @@ object LinkageGooglevsAmazon extends Logging {
     // Custom linker
     val linker: (String, String, String, String) => String = {
       case (_, name, description, manu) => {
-        val nameTokens = name.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 1).distinct.mkString(" OR ")
-        val descTerms = description.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 6).distinct.mkString(" OR ")
-        val manuTerms = manu.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 1).mkString(" OR ")
+
+        // Clean fields and tokenize them
+        val nameTokens = name.split(" ")
+          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
+          .filter(_.length > 1)
+          .distinct
+          .mkString(" OR ")
+
+        val descTerms = description.split(" ")
+          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
+          .filter(_.length > 6)
+          .distinct
+          .mkString(" OR ")
+
+        val manuTerms = manu.split(" ")
+          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
+          .filter(_.length > 1)
+          .mkString(" OR ")
 
         /*
         if (descTerms.nonEmpty && nameTokens.nonEmpty && manuTerms.nonEmpty) {
@@ -61,15 +76,18 @@ object LinkageGooglevsAmazon extends Logging {
       }
     }
 
-    val linkedResults = googleLuceneRDD.link(amazon.rdd, linker.tupled, 3)
+    val linkedResults = googleLuceneRDD.link(amazon.rdd, linker.tupled, 3).filter(_._2.nonEmpty)
 
     import sc.implicits._
 
-    val linkageResults = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (left, topDocs) => (topDocs.head.doc.textField("_1").head, left._1)})
+    val linkageResults = sc.createDataFrame(linkedResults
+      .map{ case (left, topDocs) => (topDocs.head.doc.textField("_1").head, left._1)})
       .toDF("idGoogleBase", "idAmazon")
 
-    val correctHits: Double = linkageResults.join(groundTruthDF, groundTruthDF.col("idAmazon").equalTo(linkageResults("idAmazon")) &&  groundTruthDF.col("idGoogleBase").equalTo(linkageResults("idGoogleBase"))).count
-    val total: Double = groundTruthDF.count
+    val correctHits: Double = linkageResults
+      .join(groundTruthDF, groundTruthDF.col("idAmazon").equalTo(linkageResults("idAmazon")) &&  groundTruthDF.col("idGoogleBase").equalTo(linkageResults("idGoogleBase")))
+      .count()
+    val total: Double = groundTruthDF.count()
     val accuracy = correctHits / total
     val end = System.currentTimeMillis()
 
@@ -77,12 +95,12 @@ object LinkageGooglevsAmazon extends Logging {
     logInfo(s"Elapsed time: ${(end - start) / 1000.0} seconds")
     logInfo("=" * 40)
 
-    logInfo("********************************")
+    logInfo("*" * 40)
     logInfo(s"Accuracy of linkage is ${accuracy}")
-    logInfo("********************************")
+    logInfo("*" * 40)
+
     // terminate spark context
     sc.stop()
-
   }
 }
 

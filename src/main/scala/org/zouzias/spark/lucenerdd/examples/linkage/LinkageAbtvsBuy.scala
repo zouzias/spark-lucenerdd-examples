@@ -36,8 +36,13 @@ object LinkageAbtvsBuy extends Logging {
 
     val linker: (String, String, String, String) => String = {
       case (_, name, description, _) => {
-        val nameTokens = name.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 0).mkString(" OR ")
-        val descTerms = description.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 0).mkString(" OR ")
+        val nameTokens = name.split(" ")
+          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
+          .filter(_.length > 0).mkString(" OR ")
+
+        val descTerms = description.split(" ")
+          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
+          .filter(_.length > 0).mkString(" OR ")
 
         if (descTerms.nonEmpty) {
           s"(_2:(${nameTokens})) OR (_3:${descTerms})"
@@ -51,9 +56,14 @@ object LinkageAbtvsBuy extends Logging {
 
     val linkedResults = buy.link(abt.rdd, linker.tupled, 3)
 
-    val linkageResultsIds = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (abtId, topDocs) => (topDocs.head.doc.textField("_1").head, abtId._1.toInt)}).toDF("idBuy", "idAbt")
+    val linkageResultsIds = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty)
+      .map{ case (abtId, topDocs) => (topDocs.head.doc.textField("_1").head, abtId._1.toInt)})
+      .toDF("idBuy", "idAbt")
 
-    val correctHits: Double = linkageResultsIds.join(groundTruthDF, groundTruthDF.col("idAbt").equalTo(linkageResultsIds("idAbt")) &&  groundTruthDF.col("idBuy").equalTo(linkageResultsIds("idBuy"))).count
+    val correctHits: Double = linkageResultsIds
+      .join(groundTruthDF, groundTruthDF.col("idAbt").equalTo(linkageResultsIds("idAbt")) && groundTruthDF.col("idBuy").equalTo(linkageResultsIds("idBuy")))
+      .count()
+
     val total: Double = groundTruthDF.count
 
     val accuracy = correctHits / total
@@ -61,12 +71,12 @@ object LinkageAbtvsBuy extends Logging {
     val end = System.currentTimeMillis()
 
     logInfo("=" * 40)
-    logInfo(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    logInfo(s"|| Elapsed time: ${(end - start) / 1000.0} seconds ||")
     logInfo("=" * 40)
 
-    logInfo("********************************")
-    logInfo(s"Accuracy of linkage is ${accuracy}")
-    logInfo("********************************")
+    logInfo("*" * 40)
+    logInfo(s"* Accuracy of linkage is ${accuracy} *")
+    logInfo("*" * 40)
     // terminate sparkSession context
     sc.stop()
 

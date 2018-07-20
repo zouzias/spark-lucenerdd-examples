@@ -20,7 +20,7 @@ object ShapeLuceneRDDLinkageCountriesvsCapitals extends Logging {
     // initialise spark context
     val conf = new SparkConf().setAppName(ShapeLuceneRDDLinkageCountriesvsCapitals.getClass.getName)
 
-    implicit val spark = SparkSession.builder.config(conf).getOrCreate()
+    implicit val spark: SparkSession = SparkSession.builder.config(conf).getOrCreate()
     import spark.implicits._
 
     val start = System.currentTimeMillis()
@@ -59,6 +59,7 @@ object ShapeLuceneRDDLinkageCountriesvsCapitals extends Logging {
     println("=" * 40)
     println(s"Elapsed time: ${(end - start) / 1000.0} seconds")
     println("=" * 40)
+
     // terminate spark context
     spark.stop()
 

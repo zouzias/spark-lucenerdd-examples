@@ -33,11 +33,21 @@ object BlockLinkageAmazon extends Logging {
         val name = row.getString(row.fieldIndex("title"))
         val description = row.getString(row.fieldIndex("description"))
         val manu = row.getString(row.fieldIndex("manufacturer"))
-        val nameTokens = name.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 1).distinct.mkString(" OR ")
-        val descTerms = description.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 6).distinct.mkString(" OR ")
-        val manuTerms = manu.split(" ").map(_.replaceAll("[^a-zA-Z0-9]", "")).filter(_.length > 1).mkString(" OR ")
+        val nameTokens = name.split(" ")
+          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
+          .filter(_.length > 1)
+          .distinct
+          .mkString(" OR ")
+        val descTerms = description.split(" ")
+          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
+          .filter(_.length > 6)
+          .distinct
+          .mkString(" OR ")
 
-        if (nameTokens.nonEmpty) {
+        if (nameTokens.nonEmpty && descTerms.nonEmpty) {
+          s"title:(${nameTokens}) OR description:(${descTerms})"
+        }
+        else if (nameTokens.nonEmpty){
           s"title:(${nameTokens})"
         }
         else {
@@ -69,12 +79,12 @@ object BlockLinkageAmazon extends Logging {
     val end = System.currentTimeMillis()
 
     logInfo("=" * 40)
-    logInfo(s"Elapsed time: ${(end - start) / 1000.0} seconds")
+    logInfo(s"|| Elapsed time: ${(end - start) / 1000.0} seconds ||")
     logInfo("=" * 40)
 
-    logInfo("********************************")
-    logInfo(s"Accuracy of linkage is $accuracy")
-    logInfo("********************************")
+    logInfo("*" * 40)
+    logInfo(s"* Accuracy of deduplication is $accuracy *")
+    logInfo("*" * 40)
     // terminate spark context
     spark.stop()
 
