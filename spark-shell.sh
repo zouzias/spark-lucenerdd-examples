@@ -6,7 +6,7 @@ CURRENT_DIR=`pwd`
 SPARK_LUCENERDD_VERSION=`cat version.sbt | awk '{print $5}' | xargs`
 
 # Spark version (requires uncompressed tar.gz under $HOME)
-SPARK_VERSION="2.3.1"
+SPARK_VERSION="2.3.2"
 
 
 echo "==============================================="
@@ -36,4 +36,4 @@ ${SPARK_HOME}/bin/spark-shell   \
         --conf "spark.driver.extraJavaOptions=-Dlucenerdd.index.store.mode=disk" \
         --conf "spark.executor.extraJavaOptions=-Dlucenerdd.index.store.mode=disk" \
         --master local[*] \
-        --jars ${MAIN_JAR} 
+        --jars ${MAIN_JAR}
