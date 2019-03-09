@@ -22,7 +22,7 @@ SPARK_HOME=${HOME_DIR}/spark-${SPARK_VERSION}-bin-hadoop2.7
 # spark-lucenerdd assembly JAR
 MAIN_JAR=${CURRENT_DIR}/target/scala-2.11/spark-lucenerdd-examples-assembly-${SPARK_LUCENERDD_VERSION}.jar
 
-echo "SPARK SUBMIT: $1"
+echo "SPARK SHELL: $1"
 
 # Run spark shell locally
 ${SPARK_HOME}/bin/spark-shell   \

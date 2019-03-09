@@ -1,5 +1,8 @@
 package org.zouzias.spark.lucenerdd.examples.linkage
 
+import org.apache.lucene.index.Term
+import org.apache.lucene.search.BooleanClause.Occur
+import org.apache.lucene.search.{BooleanQuery, MatchAllDocsQuery, Query, TermQuery}
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.zouzias.spark.lucenerdd.{LuceneRDD, _}
@@ -11,7 +14,7 @@ import org.zouzias.spark.lucenerdd.logging.Logging
  *
  * You can run this locally with ./spark-blocklinkage-amazon.sh
  */
-object BlockLinkageAmazon extends Logging {
+object BlockDedupAmazon extends Logging {
 
   def main(args: Array[String]) {
 
@@ -28,29 +31,43 @@ object BlockLinkageAmazon extends Logging {
     val amazon = amazonDF.select("id", "title", "description", "manufacturer")
 
     // Custom linker
-    val linker: Row => String = {
-      case row => {
+    val linker: Row => Query = { row => {
+
         val name = row.getString(row.fieldIndex("title"))
         val description = row.getString(row.fieldIndex("description"))
         val nameTokens = name.split(" ")
           .map(_.replaceAll("[^a-zA-Z0-9]", ""))
           .filter(_.length > 1)
           .distinct
-          .mkString(" OR ")
+
         val descTerms = description.split(" ")
           .map(_.replaceAll("[^a-zA-Z0-9]", ""))
-          .filter(_.length > 6)
+          .filter(_.length > 2)
           .distinct
-          .mkString(" OR ")
+
+        val booleanQuery = new BooleanQuery.Builder()
 
         if (nameTokens.nonEmpty && descTerms.nonEmpty) {
-          s"title:(${nameTokens}) OR description:(${descTerms})"
+          nameTokens.foreach{ name =>
+            booleanQuery.add(new TermQuery(new Term("title", name)), Occur.SHOULD)
+          }
+
+          descTerms.foreach{ name =>
+            booleanQuery.add(new TermQuery(new Term("description", name)), Occur.SHOULD)
+          }
+
+          booleanQuery.build()
+
         }
         else if (nameTokens.nonEmpty){
-          s"title:(${nameTokens})"
+          nameTokens.foreach{ name =>
+            booleanQuery.add(new TermQuery(new Term("title", name)), Occur.SHOULD)
+          }
+
+          booleanQuery.build()
         }
         else {
-          "*:*"
+          new MatchAllDocsQuery()
         }
       }
     }
