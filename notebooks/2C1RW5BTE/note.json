@@ -1,9 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.3-SNAPSHOT\")",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.6-SNAPSHOT\")",
       "user": "anonymous",
-      "dateUpdated": "Jul 20, 2018 7:47:07 AM",
+      "dateUpdated": "2019-03-09 22:50:20.602",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -29,7 +29,9 @@
         "editorSetting": {
           "language": "text",
           "editOnDblClick": false
-        }
+        },
+        "fontSize": 9.0,
+        "tableHide": true
       },
       "settings": {
         "params": {},
@@ -40,7 +42,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "res0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@2a171248\n"
+            "data": "res0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@788f1ff1\n"
           }
         ]
       },
@@ -52,16 +54,16 @@
       "apps": [],
       "jobName": "paragraph_1476132703718_-1609222579",
       "id": "20161010-205143_1251171978",
-      "dateCreated": "Oct 10, 2016 8:51:43 AM",
-      "dateStarted": "Jul 20, 2018 7:47:08 AM",
-      "dateFinished": "Jul 20, 2018 7:47:35 AM",
+      "dateCreated": "2016-10-10 08:51:43.000",
+      "dateStarted": "2019-03-09 22:47:29.660",
+      "dateFinished": "2019-03-09 22:48:08.310",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "\nimport org.zouzias.spark.lucenerdd.facets.FacetedLuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.apache.spark.sql.functions._\nimport org.zouzias.spark.lucenerdd.logging.Logging\nval cities \u003d spark.read.parquet(\"data/world-cities-maxmind.parquet\")",
       "user": "anonymous",
-      "dateUpdated": "Jul 20, 2018 7:48:16 AM",
+      "dateUpdated": "2019-03-09 22:50:15.533",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -87,7 +89,9 @@
         "editorSetting": {
           "language": "text",
           "editOnDblClick": false
-        }
+        },
+        "fontSize": 9.0,
+        "tableHide": true
       },
       "settings": {
         "params": {},
@@ -107,19 +111,31 @@
         "type": "TEXT",
         "msg": "\nimport org.zouzias.spark.lucenerdd.facets.FacetedLuceneRDD\n\nimport org.zouzias.spark.lucenerdd._\n\nimport org.apache.spark.sql.functions._\n\nimport org.zouzias.spark.lucenerdd.logging.Logging\n\ncities: org.apache.spark.sql.DataFrame \u003d [Country: string, City: string ... 5 more fields]\n"
       },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.19.0.2:4040/jobs/job?id\u003d0"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "apps": [],
       "jobName": "paragraph_1476132726766_832055165",
       "id": "20161010-205206_358353446",
-      "dateCreated": "Oct 10, 2016 8:52:06 AM",
-      "dateStarted": "Jul 20, 2018 7:48:16 AM",
-      "dateFinished": "Jul 20, 2018 7:48:19 AM",
+      "dateCreated": "2016-10-10 08:52:06.000",
+      "dateStarted": "2019-03-09 22:47:33.564",
+      "dateFinished": "2019-03-09 22:48:50.188",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "cities.cache\ncities.count",
       "user": "anonymous",
-      "dateUpdated": "Jul 20, 2018 7:49:05 AM",
+      "dateUpdated": "2019-03-09 22:47:38.855",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -145,7 +161,8 @@
         "editorSetting": {
           "language": "text",
           "editOnDblClick": false
-        }
+        },
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -156,7 +173,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "res2: cities.type \u003d [Country: string, City: string ... 5 more fields]\nres3: Long \u003d 3173958\n"
+            "data": "res1: Long \u003d 3173958\n"
           }
         ]
       },
@@ -165,19 +182,31 @@
         "type": "TEXT",
         "msg": "\nres25: cities.type \u003d [Country: string, City: string ... 5 more fields]\n\nres26: Long \u003d 3173958\n"
       },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.19.0.2:4040/jobs/job?id\u003d1"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "apps": [],
       "jobName": "paragraph_1476132824517_-343967337",
       "id": "20161010-205344_531270225",
-      "dateCreated": "Oct 10, 2016 8:53:44 AM",
-      "dateStarted": "Jul 20, 2018 7:49:05 AM",
-      "dateFinished": "Jul 20, 2018 7:49:20 AM",
+      "dateCreated": "2016-10-10 08:53:44.000",
+      "dateStarted": "2019-03-09 22:48:08.559",
+      "dateFinished": "2019-03-09 22:49:26.096",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val fieldName \u003d \"country\"\nval k \u003d 10\nval dfStart \u003d System.currentTimeMillis()\nval dfResults \u003d cities.groupBy(fieldName).count().sort(desc(\"count\")).take(k)\nval dfEnd \u003d System.currentTimeMillis()\n\nval luceneRDD \u003d FacetedLuceneRDD(cities.select(fieldName))\nluceneRDD.cache()\nluceneRDD.count()\nval lucStart \u003dSystem.currentTimeMillis()\nluceneRDD.facetQuery(\"*:*\", fieldName, facetNum \u003d k)\nval lucEnd \u003dSystem.currentTimeMillis()\n\n\nprintln(\"\u003d\" * 20)\nprintln(s\"DF time: ${ (dfEnd - dfStart) / 1000D } seconds\")\nprintln(\"\u003d\" * 20)\nprintln(s\"Lucene time: ${(lucEnd - lucStart) / 1000D} seconds\")\nprintln(\"\u003d\" * 20)",
       "user": "anonymous",
-      "dateUpdated": "Jul 20, 2018 7:49:19 AM",
+      "dateUpdated": "2019-03-09 22:47:46.247",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -186,80 +215,60 @@
         "editorSetting": {
           "language": "text",
           "editOnDblClick": false
-        }
+        },
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "results": "org.apache.thrift.transport.TTransportException",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.thrift.transport.TTransportException\n\tat org.apache.thrift.transport.TIOStreamTransport.read(TIOStreamTransport.java:132)\n\tat org.apache.thrift.transport.TTransport.readAll(TTransport.java:86)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readAll(TBinaryProtocol.java:429)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readI32(TBinaryProtocol.java:318)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readMessageBegin(TBinaryProtocol.java:219)\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:69)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:274)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:258)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter$4.call(RemoteInterpreter.java:233)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter$4.call(RemoteInterpreter.java:229)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterProcess.callRemoteFunction(RemoteInterpreterProcess.java:135)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:228)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:437)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:188)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:315)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\n"
+          }
+        ]
+      },
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": ""
       },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.19.0.2:4040/jobs/job?id\u003d2",
+            "http://172.19.0.2:4040/jobs/job?id\u003d3"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "apps": [],
       "jobName": "paragraph_1476132888753_137784783",
       "id": "20161010-205448_472882432",
-      "dateCreated": "Oct 10, 2016 8:54:48 AM",
-      "dateStarted": "Jul 20, 2018 7:49:19 AM",
-      "dateFinished": "Jul 20, 2018 7:50:20 AM",
+      "dateCreated": "2016-10-10 08:54:48.000",
+      "dateStarted": "2019-03-09 22:48:50.566",
+      "dateFinished": "2019-03-09 22:50:15.751",
       "status": "ERROR",
-      "errorMessage": "org.apache.thrift.transport.TTransportException\n\tat org.apache.thrift.transport.TIOStreamTransport.read(TIOStreamTransport.java:132)\n\tat org.apache.thrift.transport.TTransport.readAll(TTransport.java:86)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readAll(TBinaryProtocol.java:429)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readI32(TBinaryProtocol.java:318)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readMessageBegin(TBinaryProtocol.java:219)\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:69)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:266)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:250)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:373)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:97)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:406)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:329)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:748)\n",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "text": "",
-      "dateUpdated": "Nov 9, 2016 3:13:32 AM",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {},
-          "map": {
-            "baseMapType": "Streets",
-            "isOnline": true,
-            "pinCols": []
-          }
-        },
-        "enabled": true,
-        "tableHide": true,
-        "editorMode": "ace/mode/scala"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "result": "org.apache.thrift.transport.TTransportException",
-      "apps": [],
-      "jobName": "paragraph_1476132978801_-1356641242",
-      "id": "20161010-205618_237558344",
-      "dateCreated": "Oct 10, 2016 8:56:18 AM",
-      "dateStarted": "Nov 9, 2016 3:14:29 AM",
-      "dateFinished": "Nov 9, 2016 3:15:18 AM",
-      "status": "ERROR",
-      "errorMessage": "org.apache.thrift.transport.TTransportException\n\tat org.apache.thrift.transport.TIOStreamTransport.read(TIOStreamTransport.java:132)\n\tat org.apache.thrift.transport.TTransport.readAll(TTransport.java:86)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readAll(TBinaryProtocol.java:429)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readI32(TBinaryProtocol.java:318)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readMessageBegin(TBinaryProtocol.java:219)\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:69)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:261)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:245)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:326)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:325)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:329)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n",
+      "errorMessage": "org.apache.thrift.transport.TTransportException\n\tat org.apache.thrift.transport.TIOStreamTransport.read(TIOStreamTransport.java:132)\n\tat org.apache.thrift.transport.TTransport.readAll(TTransport.java:86)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readAll(TBinaryProtocol.java:429)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readI32(TBinaryProtocol.java:318)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readMessageBegin(TBinaryProtocol.java:219)\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:69)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:274)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:258)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter$4.call(RemoteInterpreter.java:233)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter$4.call(RemoteInterpreter.java:229)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterProcess.callRemoteFunction(RemoteInterpreterProcess.java:135)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:228)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:437)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:188)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:315)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\n",
       "progressUpdateIntervalMs": 500
     }
   ],
   "name": "/lucenerdd/df_vs_lucenerdd",
   "id": "2C1RW5BTE",
+  "noteParams": {},
+  "noteForms": {},
   "angularObjects": {
-    "2DKN7VGRS:shared_process": [],
-    "2DM9V4S9W:shared_process": [],
-    "2DJTTJT27:shared_process": [],
-    "2DM6T9245:shared_process": [],
-    "2DM6REESM:shared_process": [],
-    "2DNGNJGJD:shared_process": [],
-    "2DJNEV1SS:shared_process": [],
-    "2DJXGPGXP:shared_process": [],
-    "2DKUGPWPT:shared_process": []
+    "spark:shared_process": []
   },
-  "config": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
   "info": {}
 }

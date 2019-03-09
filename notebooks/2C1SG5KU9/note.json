@@ -2,8 +2,9 @@
   "paragraphs": [
     {
       "title": "Download spark-lucenerdd JARS",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")  // Releases\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\") // SNAPSHOTS\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.2.8\")",
-      "dateUpdated": "Jun 2, 2017 1:17:25 PM",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")  // Releases\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\") // SNAPSHOTS\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.5\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-09 23:02:45.450",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/text",
@@ -31,18 +32,19 @@
         "editorSetting": {
           "language": "text",
           "editOnDblClick": false
-        }
+        },
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
         "forms": {}
       },
       "results": {
-        "code": "SUCCESS",
+        "code": "ERROR",
         "msg": [
           {
             "type": "TEXT",
-            "data": "DepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Add repository through GUI interpreter menu instead.\nDepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@5f322512\n"
+            "data": "Must be used before SparkInterpreter (%spark) initialized\nHint: put this paragraph before any Spark code and restart Zeppelin/Interpreter"
           }
         ]
       },
@@ -54,16 +56,17 @@
       "apps": [],
       "jobName": "paragraph_1476824980259_1282654834",
       "id": "20161005-175550_494955961",
-      "dateCreated": "Oct 18, 2016 9:09:40 AM",
-      "dateStarted": "Nov 10, 2016 8:31:52 AM",
-      "dateFinished": "Nov 10, 2016 8:32:51 AM",
-      "status": "FINISHED",
+      "dateCreated": "2016-10-18 09:09:40.000",
+      "dateStarted": "2019-03-09 23:02:45.570",
+      "dateFinished": "2019-03-09 23:02:45.611",
+      "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "ShapeLuceneRDD imports",
       "text": "import org.apache.spark.sql.SparkSession\nimport org.apache.spark.SparkConf\nimport org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD\nimport org.zouzias.spark.lucenerdd.spatial.shape._\nimport org.zouzias.spark.lucenerdd._\n\nShapeLuceneRDD.version.toSet.foreach(println)",
-      "dateUpdated": "Nov 10, 2016 8:31:52 AM",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-09 23:02:49.935",
       "config": {
         "tableHide": false,
         "colWidth": 12.0,
@@ -87,7 +90,9 @@
               }
             }
           }
-        ]
+        ],
+        "fontSize": 9.0,
+        "editorSetting": {}
       },
       "settings": {
         "params": {},
@@ -98,7 +103,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nimport org.apache.spark.sql.SparkSession\n\nimport org.apache.spark.SparkConf\n\nimport org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD\n\nimport org.zouzias.spark.lucenerdd.spatial.shape._\n\nimport org.zouzias.spark.lucenerdd._\n(builtAtString,2016-11-10 19:41:31.340)\n(builtAtMillis,1478806891340)\n(version,0.2.3)\n(scalaVersion,2.11.8)\n(name,spark-lucenerdd)\n(sbtVersion,0.13.12)\n"
+            "data": "(builtAtMillis,1549575990035)\n(sbtVersion,0.13.17)\n(version,0.3.5)\n(scalaVersion,2.11.12)\n(name,spark-lucenerdd)\n(builtAtString,2019-02-07 21:46:30.035)\nimport org.apache.spark.sql.SparkSession\nimport org.apache.spark.SparkConf\nimport org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD\nimport org.zouzias.spark.lucenerdd.spatial.shape._\nimport org.zouzias.spark.lucenerdd._\n"
           }
         ]
       },
@@ -110,16 +115,17 @@
       "apps": [],
       "jobName": "paragraph_1476824980260_1280731089",
       "id": "20161005-175658_813862107",
-      "dateCreated": "Oct 18, 2016 9:09:40 AM",
-      "dateStarted": "Nov 10, 2016 8:31:56 AM",
-      "dateFinished": "Nov 10, 2016 8:33:20 AM",
+      "dateCreated": "2016-10-18 09:09:40.000",
+      "dateStarted": "2019-03-09 23:02:50.054",
+      "dateFinished": "2019-03-09 23:02:51.280",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Load all capitals",
       "text": " // Load all countries\nval allCountriesDF \u003d spark.read.parquet(\"data/spatial/countries-poly.parquet\").select(\"name\", \"shape\")\nallCountriesDF.registerTempTable(\"allCountries\")\n\n// Define ShapeLuceneRDD\nval shapes \u003d ShapeLuceneRDD(allCountriesDF, \"shape\")\nshapes.cache\nshapes.count",
-      "dateUpdated": "Nov 10, 2016 8:38:02 AM",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-09 23:02:53.939",
       "config": {
         "tableHide": false,
         "colWidth": 12.0,
@@ -143,7 +149,9 @@
               }
             }
           }
-        ]
+        ],
+        "fontSize": 9.0,
+        "editorSetting": {}
       },
       "settings": {
         "params": {},
@@ -154,7 +162,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\nallCountriesDF: org.apache.spark.sql.DataFrame \u003d [name: string, shape: string]\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nshapes: org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD[String,org.apache.spark.sql.Row] \u003d ShapeLuceneRDD[25] at RDD at ShapeLuceneRDD.scala:48\n\nres12: shapes.type \u003d ShapeLuceneRDD[25] at RDD at ShapeLuceneRDD.scala:48\n\nres13: Long \u003d 248\n"
+            "data": "warning: there was one deprecation warning; re-run with -deprecation for details\nallCountriesDF: org.apache.spark.sql.DataFrame \u003d [name: string, shape: string]\nshapes: org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD[String,org.apache.spark.sql.Row] \u003d ShapeLuceneRDD[63] at RDD at ShapeLuceneRDD.scala:54\nres7: Long \u003d 248\n"
           }
         ]
       },
@@ -163,18 +171,32 @@
         "type": "TEXT",
         "msg": "\nallCountriesDF: org.apache.spark.sql.DataFrame \u003d [name: string, shape: string]\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nshapes: org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD[String,org.apache.spark.sql.Row] \u003d ShapeLuceneRDD[25] at RDD at ShapeLuceneRDD.scala:48\n\nres12: shapes.type \u003d ShapeLuceneRDD[25] at RDD at ShapeLuceneRDD.scala:48\n\nres13: Long \u003d 248\n"
       },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.19.0.2:4040/jobs/job?id\u003d14",
+            "http://172.19.0.2:4040/jobs/job?id\u003d15",
+            "http://172.19.0.2:4040/jobs/job?id\u003d16"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "apps": [],
       "jobName": "paragraph_1476824980260_1280731089",
       "id": "20161005-175917_1541464701",
-      "dateCreated": "Oct 18, 2016 9:09:40 AM",
-      "dateStarted": "Nov 10, 2016 8:38:19 AM",
-      "dateFinished": "Nov 10, 2016 8:40:34 AM",
+      "dateCreated": "2016-10-18 09:09:40.000",
+      "dateStarted": "2019-03-09 23:02:54.083",
+      "dateFinished": "2019-03-09 23:03:56.836",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect name from allCountries limit 20\n",
-      "dateUpdated": "Nov 10, 2016 8:31:53 AM",
+      "dateUpdated": "2016-11-10 08:31:53.000",
       "config": {
         "colWidth": 3.0,
         "enabled": true,
@@ -219,15 +241,15 @@
       "apps": [],
       "jobName": "paragraph_1476825065939_1711419995",
       "id": "20161018-211105_67089171",
-      "dateCreated": "Oct 18, 2016 9:11:05 AM",
-      "dateStarted": "Nov 10, 2016 8:33:21 AM",
-      "dateFinished": "Nov 10, 2016 8:38:08 AM",
+      "dateCreated": "2016-10-18 09:11:05.000",
+      "dateStarted": "2016-11-10 08:33:21.000",
+      "dateFinished": "2016-11-10 08:38:08.000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect * from allCountries limit 20",
-      "dateUpdated": "Nov 10, 2016 8:31:53 AM",
+      "dateUpdated": "2016-11-10 08:31:53.000",
       "config": {
         "colWidth": 9.0,
         "editorMode": "ace/mode/sql",
@@ -295,16 +317,16 @@
       "apps": [],
       "jobName": "paragraph_1476824980263_1281115838",
       "id": "20161018-202324_40232036",
-      "dateCreated": "Oct 18, 2016 9:09:40 AM",
-      "dateStarted": "Nov 10, 2016 8:37:57 AM",
-      "dateFinished": "Nov 10, 2016 8:38:10 AM",
+      "dateCreated": "2016-10-18 09:09:40.000",
+      "dateStarted": "2016-11-10 08:37:57.000",
+      "dateFinished": "2016-11-10 08:38:10.000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Spatial Circle Search",
       "text": "// Radius in km\nval Radius \u003d 20 // try 100\nval k \u003d 10\nval Bern \u003d (7.433534, 46.948380)\n\nshapes.circleSearch(Bern, Radius, k).take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)",
-      "dateUpdated": "Nov 10, 2016 8:31:53 AM",
+      "dateUpdated": "2016-11-10 08:31:53.000",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -350,16 +372,16 @@
       "apps": [],
       "jobName": "paragraph_1476824980264_1279192094",
       "id": "20161005-213219_809764400",
-      "dateCreated": "Oct 18, 2016 9:09:40 AM",
-      "dateStarted": "Nov 10, 2016 8:38:09 AM",
-      "dateFinished": "Nov 10, 2016 8:38:13 AM",
+      "dateCreated": "2016-10-18 09:09:40.000",
+      "dateStarted": "2016-11-10 08:38:09.000",
+      "dateFinished": "2016-11-10 08:38:13.000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Point / Polygon Intersection",
       "text": "val k \u003d 10\nval Bern \u003d \"POINT (7.433534 46.948380)\"\n\nshapes.spatialSearch(Bern, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)",
-      "dateUpdated": "Nov 10, 2016 8:31:54 AM",
+      "dateUpdated": "2016-11-10 08:31:54.000",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -405,16 +427,16 @@
       "apps": [],
       "jobName": "paragraph_1476824980264_1279192094",
       "id": "20161005-213433_1705431143",
-      "dateCreated": "Oct 18, 2016 9:09:40 AM",
-      "dateStarted": "Nov 10, 2016 8:38:11 AM",
-      "dateFinished": "Nov 10, 2016 8:38:15 AM",
+      "dateCreated": "2016-10-18 09:09:40.000",
+      "dateStarted": "2016-11-10 08:38:11.000",
+      "dateFinished": "2016-11-10 08:38:15.000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "LineString-Polygon Intersection",
       "text": "val k \u003d 10\nval bernToAthens \u003d \"LINESTRING (7.433534 46.948380, 23.725979  37.994620)\"\n\nshapes.spatialSearch(bernToAthens, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)",
-      "dateUpdated": "Nov 10, 2016 8:31:54 AM",
+      "dateUpdated": "2016-11-10 08:31:54.000",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -460,16 +482,16 @@
       "apps": [],
       "jobName": "paragraph_1476826265233_-1429019832",
       "id": "20161018-213105_1384937762",
-      "dateCreated": "Oct 18, 2016 9:31:05 AM",
-      "dateStarted": "Nov 10, 2016 8:38:14 AM",
-      "dateFinished": "Nov 10, 2016 8:38:16 AM",
+      "dateCreated": "2016-10-18 09:31:05.000",
+      "dateStarted": "2016-11-10 08:38:14.000",
+      "dateFinished": "2016-11-10 08:38:16.000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Polygon-polygon Intersection",
       "text": "val k \u003d 10\nval bernAthensMadrid \u003d \"POLYGON ((7.433534 46.948380, 23.725979 37.994620,-3.688473 40.435779,7.433534 46.948380))\"\n\nshapes.spatialSearch(bernAthensMadrid, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)",
-      "dateUpdated": "Nov 10, 2016 8:31:54 AM",
+      "dateUpdated": "2016-11-10 08:31:54.000",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -515,15 +537,15 @@
       "apps": [],
       "jobName": "paragraph_1476826534986_2048723831",
       "id": "20161018-213534_524770034",
-      "dateCreated": "Oct 18, 2016 9:35:34 AM",
-      "dateStarted": "Nov 10, 2016 8:38:15 AM",
-      "dateFinished": "Nov 10, 2016 8:38:17 AM",
+      "dateCreated": "2016-10-18 09:35:34.000",
+      "dateStarted": "2016-11-10 08:38:15.000",
+      "dateFinished": "2016-11-10 08:38:17.000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "// Radius in km\nval k \u003d 30\nval Bern \u003d (7.433534, 46.948380)\n\nshapes.knnSearch(Bern, k).take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)",
-      "dateUpdated": "Nov 10, 2016 8:31:54 AM",
+      "dateUpdated": "2016-11-10 08:31:54.000",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -568,15 +590,15 @@
       "apps": [],
       "jobName": "paragraph_1476826795482_-660710216",
       "id": "20161018-213955_1431661705",
-      "dateCreated": "Oct 18, 2016 9:39:55 AM",
-      "dateStarted": "Nov 10, 2016 8:38:16 AM",
-      "dateFinished": "Nov 10, 2016 8:38:18 AM",
+      "dateCreated": "2016-10-18 09:39:55.000",
+      "dateStarted": "2016-11-10 08:38:16.000",
+      "dateFinished": "2016-11-10 08:38:18.000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "",
-      "dateUpdated": "Nov 10, 2016 8:31:54 AM",
+      "dateUpdated": "2016-11-10 08:31:54.000",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -599,18 +621,23 @@
       "apps": [],
       "jobName": "paragraph_1476826874896_161821635",
       "id": "20161018-214114_2004943258",
-      "dateCreated": "Oct 18, 2016 9:41:14 AM",
-      "dateStarted": "Nov 10, 2016 8:38:17 AM",
-      "dateFinished": "Nov 10, 2016 8:38:18 AM",
+      "dateCreated": "2016-10-18 09:41:14.000",
+      "dateStarted": "2016-11-10 08:38:17.000",
+      "dateFinished": "2016-11-10 08:38:18.000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     }
   ],
   "name": "/lucenerdd/spatial/capitals-spatial-search (ScalaIO)",
   "id": "2C1SG5KU9",
-  "angularObjects": {},
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "spark:shared_process": []
+  },
   "config": {
-    "looknfeel": "default"
+    "looknfeel": "default",
+    "isZeppelinNotebookCronEnable": false
   },
   "info": {}
 }

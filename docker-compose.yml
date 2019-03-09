@@ -1,18 +1,21 @@
-zeppelin:
-  image: dylanmei/zeppelin
-  environment:
-    ZEPPELIN_PORT: 8080
-    ZEPPELIN_JAVA_OPTS: >-
-      -Dspark.driver.memory=1g
-      -Dspark.executor.memory=1g
-      -Dspark.rdd.compress=true
-      -Dspark.serializer=org.apache.spark.serializer.KryoSerializer
-      -Dspark.kryo.registrator=org.zouzias.spark.lucenerdd.LuceneRDDKryoRegistrator
-      -Dspark.driver.extraJavaOptions=-Dlucenerdd.index.store.mode=disk
-      -Dspark.executor.extraJavaOptions=-Dlucenerdd.index.store.mode=disk
-    MASTER: local[*]
-  ports:
-    - 8080:8080
-  volumes:
-    - ./data:/usr/zeppelin/data
-    - ./notebooks:/usr/zeppelin/notebook
+version: '3'
+
+services:
+  zeppelin:
+    image: apache/zeppelin:0.8.1
+    environment:
+      ZEPPELIN_PORT: 8080
+      ZEPPELIN_JAVA_OPTS: >-
+        -Dspark.driver.memory=1g
+        -Dspark.executor.memory=1g
+        -Dspark.rdd.compress=true
+        -Dspark.serializer=org.apache.spark.serializer.KryoSerializer
+        -Dspark.kryo.registrator=org.zouzias.spark.lucenerdd.LuceneRDDKryoRegistrator
+        -Dspark.driver.extraJavaOptions=-Dlucenerdd.index.store.mode=disk
+        -Dspark.executor.extraJavaOptions=-Dlucenerdd.index.store.mode=disk
+      MASTER: local[*]
+    ports:
+      - 8080:8080
+    volumes:
+      - ./data:/zeppelin/data
+      - ./notebooks:/zeppelin/notebook
