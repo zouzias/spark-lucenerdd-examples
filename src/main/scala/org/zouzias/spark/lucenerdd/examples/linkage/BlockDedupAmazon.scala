@@ -2,7 +2,7 @@ package org.zouzias.spark.lucenerdd.examples.linkage
 
 import org.apache.lucene.index.Term
 import org.apache.lucene.search.BooleanClause.Occur
-import org.apache.lucene.search.{BooleanQuery, MatchAllDocsQuery, Query, TermQuery}
+import org.apache.lucene.search._
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.zouzias.spark.lucenerdd.{LuceneRDD, _}
@@ -36,24 +36,25 @@ object BlockDedupAmazon extends Logging {
         val name = row.getString(row.fieldIndex("title"))
         val description = row.getString(row.fieldIndex("description"))
         val nameTokens = name.split(" ")
-          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
+          .flatMap(_.replaceAll("[^a-zA-Z0-9]", " ").split(" "))
           .filter(_.length > 1)
           .distinct
 
         val descTerms = description.split(" ")
-          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
-          .filter(_.length > 2)
+          .flatMap(_.replaceAll("[^a-zA-Z0-9]", " ").split(" "))
+          .filter(_.length >= 2)
           .distinct
 
         val booleanQuery = new BooleanQuery.Builder()
 
         if (nameTokens.nonEmpty && descTerms.nonEmpty) {
+
           nameTokens.foreach{ name =>
-            booleanQuery.add(new TermQuery(new Term("title", name)), Occur.SHOULD)
+            booleanQuery.add(new TermQuery(new Term("title", name.toLowerCase)), Occur.SHOULD)
           }
 
           descTerms.foreach{ name =>
-            booleanQuery.add(new TermQuery(new Term("description", name)), Occur.SHOULD)
+            booleanQuery.add(new TermQuery(new Term("description", name.toLowerCase())), Occur.SHOULD)
           }
 
           booleanQuery.build()
@@ -61,7 +62,7 @@ object BlockDedupAmazon extends Logging {
         }
         else if (nameTokens.nonEmpty){
           nameTokens.foreach{ name =>
-            booleanQuery.add(new TermQuery(new Term("title", name)), Occur.SHOULD)
+            booleanQuery.add(new TermQuery(new Term("title", name.toLowerCase())), Occur.SHOULD)
           }
 
           booleanQuery.build()
