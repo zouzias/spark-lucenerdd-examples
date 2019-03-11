@@ -2,9 +2,9 @@
   "paragraphs": [
     {
       "title": "Load LuceneRDD jars",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.3-SNAPSHOT\")",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.5\")",
       "user": "anonymous",
-      "dateUpdated": "Jul 20, 2018 7:51:16 AM",
+      "dateUpdated": "2019-03-10 21:29:25.703",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -14,7 +14,8 @@
           "editOnDblClick": false
         },
         "editorMode": "ace/mode/scala",
-        "title": true
+        "title": true,
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -25,16 +26,16 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "res0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@5de55e03\n"
+            "data": "res0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@73a8b761\n"
           }
         ]
       },
       "apps": [],
       "jobName": "paragraph_1496409093041_-1432320270",
       "id": "20170602-131133_481920134",
-      "dateCreated": "Jun 2, 2017 1:11:33 PM",
-      "dateStarted": "Jul 20, 2018 7:51:16 AM",
-      "dateFinished": "Jul 20, 2018 7:51:32 AM",
+      "dateCreated": "2017-06-02 13:11:33.000",
+      "dateStarted": "2019-03-10 21:29:25.935",
+      "dateFinished": "2019-03-10 21:30:10.408",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -42,14 +43,14 @@
       "title": "Imports for spark-lucenerdd",
       "text": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.apache.spark.sql.SparkSession\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\nLuceneRDD.version.foreach(println)",
       "user": "anonymous",
-      "dateUpdated": "Jul 20, 2018 7:52:03 AM",
+      "dateUpdated": "2019-03-10 21:29:29.848",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
         "title": true,
         "enabled": true,
         "editorHide": false,
-        "tableHide": false,
+        "tableHide": true,
         "results": [
           {
             "graph": {
@@ -62,7 +63,8 @@
         "editorSetting": {
           "language": "scala",
           "editOnDblClick": false
-        }
+        },
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -73,7 +75,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.apache.spark.sql.SparkSession\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n(builtAtMillis,1532027027953)\n(name,spark-lucenerdd)\n(scalaVersion,2.11.12)\n(version,0.3.3-SNAPSHOT)\n(sbtVersion,0.13.17)\n(builtAtString,2018-07-19 19:03:47.953)\n"
+            "data": "(builtAtMillis,1549575990035)\n(name,spark-lucenerdd)\n(scalaVersion,2.11.12)\n(version,0.3.5)\n(sbtVersion,0.13.17)\n(builtAtString,2019-02-07 21:46:30.035)\nimport org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.apache.spark.sql.SparkSession\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n"
           }
         ]
       },
@@ -85,9 +87,9 @@
       "apps": [],
       "jobName": "paragraph_1475703562467_719822277",
       "id": "20161001-120020_440303718",
-      "dateCreated": "Oct 5, 2016 9:39:22 AM",
-      "dateStarted": "Jul 20, 2018 7:52:03 AM",
-      "dateFinished": "Jul 20, 2018 7:52:24 AM",
+      "dateCreated": "2016-10-05 09:39:22.000",
+      "dateStarted": "2019-03-10 21:29:30.490",
+      "dateFinished": "2019-03-10 21:30:58.302",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -95,7 +97,7 @@
       "title": "Load all capitals",
       "text": "val capitals \u003d spark.read.parquet(\"data/spatial/capitals.parquet\").select(\"name\", \"country\")\nval luceneRDD \u003d LuceneRDD(capitals)\n\nluceneRDD.cache\nluceneRDD.count",
       "user": "anonymous",
-      "dateUpdated": "Jul 20, 2018 7:52:33 AM",
+      "dateUpdated": "2019-03-10 21:29:31.929",
       "config": {
         "tableHide": true,
         "colWidth": 12.0,
@@ -114,7 +116,8 @@
         "editorSetting": {
           "language": "scala",
           "editOnDblClick": false
-        }
+        },
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -125,7 +128,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "capitals: org.apache.spark.sql.DataFrame \u003d [name: string, country: string]\nluceneRDD: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[7] at RDD at LuceneRDD.scala:52\nres2: luceneRDD.type \u003d LuceneRDD[7] at RDD at LuceneRDD.scala:52\nres3: Long \u003d 303\n"
+            "data": "capitals: org.apache.spark.sql.DataFrame \u003d [name: string, country: string]\nluceneRDD: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[7] at RDD at LuceneRDD.scala:52\nres2: Long \u003d 303\n"
           }
         ]
       },
@@ -134,12 +137,25 @@
         "type": "TEXT",
         "msg": "\ncapitals: org.apache.spark.sql.DataFrame \u003d [name: string, country: string]\n\nluceneRDD: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[36] at RDD at LuceneRDD.scala:42\n\nres10: luceneRDD.type \u003d LuceneRDD[36] at RDD at LuceneRDD.scala:42\n\nres11: Long \u003d 303\n"
       },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.19.0.2:4040/jobs/job?id\u003d0",
+            "http://172.19.0.2:4040/jobs/job?id\u003d1"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "apps": [],
       "jobName": "paragraph_1475703562472_716359537",
       "id": "20161001-145632_657667869",
-      "dateCreated": "Oct 5, 2016 9:39:22 AM",
-      "dateStarted": "Jul 20, 2018 7:52:33 AM",
-      "dateFinished": "Jul 20, 2018 7:52:47 AM",
+      "dateCreated": "2016-10-05 09:39:22.000",
+      "dateStarted": "2019-03-10 21:30:10.612",
+      "dateFinished": "2019-03-10 21:31:27.764",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -147,7 +163,7 @@
       "title": "Search for Ottawa",
       "text": "val k \u003d 10\nval result \u003d luceneRDD.termQuery(\"name\", \"ottawa\", k)\n\nresult.take(k).foreach(println)",
       "user": "anonymous",
-      "dateUpdated": "Jul 20, 2018 7:52:49 AM",
+      "dateUpdated": "2019-03-10 21:29:36.976",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -165,7 +181,8 @@
         "editorSetting": {
           "language": "scala",
           "editOnDblClick": false
-        }
+        },
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -176,7 +193,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "k: Int \u003d 10\nresult: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse LuceneRDDResponse[10] at RDD at LuceneRDDResponse.scala:34\n[score: 4.9240813/docId: 11/doc: Text fields:name:[Ottawa]country:[Canada]]\n"
+            "data": "[score: 5.7252574/docId: 161/doc: Text fields:name:[Ottawa]country:[Canada]]\nk: Int \u003d 10\nresult: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse LuceneRDDResponse[10] at RDD at LuceneRDDResponse.scala:34\n"
           }
         ]
       },
@@ -185,12 +202,24 @@
         "type": "TEXT",
         "msg": "\nk: Int \u003d 10\n\nresult: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse[39] at RDD at LuceneRDDResponse.scala:32\n[score: 5.337291/docId: 11/doc: Text fields:name:[Ottawa]country:[Canada]]\n"
       },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.19.0.2:4040/jobs/job?id\u003d2"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "apps": [],
       "jobName": "paragraph_1475703562473_715974788",
       "id": "20161001-155628_1046044654",
-      "dateCreated": "Oct 5, 2016 9:39:22 AM",
-      "dateStarted": "Jul 20, 2018 7:52:49 AM",
-      "dateFinished": "Jul 20, 2018 7:52:51 AM",
+      "dateCreated": "2016-10-05 09:39:22.000",
+      "dateStarted": "2019-03-10 21:30:59.119",
+      "dateFinished": "2019-03-10 21:31:31.402",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -198,7 +227,7 @@
       "title": "Prefix query for \"par\"",
       "text": "val topK \u003d 10\nval response \u003d luceneRDD.prefixQuery(\"name\", \"par\", topK)\nresponse.take(k).foreach(println)",
       "user": "anonymous",
-      "dateUpdated": "Jul 20, 2018 7:52:57 AM",
+      "dateUpdated": "2019-03-10 21:29:40.871",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -216,7 +245,8 @@
         "editorSetting": {
           "language": "scala",
           "editOnDblClick": false
-        }
+        },
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -227,7 +257,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "topK: Int \u003d 10\nresponse: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse LuceneRDDResponse[13] at RDD at LuceneRDDResponse.scala:34\n[score: 1.0/docId: 43/doc: Text fields:name:[Paramaribo]country:[Suriname]]\n[score: 1.0/docId: 9/doc: Text fields:name:[Paris]country:[France]]\n"
+            "data": "[score: 1.0/docId: 159/doc: Text fields:name:[Paris]country:[France]]\n[score: 1.0/docId: 43/doc: Text fields:name:[Paramaribo]country:[Suriname]]\ntopK: Int \u003d 10\nresponse: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse LuceneRDDResponse[13] at RDD at LuceneRDDResponse.scala:34\n"
           }
         ]
       },
@@ -236,18 +266,30 @@
         "type": "TEXT",
         "msg": "\ntopK: Int \u003d 10\n\nresponse: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse[42] at RDD at LuceneRDDResponse.scala:32\n[score: 1.0/docId: 9/doc: Text fields:name:[Paris]country:[France]]\n[score: 1.0/docId: 43/doc: Text fields:name:[Paramaribo]country:[Suriname]]\n"
       },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.19.0.2:4040/jobs/job?id\u003d3"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "apps": [],
       "jobName": "paragraph_1475703562515_812162013",
       "id": "20161003-215636_1667429531",
-      "dateCreated": "Oct 5, 2016 9:39:22 AM",
-      "dateStarted": "Jul 20, 2018 7:52:57 AM",
-      "dateFinished": "Jul 20, 2018 7:52:59 AM",
+      "dateCreated": "2016-10-05 09:39:22.000",
+      "dateStarted": "2019-03-10 21:31:28.515",
+      "dateFinished": "2019-03-10 21:31:34.108",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "",
-      "dateUpdated": "Oct 21, 2016 8:58:48 AM",
+      "dateUpdated": "2016-10-21 08:58:48.000",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -271,28 +313,23 @@
       "apps": [],
       "jobName": "paragraph_1476611072688_1942330680",
       "id": "20161016-094432_1063110604",
-      "dateCreated": "Oct 16, 2016 9:44:32 AM",
-      "dateStarted": "Oct 21, 2016 8:58:05 AM",
-      "dateFinished": "Oct 21, 2016 8:58:06 AM",
+      "dateCreated": "2016-10-16 09:44:32.000",
+      "dateStarted": "2016-10-21 08:58:05.000",
+      "dateFinished": "2016-10-21 08:58:06.000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     }
   ],
   "name": "/lucenerdd/search/capitals",
   "id": "2BX1HSTCN",
+  "noteParams": {},
+  "noteForms": {},
   "angularObjects": {
-    "2DKN7VGRS:shared_process": [],
-    "2DM9V4S9W:shared_process": [],
-    "2DJTTJT27:shared_process": [],
-    "2DM6T9245:shared_process": [],
-    "2DM6REESM:shared_process": [],
-    "2DNGNJGJD:shared_process": [],
-    "2DJNEV1SS:shared_process": [],
-    "2DJXGPGXP:shared_process": [],
-    "2DKUGPWPT:shared_process": []
+    "spark:shared_process": []
   },
   "config": {
-    "looknfeel": "default"
+    "looknfeel": "default",
+    "isZeppelinNotebookCronEnable": false
   },
   "info": {}
 }
