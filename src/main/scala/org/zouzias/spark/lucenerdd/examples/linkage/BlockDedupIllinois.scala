@@ -1,5 +1,7 @@
 package org.zouzias.spark.lucenerdd.examples.linkage
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
 import org.apache.lucene.index.Term
 import org.apache.lucene.search.BooleanClause.Occur
 import org.apache.lucene.search._
@@ -7,6 +9,8 @@ import org.apache.spark.SparkConf
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd.logging.Logging
+
+import scala.collection.mutable
 
 
 /**
@@ -33,24 +37,40 @@ object BlockDedupIllinois extends Logging {
 
 
     // Custom linker
-    val linker: Row => Query = { row => {
+    val linker: Row => Query = row => {
 
-        val name = row.getString(row.fieldIndex("FirstName"))
+
+      /**
+        *
+        * @param text
+        * @return
+        */
+      def analyze(text: String): Array[String] = {
+        val analyzer = new StandardAnalyzer()
+        val result = mutable.ArrayBuilder.make[String]()
+        val tokenStream = analyzer.tokenStream("text", text)
+        val attr = tokenStream.addAttribute(classOf[CharTermAttribute])
+        tokenStream.reset()
+        while (tokenStream.incrementToken() ) {
+          result.+=(attr.toString)
+        }
+        result.result()
+      }
+
+      val name = row.getString(row.fieldIndex("FirstName"))
         val lastName = row.getString(row.fieldIndex("LastOnlyName"))
 
 
       val booleanQuery = new BooleanQuery.Builder()
         if (name != null) {
-          name.split(" ")
-            .flatMap(x => x.replaceAll("[^a-zA-Z0-9]", " ").split(" "))
+          analyze(name)
             .filter(_.length >= 2).foreach { nameToken =>
             booleanQuery.add(new TermQuery(new Term("FirstName", nameToken.toLowerCase)), Occur.SHOULD)
           }
         }
 
         if ( lastName != null) {
-          lastName.split(" ")
-            .flatMap(x => x.replaceAll("[^a-zA-Z0-9]", " ").split(" "))
+          analyze(lastName)
             .filter(_.length >= 2).foreach { lastNameToken =>
             booleanQuery.add(new TermQuery(new Term("LastOnlyName", lastNameToken.toLowerCase)), Occur.SHOULD)
           }
@@ -59,7 +79,6 @@ object BlockDedupIllinois extends Logging {
         booleanQuery.setMinimumNumberShouldMatch(1)
         booleanQuery.build()
       }
-    }
 
     val blockingFields = Array("City")
 
