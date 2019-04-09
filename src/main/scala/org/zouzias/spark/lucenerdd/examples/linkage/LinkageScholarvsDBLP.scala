@@ -70,7 +70,7 @@ object LinkageScholarvsDBLP extends Logging {
     val correctHits: Double = linkageResults
       .join(groundTruthDF, groundTruthDF.col("idDBLP").equalTo(linkageResults("idDBLP")) &&  groundTruthDF.col("idScholar").equalTo(linkageResults("idScholar"))).count
     val total: Double = groundTruthDF.count
-    val accuracy = correctHits / total
+    val accuracy = correctHits / total.toDouble
 
     val end = System.currentTimeMillis()
 
@@ -87,4 +87,3 @@ object LinkageScholarvsDBLP extends Logging {
 
   }
 }
-

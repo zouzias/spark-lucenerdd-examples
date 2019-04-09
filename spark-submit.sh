@@ -3,7 +3,7 @@
 CURRENT_DIR=`pwd`
 
 # Spark version (requires uncompressed tar.gz under $HOME)
-SPARK_VERSION="2.4.0"
+SPARK_VERSION="2.4.1"
 
 # Read the version from version.sbt
 SPARK_LUCENERDD_VERSION=`cat version.sbt | awk '{print $5}' | xargs`
