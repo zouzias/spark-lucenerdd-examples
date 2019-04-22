@@ -81,11 +81,11 @@ object LinkageGooglevsAmazon extends Logging {
     import sparkSession.implicits._
 
 
-    val linkageResults = sparkSession.createDataFrame(linkedResults.map{ case (schl, topDocs) =>
+    val linkageResults = sparkSession.createDataFrame(linkedResults.map{ case (amz, topDocs) =>
       val rightId = topDocs.head.getString(topDocs.head.fieldIndex("_1"))
-      val leftId = schl._1
+      val leftId = amz._1
       (leftId, rightId)
-    }).toDF("idGoogleBase", "idAmazon")
+    }).toDF("idAmazon", "idGoogleBase")
 
     val correctHits: Double = linkageResults
       .join(groundTruthDF, groundTruthDF.col("idAmazon").equalTo(linkageResults("idAmazon")) &&  groundTruthDF.col("idGoogleBase").equalTo(linkageResults("idGoogleBase")))

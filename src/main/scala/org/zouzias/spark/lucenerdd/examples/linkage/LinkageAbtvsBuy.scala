@@ -60,7 +60,7 @@ object LinkageAbtvsBuy extends Logging {
       val rightId = topDocs.head.getString(topDocs.head.fieldIndex("_1"))
       val leftId = abtId._1.toInt
       (leftId, rightId)
-    }).toDF("idBuy", "idAbt")
+    }).toDF("idAbt","idBuy")
 
     val correctHits: Double = linkageResultsIds
       .join(groundTruthDF, groundTruthDF.col("idAbt").equalTo(linkageResultsIds("idAbt")) && groundTruthDF.col("idBuy").equalTo(linkageResultsIds("idBuy")))

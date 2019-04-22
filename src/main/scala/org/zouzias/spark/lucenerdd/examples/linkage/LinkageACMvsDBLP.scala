@@ -61,7 +61,7 @@ object LinkageACMvsDBLP extends Logging {
       val rightId = topDocs.head.getString(topDocs.head.fieldIndex("id"))
       val leftId = acm.getInt(acm.fieldIndex("id")).toString
       (leftId, rightId)
-    }).toDF("idDBLP", "idACM")
+    }).toDF("idACM", "idDBLP")
 
 
     val correctHits: Double = linkageResults
