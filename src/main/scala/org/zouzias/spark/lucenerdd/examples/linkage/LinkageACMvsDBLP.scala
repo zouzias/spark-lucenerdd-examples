@@ -59,11 +59,11 @@ object LinkageACMvsDBLP extends Logging {
     val linkedResults = dblp2.linkDataFrame(acmDF, linker, 5).filter(_._2.nonEmpty)
 
     // Compute the performance of linkage (accuracy)
-    val linkageResults = spark.createDataFrame(linkedResults.map{ case (acm, topDocs) =>
+    val linkageResults = spark.createDataFrame(linkedResults.map{ case (dblp, topDocs) =>
       val rightId = topDocs.head.getString(topDocs.head.fieldIndex("id"))
-      val leftId = acm.getInt(acm.fieldIndex("id")).toString
+      val leftId = dblp.getInt(dblp.fieldIndex("id")).toString
       (leftId, rightId)
-    }).toDF("idACM", "idDBLP")
+    }).toDF("idDBLP", "idACM")
 
     val correctHits: Double = linkageResults
       .join(groundTruthDF, groundTruthDF.col("idDBLP").equalTo(linkageResults("idDBLP")) &&  groundTruthDF.col("idACM").equalTo(linkageResults("idACM")))
