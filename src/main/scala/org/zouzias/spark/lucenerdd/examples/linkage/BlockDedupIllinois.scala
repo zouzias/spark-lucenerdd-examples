@@ -94,7 +94,7 @@ object BlockDedupIllinois extends Logging {
     val linkageResults: DataFrame = spark.createDataFrame(linkedResults
       .filter(_._2.nonEmpty)
       .map{ case (left, topDocs) =>
-        (topDocs.head.doc.textField("RctNum").headOption,
+        (topDocs.head.getString(topDocs.head.fieldIndex("RctNum")),
           left.getString(left.fieldIndex("RctNum"))
         )
       })

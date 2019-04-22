@@ -17,7 +17,7 @@ object CapitalsSearchExample extends Logging {
     val conf = new SparkConf().setAppName("CapitalsSearchExample")
     val k = 10
 
-    implicit val spark = SparkSession.builder.config(conf).getOrCreate()
+    implicit val spark: SparkSession = SparkSession.builder.config(conf).getOrCreate()
 
     val start = System.currentTimeMillis()
 

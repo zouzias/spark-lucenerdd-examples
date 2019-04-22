@@ -17,7 +17,7 @@ object LinkageACMvsDBLP extends Logging {
     // initialise spark context
     val conf = new SparkConf().setAppName(LinkageACMvsDBLP.getClass.getName)
 
-    implicit val spark = SparkSession.builder.config(conf).getOrCreate()
+    implicit val spark: SparkSession = SparkSession.builder.config(conf).getOrCreate()
     import spark.implicits._
 
     val start = System.currentTimeMillis()
@@ -32,9 +32,7 @@ object LinkageACMvsDBLP extends Logging {
     dblp2.cache()
 
     // Link is the author tokens or title tokens match. Combine all tokens by an OR clause
-    val linker: Row => String = {
-      case row => {
-
+    val linker: Row => String = { row =>
         // Get title and author fields
         val title = row.getString(row.fieldIndex("title"))
         val authors = row.getString(row.fieldIndex("authors"))
@@ -50,18 +48,21 @@ object LinkageACMvsDBLP extends Logging {
           .filter(_.length > 2).mkString(" OR ")
 
         if (authorsTerms.nonEmpty) {
-          s"(title:(${titleTokens})) OR (author:${authorsTerms})"
+          s"(title:($titleTokens)) OR (author:$authorsTerms)"
         }
         else{
-          s"title:(${titleTokens})"
+          s"title:($titleTokens)"
         }
-      }
     }
 
     val linkedResults = dblp2.linkDataFrame(acmDF, linker, 10).filter(_._2.nonEmpty)
 
-    val linkageResults = spark.createDataFrame(linkedResults.map{ case (acm, topDocs) => (topDocs.head.doc.textField("id").head, acm.getInt(acm.fieldIndex("id")).toString)})
-      .toDF("idDBLP", "idACM")
+    val linkageResults = spark.createDataFrame(linkedResults.map{ case (acm, topDocs) =>
+      val rightId = topDocs.head.getString(topDocs.head.fieldIndex("id"))
+      val leftId = acm.getInt(acm.fieldIndex("id")).toString
+      (leftId, rightId)
+    }).toDF("idDBLP", "idACM")
+
 
     val correctHits: Double = linkageResults
       .join(groundTruthDF, groundTruthDF.col("idDBLP").equalTo(linkageResults("idDBLP")) &&  groundTruthDF.col("idACM").equalTo(linkageResults("idACM")))
@@ -76,7 +77,7 @@ object LinkageACMvsDBLP extends Logging {
     logInfo("=" * 40)
 
     logInfo("********************************")
-    logInfo(s"Accuracy of linkage is ${accuracy}")
+    logInfo(s"Accuracy of linkage is $accuracy")
     logInfo("********************************")
     // terminate spark context
     spark.stop()

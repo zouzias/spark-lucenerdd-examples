@@ -56,9 +56,11 @@ object LinkageAbtvsBuy extends Logging {
 
     val linkedResults = buy.link(abt.rdd, linker.tupled, 3)
 
-    val linkageResultsIds = sc.createDataFrame(linkedResults.filter(_._2.nonEmpty)
-      .map{ case (abtId, topDocs) => (topDocs.head.doc.textField("_1").head, abtId._1.toInt)})
-      .toDF("idBuy", "idAbt")
+    val linkageResultsIds = sc.createDataFrame(linkedResults.map{ case (abtId, topDocs) =>
+      val rightId = topDocs.head.getString(topDocs.head.fieldIndex("_1"))
+      val leftId = abtId._1.toInt
+      (leftId, rightId)
+    }).toDF("idBuy", "idAbt")
 
     val correctHits: Double = linkageResultsIds
       .join(groundTruthDF, groundTruthDF.col("idAbt").equalTo(linkageResultsIds("idAbt")) && groundTruthDF.col("idBuy").equalTo(linkageResultsIds("idBuy")))

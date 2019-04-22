@@ -1,7 +1,8 @@
 package org.zouzias.spark.lucenerdd.examples.linkage
 
 import org.apache.spark.SparkConf
-import org.apache.spark.sql.{Row, SparkSession}
+import org.apache.spark.rdd.RDD
+import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd._
 import org.zouzias.spark.lucenerdd.logging.Logging
@@ -13,20 +14,29 @@ import org.zouzias.spark.lucenerdd.logging.Logging
  */
 object LinkageScholarvsDBLP extends Logging {
 
+  def get_ids(df: RDD[(Row, Array[Row])], leftIdName: String, rightIdName: String)(sparkSession: SparkSession)
+  : DataFrame = {
+    sparkSession.createDataFrame(df.map{ case (schl, topDocs) =>
+      val rightId = topDocs.head.getString(topDocs.head.fieldIndex("id"))
+      val leftId = schl.getString(schl.fieldIndex("id"))
+      (leftId, rightId)
+    }).toDF(leftIdName, rightIdName)
+  }
+
   def main(args: Array[String]) {
 
     // initialise spark context
     val conf = new SparkConf().setAppName(LinkageScholarvsDBLP.getClass.getName)
 
-    implicit val sc = SparkSession.builder.config(conf).getOrCreate()
-    import sc.implicits._
+    implicit val spark: SparkSession = SparkSession.builder.config(conf).getOrCreate()
+    import spark.implicits._
 
     val start = System.currentTimeMillis()
-    val scholarDF = sc.read.parquet("data/linkage-papers1/linkage-papers-scholar.parquet")
+    val scholarDF = spark.read.parquet("data/linkage-papers1/linkage-papers-scholar.parquet")
     logInfo(s"Loaded ${scholarDF.count} ACM records")
-    val dblpDF = sc.read.parquet("data/linkage-papers1/linkage-papers-dblp.parquet")
+    val dblpDF = spark.read.parquet("data/linkage-papers1/linkage-papers-dblp.parquet")
     logInfo(s"Loaded ${scholarDF.count} DBLP records")
-    val groundTruthDF = sc.read.parquet("data/linkage-papers1/linkage-papers-scholar-vs-dblp.parquet")
+    val groundTruthDF = spark.read.parquet("data/linkage-papers1/linkage-papers-scholar-vs-dblp.parquet")
 
     val scholar = scholarDF.select("id", "title", "authors", "venue")
 
@@ -64,11 +74,10 @@ object LinkageScholarvsDBLP extends Logging {
 
     val linkedResults = dblp.linkDataFrame(scholar, linker, 3).filter(_._2.nonEmpty)
 
-    val linkageResults = sc.createDataFrame(linkedResults.map{ case (schl, topDocs) => (topDocs.head.doc.textField("id").head, schl.getString(schl.fieldIndex("id")))})
-      .toDF("idDBLP", "idScholar")
+    val linkageResults = get_ids(linkedResults, "idDBLP", "idScholar")(spark)
 
-    val correctHits: Double = linkageResults
-      .join(groundTruthDF, groundTruthDF.col("idDBLP").equalTo(linkageResults("idDBLP")) &&  groundTruthDF.col("idScholar").equalTo(linkageResults("idScholar"))).count
+    val correctHits: Double = linkageResults.join(groundTruthDF, groundTruthDF.col("idDBLP")
+      .equalTo(linkageResults("idDBLP")) &&  groundTruthDF.col("idScholar").equalTo(linkageResults("idScholar"))).count
     val total: Double = groundTruthDF.count
     val accuracy = correctHits / total.toDouble
 
@@ -83,7 +92,7 @@ object LinkageScholarvsDBLP extends Logging {
     logInfo(s"Accuracy of linkage is ${accuracy}")
     logInfo("********************************")
     // terminate spark context
-    sc.stop()
+    spark.stop()
 
   }
 }

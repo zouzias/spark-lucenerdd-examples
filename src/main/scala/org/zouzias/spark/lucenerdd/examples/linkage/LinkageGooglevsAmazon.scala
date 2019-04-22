@@ -18,15 +18,15 @@ object LinkageGooglevsAmazon extends Logging {
     // initialise spark context
     val conf = new SparkConf().setAppName(LinkageGooglevsAmazon.getClass.getName)
 
-    implicit val sc = SparkSession.builder.config(conf).getOrCreate()
-    import sc.implicits._
+    implicit val sparkSession: SparkSession = SparkSession.builder.config(conf).getOrCreate()
+    import sparkSession.implicits._
 
     val start = System.currentTimeMillis()
-    val amazonDF = sc.read.parquet("data/linkage-products1/linkage-products-amazon.parquet")
+    val amazonDF = sparkSession.read.parquet("data/linkage-products1/linkage-products-amazon.parquet")
     logInfo(s"Loaded ${amazonDF.count} ACM records")
-    val googleDF = sc.read.parquet("data/linkage-products1/linkage-products-google.parquet")
+    val googleDF = sparkSession.read.parquet("data/linkage-products1/linkage-products-google.parquet")
     logInfo(s"Loaded ${googleDF.count} DBLP records")
-    val groundTruthDF = sc.read.parquet("data/linkage-products1/linkage-products-amazon-vs-google.parquet")
+    val groundTruthDF = sparkSession.read.parquet("data/linkage-products1/linkage-products-amazon-vs-google.parquet")
 
     val amazon = amazonDF.select("id", "title", "description", "manufacturer").map( row => (row.get(0).toString, row.getString(1), row.getString(2), row.getString(3)))
     val googleLuceneRDD = LuceneRDD(googleDF.rdd.map( row => (row.get(0).toString, row.getString(1), row.getString(2), row.getString(3))))
@@ -78,11 +78,14 @@ object LinkageGooglevsAmazon extends Logging {
 
     val linkedResults = googleLuceneRDD.link(amazon.rdd, linker.tupled, 3).filter(_._2.nonEmpty)
 
-    import sc.implicits._
+    import sparkSession.implicits._
 
-    val linkageResults = sc.createDataFrame(linkedResults
-      .map{ case (left, topDocs) => (topDocs.head.doc.textField("_1").head, left._1)})
-      .toDF("idGoogleBase", "idAmazon")
+
+    val linkageResults = sparkSession.createDataFrame(linkedResults.map{ case (schl, topDocs) =>
+      val rightId = topDocs.head.getString(topDocs.head.fieldIndex("_1"))
+      val leftId = schl._1
+      (leftId, rightId)
+    }).toDF("idGoogleBase", "idAmazon")
 
     val correctHits: Double = linkageResults
       .join(groundTruthDF, groundTruthDF.col("idAmazon").equalTo(linkageResults("idAmazon")) &&  groundTruthDF.col("idGoogleBase").equalTo(linkageResults("idGoogleBase")))
@@ -96,11 +99,11 @@ object LinkageGooglevsAmazon extends Logging {
     logInfo("=" * 40)
 
     logInfo("*" * 40)
-    logInfo(s"Accuracy of linkage is ${accuracy}")
+    logInfo(s"Accuracy of linkage is $accuracy")
     logInfo("*" * 40)
 
     // terminate spark context
-    sc.stop()
+    sparkSession.stop()
   }
 }
 

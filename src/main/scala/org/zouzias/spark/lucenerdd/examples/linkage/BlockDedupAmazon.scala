@@ -83,7 +83,7 @@ object BlockDedupAmazon extends Logging {
     val linkageResults: DataFrame = spark.createDataFrame(linkedResults
       .filter(_._2.nonEmpty)
       .map{ case (left, topDocs) =>
-        (topDocs.head.doc.textField("id").headOption,
+        (topDocs.head.get(topDocs.head.fieldIndex("id")),
           left.getString(left.fieldIndex("id"))
         )
       })
