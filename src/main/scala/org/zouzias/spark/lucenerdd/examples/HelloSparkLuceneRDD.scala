@@ -22,7 +22,7 @@ object HelloSparkLuceneRDD extends Logging {
     val count = rdd.count
 
     logInfo("=" * 20)
-    logInfo(s"| LuceneRDD results count is ${count} |")
+    logInfo(s"| LuceneRDD results count is $count |")
     logInfo("=" * 20)
 
     // terminate spark context

@@ -17,17 +17,16 @@ object LinkageAbtvsBuy extends Logging {
 
     // initialise sparkSession context
     val conf = new SparkConf().setAppName(LinkageAbtvsBuy.getClass.getName)
-
-    implicit val sc = SparkSession.builder().config(conf).getOrCreate()
-    import sc.implicits._
+    implicit val spark: SparkSession = SparkSession.builder().config(conf).getOrCreate()
+    import spark.implicits._
 
     val start = System.currentTimeMillis()
 
-    val abtDF = sc.read.parquet("data/linkage-products2/linkage-products-abt.parquet")
+    val abtDF = spark.read.parquet("data/linkage-products2/linkage-products-abt.parquet")
     logInfo(s"Loaded ${abtDF.count} Abt product descriptions")
-    val buyDF = sc.read.parquet("data/linkage-products2/linkage-products-buy.parquet")
+    val buyDF = spark.read.parquet("data/linkage-products2/linkage-products-buy.parquet")
     logInfo(s"Loaded ${buyDF.count} Buy product descriptions")
-    val groundTruthDF = sc.read.parquet("data/linkage-products2/linkage-products-abt-vs-buy.parquet")
+    val groundTruthDF = spark.read.parquet("data/linkage-products2/linkage-products-abt-vs-buy.parquet")
 
 
     val abt = abtDF.map( row => (row.get(0).toString, row.getString(1), row.getString(2), row.getString(3)))
@@ -45,18 +44,20 @@ object LinkageAbtvsBuy extends Logging {
           .filter(_.length > 0).mkString(" OR ")
 
         if (descTerms.nonEmpty) {
-          s"(_2:(${nameTokens})) OR (_3:${descTerms})"
+          s"(_2:($nameTokens)) OR (_3:$descTerms)"
         }
         else{
-          s"_2:(${nameTokens})"
+          s"_2:($nameTokens)"
         }
       }
     }
 
 
+    // Perform linkage and return top-5 results
     val linkedResults = buy.link(abt.rdd, linker.tupled, 3)
 
-    val linkageResultsIds = sc.createDataFrame(linkedResults.map{ case (abtId, topDocs) =>
+    // Compute the performance of linkage (accuracy)
+    val linkageResultsIds = spark.createDataFrame(linkedResults.map{ case (abtId, topDocs) =>
       val rightId = topDocs.head.getString(topDocs.head.fieldIndex("_1"))
       val leftId = abtId._1.toInt
       (leftId, rightId)
@@ -67,9 +68,7 @@ object LinkageAbtvsBuy extends Logging {
       .count()
 
     val total: Double = groundTruthDF.count
-
     val accuracy = correctHits / total
-
     val end = System.currentTimeMillis()
 
     logInfo("=" * 40)
@@ -77,11 +76,10 @@ object LinkageAbtvsBuy extends Logging {
     logInfo("=" * 40)
 
     logInfo("*" * 40)
-    logInfo(s"* Accuracy of linkage is ${accuracy} *")
+    logInfo(s"* Accuracy of linkage is $accuracy *")
     logInfo("*" * 40)
     // terminate sparkSession context
-    sc.stop()
-
+    spark.stop()
   }
 }
 

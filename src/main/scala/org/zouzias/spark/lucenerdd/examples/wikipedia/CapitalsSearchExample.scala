@@ -8,6 +8,8 @@ import org.zouzias.spark.lucenerdd.logging.Logging
 
 /**
  * Capitals search example
+ *
+ * Search over all capitals for a specific capital
  */
 object CapitalsSearchExample extends Logging {
 
@@ -37,6 +39,5 @@ object CapitalsSearchExample extends Logging {
 
     // terminate spark context
     spark.stop()
-
   }
 }

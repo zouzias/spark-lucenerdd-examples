@@ -31,6 +31,7 @@ object LinkageScholarvsDBLP extends Logging {
     implicit val spark: SparkSession = SparkSession.builder.config(conf).getOrCreate()
     import spark.implicits._
 
+    // Load input datasets
     val start = System.currentTimeMillis()
     val scholarDF = spark.read.parquet("data/linkage-papers1/linkage-papers-scholar.parquet")
     logInfo(s"Loaded ${scholarDF.count} ACM records")
@@ -40,9 +41,10 @@ object LinkageScholarvsDBLP extends Logging {
 
     val scholar = scholarDF.select("id", "title", "authors", "venue")
 
+    // Index DBLP dataset
     val dblp = LuceneRDD(dblpDF)
 
-    // A custom linker
+    // Define a  custom linker (defines your linkage logic)
     val linker: Row => String = { row =>
         val title = row.getString(row.fieldIndex("title"))
         val authors = row.getString(row.fieldIndex("authors"))
@@ -57,28 +59,28 @@ object LinkageScholarvsDBLP extends Logging {
           .mkString(" OR ")
 
         if (titleTokens.nonEmpty && authorsTerms.nonEmpty) {
-          s"(title:(${titleTokens}) OR authors:(${authorsTerms}))"
+          s"(title:($titleTokens) OR authors:($authorsTerms))"
         }
         else if (titleTokens.nonEmpty){
-          s"title:(${titleTokens})"
+          s"title:($titleTokens)"
         }
         else if (authorsTerms.nonEmpty){
-          s"authors:(${authorsTerms})"
+          s"authors:($authorsTerms)"
         }
         else {
           "*:*"
         }
     }
 
+    // Perform linkage and return top-3 results
     val linkedResults = dblp.linkDataFrame(scholar, linker, 3).filter(_._2.nonEmpty)
 
+    // Compute the performance of linkage (accuracy)
     val linkageResults = get_ids(linkedResults, "idScholar", "idDBLP")(spark)
-
     val correctHits: Double = linkageResults.join(groundTruthDF, groundTruthDF.col("idDBLP")
       .equalTo(linkageResults("idDBLP")) &&  groundTruthDF.col("idScholar").equalTo(linkageResults("idScholar"))).count
     val total: Double = groundTruthDF.count
     val accuracy = correctHits / total.toDouble
-
     val end = System.currentTimeMillis()
 
     logInfo("=" * 40)
@@ -87,10 +89,10 @@ object LinkageScholarvsDBLP extends Logging {
 
 
     logInfo("********************************")
-    logInfo(s"Accuracy of linkage is ${accuracy}")
+    logInfo(s"Accuracy of linkage is $accuracy")
     logInfo("********************************")
+
     // terminate spark context
     spark.stop()
-
   }
 }

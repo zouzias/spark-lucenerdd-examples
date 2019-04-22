@@ -76,11 +76,10 @@ object LinkageGooglevsAmazon extends Logging {
       }
     }
 
+    // Perform linkage and return top-3 results
     val linkedResults = googleLuceneRDD.link(amazon.rdd, linker.tupled, 3).filter(_._2.nonEmpty)
 
-    import sparkSession.implicits._
-
-
+    // Compute the performance of linkage (accuracy)
     val linkageResults = sparkSession.createDataFrame(linkedResults.map{ case (amz, topDocs) =>
       val rightId = topDocs.head.getString(topDocs.head.fieldIndex("_1"))
       val leftId = amz._1
