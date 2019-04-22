@@ -8,7 +8,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 import org.zouzias.spark.lucenerdd.{LuceneRDD, _}
 import org.zouzias.spark.lucenerdd.logging.Logging
 import org.apache.spark.sql.functions.{log10, round}
-import org.apache.spark.sql.types.{IntegerType, StringType}
+import org.apache.spark.sql.types.StringType
 
 /**
  * Block Record linkage example between amazon and google product's descriptions using [[LuceneRDD]]
@@ -39,8 +39,7 @@ object BlockLinkageGooglevsAmazon extends Logging {
     val googleDF = ggleDF.withColumn("priceDigits", round(log10('price + 1)).cast(StringType))
 
     // Custom linker
-    val linker: Row => Query = {
-      case row => {
+    val linker: Row => Query = { row =>
 
         val name = row.getString(row.fieldIndex("name"))
         val description = row.getString(row.fieldIndex("description"))
@@ -71,7 +70,6 @@ object BlockLinkageGooglevsAmazon extends Logging {
         else {
           new MatchAllDocsQuery()
         }
-      }
     }
 
 
@@ -83,11 +81,14 @@ object BlockLinkageGooglevsAmazon extends Logging {
       blockingFields, blockingFields)
 
     val linkageResults = spark.createDataFrame(linkedResults
-      .map{ case (left, topDocs) => (topDocs.headOption.flatMap(_.doc.textField("_1")), left.getString(0))})
+      .map{ case (left, topDocs) =>
+        (topDocs.headOption.map(x => x.getString(x.fieldIndex("id"))),
+        left.getString(left.fieldIndex("id")))})
       .toDF("idGoogleBase", "idAmazon")
 
     val correctHits: Double = linkageResults
-      .join(groundTruthDF, groundTruthDF.col("idAmazon").equalTo(linkageResults("idAmazon")) &&  groundTruthDF.col("idGoogleBase").equalTo(linkageResults("idGoogleBase")))
+      .join(groundTruthDF, groundTruthDF.col("idAmazon").equalTo(linkageResults("idAmazon"))
+        && groundTruthDF.col("idGoogleBase").equalTo(linkageResults("idGoogleBase")))
       .count()
     val total: Double = groundTruthDF.count()
     val accuracy = correctHits / total

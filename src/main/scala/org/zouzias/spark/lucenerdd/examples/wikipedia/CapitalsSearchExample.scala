@@ -8,6 +8,8 @@ import org.zouzias.spark.lucenerdd.logging.Logging
 
 /**
  * Capitals search example
+ *
+ * Search over all capitals for a specific capital
  */
 object CapitalsSearchExample extends Logging {
 
@@ -17,7 +19,7 @@ object CapitalsSearchExample extends Logging {
     val conf = new SparkConf().setAppName("CapitalsSearchExample")
     val k = 10
 
-    implicit val spark = SparkSession.builder.config(conf).getOrCreate()
+    implicit val spark: SparkSession = SparkSession.builder.config(conf).getOrCreate()
 
     val start = System.currentTimeMillis()
 
@@ -37,6 +39,5 @@ object CapitalsSearchExample extends Logging {
 
     // terminate spark context
     spark.stop()
-
   }
 }

@@ -50,7 +50,8 @@ object ShapeLuceneRDDLinkageCountriesvsCapitals extends Logging {
     val linked = shapes.linkByRadius(capitals.rdd, coords, Radius)
     linked.cache
 
-    linked.map(x => (x._1, x._2.headOption.flatMap(_.doc.textField("_1")))).foreach { case (capital, country) =>
+    linked.map(x => (x._1, x._2.headOption.map(x => x.getString(x.fieldIndex("_1")))))
+      .foreach { case (capital, country) =>
       logInfo(s"Capital of ${country.getOrElse("Unknown")} is ${capital._2} (${capital._1})")
     }
 
