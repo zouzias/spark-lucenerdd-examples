@@ -82,14 +82,8 @@ object BlockDedupIllinois extends Logging {
 
     val blockingFields = Array("City")
 
-    // Block entity linkage
+    // Block entity linkage; block on City column
     val linkedResults = LuceneRDD.blockDedup(illinoisDF, linker, blockingFields)
-
-    val collected = linkedResults.collect()
-
-    collected.map(x => (x._1, x._2.headOption)).foreach(println)
-
-
 
     val linkageResults: DataFrame = spark.createDataFrame(linkedResults
       .filter(_._2.nonEmpty)
@@ -114,9 +108,9 @@ object BlockDedupIllinois extends Logging {
     logInfo("*" * 40)
     logInfo(s"* Accuracy of deduplication is $accuracy *")
     logInfo("*" * 40)
+
     // terminate spark context
     spark.stop()
-
   }
 }
 

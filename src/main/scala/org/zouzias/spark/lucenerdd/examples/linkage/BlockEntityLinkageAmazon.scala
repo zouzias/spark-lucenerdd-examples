@@ -14,7 +14,7 @@ import org.zouzias.spark.lucenerdd.logging.Logging
  *
  * You can run this locally with ./spark-blocklinkage-amazon.sh
  */
-object BlockDedupAmazon extends Logging {
+object BlockEntityLinkageAmazon extends Logging {
 
   def main(args: Array[String]) {
 
@@ -50,11 +50,13 @@ object BlockDedupAmazon extends Logging {
         if (nameTokens.nonEmpty && descTerms.nonEmpty) {
 
           nameTokens.foreach{ name =>
-            booleanQuery.add(new TermQuery(new Term("title", name.toLowerCase)), Occur.SHOULD)
+            booleanQuery.add(new TermQuery(new Term("title", name.toLowerCase)),
+              Occur.SHOULD)
           }
 
           descTerms.foreach{ name =>
-            booleanQuery.add(new TermQuery(new Term("description", name.toLowerCase())), Occur.SHOULD)
+            booleanQuery.add(new TermQuery(new Term("description", name.toLowerCase())),
+              Occur.SHOULD)
           }
 
           booleanQuery.build()
@@ -62,7 +64,8 @@ object BlockDedupAmazon extends Logging {
         }
         else if (nameTokens.nonEmpty){
           nameTokens.foreach{ name =>
-            booleanQuery.add(new TermQuery(new Term("title", name.toLowerCase())), Occur.SHOULD)
+            booleanQuery.add(new TermQuery(new Term("title", name.toLowerCase())),
+              Occur.SHOULD)
           }
 
           booleanQuery.build()
@@ -80,6 +83,7 @@ object BlockDedupAmazon extends Logging {
       linker, /* Link by title similarity */
       blockingFields, blockingFields)
 
+    // Compute the performance of linkage (accuracy)
     val linkageResults: DataFrame = spark.createDataFrame(linkedResults
       .filter(_._2.nonEmpty)
       .map{ case (left, topDocs) =>
@@ -103,9 +107,9 @@ object BlockDedupAmazon extends Logging {
     logInfo("*" * 40)
     logInfo(s"* Accuracy of deduplication is $accuracy *")
     logInfo("*" * 40)
+
     // terminate spark context
     spark.stop()
-
   }
 }
 

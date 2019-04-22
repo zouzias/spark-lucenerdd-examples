@@ -81,12 +81,14 @@ object BlockLinkageGooglevsAmazon extends Logging {
       blockingFields, blockingFields)
 
     val linkageResults = spark.createDataFrame(linkedResults
-      .map{ case (left, topDocs) => (topDocs.headOption.map(x => x.getString(x.fieldIndex("_1"))),
-        left.getString(0))})
+      .map{ case (left, topDocs) =>
+        (topDocs.headOption.map(x => x.getString(x.fieldIndex("id"))),
+        left.getString(left.fieldIndex("id")))})
       .toDF("idGoogleBase", "idAmazon")
 
     val correctHits: Double = linkageResults
-      .join(groundTruthDF, groundTruthDF.col("idAmazon").equalTo(linkageResults("idAmazon")) &&  groundTruthDF.col("idGoogleBase").equalTo(linkageResults("idGoogleBase")))
+      .join(groundTruthDF, groundTruthDF.col("idAmazon").equalTo(linkageResults("idAmazon"))
+        && groundTruthDF.col("idGoogleBase").equalTo(linkageResults("idGoogleBase")))
       .count()
     val total: Double = groundTruthDF.count()
     val accuracy = correctHits / total
