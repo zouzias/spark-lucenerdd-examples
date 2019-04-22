@@ -43,8 +43,7 @@ object LinkageScholarvsDBLP extends Logging {
     val dblp = LuceneRDD(dblpDF)
 
     // A custom linker
-    val linker: Row => String = {
-      case row => {
+    val linker: Row => String = { row =>
         val title = row.getString(row.fieldIndex("title"))
         val authors = row.getString(row.fieldIndex("authors"))
 
@@ -69,12 +68,11 @@ object LinkageScholarvsDBLP extends Logging {
         else {
           "*:*"
         }
-      }
     }
 
     val linkedResults = dblp.linkDataFrame(scholar, linker, 3).filter(_._2.nonEmpty)
 
-    val linkageResults = get_ids(linkedResults, "idDBLP", "idScholar")(spark)
+    val linkageResults = get_ids(linkedResults, "idScholar", "idDBLP")(spark)
 
     val correctHits: Double = linkageResults.join(groundTruthDF, groundTruthDF.col("idDBLP")
       .equalTo(linkageResults("idDBLP")) &&  groundTruthDF.col("idScholar").equalTo(linkageResults("idScholar"))).count
