@@ -55,6 +55,7 @@ object LinkageScholarvsDBLP extends Logging {
           .mkString(" OR ")
         val authorsTerms = authors.split(" ")
           .map(_.replaceAll("[^a-zA-Z0-9]", ""))
+          .filter(_.compareToIgnoreCase("OR") != 0)
           .filter(_.length > 2)
           .mkString(" OR ")
 

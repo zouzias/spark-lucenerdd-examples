@@ -16,7 +16,6 @@ object LinkageACMvsDBLP extends Logging {
 
     // initialise spark context
     val conf = new SparkConf().setAppName(LinkageACMvsDBLP.getClass.getName)
-
     implicit val spark: SparkSession = SparkSession.builder.config(conf).getOrCreate()
     import spark.implicits._
 
@@ -32,27 +31,34 @@ object LinkageACMvsDBLP extends Logging {
     dblp2.cache()
 
     // Link is the author tokens or title tokens match. Combine all tokens by an OR clause
+    // Define a  custom linker (defines your linkage logic)
     val linker: Row => String = { row =>
-        // Get title and author fields
-        val title = row.getString(row.fieldIndex("title"))
-        val authors = row.getString(row.fieldIndex("authors"))
+      val title = row.getString(row.fieldIndex("title"))
+      val authors = row.getString(row.fieldIndex("authors"))
 
-        // Clean and split title into tokens
-        val titleTokens = title.split(" ")
-          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
-          .filter(_.length > 3).mkString(" OR ")
+      val titleTokens = title.split(" ").map(_.trim)
+        .flatMap(_.replaceAll("[^a-zA-Z0-9]", " ").split(" "))
+        .filter(_.compareToIgnoreCase("OR") != 0)
+        .filter(_.length > 3)
+        .mkString(" OR ")
+      val authorsTerms = authors.split(" ").map(_.trim)
+        .flatMap(_.replaceAll("[^a-zA-Z0-9]", " ").split(" "))
+        .filter(_.compareToIgnoreCase("OR") != 0)
+        .filter(_.length > 2)
+        .mkString(" OR ")
 
-        // Clean and split authors into tokens
-        val authorsTerms = authors.split(" ")
-          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
-          .filter(_.length > 2).mkString(" OR ")
-
-        if (authorsTerms.nonEmpty) {
-          s"(title:($titleTokens)) OR (author:$authorsTerms)"
-        }
-        else{
-          s"title:($titleTokens)"
-        }
+      if (titleTokens.nonEmpty && authorsTerms.nonEmpty) {
+        s"(title:($titleTokens) OR authors:($authorsTerms))"
+      }
+      else if (titleTokens.nonEmpty){
+        s"title:($titleTokens)"
+      }
+      else if (authorsTerms.nonEmpty){
+        s"authors:($authorsTerms)"
+      }
+      else {
+        "*:*"
+      }
     }
 
     // Perform linkage and return top-5 results
@@ -66,7 +72,8 @@ object LinkageACMvsDBLP extends Logging {
     }).toDF("idDBLP", "idACM")
 
     val correctHits: Double = linkageResults
-      .join(groundTruthDF, groundTruthDF.col("idDBLP").equalTo(linkageResults("idDBLP")) &&  groundTruthDF.col("idACM").equalTo(linkageResults("idACM")))
+      .join(groundTruthDF, groundTruthDF.col("idDBLP").equalTo(linkageResults("idDBLP"))
+        && groundTruthDF.col("idACM").equalTo(linkageResults("idACM")))
       .count()
     val total: Double = groundTruthDF.count
 
