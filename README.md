@@ -1,6 +1,6 @@
 # spark-lucenerdd-examples
 
-Usage examples of [spark-lucenerdd](https://github.com/zouzias/spark-lucenerdd).
+Examples of [spark-lucenerdd](https://github.com/zouzias/spark-lucenerdd).
 
 
 ## Datasets
@@ -9,7 +9,7 @@ that the goal here is to demonstrate the user-friendliness of the spark-lucenerd
 
 
 
-|Dataset | Domain | Attributes  | Accuracy (top-1) | Link |
+|Dataset | Domain | Attributes  | Accuracy (top-1) | References |
 |-------|---------|------------------|------|------|
 | DBLP vs ACM article| Bibliographic| title, authors, venue, year | [0.XX]()| [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|
 | DBLP vs Scholar article| Bibliographic| title, authors, venue, year | [0.61]() | [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|
