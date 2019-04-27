@@ -4,6 +4,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd.logging.Logging
+import org.apache.spark.sql
 
 /**
  * Record linkage example between ACM and DBLP using [[LuceneRDD]]
@@ -22,10 +23,12 @@ object LinkageACMvsDBLP extends Logging {
     val start = System.currentTimeMillis()
 
     val acmDF = spark.read.parquet("data/linkage-papers2/linkage-papers-acm.parquet")
+      .withColumn("id", $"id".cast(sql.types.StringType))
     logInfo(s"Loaded ${acmDF.count} ACM records")
     val dblp2DF = spark.read.parquet("data/linkage-papers2/linkage-papers-dblp2.parquet")
     logInfo(s"Loaded ${acmDF.count} DBLP records")
     val groundTruthDF = spark.read.parquet("data/linkage-papers2/linkage-papers-acm-vs-dblp2.parquet")
+      .withColumn("idACM", $"idACM".cast(sql.types.StringType))
 
     val dblp2 = LuceneRDD(dblp2DF)
     dblp2.cache()
@@ -67,15 +70,15 @@ object LinkageACMvsDBLP extends Logging {
     // Compute the performance of linkage (accuracy)
     val linkageResults = spark.createDataFrame(linkedResults.map{ case (dblp, topDocs) =>
       val rightId = topDocs.head.getString(topDocs.head.fieldIndex("id"))
-      val leftId = dblp.getInt(dblp.fieldIndex("id")).toString
+      val leftId = dblp.getString(dblp.fieldIndex("id"))
       (leftId, rightId)
     }).toDF("idDBLP", "idACM")
 
     val correctHits: Double = linkageResults
       .join(groundTruthDF, groundTruthDF.col("idDBLP").equalTo(linkageResults("idDBLP"))
         && groundTruthDF.col("idACM").equalTo(linkageResults("idACM")))
-      .count()
-    val total: Double = groundTruthDF.count
+      .count().toDouble
+    val total: Double = groundTruthDF.count.toDouble
 
     val accuracy = correctHits / total
     val end = System.currentTimeMillis()

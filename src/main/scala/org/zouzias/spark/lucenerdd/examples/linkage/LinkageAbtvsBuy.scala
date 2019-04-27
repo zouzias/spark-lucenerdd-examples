@@ -9,7 +9,7 @@ import org.zouzias.spark.lucenerdd.logging.Logging
 /**
  * Record linkage example between Abt and Buy product's descriptions using [[LuceneRDD]]
  *
- * You can run this locally with, ./spark-linkage-products2.sh
+ * You can run this locally with, ./spark-linkage-abt-vs-buy-products.sh
  */
 object LinkageAbtvsBuy extends Logging {
 

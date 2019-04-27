@@ -17,7 +17,7 @@ import scala.collection.mutable
  * Record linkage example between amazon and itself blocked by manufacturer using
  * [[LuceneRDD.blockEntityLinkage]] method
  *
- * You can run this locally with ./spark-blocklinkage-amazon.sh
+ * You can run this locally with ./spark-blockdedup-illinois.sh
  */
 object BlockDedupIllinois extends Logging {
 

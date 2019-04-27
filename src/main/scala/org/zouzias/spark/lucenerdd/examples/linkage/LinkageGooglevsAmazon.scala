@@ -9,7 +9,7 @@ import org.zouzias.spark.lucenerdd.logging.Logging
 /**
  * Record linkage example between amazon and google product's descriptions using [[LuceneRDD]]
  *
- * You can run this locally with, ./spark-linkage-products1.sh
+ * You can run this locally with, ./spark-linkage-google-vs-amazon.sh
  */
 object LinkageGooglevsAmazon extends Logging {
 

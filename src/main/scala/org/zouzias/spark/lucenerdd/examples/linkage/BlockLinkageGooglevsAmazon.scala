@@ -13,7 +13,7 @@ import org.apache.spark.sql.types.StringType
 /**
  * Block Record linkage example between amazon and google product's descriptions using [[LuceneRDD]]
  *
- * You can run this locally with, ./spark-blocklinkage-products1.sh
+ * You can run this locally with, ./spark-blocklinkage-google-vs-amazon-produces.sh
  */
 object BlockLinkageGooglevsAmazon extends Logging {
 

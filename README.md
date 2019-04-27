@@ -11,7 +11,6 @@ that the goal here is to demonstrate the user-friendliness of the spark-lucenerd
 
 |Dataset | Domain | Attributes  | Accuracy (top-1) | References |
 |-------|---------|------------------|------|------|
-| DBLP vs ACM article| Bibliographic| title, authors, venue, year | [0.XX]()| [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|
 | DBLP vs Scholar article| Bibliographic| title, authors, venue, year | [0.61]() | [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|
 | Amazon vs Google products| E-commerce| name, description, manufacturer, price | [0.58]() | [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|
 | Abt vs Buy products | E-commerce| name, description, manufacturer, price | [0.64]() | [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|

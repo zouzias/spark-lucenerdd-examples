@@ -10,7 +10,7 @@ import org.zouzias.spark.lucenerdd.logging.Logging
 /**
  * Record linkage example between Google scholar and DBLP using [[LuceneRDD]]
  *
- * You can run this locally with, ./spark-linkage-scholar.sh
+ * You can run this locally with, ./spark-linkage-dblp-vs-scholar-articles.sh
  */
 object LinkageScholarvsDBLP extends Logging {
 
