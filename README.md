@@ -3,34 +3,20 @@
 Examples of [spark-lucenerdd](https://github.com/zouzias/spark-lucenerdd).
 
 
-## Datasets
+## Datasets and Entity Likage 
 The following pairs of datasets are used here to demonstrate the accuracy/quality of the record linkage methods. Note 
 that the goal here is to demonstrate the user-friendliness of the spark-lucenerdd library and no optimization is attempted.
 
 
-
 |Dataset | Domain | Attributes  | Accuracy (top-1) | References |
 |-------|---------|------------------|------|------|
-| DBLP vs Scholar article| Bibliographic| title, authors, venue, year | [0.61]() | [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|
-| Amazon vs Google products| E-commerce| name, description, manufacturer, price | [0.58]() | [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|
-| Abt vs Buy products | E-commerce| name, description, manufacturer, price | [0.64]() | [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|
+| DBLP vs Scholar article| Bibliographic| title, authors, venue, year | [0.61](https://github.com/zouzias/spark-lucenerdd-examples/blob/develop/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/LinkageScholarvsDBLP.scala) | [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|
+| Amazon vs Google products| E-commerce| name, description, manufacturer, price | [0.58](https://github.com/zouzias/spark-lucenerdd-examples/blob/develop/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/BlockLinkageGooglevsAmazon.scala) | [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|
+| Abt vs Buy products | E-commerce| name, description, manufacturer, price | [0.64](https://github.com/zouzias/spark-lucenerdd-examples/blob/develop/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/LinkageAbtvsBuy.scala) | [Benchmark datasets for entity resolution](https://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution)|
 
 The reported accuracy above is by selecting as the linked entity: the first result from the top-K list of results.
 
-
-All datasets are available in Spark friendly Parquet format [here](https://github.com/zouzias/spark-lucenerdd-examples/tree/master/data)
-
-### Record Linkage
-
-Examples with "real-world" datasets are available:
-
-* [DBLP vs ACM](https://github.com/zouzias/spark-lucenerdd-examples/blob/master/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/LinkageACMvsDBLP.scala) - DBLP academic articles versus ACM articles
-* [DBLP vs Scholar](https://github.com/zouzias/spark-lucenerdd-examples/blob/master/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/LinkageScholarvsDBLP.scala) - DBLP academic articles versus Google Scholar articles
-* [Amazon vs Google](https://github.com/zouzias/spark-lucenerdd-examples/blob/master/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/LinkageGooglevsAmazon.scala) - Amazon versus google product listings
-* [Abt vs Buy](https://github.com/zouzias/spark-lucenerdd-examples/blob/master/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/LinkageAbtvsBuy.scala) - Abt versus buy product listings
-
-The datasets used for record linkage are
-available at [here](http://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution).
+All datasets are available in Spark friendly Parquet format [here](https://github.com/zouzias/spark-lucenerdd-examples/tree/master/data); original datasets are available [here](http://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution).
 
 #### Usage (spark-submit)
 
