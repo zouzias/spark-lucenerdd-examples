@@ -13,6 +13,12 @@ import org.apache.spark.sql
  */
 object LinkageACMvsDBLP extends Logging {
 
+  def tokenizer(s: String, threshold: Int, comb: String = "OR"): String = {
+    s.split(" ")
+      .flatMap(_.replaceAll("[^a-zA-Z0-9]", " ").split(" "))
+      .filter(_.length > threshold).mkString(s" $comb ")
+  }
+
   def main(args: Array[String]) {
 
     // initialise spark context
@@ -23,56 +29,48 @@ object LinkageACMvsDBLP extends Logging {
     val start = System.currentTimeMillis()
 
     val acmDF = spark.read.parquet("data/linkage-papers2/linkage-papers-acm.parquet")
-      .withColumn("id", $"id".cast(sql.types.StringType))
     logInfo(s"Loaded ${acmDF.count} ACM records")
     val dblp2DF = spark.read.parquet("data/linkage-papers2/linkage-papers-dblp2.parquet")
     logInfo(s"Loaded ${acmDF.count} DBLP records")
     val groundTruthDF = spark.read.parquet("data/linkage-papers2/linkage-papers-acm-vs-dblp2.parquet")
-      .withColumn("idACM", $"idACM".cast(sql.types.StringType))
 
     val dblp2 = LuceneRDD(dblp2DF)
     dblp2.cache()
 
     // Link is the author tokens or title tokens match. Combine all tokens by an OR clause
     // Define a  custom linker (defines your linkage logic)
-    val linker: Row => String = { row =>
+    val linker: Row => String = {row => {
+
+      // Get title and authors fields
       val title = row.getString(row.fieldIndex("title"))
       val authors = row.getString(row.fieldIndex("authors"))
 
-      val titleTokens = title.split(" ").map(_.trim)
-        .flatMap(_.replaceAll("[^a-zA-Z0-9]", " ").split(" "))
-        .filter(_.compareToIgnoreCase("OR") != 0)
-        .filter(_.length > 3)
-        .mkString(" OR ")
-      val authorsTerms = authors.split(" ").map(_.trim)
-        .flatMap(_.replaceAll("[^a-zA-Z0-9]", " ").split(" "))
-        .filter(_.compareToIgnoreCase("OR") != 0)
-        .filter(_.length > 2)
-        .mkString(" OR ")
+      val titleTokens = tokenizer(title, 3) // Replace 8 with 3
+      val authorsTerms = tokenizer(authors, 3) // Use 3 to get 0.97 accuracy
 
       if (titleTokens.nonEmpty && authorsTerms.nonEmpty) {
-        s"(title:($titleTokens) OR authors:($authorsTerms))"
+        s"(title:(${titleTokens})) OR (authors:${authorsTerms})"
       }
       else if (titleTokens.nonEmpty){
-        s"title:($titleTokens)"
+        s"title:(${titleTokens})"
       }
-      else if (authorsTerms.nonEmpty){
-        s"authors:($authorsTerms)"
+      else if ( authorsTerms.nonEmpty) {
+        s"(authors:${authorsTerms})"
       }
       else {
         "*:*"
       }
     }
+    }
 
     // Perform linkage and return top-5 results
-    val linkedResults = dblp2.linkDataFrame(acmDF, linker, 5).filter(_._2.nonEmpty)
+    val linkedResults = dblp2.linkDataFrame(acmDF, linker, 3).filter(_._2.nonEmpty)
 
     // Compute the performance of linkage (accuracy)
-    val linkageResults = spark.createDataFrame(linkedResults.map{ case (dblp, topDocs) =>
-      val rightId = topDocs.head.getString(topDocs.head.fieldIndex("id"))
-      val leftId = dblp.getString(dblp.fieldIndex("id"))
-      (leftId, rightId)
-    }).toDF("idDBLP", "idACM")
+    val linkageResults = spark.createDataFrame(linkedResults.map{ case (acm, topDocs) =>
+      (topDocs.head.getString(topDocs.head.fieldIndex("id")),
+        acm.getInt(acm.fieldIndex("id")).toString)})
+      .toDF("idDBLP", "idACM")
 
     val correctHits: Double = linkageResults
       .join(groundTruthDF, groundTruthDF.col("idDBLP").equalTo(linkageResults("idDBLP"))

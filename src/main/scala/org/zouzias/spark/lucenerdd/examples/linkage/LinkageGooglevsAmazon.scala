@@ -36,24 +36,13 @@ object LinkageGooglevsAmazon extends Logging {
       case (_, name, description, manu) => {
 
         // Clean fields and tokenize them
-        val nameTokens = name.split(" ")
-          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
-          .filter(_.length > 1)
-          .distinct
+        val nameTokens = LinkageUtils.tokenize(name, 1)
           .mkString(" OR ")
 
-        val descTerms = description.split(" ")
-          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
-          .filter(_.length > 6)
-          .distinct
-          .mkString(" OR ")
+        val descTerms = LinkageUtils.tokenize(description, 8).mkString(" OR ")
 
-        val manuTerms = manu.split(" ")
-          .map(_.replaceAll("[^a-zA-Z0-9]", ""))
-          .filter(_.length > 1)
-          .mkString(" OR ")
+        val manuTerms = LinkageUtils.tokenize(manu, 1).mkString(" OR ")
 
-        /*
         if (descTerms.nonEmpty && nameTokens.nonEmpty && manuTerms.nonEmpty) {
           s"(_2:(${nameTokens})) OR (_3:${descTerms}) OR (_4:${manuTerms})"
         }
@@ -61,13 +50,6 @@ object LinkageGooglevsAmazon extends Logging {
           s"(_2:(${nameTokens})) OR (_4:${manuTerms})"
         }
         else if (nameTokens.nonEmpty) {
-          s"_2:(${nameTokens})"
-        }
-        else {
-          "*:*"
-        }*/
-
-        if (nameTokens.nonEmpty) {
           s"_2:(${nameTokens})"
         }
         else {

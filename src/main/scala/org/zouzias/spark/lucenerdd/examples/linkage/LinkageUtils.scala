@@ -12,4 +12,11 @@ object LinkageUtils {
         && truthDF.col(rightId).equalTo(linkageResults(rightId)))
       .count()
   }
+
+  def tokenize(text: String, minThreshold: Int): Array[String] = {
+    text.split(" ")
+      .flatMap(_.replaceAll("[^a-zA-Z0-9]", " ").split(" "))
+      .filter(_.length > minThreshold)
+      .distinct
+  }
 }
