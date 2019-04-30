@@ -19,3 +19,5 @@ services:
     volumes:
       - ./data:/zeppelin/data
       - ./notebooks:/zeppelin/notebook
+      - ./zeppelin-logs:/zeppelin/logs
+      - ./zeppelin-run:/zeppelin/run
