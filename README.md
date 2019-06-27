@@ -19,7 +19,24 @@ The reported accuracy above is by selecting as the linked entity: the first resu
 
 All datasets are available in Spark friendly Parquet format [here](https://github.com/zouzias/spark-lucenerdd-examples/tree/master/data); original datasets are available [here](http://dbs.uni-leipzig.de/en/research/projects/object_matching/fever/benchmark_datasets_for_entity_resolution).
 
-#### Usage (spark-submit)
+## Spatial linkage between countries and capitals
+
+This [example](https://github.com/zouzias/spark-lucenerdd-examples/blob/develop/src/main/scala/org/zouzias/spark/lucenerdd/examples/linkage/shape/ShapeLuceneRDDLinkageCountriesvsCapitals.scala) loads all countries from a parquet file containing fields "name" and "shape" (shape is mostly polygons in WKT)
+
+```scala
+val allCountries = spark.read.parquet("data/spatial/countries-poly.parquet")
+```
+then, it load all capitals from a parquet file containing fields "name" and "shape" (shape is mostly points in WKT)
+
+```scala
+val capitals = spark.read.parquet("data/spatial/capitals.parquet")
+```
+
+A ShapeLuceneRDD instance is created on the countries and a `linkageByRadius` is performed on the capitals. The output is presented in the logs.
+
+# Development
+
+## Usage (spark-submit)
 
 Install Java, [SBT](http://www.scala-sbt.org) and clone the project
 
@@ -37,7 +54,7 @@ Download and extract apache spark under your home directory, update the `spark-s
 
 to run the record linkage examples and `./spark-search-capitalts.sh` to run a search example.
 
-#### Usage (docker)
+### Usage (docker)
 
 Setup docker and  assuming that you have a docker machine named `default`, type
 
@@ -47,18 +64,5 @@ Setup docker and  assuming that you have a docker machine named `default`, type
 To start an Apache Zeppelin with preloaded notebooks.
 
 
-#### Spatial linkage between countries and capitals
 
-This example loads all countries from a parquet file containing fields "name" and "shape" (shape is mostly polygons in WKT)
-
-```scala
-val allCountries = spark.read.parquet("data/spatial/countries-poly.parquet")
-```
-then, it load all capitals from a parquet file containing fields "name" and "shape" (shape is mostly points in WKT)
-
-```scala
-val capitals = spark.read.parquet("data/spatial/capitals.parquet")
-```
-
-A ShapeLuceneRDD instance is created on the countries and a `linkageByRadius` is performed on the capitals. The output is presented in the logs.
 
