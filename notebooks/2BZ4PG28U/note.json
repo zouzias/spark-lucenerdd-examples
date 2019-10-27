@@ -2,9 +2,9 @@
   "paragraphs": [
     {
       "title": "Load Spark LuceneRDD Jars",
-      "text": "%dep\nz.reset()\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.7\")",
+      "text": "%dep\nz.reset()\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.8-SNAPSHOT\")",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:37:49.602",
+      "dateUpdated": "2019-10-27 09:58:19.070",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -37,7 +37,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "res0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@1be0fad5\n"
+            "data": "res0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@428a8dd4\n"
           }
         ]
       },
@@ -50,8 +50,8 @@
       "jobName": "paragraph_1475350680699_-1674609895",
       "id": "20161001-115642_482200633",
       "dateCreated": "2016-10-01 07:38:00.000",
-      "dateStarted": "2019-05-01 07:37:49.944",
-      "dateFinished": "2019-05-01 07:38:05.334",
+      "dateStarted": "2019-10-27 09:58:19.320",
+      "dateFinished": "2019-10-27 09:58:47.775",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -59,7 +59,7 @@
       "title": "Imports for LuceneRDD",
       "text": "%spark\nimport org.apache.spark.SparkConf\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.zouzias.spark.lucenerdd.LuceneRDD\nimport org.zouzias.spark.lucenerdd._\nimport org.zouzias.spark.lucenerdd.logging.Logging\n",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:38:05.358",
+      "dateUpdated": "2019-10-27 09:59:03.290",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -105,8 +105,8 @@
       "jobName": "paragraph_1475350680710_-1592658380",
       "id": "20161001-120020_440303718",
       "dateCreated": "2016-10-01 07:38:00.000",
-      "dateStarted": "2019-05-01 07:38:05.733",
-      "dateFinished": "2019-05-01 07:38:17.332",
+      "dateStarted": "2019-10-27 09:59:03.373",
+      "dateFinished": "2019-10-27 09:59:17.352",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -114,7 +114,7 @@
       "title": "Load ACM and DBLP articles as Spark DataFrames",
       "text": "import spark.implicits._\n\n// ACM\nval acmDF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-acm.parquet\")\nprintln(s\"Loaded ${acmDF.count} ACM records\")\nacmDF.cache()\nacmDF.printSchema()\n\n// DBLP\nval dblp2DF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-dblp2.parquet\")\nprintln(s\"Loaded ${acmDF.count} DBLP records\")\n\n// Ground truth DataFrame\nval groundTruthDF \u003d spark.read.parquet(\"data/linkage-papers2/linkage-papers-acm-vs-dblp2.parquet\")\n\n// DBLP LuceneRDD\nval dblp2 \u003d LuceneRDD(dblp2DF)\ndblp2.cache()\ndblp2.fields()",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:38:17.377",
+      "dateUpdated": "2019-10-27 09:59:27.158",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -163,12 +163,12 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d0",
-            "http://172.19.0.2:4040/jobs/job?id\u003d1",
-            "http://172.19.0.2:4040/jobs/job?id\u003d2",
-            "http://172.19.0.2:4040/jobs/job?id\u003d3",
-            "http://172.19.0.2:4040/jobs/job?id\u003d4",
-            "http://172.19.0.2:4040/jobs/job?id\u003d5"
+            "http://172.29.0.2:4040/jobs/job?id\u003d0",
+            "http://172.29.0.2:4040/jobs/job?id\u003d1",
+            "http://172.29.0.2:4040/jobs/job?id\u003d2",
+            "http://172.29.0.2:4040/jobs/job?id\u003d3",
+            "http://172.29.0.2:4040/jobs/job?id\u003d4",
+            "http://172.29.0.2:4040/jobs/job?id\u003d5"
           ],
           "interpreterSettingId": "spark"
         }
@@ -177,8 +177,8 @@
       "jobName": "paragraph_1475350680712_-1594966873",
       "id": "20161001-120320_2078137697",
       "dateCreated": "2016-10-01 07:38:00.000",
-      "dateStarted": "2019-05-01 07:38:17.471",
-      "dateFinished": "2019-05-01 07:38:30.410",
+      "dateStarted": "2019-10-27 09:59:27.237",
+      "dateFinished": "2019-10-27 09:59:46.105",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -186,7 +186,7 @@
       "title": "Register tables for visualization",
       "text": "acmDF.registerTempTable(\"acm\")\ndblp2DF.registerTempTable(\"dblp\")",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:38:30.438",
+      "dateUpdated": "2019-10-27 09:59:30.633",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -232,8 +232,8 @@
       "jobName": "paragraph_1476792709323_-1512020199",
       "id": "20161018-121149_1501647868",
       "dateCreated": "2016-10-18 12:11:49.000",
-      "dateStarted": "2019-05-01 07:38:30.574",
-      "dateFinished": "2019-05-01 07:38:31.207",
+      "dateStarted": "2019-10-27 09:59:30.809",
+      "dateFinished": "2019-10-27 09:59:46.958",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -241,7 +241,7 @@
       "title": "ACM Papers",
       "text": "%sql\nselect id, year, title, authors, venue FROM acm limit 10",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:38:31.274",
+      "dateUpdated": "2019-10-27 09:59:36.515",
       "config": {
         "colWidth": 6.0,
         "enabled": true,
@@ -382,7 +382,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d6"
+            "http://172.29.0.2:4040/jobs/job?id\u003d6"
           ],
           "interpreterSettingId": "spark"
         }
@@ -391,8 +391,8 @@
       "jobName": "paragraph_1476792941795_1780446349",
       "id": "20161018-121541_1139402059",
       "dateCreated": "2016-10-18 12:15:41.000",
-      "dateStarted": "2019-05-01 07:38:31.388",
-      "dateFinished": "2019-05-01 07:38:31.841",
+      "dateStarted": "2019-10-27 09:59:46.704",
+      "dateFinished": "2019-10-27 09:59:47.559",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -400,7 +400,7 @@
       "title": "DBLP papers",
       "text": "%sql\nselect id, year, title, authors, venue FROM dblp limit 10",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:38:31.888",
+      "dateUpdated": "2019-10-27 09:59:38.266",
       "config": {
         "colWidth": 6.0,
         "enabled": true,
@@ -477,7 +477,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d7"
+            "http://172.29.0.2:4040/jobs/job?id\u003d7"
           ],
           "interpreterSettingId": "spark"
         }
@@ -486,8 +486,8 @@
       "jobName": "paragraph_1476793006890_1637948050",
       "id": "20161018-121646_135219171",
       "dateCreated": "2016-10-18 12:16:46.000",
-      "dateStarted": "2019-05-01 07:38:31.941",
-      "dateFinished": "2019-05-01 07:38:32.300",
+      "dateStarted": "2019-10-27 09:59:47.057",
+      "dateFinished": "2019-10-27 09:59:47.884",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -495,7 +495,7 @@
       "title": "Threshold for word/token length",
       "text": "%spark\n\n// Size threshold on the words of *title* field\nval titleThres \u003d z.input(\"title_word_threshold\", 8.0)\n\n// Size threshold of the words on *authors* field\nval authorsThres \u003d z.input(\"authors_word_threshold\", 100.0)\n",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:38:32.339",
+      "dateUpdated": "2019-10-27 10:00:47.060",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -523,8 +523,8 @@
         "params": {
           "titleWordThreshold": "",
           "authorsWorldThreshold": "",
-          "title_word_threshold": "3",
-          "authors_word_threshold": "3"
+          "title_word_threshold": "8",
+          "authors_word_threshold": "100"
         },
         "forms": {
           "title_word_threshold": {
@@ -548,7 +548,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "warning: there were two deprecation warnings; re-run with -deprecation for details\ntitleThres: Object \u003d 3\nauthorsThres: Object \u003d 3\n"
+            "data": "warning: there were two deprecation warnings; re-run with -deprecation for details\ntitleThres: Object \u003d 8\nauthorsThres: Object \u003d 100\n"
           }
         ]
       },
@@ -561,8 +561,8 @@
       "jobName": "paragraph_1476993517851_-127333029",
       "id": "20161020-195837_359626346",
       "dateCreated": "2016-10-20 07:58:37.000",
-      "dateStarted": "2019-05-01 07:38:32.372",
-      "dateFinished": "2019-05-01 07:38:32.716",
+      "dateStarted": "2019-10-27 10:00:47.119",
+      "dateFinished": "2019-10-27 10:00:47.328",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -570,7 +570,7 @@
       "title": "Define Entity Linkage Function",
       "text": "%spark\n\n// Helper: whitespace split words, keep words \u003e threshold # of chars\ndef tokenizer(s: String, threshold: Int, comb: String \u003d \"OR\"): String \u003d {\n    s.split(\" \").map(_.replaceAll(\"[^a-zA-Z0-9]\", \"\")).filter(_.length \u003e threshold).mkString(s\" ${comb} \")\n}\n   \n///////////////////////////////////////////////////////////////////////////////////////\n// Entity linkage function definition, i.e., how do you want your records to be linked?\n//\n// Input: org.apache.spark.sql.Row\n// Output: Lucene query string as in [query string] (https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)\n//////////////////////////////////////////////////////////////////////////////////////\nval linker: Row \u003d\u003e String \u003d { case row \u003d\u003e {\n    \n    // Get title and authors fields\n    val title \u003d row.getString(row.fieldIndex(\"title\"))\n    val authors \u003d row.getString(row.fieldIndex(\"authors\"))\n    \n    val titleTokens \u003d tokenizer(title, Integer.parseInt(titleThres.toString)) // Replace 8 with 3\n    val authorsTerms \u003d tokenizer(authors, Integer.parseInt(authorsThres.toString)) // Use 3 to get 0.97 accuracy\n    \n    if (titleTokens.nonEmpty \u0026\u0026 authorsTerms.nonEmpty) {\n        s\"(title:(${titleTokens})) OR (authors:${authorsTerms})\"\n    }\n    else if (titleTokens.nonEmpty){\n        s\"title:(${titleTokens})\"\n    }\n    else if ( authorsTerms.nonEmpty) {\n        s\"(authors:${authorsTerms})\"\n    }\n    else {\n        \"*:*\" // Random search\n    }\n  }\n}",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:38:32.775",
+      "dateUpdated": "2019-10-27 10:00:49.824",
       "config": {
         "colWidth": 7.0,
         "editorMode": "ace/mode/scala",
@@ -617,8 +617,8 @@
       "jobName": "paragraph_1475350680724_-1587271895",
       "id": "20161001-154952_870995671",
       "dateCreated": "2016-10-01 07:38:00.000",
-      "dateStarted": "2019-05-01 07:38:32.861",
-      "dateFinished": "2019-05-01 07:38:34.030",
+      "dateStarted": "2019-10-27 10:00:49.879",
+      "dateFinished": "2019-10-27 10:00:50.694",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -626,7 +626,7 @@
       "title": "Compute Linkage Accuracy",
       "text": "//////////////////////////////////\n// Entity linkage                /\n//////////////////////////////////\nval linkedResults \u003d dblp2.linkDataFrame(acmDF, linker, 3)\n\n////////////////////////////////////////\n// The rest is for computing accuracy  /\n////////////////////////////////////////\n\n// Linkage Results (get top result)\nval linkageResultsDF \u003d spark.createDataFrame(linkedResults.filter(_._2.nonEmpty).map{ case (acm, topDocs) \u003d\u003e (topDocs.head.getString(topDocs.head.fieldIndex(\"id\")), acm.getInt(acm.fieldIndex(\"id\")).toString)}).toDF(\"idDBLP\", \"idACM\")\n\n// Compute the number of currect results based on ground truth\nval correctHits: Double \u003d linkageResultsDF.join(groundTruthDF, groundTruthDF.col(\"idDBLP\").equalTo(linkageResultsDF(\"idDBLP\")) \u0026\u0026  groundTruthDF.col(\"idACM\").equalTo(linkageResultsDF(\"idACM\"))).count\n\n// Total # of ground truth records    \nval total: Double \u003d groundTruthDF.count\n\n// Accuracy\nval accuracy \u003d correctHits / total\n\nprintln(\"*\" * 40)\nprintln(\"*\" * 40)\nprintln(s\"* Accuracy of linkage is ${accuracy}\")\nprintln(\"*\" * 40)\nprintln(\"*\" * 40)",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:38:34.062",
+      "dateUpdated": "2019-10-27 10:00:51.308",
       "config": {
         "colWidth": 5.0,
         "editorMode": "ace/mode/scala",
@@ -660,7 +660,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "****************************************\n****************************************\n* Accuracy of linkage is 0.9743705035971223\n****************************************\n****************************************\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, Array[org.apache.spark.sql.Row])] \u003d MapPartitionsRDD[45] at map at LuceneRDD.scala:248\nlinkageResultsDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: string]\ncorrectHits: Double \u003d 2167.0\ntotal: Double \u003d 2224.0\naccuracy: Double \u003d 0.9743705035971223\n"
+            "data": "****************************************\n****************************************\n* Accuracy of linkage is 0.9743705035971223\n****************************************\n****************************************\nlinkedResults: org.apache.spark.rdd.RDD[(org.apache.spark.sql.Row, Array[org.apache.spark.sql.Row])] \u003d MapPartitionsRDD[74] at map at LuceneRDD.scala:248\nlinkageResultsDF: org.apache.spark.sql.DataFrame \u003d [idDBLP: string, idACM: string]\ncorrectHits: Double \u003d 2167.0\ntotal: Double \u003d 2224.0\naccuracy: Double \u003d 0.9743705035971223\n"
           }
         ]
       },
@@ -676,10 +676,10 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d8",
-            "http://172.19.0.2:4040/jobs/job?id\u003d9",
-            "http://172.19.0.2:4040/jobs/job?id\u003d10",
-            "http://172.19.0.2:4040/jobs/job?id\u003d11"
+            "http://172.29.0.2:4040/jobs/job?id\u003d13",
+            "http://172.29.0.2:4040/jobs/job?id\u003d14",
+            "http://172.29.0.2:4040/jobs/job?id\u003d15",
+            "http://172.29.0.2:4040/jobs/job?id\u003d16"
           ],
           "interpreterSettingId": "spark"
         }
@@ -688,8 +688,8 @@
       "jobName": "paragraph_1475350680724_-1587271895",
       "id": "20161001-155056_1480917921",
       "dateCreated": "2016-10-01 07:38:00.000",
-      "dateStarted": "2019-05-01 07:38:34.201",
-      "dateFinished": "2019-05-01 07:38:41.644",
+      "dateStarted": "2019-10-27 10:00:51.352",
+      "dateFinished": "2019-10-27 10:00:55.183",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -697,7 +697,7 @@
       "title": "Output Linkage Results",
       "text": "linkedResults.map(x \u003d\u003e (x._1.getString(1), x._2.headOption.map(x \u003d\u003e x.getString(x.fieldIndex(\"title\"))))).sample(false, 0.1).take(20).foreach(x \u003d\u003e println(s\"${x._1}\\n${x._2}\\n\"))",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:38:41.741",
+      "dateUpdated": "2019-10-27 10:00:59.296",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -729,7 +729,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "Database research at the University of Illinois at Urbana-Champaign\nSome(Database Research at the University of Illinois at Urbana-Champaign)\n\nInformation, Communication, and Money: For What Can We Charge and How Can We Meter It?\nSome(Information, Communication, and Money: For What Can We Charge and How Can We Meter It?)\n\nW3QS: A Query System for the World-Wide Web\nSome(W3QS: A Query System for the World-Wide Web)\n\nThe INCINERATE data model\nSome(The INCINERATE Data Model)\n\nThe Montage extensible DataBlade architecture\nSome(The Montage Extensible DataBlade Achitecture)\n\nImproving Business Process Quality through Exception Understanding, Prediction, and Prevention\nSome(Improving Business Process Quality through Exception Understanding, Prediction, and Prevention)\n\nQuerying Continuous Time Sequences\nSome(Querying Continuous Time Sequences)\n\nSQLJ  Part 1: SQL routines using the Java programming language\nSome(SQLJ-Part 1: SQL Routines Using the Java Programming Language)\n\nQuickly generating billion-record synthetic databases\nSome(Quickly Generating Billion-Record Synthetic Databases)\n\nEfficient transparent application recovery in client-server information systems\nSome(Efficient and Transparent Application Recovery in Client-Server Information Systems)\n\nLinking Business to Deliver Value: A Data Management Challenge\nSome(Linking Business to Deliver Value: A Data Management Challenge)\n\nWALRUS: a similarity retrieval algorithm for image databases\nSome(WALRUS: A Similarity Retrieval Algorithm for Image Databases)\n\nThe Piazza peer data management project\nSome(The Piazza peer data management project)\n\nDOMINO: databases fOr MovINg Objects tracking\nSome(DOMINO: Databases fOr MovINg Objects tracking)\n\nManaging large systems with DB2 UDB\nSome(Managing Large Systems with DB2 UDB)\n\nAn Overview of Repository Technology\nSome(An Overview of Repository Technology)\n\nUpdating knowledge bases while maintaining their consistency\nSome(Updating Knowledge Bases While Maintaining Their Consistency)\n\nA flexible and recoverable client/server database event notification system\nSome(A Flexible and Recoverable Client/Server Database Event Notification System)\n\nSpecial issue on data mining for intrusion detection and threat analysis\nSome(Special Issue on Data Mining for Intrusion Detection and Threat Analysis - Guest Editor\u0027s Introduction)\n\nMining long sequential patterns in a noisy environment\nSome(Mining long sequential patterns in a noisy environment)\n\n"
+            "data": "PicoDBMS: Scaling down database techniques for the smartcard\nSome(PicoDBMS: Scaling down database techniques for the smartcard)\n\nIn-memory data management for consumer transactions the timesten approach\nSome(In-Memory Data Management for Consumer Transactions The Times-Ten Approach)\n\nThe Montage extensible DataBlade architecture\nSome(The Montage Extensible DataBlade Achitecture)\n\nOn Spatially Partitioned Temporal Join\nSome(On Spatially Partitioned Temporal Join)\n\nManaging large systems with DB2 UDB\nSome(Managing Large Systems with DB2 UDB)\n\nAn Overview of Repository Technology\nSome(An Overview of Repository Technology)\n\nApplying update streams in a soft real-time database system\nSome(Applying Update Streams in a Soft Real-Time Database System)\n\nQuery Decomposition and View Maintenance for Query Languages for Unstructured Data\nSome(Query Decomposition and View Maintenance for Query Languages for Unstructured Data)\n\nA flexible and recoverable client/server database event notification system\nSome(A Flexible and Recoverable Client/Server Database Event Notification System)\n\nWWW-UDK: a web-based environmental meta-information system\nSome(WWW-UDK: A Web-based Environmental Meta-Information System)\n\nFundamentals of data warehouses: 2nd revised and extended edition\nSome(Fundamentals of data warehouses: 2nd revised and extended edition)\n\n50,000 users on an Oracle8 universal server database\nSome(50,000 Users on an Oracle8 Universal Server Database)\n\nDatabase principles\nSome(Database Principles Column - Introduction)\n\nApplication of OODB and SGML techniques in text database: an electronic dictionary system\nSome(Application of OODB and SGML Techniques in Text Database: An Electronic Dictionary System)\n\nEstimating the Selectivity of XML Path Expressions for Internet Scale Applications\nSome(Estimating the Selectivity of XML Path Expressions for Internet Scale Applications)\n\nDatabases for networks\nSome(Databases for Networks)\n\nA new method for similarity indexing of market basket data\nSome(A New Method for Similarity Indexing of Market Basket Data)\n\nUnbundling active functionality\nSome(Unbundling Active Functionality)\n\nThe TV-tree: an index structure for high-dimensional data\nSome(The TV-Tree: An Index Structure for High-Dimensional Data)\n\nThe Jungle database search engine\nSome(The Jungle Database Search Engine)\n\n"
           }
         ]
       },
@@ -745,7 +745,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d12"
+            "http://172.29.0.2:4040/jobs/job?id\u003d17"
           ],
           "interpreterSettingId": "spark"
         }
@@ -754,8 +754,8 @@
       "jobName": "paragraph_1475350680725_-1587656644",
       "id": "20161001-155628_1046044654",
       "dateCreated": "2016-10-01 07:38:00.000",
-      "dateStarted": "2019-05-01 07:38:41.793",
-      "dateFinished": "2019-05-01 07:38:42.963",
+      "dateStarted": "2019-10-27 10:00:59.354",
+      "dateFinished": "2019-10-27 10:01:00.280",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

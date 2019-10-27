@@ -2,9 +2,9 @@
   "paragraphs": [
     {
       "title": "Download spark-lucenerdd JARS",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")  // Releases\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\") // SNAPSHOTS\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.7\")",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")  // Releases\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\") // SNAPSHOTS\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.8-SNAPSHOT\")",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:39:04.340",
+      "dateUpdated": "2019-10-27 10:01:52.685",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/text",
@@ -57,8 +57,8 @@
       "jobName": "paragraph_1476824980259_1282654834",
       "id": "20161005-175550_494955961",
       "dateCreated": "2016-10-18 09:09:40.000",
-      "dateStarted": "2019-05-01 07:39:04.382",
-      "dateFinished": "2019-05-01 07:39:04.401",
+      "dateStarted": "2019-10-27 10:01:52.735",
+      "dateFinished": "2019-10-27 10:01:52.743",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
@@ -171,20 +171,6 @@
         "type": "TEXT",
         "msg": "\nallCountriesDF: org.apache.spark.sql.DataFrame \u003d [name: string, shape: string]\n\nwarning: there was one deprecation warning; re-run with -deprecation for details\n\nshapes: org.zouzias.spark.lucenerdd.spatial.shape.ShapeLuceneRDD[String,org.apache.spark.sql.Row] \u003d ShapeLuceneRDD[25] at RDD at ShapeLuceneRDD.scala:48\n\nres12: shapes.type \u003d ShapeLuceneRDD[25] at RDD at ShapeLuceneRDD.scala:48\n\nres13: Long \u003d 248\n"
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d13",
-            "http://172.19.0.2:4040/jobs/job?id\u003d14",
-            "http://172.19.0.2:4040/jobs/job?id\u003d15"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1476824980260_1280731089",
       "id": "20161005-175917_1541464701",
@@ -264,18 +250,6 @@
         "code": "ERROR",
         "type": "TEXT",
         "msg": "org.apache.spark.SparkException: Job 2 cancelled part of cancelled job group zeppelin-20161018-211105_67089171\n\tat org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1450)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobCancellation(DAGScheduler.scala:1389)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply$mcVI$sp(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat scala.collection.mutable.HashSet.foreach(HashSet.scala:78)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobGroupCancelled(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1638)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1618)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1607)\n\tat org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)\n\tat org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:632)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1871)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1884)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1897)\n\tat org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:347)\n\tat org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:39)\n\tat org.apache.spark.sql.Dataset$$anonfun$org$apache$spark$sql$Dataset$$execute$1$1.apply(Dataset.scala:2183)\n\tat org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:57)\n\tat org.apache.spark.sql.Dataset.withNewExecutionId(Dataset.scala:2532)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$execute$1(Dataset.scala:2182)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$collect(Dataset.scala:2189)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1925)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.withTypedCallback(Dataset.scala:2562)\n\tat org.apache.spark.sql.Dataset.head(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.take(Dataset.scala:2139)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.zeppelin.spark.ZeppelinContext.showDF(ZeppelinContext.java:214)\n\tat org.apache.zeppelin.spark.SparkSqlInterpreter.interpret(SparkSqlInterpreter.java:129)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:390)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n"
-      },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d16"
-          ],
-          "interpreterSettingId": "spark"
-        }
       },
       "apps": [],
       "jobName": "paragraph_1476825065939_1711419995",
@@ -381,18 +355,6 @@
         "type": "TEXT",
         "msg": "org.apache.spark.SparkException: Job 3 cancelled part of cancelled job group zeppelin-20161018-202324_40232036\n\tat org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1450)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobCancellation(DAGScheduler.scala:1389)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply$mcVI$sp(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGScheduler$$anonfun$handleJobGroupCancelled$1.apply(DAGScheduler.scala:795)\n\tat scala.collection.mutable.HashSet.foreach(HashSet.scala:78)\n\tat org.apache.spark.scheduler.DAGScheduler.handleJobGroupCancelled(DAGScheduler.scala:795)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1638)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1618)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1607)\n\tat org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)\n\tat org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:632)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1871)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1884)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:1897)\n\tat org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:347)\n\tat org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:39)\n\tat org.apache.spark.sql.Dataset$$anonfun$org$apache$spark$sql$Dataset$$execute$1$1.apply(Dataset.scala:2183)\n\tat org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:57)\n\tat org.apache.spark.sql.Dataset.withNewExecutionId(Dataset.scala:2532)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$execute$1(Dataset.scala:2182)\n\tat org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$collect(Dataset.scala:2189)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1925)\n\tat org.apache.spark.sql.Dataset$$anonfun$head$1.apply(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.withTypedCallback(Dataset.scala:2562)\n\tat org.apache.spark.sql.Dataset.head(Dataset.scala:1924)\n\tat org.apache.spark.sql.Dataset.take(Dataset.scala:2139)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.zeppelin.spark.ZeppelinContext.showDF(ZeppelinContext.java:214)\n\tat org.apache.zeppelin.spark.SparkSqlInterpreter.interpret(SparkSqlInterpreter.java:129)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:390)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n"
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d17"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1476824980263_1281115838",
       "id": "20161018-202324_40232036",
@@ -455,18 +417,6 @@
         "code": "ERROR",
         "type": "TEXT",
         "msg": "\nRadius: Int \u003d 20\n\nk: Int \u003d 10\n\nBern: (Double, Double) \u003d (7.433534,46.94838)\n\n\n\n\u003cconsole\u003e:41: error: not found: value shapes\n       shapes.circleSearch(Bern, Radius, k).take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
-      },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d23"
-          ],
-          "interpreterSettingId": "spark"
-        }
       },
       "apps": [],
       "jobName": "paragraph_1476824980264_1279192094",
@@ -531,18 +481,6 @@
         "type": "TEXT",
         "msg": "\nk: Int \u003d 10\n\nBern: String \u003d POINT (7.433534 46.948380)\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.spatialSearch(Bern, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d24"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1476824980264_1279192094",
       "id": "20161005-213433_1705431143",
@@ -605,18 +543,6 @@
         "code": "ERROR",
         "type": "TEXT",
         "msg": "\nk: Int \u003d 10\n\nbernToAthens: String \u003d LINESTRING (7.433534 46.948380, 23.725979  37.994620)\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.spatialSearch(bernToAthens, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
-      },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d25"
-          ],
-          "interpreterSettingId": "spark"
-        }
       },
       "apps": [],
       "jobName": "paragraph_1476826265233_-1429019832",
@@ -681,18 +607,6 @@
         "type": "TEXT",
         "msg": "\nk: Int \u003d 10\n\nbernAthensMadrid: String \u003d POLYGON ((7.433534 46.948380, 23.725979 37.994620,-3.688473 40.435779,7.433534 46.948380))\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.spatialSearch(bernAthensMadrid, k, \"Intersects\").take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d26"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1476826534986_2048723831",
       "id": "20161018-213534_524770034",
@@ -753,18 +667,6 @@
         "code": "ERROR",
         "type": "TEXT",
         "msg": "\nk: Int \u003d 30\n\nBern: (Double, Double) \u003d (7.433534,46.94838)\n\n\n\n\u003cconsole\u003e:39: error: not found: value shapes\n       shapes.knnSearch(Bern, k).take(k).flatMap(_.doc.textField(\"_1\")).foreach(println)\n       ^\n"
-      },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d27"
-          ],
-          "interpreterSettingId": "spark"
-        }
       },
       "apps": [],
       "jobName": "paragraph_1476826795482_-660710216",

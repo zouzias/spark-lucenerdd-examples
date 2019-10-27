@@ -2,9 +2,9 @@
   "paragraphs": [
     {
       "title": "Load LuceneRDD jars",
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.7\")",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.8-SNAPSHOT\")",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:49:20.780",
+      "dateUpdated": "2019-10-27 10:01:37.096",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -34,8 +34,8 @@
       "jobName": "paragraph_1496409093041_-1432320270",
       "id": "20170602-131133_481920134",
       "dateCreated": "2017-06-02 13:11:33.000",
-      "dateStarted": "2019-05-01 07:49:20.814",
-      "dateFinished": "2019-05-01 07:49:20.834",
+      "dateStarted": "2019-10-27 10:01:37.155",
+      "dateFinished": "2019-10-27 10:01:37.165",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
@@ -137,19 +137,6 @@
         "type": "TEXT",
         "msg": "\ncapitals: org.apache.spark.sql.DataFrame \u003d [name: string, country: string]\n\nluceneRDD: org.zouzias.spark.lucenerdd.LuceneRDD[org.apache.spark.sql.Row] \u003d LuceneRDD[36] at RDD at LuceneRDD.scala:42\n\nres10: luceneRDD.type \u003d LuceneRDD[36] at RDD at LuceneRDD.scala:42\n\nres11: Long \u003d 303\n"
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d28",
-            "http://172.19.0.2:4040/jobs/job?id\u003d29"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1475703562472_716359537",
       "id": "20161001-145632_657667869",
@@ -201,18 +188,6 @@
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\nk: Int \u003d 10\n\nresult: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse[39] at RDD at LuceneRDDResponse.scala:32\n[score: 5.337291/docId: 11/doc: Text fields:name:[Ottawa]country:[Canada]]\n"
-      },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d30"
-          ],
-          "interpreterSettingId": "spark"
-        }
       },
       "apps": [],
       "jobName": "paragraph_1475703562473_715974788",
@@ -267,18 +242,6 @@
         "code": "SUCCESS",
         "type": "TEXT",
         "msg": "\ntopK: Int \u003d 10\n\nresponse: org.zouzias.spark.lucenerdd.response.LuceneRDDResponse \u003d LuceneRDDResponse[42] at RDD at LuceneRDDResponse.scala:32\n[score: 1.0/docId: 9/doc: Text fields:name:[Paris]country:[France]]\n[score: 1.0/docId: 43/doc: Text fields:name:[Paramaribo]country:[Suriname]]\n"
-      },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.19.0.2:4040/jobs/job?id\u003d31"
-          ],
-          "interpreterSettingId": "spark"
-        }
       },
       "apps": [],
       "jobName": "paragraph_1475703562515_812162013",

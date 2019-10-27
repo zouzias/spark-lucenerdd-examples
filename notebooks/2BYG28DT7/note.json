@@ -1,9 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.7\")",
+      "text": "%dep\nz.addRepo(\"Spark Packages Repo\").url(\"http://dl.bintray.com/spark-packages/maven\")\nz.addRepo(\"OSS SNAPSHOTS\").url(\"https://oss.sonatype.org/content/repositories/snapshots\")\nz.load(\"org.zouzias:spark-lucenerdd_2.11:0.3.8-SNAPSHOT\")",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 07:47:53.154",
+      "dateUpdated": "2019-10-27 10:02:27.062",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -48,8 +48,8 @@
       "jobName": "paragraph_1475690150553_-1276120470",
       "id": "20161005-175550_494955961",
       "dateCreated": "2016-10-05 05:55:50.000",
-      "dateStarted": "2019-05-01 07:47:53.186",
-      "dateFinished": "2019-05-01 07:47:53.198",
+      "dateStarted": "2019-10-27 10:02:27.101",
+      "dateFinished": "2019-10-27 10:02:27.106",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
