@@ -13,6 +13,13 @@ object LinkageUtils {
       .count()
   }
 
+  /**
+    * Naive white-space tokenizer for text, keep only alphanumerics
+    *
+    * @param text
+    * @param minThreshold Keep tokens with length more than minThreshold
+    * @return Array of tokens / words
+    */
   def tokenize(text: String, minThreshold: Int): Array[String] = {
     text.split(" ")
       .flatMap(_.replaceAll("[^a-zA-Z0-9]", " ").split(" "))

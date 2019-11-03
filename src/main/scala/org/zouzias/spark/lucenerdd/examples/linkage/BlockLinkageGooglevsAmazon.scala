@@ -13,7 +13,7 @@ import org.apache.spark.sql.types.StringType
 /**
  * Block Record linkage example between amazon and google product's descriptions using [[LuceneRDD]]
  *
- * You can run this locally with, ./spark-blocklinkage-google-vs-amazon-produces.sh
+ * You can run this locally with, ./spark-blocklinkage-products1.sh
  */
 object BlockLinkageGooglevsAmazon extends Logging {
 
@@ -28,7 +28,6 @@ object BlockLinkageGooglevsAmazon extends Logging {
     val start = System.currentTimeMillis()
     val amznDF = spark.read.parquet("data/linkage-products1/linkage-products-amazon.parquet")
     val ggleDF = spark.read.parquet("data/linkage-products1/linkage-products-google.parquet")
-
 
     logInfo(s"Loaded ${amznDF.count} ACM records")
     logInfo(s"Loaded ${ggleDF.count} DBLP records")

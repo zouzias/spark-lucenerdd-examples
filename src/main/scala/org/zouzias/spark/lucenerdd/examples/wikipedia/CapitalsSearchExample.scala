@@ -7,7 +7,7 @@ import org.zouzias.spark.lucenerdd._
 import org.zouzias.spark.lucenerdd.logging.Logging
 
 /**
- * Capitals search example
+ * Example that demonstrates how to search on a list of capital names using [[LuceneRDD]]
  *
  * Search over all capitals for a specific capital
  */
@@ -23,12 +23,12 @@ object CapitalsSearchExample extends Logging {
 
     val start = System.currentTimeMillis()
 
+    // Load DataFrame and instantiate LuceneRDD
     val capitals = spark.read.parquet("data/spatial/capitals.parquet").select("name", "country")
-
     val luceneRDD = LuceneRDD(capitals)
 
+    // Perform a term query
     val result = luceneRDD.termQuery("name", "ottawa", k)
-
     val end = System.currentTimeMillis()
 
     logInfo("=" * 40)
