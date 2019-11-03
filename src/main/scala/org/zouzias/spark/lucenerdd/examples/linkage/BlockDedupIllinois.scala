@@ -14,8 +14,7 @@ import scala.collection.mutable
 
 
 /**
- * Record linkage example between amazon and itself blocked by manufacturer using
- * [[LuceneRDD.blockEntityLinkage]] method
+ * Example using blocking for record deduplication using the [[LuceneRDD.blockDedup]] method
  *
  * You can run this locally with ./spark-blockdedup-illinois.sh
  */
@@ -23,9 +22,7 @@ object BlockDedupIllinois extends Logging {
 
   def main(args: Array[String]) {
 
-    // initialise spark context
     val conf = new SparkConf().setAppName(LinkageGooglevsAmazon.getClass.getName)
-
     implicit val spark: SparkSession = SparkSession.builder.config(conf).getOrCreate()
     import spark.sqlContext.implicits._
 
@@ -41,7 +38,7 @@ object BlockDedupIllinois extends Logging {
 
 
       /**
-        *
+        * An inplace text analyzer
         * @param text
         * @return
         */
@@ -82,9 +79,10 @@ object BlockDedupIllinois extends Logging {
 
     val blockingFields = Array("City")
 
-    // Block entity linkage; block on City column
+    // Block deduplication; block on City column
     val linkedResults = LuceneRDD.blockDedup(illinoisDF, linker, blockingFields)
 
+    // Get the deduplication results and check if IDs match
     val linkageResults: DataFrame = spark.createDataFrame(linkedResults
       .filter(_._2.nonEmpty)
       .map{ case (left, topDocs) =>
@@ -95,6 +93,7 @@ object BlockDedupIllinois extends Logging {
       .toDF("left_id", "right_id")
       .filter($"left_id".equalTo($"right_id"))
 
+    // Correct # of hits is total dataset
     val correctHits: Double = linkageResults.count()
     logInfo(s"Correct hits are $correctHits")
     val total: Double = illinoisDF.count
