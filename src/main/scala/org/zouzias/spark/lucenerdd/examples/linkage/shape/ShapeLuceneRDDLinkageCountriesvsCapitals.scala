@@ -7,7 +7,7 @@ import org.zouzias.spark.lucenerdd._
 import org.zouzias.spark.lucenerdd.logging.Logging
 
 /**
- * Record linkage example between countries and cities using [[ShapeLuceneRDD]]
+ * Record linkage example between countries and capitals using [[ShapeLuceneRDD]]
  *
  * You can run this locally with, ./spark-linkage-radius.sh
  */
@@ -17,9 +17,8 @@ object ShapeLuceneRDDLinkageCountriesvsCapitals extends Logging {
   val Radius = 10D
 
   def main(args: Array[String]): Unit = {
-    // initialise spark context
-    val conf = new SparkConf().setAppName(ShapeLuceneRDDLinkageCountriesvsCapitals.getClass.getName)
 
+    val conf = new SparkConf().setAppName(ShapeLuceneRDDLinkageCountriesvsCapitals.getClass.getName)
     implicit val spark: SparkSession = SparkSession.builder.config(conf).getOrCreate()
     import spark.implicits._
 
