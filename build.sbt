@@ -1,7 +1,7 @@
 organization := "org.zouzias"
 name := "spark-lucenerdd-examples"
 scalaVersion := "2.11.12"
-val sparkV = "2.4.4"
+val sparkV = "2.4.5"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 
@@ -14,20 +14,4 @@ libraryDependencies ++= Seq(
 	"org.apache.spark" %% "spark-sql" % sparkV % "provided"
 )
 
-enablePlugins(DockerPlugin)
-
 mainClass in assembly := Some("org.zouzias.spark.lucenerdd.examples.wikipedia.WikipediaSearchExample")
-
-
-dockerfile in docker := {
-	// The assembly task generates a fat JAR file
-	val artifact: File = assembly.value
-	val artifactTargetPath = s"/app/${artifact.name}"
-
-	new Dockerfile {
-		from("java")
-		add(artifact, artifactTargetPath)
-		entryPoint("java", "-jar", artifactTargetPath)
-		expose(8299)
-	}
-}
