@@ -6,7 +6,7 @@ CURRENT_DIR=`pwd`
 SPARK_LUCENERDD_VERSION=`cat version.sbt | awk '{print $5}' | xargs`
 
 # Spark version (requires uncompressed tar.gz under $HOME)
-SPARK_VERSION="2.4.5"
+SPARK_VERSION="2.4.6"
 
 
 echo "==============================================="
