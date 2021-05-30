@@ -11,7 +11,17 @@ resolvers += "OSS Snapshots" at "https://oss.sonatype.org/content/repositories/s
 libraryDependencies ++= Seq(
 	"org.zouzias" %% "spark-lucenerdd" % version.value,
 	"org.apache.spark" %% "spark-core" % sparkV % "provided",
-	"org.apache.spark" %% "spark-sql" % sparkV % "provided"
+	"org.apache.spark" %% "spark-sql" % sparkV % "provided",
 )
 
-mainClass in assembly := Some("org.zouzias.spark.lucenerdd.examples.wikipedia.WikipediaSearchExample")
+assembly / mainClass := Some("org.zouzias.spark.lucenerdd.examples.wikipedia.WikipediaSearchExample")
+
+
+// To avoid merge issues
+assembly / assemblyMergeStrategy := {
+    case PathList("module-info.class", xs @ _*) => MergeStrategy.first
+    case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard
+    case x =>
+    val oldStrategy = (assembly / assemblyMergeStrategy).value
+    oldStrategy(x)
+}
