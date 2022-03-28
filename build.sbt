@@ -1,7 +1,7 @@
 organization := "org.zouzias"
 name := "spark-lucenerdd-examples"
-scalaVersion := "2.11.12"
-val sparkV = "2.4.8"
+scalaVersion := "2.12.5"
+val sparkV = "3.2.1"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 
@@ -11,7 +11,7 @@ resolvers += "OSS Snapshots" at "https://oss.sonatype.org/content/repositories/s
 libraryDependencies ++= Seq(
 	"org.zouzias" %% "spark-lucenerdd" % version.value,
 	"org.apache.spark" %% "spark-core" % sparkV % "provided",
-	"org.apache.spark" %% "spark-sql" % sparkV % "provided",
+	"org.apache.spark" %% "spark-sql" % sparkV % "provided"
 )
 
 assembly / mainClass := Some("org.zouzias.spark.lucenerdd.examples.wikipedia.WikipediaSearchExample")

@@ -3,7 +3,9 @@
 CURRENT_DIR=`pwd`
 
 # Spark version (requires uncompressed tar.gz under $HOME)
-SPARK_VERSION="2.4.8"
+SPARK_VERSION="3.2.1"
+HADOOP_VERSION="3.2"
+SCALA_VERSION="2.12"
 
 # Read the version from version.sbt
 SPARK_LUCENERDD_VERSION=`cat version.sbt | awk '{print $5}' | xargs`
@@ -17,10 +19,10 @@ echo "||==========================================================="
 # Assumes that spark is installed under home directory
 HOME_DIR=`echo ~`
 export SPARK_LOCAL_IP=localhost
-SPARK_HOME=${HOME_DIR}/spark-${SPARK_VERSION}-bin-hadoop2.7
+SPARK_HOME=${HOME_DIR}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}
 
 # spark-lucenerdd assembly JAR
-MAIN_JAR=${CURRENT_DIR}/target/scala-2.11/spark-lucenerdd-examples-assembly-${SPARK_LUCENERDD_VERSION}.jar
+MAIN_JAR=${CURRENT_DIR}/target/scala-${SCALA_VERSION}/spark-lucenerdd-examples-assembly-${SPARK_LUCENERDD_VERSION}.jar
 
 echo "Executing spark submit: $1"
 
