@@ -6,10 +6,9 @@ CURRENT_DIR=`pwd`
 SPARK_LUCENERDD_VERSION=`cat version.sbt | awk '{print $5}' | xargs`
 
 # Spark version (requires uncompressed tar.gz under $HOME)
-SPARK_VERSION="3.2.1"
+SPARK_VERSION="3.2.2"
 HADOOP_VERSION="3.2"
 SCALA_VERSION="2.12"
-
 
 
 echo "==============================================="
@@ -23,7 +22,7 @@ export SPARK_LOCAL_IP=localhost
 SPARK_HOME=${HOME_DIR}/spark-${SPARK_VERSION}-bin-hadoop3.2
 
 # spark-lucenerdd assembly JAR
-MAIN_JAR=${CURRENT_DIR}/target/scala-2.${SCALA_VERSION}/spark-lucenerdd-examples-assembly-${SPARK_LUCENERDD_VERSION}.jar
+MAIN_JAR=${CURRENT_DIR}/target/scala-${SCALA_VERSION}/spark-lucenerdd-examples-assembly-${SPARK_LUCENERDD_VERSION}.jar
 
 echo "SPARK SHELL: $1"
 

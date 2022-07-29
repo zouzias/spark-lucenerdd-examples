@@ -3,7 +3,7 @@
 CURRENT_DIR=`pwd`
 
 # Spark version (requires uncompressed tar.gz under $HOME)
-SPARK_VERSION="3.2.1"
+SPARK_VERSION="3.2.2"
 HADOOP_VERSION="3.2"
 SCALA_VERSION="2.12"
 
