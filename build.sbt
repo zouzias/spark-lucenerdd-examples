@@ -1,9 +1,9 @@
 organization := "org.zouzias"
 name := "spark-lucenerdd-examples"
-scalaVersion := "2.12.5"
-val sparkV = "3.2.2"
+scalaVersion := "2.12.18"
+val sparkV = "3.3.3"
 
-javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
+javacOptions ++= Seq("-source", "1.11", "-target", "1.11", "-Xlint")
 
 resolvers += "Apache Repos" at "https://repository.apache.org/content/repositories/releases"
 resolvers += "OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
