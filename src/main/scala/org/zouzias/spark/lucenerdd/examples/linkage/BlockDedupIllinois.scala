@@ -8,7 +8,7 @@ import org.apache.lucene.search._
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.zouzias.spark.lucenerdd.LuceneRDD
-import org.zouzias.spark.lucenerdd.logging.Logging
+import org.apache.spark.internal.Logging
 
 import scala.collection.mutable
 

@@ -6,7 +6,7 @@ import org.apache.lucene.search._
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.zouzias.spark.lucenerdd.{LuceneRDD, _}
-import org.zouzias.spark.lucenerdd.logging.Logging
+import org.apache.spark.internal.Logging
 
 /**
  * Record linkage example between amazon and itself blocked by manufacturer using

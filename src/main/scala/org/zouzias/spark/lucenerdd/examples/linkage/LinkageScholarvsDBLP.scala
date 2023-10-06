@@ -5,7 +5,7 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd._
-import org.zouzias.spark.lucenerdd.logging.Logging
+import org.apache.spark.internal.Logging
 
 /**
  * Record linkage example between Google scholar and DBLP using [[LuceneRDD]]

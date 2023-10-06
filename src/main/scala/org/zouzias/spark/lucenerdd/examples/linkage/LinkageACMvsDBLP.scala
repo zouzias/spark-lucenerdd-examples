@@ -3,7 +3,7 @@ package org.zouzias.spark.lucenerdd.examples.linkage
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.SparkConf
 import org.zouzias.spark.lucenerdd.LuceneRDD
-import org.zouzias.spark.lucenerdd.logging.Logging
+import org.apache.spark.internal.Logging
 import org.apache.spark.sql
 
 /**
